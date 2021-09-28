@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_snippet/Widgets/flutter_text.dart';
+import 'package:flutter_snippet/Widgets/normal_cell.dart';
 
 void main() {
   runApp(const MyApp());
@@ -61,6 +62,7 @@ class _MyHomePageState extends State<MyHomePage> {
               style: const TextStyle(fontSize: 30, color: Colors.cyan),
               config: AnimationConfig(curveTween: CurveTween(curve: Curves.ease), repeat: true),
             ),
+            const NormalCell(leading: Text("leading"), title: Text("title"), middle: Text("middle"), trailing: Text("trailing")),
           ],
         ),
       ),

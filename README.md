@@ -13,3 +13,12 @@ FlutterText(
               config: AnimationConfig(curveTween: CurveTween(curve: Curves.ease), repeat: true),
             ),
 ```
+
+## 2. NormalCell 一行显示左边的图标，标题，和右边的尾部组件
+提供了（1）标题图片（2）标题（3）内容（4）尾部内容（或箭头）（5）是否需要底部分割线（6）点击事件
+使用示例：
+```
+const NormalCell(leading: Text("leading"), title: Text("title"), middle: Text("middle"), trailing: Text("trailing")),
+```
+
+## 3.
