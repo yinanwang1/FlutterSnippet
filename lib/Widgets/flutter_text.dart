@@ -1,4 +1,3 @@
-import 'dart:collection';
 import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
@@ -8,18 +7,50 @@ import 'package:flutter/cupertino.dart';
 
 class FlutterText extends Text {
   final String content;
+  final AnimationConfig? config;
 
-  const FlutterText(this.content, {Key? key}) : super(content, key: key);
+  /// 重载Text的属性
+  final TextStyle? style;
+  final StrutStyle? strutStyle;
+  final TextAlign? textAlign;
+  final TextDirection? textDirection;
+  final Locale? locale;
+  final bool? softWrap;
+  final TextOverflow? textOverflow;
+  final double? textScaleFactor;
+  final int? maxLines;
+  final String? semanticsLabel;
+  final TextWidthBasis? textWidthBasis;
+
+  const FlutterText(
+    this.content, {
+    this.config,
+    Key? key,
+    this.style,
+    this.strutStyle,
+    this.textAlign,
+    this.textDirection,
+    this.locale,
+    this.softWrap,
+    this.textOverflow,
+    this.textScaleFactor,
+    this.maxLines,
+    this.semanticsLabel,
+    this.textWidthBasis,
+  }) : super(content, key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Row(children: _formChild(),);
+    return Row(
+      children: _formChild(),
+    );
   }
 
   List<Widget> _formChild() {
     List<Widget> list = <Widget>[];
     for (var i = 0; i < content.length; i++) {
-      list.add(FlutterLayout(
+      list.add(
+        FlutterLayout(
           Text(
             content[i],
             style: style,
@@ -28,13 +59,14 @@ class FlutterText extends Text {
             textDirection: textDirection,
             locale: locale,
             softWrap: softWrap,
-            overflow: overflow,
             textScaleFactor: textScaleFactor,
             maxLines: maxLines,
             semanticsLabel: semanticsLabel,
             textWidthBasis: textWidthBasis,
           ),
-          AnimationConfig(2000, 2, RockMode.leftRight)));
+          config ?? AnimationConfig(),
+        ),
+      );
     }
 
     return list;
@@ -73,7 +105,8 @@ class _FlutterLayoutState extends State<FlutterLayout>
       TweenSequenceItem<double>(tween: Tween(begin: -dx, end: dx), weight: 3),
       TweenSequenceItem<double>(tween: Tween(begin: dx, end: 0), weight: 4),
     ]);
-    _animation = sequence.animate(_controller)
+    var curveTween = widget.config.curveTween;
+    _animation = sequence.animate(null == curveTween?  _controller : curveTween.animate(_controller))
       ..addStatusListener((status) {
         if (status == AnimationStatus.completed) {
           // Do nothing
@@ -119,7 +152,9 @@ class AnimationConfig {
   /// 摇晃模式
   RockMode mode;
 
-  AnimationConfig(this.duration, this.offset, this.mode);
+  CurveTween? curveTween;
+
+  AnimationConfig({this.duration = 2000, this.offset = 1, this.mode = RockMode.leftRight, this.curveTween});
 }
 
 class FlutterAnimation extends StatelessWidget {
