@@ -106,13 +106,22 @@ class _FlutterLayoutState extends State<FlutterLayout>
       TweenSequenceItem<double>(tween: Tween(begin: dx, end: 0), weight: 4),
     ]);
     var curveTween = widget.config.curveTween;
-    _animation = sequence.animate(null == curveTween?  _controller : curveTween.animate(_controller))
+    _animation = sequence.animate(
+        null == curveTween ? _controller : curveTween.animate(_controller))
       ..addStatusListener((status) {
+        print("status is $status");
+
         if (status == AnimationStatus.completed) {
-          // Do nothing
+          print("wyn 111");
+          _controller.forward();
         }
       });
-    _controller.forward();
+    if (widget.config.repeat) {
+      _controller.repeat();
+    } else {
+      _controller.forward();
+    }
+
   }
 
   @override
@@ -152,9 +161,18 @@ class AnimationConfig {
   /// 摇晃模式
   RockMode mode;
 
+  /// 运动曲线
   CurveTween? curveTween;
 
-  AnimationConfig({this.duration = 2000, this.offset = 1, this.mode = RockMode.leftRight, this.curveTween});
+  /// 循环播放动画，默认为false
+  bool repeat;
+
+  AnimationConfig(
+      {this.duration = 2000,
+      this.offset = 1,
+      this.mode = RockMode.leftRight,
+      this.curveTween,
+      this.repeat = false});
 }
 
 class FlutterAnimation extends StatelessWidget {

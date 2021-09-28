@@ -59,7 +59,7 @@ class _MyHomePageState extends State<MyHomePage> {
             FlutterText(
               "我们都是孩子",
               style: const TextStyle(fontSize: 30, color: Colors.cyan),
-              config: AnimationConfig(curveTween: CurveTween(curve: Curves.bounceIn)),
+              config: AnimationConfig(curveTween: CurveTween(curve: Curves.ease), repeat: true),
             ),
           ],
         ),
