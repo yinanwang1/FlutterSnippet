@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_snippet/Widgets/flutter_text.dart';
+import 'package:flutter_snippet/Widgets/n_star_view.dart';
 import 'package:flutter_snippet/Widgets/normal_cell.dart';
 
 void main() {
@@ -17,7 +18,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      debugShowCheckedModeBanner: false,
+      home: const MyHomePage(title: '共享单车功能检查'),
     );
   }
 }
@@ -47,30 +49,8 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-            FlutterText(
-              "我们都是孩子",
-              style: const TextStyle(fontSize: 30, color: Colors.cyan),
-              config: AnimationConfig(curveTween: CurveTween(curve: Curves.ease), repeat: true),
-            ),
-            const NormalCell(leading: Text("leading"), title: Text("title"), middle: Text("middle"), trailing: Text("trailing")),
-          ],
-        ),
+        child: NStarView(15, 30, 20, color: Colors.red,),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }

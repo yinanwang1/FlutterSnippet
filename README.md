@@ -21,4 +21,10 @@ FlutterText(
 const NormalCell(leading: Text("leading"), title: Text("title"), middle: Text("middle"), trailing: Text("trailing")),
 ```
 
-## 3.
+## 3. NStarView 多边形
+绘制多边形，传入多边形的个数n，外半径R，内半径r，填充的颜色color
+使用示例：
+```
+NStarView(15, 30, 20, color: Colors.red,)
+```
+[多边形](./images/nStar.jpg)
