@@ -27,4 +27,4 @@ const NormalCell(leading: Text("leading"), title: Text("title"), middle: Text("m
 ```
 NStarView(15, 30, 20, color: Colors.red,)
 ```
-[多边形](./images/nStar.jpg)
+![多边形](./images/nStar.jpg)
