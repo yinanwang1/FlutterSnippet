@@ -13,6 +13,7 @@ FlutterText(
               config: AnimationConfig(curveTween: CurveTween(curve: Curves.ease), repeat: true),
             ),
 ```
+<img src="./images/flutter.gif" alt="show />
 
 ## 2. NormalCell 一行显示左边的图标，标题，和右边的尾部组件
 提供了（1）标题图片（2）标题（3）内容（4）尾部内容（或箭头）（5）是否需要底部分割线（6）点击事件
@@ -20,6 +21,7 @@ FlutterText(
 ```
 const NormalCell(leading: Text("leading"), title: Text("title"), middle: Text("middle"), trailing: Text("trailing")),
 ```
+![cell](./images/cell.jpg)
 
 ## 3. NStarView 多边形
 绘制多边形，传入多边形的个数n，外半径R，内半径r，填充的颜色color

@@ -49,7 +49,11 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: NStarView(15, 30, 20, color: Colors.red,),
+        child: FlutterText(
+          "我们都是孩子",
+          style: const TextStyle(fontSize: 30, color: Colors.cyan),
+          config: AnimationConfig(curveTween: CurveTween(curve: Curves.ease), repeat: true),
+        ),
       ),
     );
   }
