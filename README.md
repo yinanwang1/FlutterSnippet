@@ -2,6 +2,7 @@
 ## 声明： 如果有任何代码侵权，请联系我wyn18968158629@gmail.com。 
 
 在项目使用到或者网上看到好的组件，整理一份方便以后开发的时候使用。
+
 ## 1. FlutterText 字体抖动
 一个字体抖动的组件，继承自Text。用法和Text一样，可以设置Text的所有属性。
 可以传入一个动画的配置项，实现动画。支持重复播放。
@@ -30,3 +31,20 @@ const NormalCell(leading: Text("leading"), title: Text("title"), middle: Text("m
 NStarView(15, 30, 20, color: Colors.red,)
 ```
 ![多边形](./images/nStar.jpg)
+
+## 4. AbilityWidget 蛛网显示能力图
+蛛网的样式显示不同能力值，并伴有动画。
+使用示例：
+```
+AbilityWidget(
+          ability: Ability(100, 1500, AssetImage("images/namei.png"), {
+            "攻击力": 70.0,
+            "生命": 90.0,
+            "闪避": 50.0,
+            "暴击": 70.0,
+            "破格": 80.0,
+            "格挡": 100.0,
+          }, Colors.black),
+        ),
+```
+![蛛网显示能力图](./images/network.gif)

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_snippet/Widgets/flutter_text.dart';
-import 'package:flutter_snippet/Widgets/n_star_view.dart';
-import 'package:flutter_snippet/Widgets/normal_cell.dart';
+import 'package:flutter_snippet/Widgets/ability_widget.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,7 +17,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       debugShowCheckedModeBanner: false,
-      home: const MyHomePage(title: '共享单车功能检查'),
+      home: const MyHomePage(title: '哇哈哈'),
     );
   }
 }
@@ -34,25 +32,22 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: FlutterText(
-          "我们都是孩子",
-          style: const TextStyle(fontSize: 30, color: Colors.cyan),
-          config: AnimationConfig(curveTween: CurveTween(curve: Curves.ease), repeat: true),
+      body: const Center(
+        child: AbilityWidget(
+          ability: Ability(100, 1500, AssetImage("images/namei.png"), {
+            "攻击力": 70.0,
+            "生命": 90.0,
+            "闪避": 50.0,
+            "暴击": 70.0,
+            "破格": 80.0,
+            "格挡": 100.0,
+          }, Colors.red),
         ),
       ),
     );
