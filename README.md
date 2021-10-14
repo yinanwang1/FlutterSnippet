@@ -1,7 +1,7 @@
 # FlutterSnippet
 ## 声明： 如果有任何代码侵权，请联系我wyn18968158629@gmail.com。 
 
-在项目使用到或者网上看到好的组件，整理一份方便以后开发的时候使用。
+**在项目使用到或者网上看到好的组件，整理一份方便以后开发的时候使用。**
 
 ## 1. FlutterText 字体抖动
 一个字体抖动的组件，继承自Text。用法和Text一样，可以设置Text的所有属性。
@@ -48,3 +48,17 @@ AbilityWidget(
         ),
 ```
 ![蛛网显示能力图](./images/network.gif)
+
+## 5. CircleProgressWidget  圆形进度条 
+通过Progress来设置属性. 使用时设置动画，可实现动态显示
+使用示例：
+```
+CircleProgressWidget(Progress(value: value, backgroundColor: Colors.red))
+```
+![圆形进度条](./images/circle.gif)
+
+
+
+
+
+

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_snippet/Widgets/ability_widget.dart';
+import 'package:flutter_snippet/Widgets/circle_progress_widget.dart';
 
 void main() {
   runApp(const MyApp());
@@ -31,24 +32,35 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateMixin {
+  late Animation animation;
+  late AnimationController controller;
+  double value = 0.0;
+
+  @override
+  void initState() {
+    super.initState();
+
+    controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 5000));
+    Tween<double> tween = Tween<double>(begin: 0.0, end: 1.0);
+    animation = tween.animate(controller);
+    animation.addListener(() {
+      setState(() {
+        value = animation.value;
+      });
+    });
+
+    controller.repeat(reverse: true);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: const Center(
-        child: AbilityWidget(
-          ability: Ability(100, 1500, AssetImage("images/namei.png"), {
-            "攻击力": 70.0,
-            "生命": 90.0,
-            "闪避": 50.0,
-            "暴击": 70.0,
-            "破格": 80.0,
-            "格挡": 100.0,
-          }, Colors.red),
-        ),
+      body: Center(
+        child: CircleProgressWidget(Progress(value: value, backgroundColor: Colors.red)),
       ),
     );
   }
