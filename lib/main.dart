@@ -1,4 +1,3 @@
-import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -22,10 +21,12 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: const MyHomePage(title: '哇哈哈'),
       // 国际化配置 __START__
-      localeListResolutionCallback: (List<Locale>? locals, Iterable<Locale>? supportedLocales) {
+      localeListResolutionCallback:
+          (List<Locale>? locals, Iterable<Locale>? supportedLocales) {
         return const Locale('zh');
       },
-      localeResolutionCallback: (Locale? locale, Iterable<Locale>? supportedLocales) {
+      localeResolutionCallback:
+          (Locale? locale, Iterable<Locale>? supportedLocales) {
         return const Locale("zh");
       },
       localizationsDelegates: const [
@@ -53,411 +54,118 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage>
     with SingleTickerProviderStateMixin {
-  bool _showing = false;
-
   @override
   Widget build(BuildContext context) {
-    var title = Container(
-      alignment: AlignmentDirectional.center,
-      child: const Text(
-        "Dialog Unit",
-        style: TextStyle(fontSize: 30),
-      ),
-    );
-
-    void _showSimpleDialog(BuildContext context) {
-      var strs = [
-        '云深不知处内亥时息,卯时起',
-        "云深不知处内不可挑食留剩",
-        "云深不知处内不可私自斗殴",
-        "云深不知处禁止魏无羡入内"
-      ];
-
-      var title = Row(
-        children: <Widget>[
-          Image.asset(
-            "images/namei.png",
-            width: 30,
-            height: 30,
-          ),
-          const SizedBox(
-            width: 10,
-          ),
-          const Text("啥是啥啊")
-        ],
-      );
-
-      showDialog(
-          context: context,
-          builder: (context) {
-            return SimpleDialog(
-              title: title,
-              children: strs.map((str) {
-                return SimpleDialogOption(
-                  child: Row(
-                    children: <Widget>[
-                      const Icon(
-                        Icons.turned_in_not,
-                        color: Colors.blue,
-                      ),
-                      Text(str),
-                    ],
-                  ),
-                  onPressed: () {
-                    Navigator.of(context).pop(str);
-                    debugPrint(str);
-                  },
-                );
-              }).toList(),
-            );
-          }).then((value) => debugPrint("wyn return str is $value"));
-    }
-
-    void _showAlertDialog(BuildContext context) {
-      var title = Row(
-        children: <Widget>[
-          Image.asset(
-            "images/namei.png",
-            width: 30,
-            height: 30,
-          ),
-          const SizedBox(
-            width: 10,
-          ),
-          const Text("表白"),
-        ],
-      );
-
-      var content = Row(
-        children: const <Widget>[
-          Text("我💖你，你是我的"),
-        ],
-      );
-
-      showDialog(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              title: title,
-              content: content,
-              actions: <Widget>[
-                TextButton(
-                    onPressed: () {
-                      Navigator.of(context).pop("不要闹");
-                    },
-                    child: const Text("不要闹")),
-                TextButton(
-                    onPressed: () {
-                      Navigator.of(context).pop("走开");
-                    },
-                    child: const Text("走开")),
-              ],
-            );
-          }).then((value) => debugPrint("wyn value is $value"));
-    }
-
-    void _showCupertinoAlertDialog(BuildContext context) {
-      var title = Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Image.asset(
-            "images/namei.png",
-            width: 30,
-            height: 30,
-          ),
-          const SizedBox(
-            width: 10,
-          ),
-          const Text("表白"),
-        ],
-      );
-
-      var content = Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: const <Widget>[
-          Text("我💖你，你是我的"),
-        ],
-      );
-
-      showDialog(
-          context: context,
-          barrierDismissible: false,
-          builder: (context) {
-            return CupertinoAlertDialog(
-              title: title,
-              content: content,
-              actions: <Widget>[
-                CupertinoButton(
-                    onPressed: () {
-                      Navigator.of(context).pop("不要闹");
-                    },
-                    child: const Text(
-                      "不要闹",
-                      style: TextStyle(color: Colors.red),
-                    )),
-                CupertinoButton(
-                    onPressed: () {
-                      Navigator.of(context).pop("走开");
-                    },
-                    child: const Text("走开")),
-              ],
-            );
-          }).then((value) => debugPrint("wyn value is $value"));
-    }
-
-    void _showWidgetDialog(BuildContext context) {
-      showDialog(
-          context: context,
-          builder: (context) {
-            return widget;
-          });
-    }
-
-    void _showStatefulWidgetDialog(BuildContext context) {
-      var progress = 0.0;
-      StateSetter? stateSetter;
-
-      Timer.periodic(const Duration(milliseconds: 100), (timer) {
-        progress += 0.01;
-        if (null != stateSetter) {
-          stateSetter!(() {});
-        }
-
-        if (progress >= 1) {
-          timer.cancel();
-          stateSetter = null;
-
-          Navigator.of(context).pop();
-        }
-      });
-
-      var statefulBuilder = StatefulBuilder(
-          builder: (BuildContext context, StateSetter setState) {
-        stateSetter = setState;
-
-        return Center(
-          child: SizedBox(
-            width: 150,
-            height: 150,
-            child: Card(
-              elevation: 24.0,
-              color: Colors.blue.withAlpha(240),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  CircularProgressIndicator(
-                    valueColor: AlwaysStoppedAnimation(Colors.white),
-                    value: progress,
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  const Text(
-                    "Loading....",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Text(
-                    "done ${((progress - 0.1) * 100).toStringAsFixed(1)}%",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        );
-      });
-
-      showDialog(
-          context: context,
-          builder: (context) {
-            return statefulBuilder;
-          });
-    }
-
-    void _showScaffold(BuildContext context) {
-      var snakeBar = SnackBar(
-        content: const Text("和同学好厉害啊"),
-        backgroundColor: const Color(0xffFB6431),
-        duration: const Duration(seconds: 3),
-        action: SnackBarAction(
-          label: "确定",
-          onPressed: () {
-            debugPrint("Flutter 显示以下啊");
-          },
-        ),
-      );
-
-      ScaffoldMessenger.of(context).showSnackBar(snakeBar);
-    }
-
-    void _showBottomSheet(BuildContext context) {
-      var bottomSheet = BottomSheet(onClosing: () {
-        debugPrint("on closing.");
-      }, builder: (context) {
-        return Container(
-          color: const Color(0xdde3fbf6),
-          height: 150,
-          child: Center(
-            child: Image.asset("images/namei.png"),
-          ),
-        );
-      });
-
-      if (_showing) {
-        Navigator.of(context).pop();
-      } else {
-        Scaffold.of(context).showBottomSheet(bottomSheet.builder);
-      }
-
-      _showing = !_showing;
-    }
-
-    void _showDatePicker(BuildContext context) {
-      showDatePicker(
-        context: context,
-        initialDate: DateTime.now(),
-        firstDate: DateTime(2018),
-        lastDate: DateTime(2030),
-        builder: (BuildContext context, Widget? child) {
-          return Theme(data: ThemeData.dark(), child: child!);
-        },
-      ).then((value) => debugPrint("value is $value."));
-    }
-
-    void _showTimePicker(BuildContext context) {
-      showTimePicker(
-        context: context,
-        initialTime: const TimeOfDay(hour: 11, minute: 45),
-        builder: (BuildContext context, Widget? child) {
-          return Theme(data: ThemeData.dark(), child: child!);
-        },
-      ).then((value) => debugPrint("value is $value"));
-    }
-
-    void _showCupertinoPicker(BuildContext context) {
-      var names = [
-        "位阻",
-        "蓝二",
-        "j谅解",
-        "将就",
-        "幺妹",
-        "嘻嘻哈哈",
-      ];
-      final picker = CupertinoPicker(
-        itemExtent: 40,
-        onSelectedItemChanged: (position) {
-          debugPrint("The position is ${names[position]}");
-        },
-        children: names.map((e) => Text(e)).toList(),
-      );
-
-      showCupertinoModalPopup(
-          context: context,
-          builder: (context) {
-            return Container(
-              color: Colors.white,
-              height: 250,
-              child: Column(
-                children: <Widget>[
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: const Text("完成"),
-                    ),
-                  ),
-                  Container(
-                    color: Colors.white,
-                    height: 200,
-                    child: picker,
-                  )
-                ],
-              ),
-            );
-          });
-    }
-
-    void _showCupertinoDatePicker(BuildContext context) {
-      final picker = CupertinoDatePicker(
-        onDateTimeChanged: (date) {
-          debugPrint("当前日期、时间 ${date.toString()}");
-        },
-        initialDateTime: DateTime(1994),
-      );
-
-      showCupertinoModalPopup(
-          context: context,
-          builder: (context) {
-            return Container(
-              color: Colors.white,
-              height: 200,
-              child: picker,
-            );
-          });
-    }
-
-    void _showCupertinoTimerPicker(BuildContext context) {
-      final picker = CupertinoTimerPicker(onTimerDurationChanged: (duration) {
-        debugPrint("当前时间为 $duration");
-      });
-
-      showCupertinoModalPopup(context: context, builder: (context) {
-        return Material(
-          child: SizedBox(
-            height: 200,
-            child: picker,
-          ),
-        );
-      });
-    }
-
-    Map<String, Function> buttons = {
-      "对话框SimpleDialog": _showSimpleDialog,
-      "对话框AlertDialog": _showAlertDialog,
-      "对话框CupertinoAlertDialog": _showCupertinoAlertDialog,
-      "对话框显示自己": _showWidgetDialog,
-      "对话框显示StatefulWidget": _showStatefulWidgetDialog,
-      "Scaffold": _showScaffold,
-      "BottomSheet": _showBottomSheet,
-      "DatePicker": _showDatePicker,
-      "TimePicker": _showTimePicker,
-      "CupertinoPicker": _showCupertinoPicker,
-      "CupertinoDatePicker": _showCupertinoDatePicker,
-      "CupertinoTimerPicker": _showCupertinoTimerPicker,
-    };
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
+      body: OriginPage(),
+    );
+  }
+}
+
+class OriginPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    var hero = Hero(
+        tag: "user-head",
+        child: ClipRRect(
+          borderRadius: const BorderRadius.all(Radius.circular(30)),
+          child: Image.asset(
+            "images/namei.png",
+            width: 60,
+            height: 60,
+            fit: BoxFit.cover,
+          ),
+        ));
+
+    var container = Container(
+      alignment: const Alignment(-0.8, -0.8),
+      child: hero,
+      width: 250,
+      height: 250 * 0.618,
+      decoration: BoxDecoration(
+          gradient: LinearGradient(colors: [
+        Colors.red.withAlpha(99),
+        Colors.yellow.withAlpha(189),
+        Colors.green.withAlpha(88),
+        Colors.blue.withAlpha(230),
+      ])),
+    );
+
+    void _toNext(context) {
+      Navigator.push(context, ScaleRouter(child: TargetPage()));
+    }
+
+    return Scaffold(
       body: Center(
-        child: Column(
-          children: <Widget>[
-            title,
-            Builder(builder: (BuildContext context) {
-              return Column(
-                children: buttons.keys.toList().map((e) {
-                  return ElevatedButton(
-                      onPressed: () {
-                        var f = buttons[e];
-                        if (null != f) {
-                          f(context);
-                        }
-                      },
-                      child: Text(e));
-                }).toList(),
-              );
-            })
-          ],
+        child: GestureDetector(
+          child: Card(
+            elevation: 5,
+            child: container,
+          ),
+          onTap: () {
+            _toNext(context);
+          },
         ),
       ),
     );
   }
+}
+
+class TargetPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    var hero = const Hero(
+      tag: "user-head",
+      child: Padding(
+        padding: EdgeInsets.all(16.0),
+        child: CircleAvatar(
+          backgroundColor: Colors.transparent,
+          radius: 72.0,
+          backgroundImage: AssetImage("images/namei.png"),
+        ),
+      ),
+    );
+
+    var touch = InkWell(
+      onTap: () => Navigator.of(context).pop(),
+      child: hero,
+    );
+
+    return Scaffold(
+      appBar: AppBar(
+        leading: touch,
+      ),
+      body: Container(
+        decoration: BoxDecoration(
+            gradient: LinearGradient(colors: [
+          Colors.red.withAlpha(99),
+          Colors.yellow.withAlpha(189),
+          Colors.green.withAlpha(88),
+          Colors.blue.withAlpha(230),
+        ])),
+      ),
+    );
+  }
+}
+
+class ScaleRouter<T> extends PageRouteBuilder<T> {
+  final Widget child;
+  final int duration_ms;
+  final Curve curve;
+
+  ScaleRouter(
+      {required this.child,
+      this.duration_ms = 500,
+      this.curve = Curves.fastOutSlowIn})
+      : super(
+            pageBuilder: (context, animation, secondaryAnimation) => child,
+            transitionDuration: Duration(milliseconds: duration_ms),
+            transitionsBuilder: (context, a1, a2, child) => ScaleTransition(
+                  scale: Tween(begin: 0.0, end: 1.0)
+                      .animate(CurvedAnimation(parent: a1, curve: curve)),
+                  child: child,
+                ));
 }
