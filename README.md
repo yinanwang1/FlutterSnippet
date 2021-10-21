@@ -57,6 +57,20 @@ CircleProgressWidget(Progress(value: value, backgroundColor: Colors.red))
 ```
 ![圆形进度条](./images/circle.gif)
 
+## 6. FlutterWebView 浏览器
+传入url和title，打开新页面在浏览器展示内容。
+使用示例：
+```
+Navigator.of(context).push(
+              MaterialPageRoute(builder: (BuildContext context) {
+                return const FlutterWebView(
+                    "http://www.baidu.com",
+                    title: "我就是我");
+              }));
+```
+*需要在pubspec.yaml中依赖webview_flutter: ^2.1.1*
+
+## 7.
 
 
 

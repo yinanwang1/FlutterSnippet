@@ -1,7 +1,7 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_snippet/Widgets/web_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -60,112 +60,16 @@ class _MyHomePageState extends State<MyHomePage>
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: OriginPage(),
-    );
-  }
-}
-
-class OriginPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    var hero = Hero(
-        tag: "user-head",
-        child: ClipRRect(
-          borderRadius: const BorderRadius.all(Radius.circular(30)),
-          child: Image.asset(
-            "images/namei.png",
-            width: 60,
-            height: 60,
-            fit: BoxFit.cover,
-          ),
-        ));
-
-    var container = Container(
-      alignment: const Alignment(-0.8, -0.8),
-      child: hero,
-      width: 250,
-      height: 250 * 0.618,
-      decoration: BoxDecoration(
-          gradient: LinearGradient(colors: [
-        Colors.red.withAlpha(99),
-        Colors.yellow.withAlpha(189),
-        Colors.green.withAlpha(88),
-        Colors.blue.withAlpha(230),
-      ])),
-    );
-
-    void _toNext(context) {
-      Navigator.push(context, ScaleRouter(child: TargetPage()));
-    }
-
-    return Scaffold(
-      body: Center(
-        child: GestureDetector(
-          child: Card(
-            elevation: 5,
-            child: container,
-          ),
-          onTap: () {
-            _toNext(context);
-          },
-        ),
-      ),
-    );
-  }
-}
-
-class TargetPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    var hero = const Hero(
-      tag: "user-head",
-      child: Padding(
-        padding: EdgeInsets.all(16.0),
-        child: CircleAvatar(
-          backgroundColor: Colors.transparent,
-          radius: 72.0,
-          backgroundImage: AssetImage("images/namei.png"),
-        ),
-      ),
-    );
-
-    var touch = InkWell(
-      onTap: () => Navigator.of(context).pop(),
-      child: hero,
-    );
-
-    return Scaffold(
-      appBar: AppBar(
-        leading: touch,
-      ),
       body: Container(
-        decoration: BoxDecoration(
-            gradient: LinearGradient(colors: [
-          Colors.red.withAlpha(99),
-          Colors.yellow.withAlpha(189),
-          Colors.green.withAlpha(88),
-          Colors.blue.withAlpha(230),
-        ])),
+        child: ElevatedButton(onPressed: () {
+          Navigator.of(context).push(
+              MaterialPageRoute(builder: (BuildContext context) {
+                return const FlutterWebView(
+                    "http://www.baidu.com",
+                    title: "我就是我");
+              }));
+        }, child: const Text("点我"),),
       ),
     );
   }
-}
-
-class ScaleRouter<T> extends PageRouteBuilder<T> {
-  final Widget child;
-  final int duration_ms;
-  final Curve curve;
-
-  ScaleRouter(
-      {required this.child,
-      this.duration_ms = 500,
-      this.curve = Curves.fastOutSlowIn})
-      : super(
-            pageBuilder: (context, animation, secondaryAnimation) => child,
-            transitionDuration: Duration(milliseconds: duration_ms),
-            transitionsBuilder: (context, a1, a2, child) => ScaleTransition(
-                  scale: Tween(begin: 0.0, end: 1.0)
-                      .animate(CurvedAnimation(parent: a1, curve: curve)),
-                  child: child,
-                ));
 }
