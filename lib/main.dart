@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_snippet/Common/my_buttons.dart';
+import 'package:flutter_snippet/Common/my_colors.dart';
 import 'package:flutter_snippet/Widgets/web_view.dart';
 
 void main() {
@@ -16,7 +18,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: MyColors.white,
+        platform: TargetPlatform.iOS,
       ),
       debugShowCheckedModeBanner: false,
       home: const MyHomePage(title: '哇哈哈'),
@@ -61,14 +64,16 @@ class _MyHomePageState extends State<MyHomePage>
         title: Text(widget.title),
       ),
       body: Container(
-        child: ElevatedButton(onPressed: () {
-          Navigator.of(context).push(
-              MaterialPageRoute(builder: (BuildContext context) {
-                return const FlutterWebView(
-                    "http://www.baidu.com",
+        margin: const EdgeInsets.all(30),
+        child: BlueButton(
+            title: "我试试看",
+            onPressed: () {
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (BuildContext context) {
+                return const FlutterWebView("http://www.baidu.com",
                     title: "我就是我");
               }));
-        }, child: const Text("点我"),),
+            }),
       ),
     );
   }
