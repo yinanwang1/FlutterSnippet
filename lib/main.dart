@@ -1,9 +1,11 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_snippet/Common/my_buttons.dart';
 import 'package:flutter_snippet/Common/my_colors.dart';
-import 'package:flutter_snippet/Widgets/web_view.dart';
+
+import 'Widgets/math_runner.dart';
 
 void main() {
   runApp(const MyApp());
@@ -63,18 +65,54 @@ class _MyHomePageState extends State<MyHomePage>
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Container(
-        margin: const EdgeInsets.all(30),
-        child: BlueButton(
-            title: "我试试看",
-            onPressed: () {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (BuildContext context) {
-                return const FlutterWebView("http://www.baidu.com",
-                    title: "我就是我");
-              }));
-            }),
-      ),
+      body: Stack(
+        alignment: Alignment.center,
+        children: <Widget>[
+          const CircleAvatar(
+            backgroundImage: AssetImage("images/namei.png"),
+          ),
+          MathRunner(
+            f: (t) => cos(t * pi),
+            g: (t) => 0.6 * sin(t * pi),
+            reverse: false,
+            parts: 4,
+            index: 0,
+            child: const CircleAvatar(
+              backgroundImage: AssetImage("images/namei.png"),
+            ),
+          ),
+          MathRunner(
+            f: (t) => cos(t * pi),
+            g: (t) => 0.6 * sin(t * pi),
+            reverse: false,
+            parts: 4,
+            index: 1,
+            child: const CircleAvatar(
+              backgroundImage: AssetImage("images/namei.png"),
+            ),
+          ),
+          MathRunner(
+            f: (t) => cos(t * pi),
+            g: (t) => 0.6 * sin(t * pi),
+            reverse: false,
+            parts: 4,
+            index: 2,
+            child: const CircleAvatar(
+              backgroundImage: AssetImage("images/namei.png"),
+            ),
+          ),
+          MathRunner(
+            f: (t) => cos(t * pi),
+            g: (t) => 0.6 * sin(t * pi),
+            reverse: false,
+            parts: 4,
+            index: 3,
+            child: const CircleAvatar(
+              backgroundImage: AssetImage("images/namei.png"),
+            ),
+          ),
+        ],
+      )
     );
   }
 }

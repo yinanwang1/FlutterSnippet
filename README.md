@@ -59,6 +59,7 @@ CircleProgressWidget(Progress(value: value, backgroundColor: Colors.red))
 
 ## 6. FlutterWebView 浏览器
 传入url和title，打开新页面在浏览器展示内容。
+iOS使用时，需要在ViewDidLoad中添加`GeneratedPluginRegistrant.register(with: self)`。
 使用示例：
 ```
 Navigator.of(context).push(
@@ -70,7 +71,62 @@ Navigator.of(context).push(
 ```
 *需要在pubspec.yaml中依赖webview_flutter: ^2.1.1*
 
-## 7.
+## 7. MathRunner 按函数移动
+封装了一个动画，传入x和y的函数，使组件按函数动起来。
+使用示例：
+```
+Stack(
+        alignment: Alignment.center,
+        children: <Widget>[
+          const CircleAvatar(
+            backgroundImage: AssetImage("images/namei.png"),
+          ),
+          MathRunner(
+            f: (t) => cos(t * pi),
+            g: (t) => 0.6 * sin(t * pi),
+            reverse: false,
+            parts: 4,
+            index: 0,
+            child: const CircleAvatar(
+              backgroundImage: AssetImage("images/namei.png"),
+            ),
+          ),
+          MathRunner(
+            f: (t) => cos(t * pi),
+            g: (t) => 0.6 * sin(t * pi),
+            reverse: false,
+            parts: 4,
+            index: 1,
+            child: const CircleAvatar(
+              backgroundImage: AssetImage("images/namei.png"),
+            ),
+          ),
+          MathRunner(
+            f: (t) => cos(t * pi),
+            g: (t) => 0.6 * sin(t * pi),
+            reverse: false,
+            parts: 4,
+            index: 2,
+            child: const CircleAvatar(
+              backgroundImage: AssetImage("images/namei.png"),
+            ),
+          ),
+          MathRunner(
+            f: (t) => cos(t * pi),
+            g: (t) => 0.6 * sin(t * pi),
+            reverse: false,
+            parts: 4,
+            index: 3,
+            child: const CircleAvatar(
+              backgroundImage: AssetImage("images/namei.png"),
+            ),
+          ),
+        ],
+      )
+```
+![按函数移动](./images/math_runner.gif)
+
+## 8.
 
 
 
