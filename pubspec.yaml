@@ -36,7 +36,7 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.3
-  path_provider: ^2.0.5
+  path_provider: ^2.0.6
   http: ^0.13.4
   webview_flutter: ^2.1.2
 
@@ -68,6 +68,7 @@ flutter:
     - images/flutter.gif
     - images/nStar.jpg
     - images/namei.png
+    - images/apply.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

@@ -2,8 +2,11 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_snippet/Common/my_buttons.dart';
 import 'package:flutter_snippet/Common/my_colors.dart';
+import 'package:flutter_snippet/Widgets/normal_cell.dart';
 
 import 'Widgets/math_runner.dart';
 
@@ -63,56 +66,86 @@ class _MyHomePageState extends State<MyHomePage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: const Text("区域外骑行申请"),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios),
+          onPressed: () {},
+        ),
       ),
-      body: Stack(
-        alignment: Alignment.center,
+      body: ListView(
         children: <Widget>[
-          const CircleAvatar(
-            backgroundImage: AssetImage("images/namei.png"),
+          NormalCell(
+            title: Text("申请地址："),
           ),
-          MathRunner(
-            f: (t) => cos(t * pi),
-            g: (t) => 0.6 * sin(t * pi),
-            reverse: false,
-            parts: 4,
-            index: 0,
-            child: const CircleAvatar(
-              backgroundImage: AssetImage("images/namei.png"),
+          Image.asset("images/apply.png"),
+          NormalCell(
+            title: Text("申请理由："),
+          ),
+          NormalCell(
+            title: Text("去往地图所在的位置，取衣服。20分钟返回.",
+                style: TextStyle(color: Colors.blue, fontSize: 18)),
+          ),
+          Padding(padding: EdgeInsets.only(top: 15)),
+          NormalCell(
+            title: Text(
+              "用户历史用车情况",
+            ),
+            trailing: IconButton(
+              icon: const Icon(Icons.arrow_forward_ios),
+              onPressed: () {},
             ),
           ),
-          MathRunner(
-            f: (t) => cos(t * pi),
-            g: (t) => 0.6 * sin(t * pi),
-            reverse: false,
-            parts: 4,
-            index: 1,
-            child: const CircleAvatar(
-              backgroundImage: AssetImage("images/namei.png"),
+          NormalCell(
+            title: Text(
+              "车辆详情",
+            ),
+            trailing: IconButton(
+              icon: const Icon(Icons.arrow_forward_ios),
+              onPressed: () {},
             ),
           ),
-          MathRunner(
-            f: (t) => cos(t * pi),
-            g: (t) => 0.6 * sin(t * pi),
-            reverse: false,
-            parts: 4,
-            index: 2,
-            child: const CircleAvatar(
-              backgroundImage: AssetImage("images/namei.png"),
+          NormalCell(
+            title: Text(
+              "允许时长：(分钟)",
             ),
           ),
-          MathRunner(
-            f: (t) => cos(t * pi),
-            g: (t) => 0.6 * sin(t * pi),
-            reverse: false,
-            parts: 4,
-            index: 3,
-            child: const CircleAvatar(
-              backgroundImage: AssetImage("images/namei.png"),
+          TextField(
+            maxLength: 11,
+            decoration: InputDecoration(
+              labelText: "20",
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(15.0),
+              ),
             ),
+            keyboardType: TextInputType.number,
           ),
+          Padding(padding: EdgeInsets.only(top: 30)),
+          Row(
+            children: <Widget>[
+              Padding(padding: EdgeInsets.only(left: 20)),
+              Expanded(
+                child: BlueButton(
+                  onPressed: () {},
+                  title: "通过",
+                ),
+              ),
+              Padding(padding: EdgeInsets.only(left: 20)),
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: () {},
+                  child: Text(
+                    "不通过",
+                    style: TextStyle(color: Colors.white, fontSize: 17),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                      primary: Colors.red, minimumSize: Size(50, 50)),
+                ),
+              ),
+              Padding(padding: EdgeInsets.only(right: 20)),
+            ],
+          )
         ],
-      )
+      ),
     );
   }
 }
