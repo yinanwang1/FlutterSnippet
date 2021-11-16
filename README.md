@@ -150,6 +150,27 @@ Column(
 ```
 ![评分](./images/star.jpg)
 
+## 9. ToggleRotate 点击旋转组件
+点击一个组件的时候，可以将组件旋转到指定的角度，并可指定动画效果。
+使用示例：
+```
+ToggleRotate(
+  onTap: () {},
+  child: const Icon(
+    Icons.arrow_upward,
+    size: 60,
+    color: Colors.orangeAccent,
+  ),
+  durationMs: 500,
+  curve: Curves.bounceInOut,
+),
+```
+![旋转](./images/rotate.gif)
+
+
+
+
+
 
 
 

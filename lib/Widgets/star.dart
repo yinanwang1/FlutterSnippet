@@ -2,6 +2,9 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
+/// 评分
+/// @author 阿南
+/// @since 2021/11/16 13:40
 class CustomRating extends StatefulWidget {
   final int max;
   final Star star;
@@ -81,6 +84,9 @@ class _CustomRatingState extends State<CustomRating> {
   }
 }
 
+/// 展示评分
+/// @author 阿南
+/// @since 2021/11/16 13:41
 class StarScore extends StatelessWidget {
   final Star star;
   final double score;

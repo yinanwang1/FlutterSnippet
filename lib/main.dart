@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_snippet/Common/my_colors.dart';
 import 'package:flutter_snippet/Widgets/star.dart';
+import 'package:flutter_snippet/Widgets/toggle_rotate.dart';
 
 void main() {
   runApp(const MyApp());
@@ -71,16 +72,15 @@ class _MyHomePageState extends State<MyHomePage>
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            CustomRating(
-              onRating: (double d) {
-                debugPrint("score is $d");
-              },
-            ),
-            StarScore(
-              score: 3.0,
-              tail: Column(
-                children: const <Widget>[Text("综合评分"), Text("3.0")],
+            ToggleRotate(
+              onTap: () {},
+              child: const Icon(
+                Icons.arrow_upward,
+                size: 60,
+                color: Colors.orangeAccent,
               ),
+              durationMs: 500,
+              curve: Curves.bounceInOut,
             ),
           ],
         ),
