@@ -39,6 +39,7 @@ dependencies:
   path_provider: ^2.0.6
   http: ^0.13.4
   webview_flutter: ^2.1.2
+  provider: ^6.0.1
 
 dev_dependencies:
   flutter_test:
@@ -68,7 +69,6 @@ flutter:
     - images/flutter.gif
     - images/nStar.jpg
     - images/namei.png
-    - images/apply.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

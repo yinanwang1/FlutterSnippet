@@ -1,14 +1,9 @@
-import 'dart:math';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_snippet/Common/my_buttons.dart';
 import 'package:flutter_snippet/Common/my_colors.dart';
-import 'package:flutter_snippet/Widgets/normal_cell.dart';
-
-import 'Widgets/math_runner.dart';
+import 'package:flutter_snippet/Widgets/star.dart';
 
 void main() {
   runApp(const MyApp());
@@ -27,7 +22,7 @@ class MyApp extends StatelessWidget {
         platform: TargetPlatform.iOS,
       ),
       debugShowCheckedModeBanner: false,
-      home: const MyHomePage(title: '哇哈哈'),
+      home: const MyHomePage(title: "玩哈哈"),
       // 国际化配置 __START__
       localeListResolutionCallback:
           (List<Locale>? locals, Iterable<Locale>? supportedLocales) {
@@ -72,79 +67,23 @@ class _MyHomePageState extends State<MyHomePage>
           onPressed: () {},
         ),
       ),
-      body: ListView(
-        children: <Widget>[
-          NormalCell(
-            title: Text("申请地址："),
-          ),
-          Image.asset("images/apply.png"),
-          NormalCell(
-            title: Text("申请理由："),
-          ),
-          NormalCell(
-            title: Text("去往地图所在的位置，取衣服。20分钟返回.",
-                style: TextStyle(color: Colors.blue, fontSize: 18)),
-          ),
-          Padding(padding: EdgeInsets.only(top: 15)),
-          NormalCell(
-            title: Text(
-              "用户历史用车情况",
+      body: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            CustomRating(
+              onRating: (double d) {
+                debugPrint("score is $d");
+              },
             ),
-            trailing: IconButton(
-              icon: const Icon(Icons.arrow_forward_ios),
-              onPressed: () {},
-            ),
-          ),
-          NormalCell(
-            title: Text(
-              "车辆详情",
-            ),
-            trailing: IconButton(
-              icon: const Icon(Icons.arrow_forward_ios),
-              onPressed: () {},
-            ),
-          ),
-          NormalCell(
-            title: Text(
-              "允许时长：(分钟)",
-            ),
-          ),
-          TextField(
-            maxLength: 11,
-            decoration: InputDecoration(
-              labelText: "20",
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(15.0),
+            StarScore(
+              score: 3.0,
+              tail: Column(
+                children: const <Widget>[Text("综合评分"), Text("3.0")],
               ),
             ),
-            keyboardType: TextInputType.number,
-          ),
-          Padding(padding: EdgeInsets.only(top: 30)),
-          Row(
-            children: <Widget>[
-              Padding(padding: EdgeInsets.only(left: 20)),
-              Expanded(
-                child: BlueButton(
-                  onPressed: () {},
-                  title: "通过",
-                ),
-              ),
-              Padding(padding: EdgeInsets.only(left: 20)),
-              Expanded(
-                child: ElevatedButton(
-                  onPressed: () {},
-                  child: Text(
-                    "不通过",
-                    style: TextStyle(color: Colors.white, fontSize: 17),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                      primary: Colors.red, minimumSize: Size(50, 50)),
-                ),
-              ),
-              Padding(padding: EdgeInsets.only(right: 20)),
-            ],
-          )
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -126,7 +126,29 @@ Stack(
 ```
 ![按函数移动](./images/math_runner.gif)
 
-## 8.
+## 8. 评分
+StarScore显示评分结果
+CustomRating打分
+使用示例：
+```
+Column(
+  mainAxisSize: MainAxisSize.min,
+  children: <Widget>[
+    CustomRating(
+      onRating: (double d) {
+        debugPrint("score is $d");
+      },
+    ),
+    StarScore(
+      score: 3.0,
+      tail: Column(
+        children: const <Widget>[Text("综合评分"), Text("3.0")],
+      ),
+    ),
+  ],
+),
+```
+![评分](./images/star.jpg)
 
 
 
