@@ -167,6 +167,98 @@ ToggleRotate(
 ```
 ![旋转](./images/rotate.gif)
 
+## 10. CouponShapeBorder 优惠券
+用自定义shape绘制外边框的形状，实现优惠券的样式
+使用示例：
+```
+Material(
+color: Colors.red,
+shape: const CouponShapeBorder(),
+elevation: 2,
+child: Container(
+padding: const EdgeInsets.all(10),
+height: 150,
+child: Row(
+  mainAxisSize: MainAxisSize.max,
+  children: <Widget>[
+    Flexible(
+      flex: 718,
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                const Text(
+                  "￥",
+                  style: TextStyle(
+                      color: Colors.white, fontSize: 17),
+                ),
+                const Text(
+                  "200",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 60,
+                      fontWeight: FontWeight.bold),
+                ),
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: const <Widget>[
+                    Text(
+                      "优",
+                      style: TextStyle(
+                          color: Colors.white, fontSize: 12),
+                    ),
+                    Text(
+                      "惠",
+                      style: TextStyle(
+                          color: Colors.white, fontSize: 12),
+                    ),
+                    Text(
+                      "券",
+                      style: TextStyle(
+                          color: Colors.white, fontSize: 12),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            const Text(
+              "订单满599元使用",
+              style: TextStyle(
+                  color: Colors.black45, fontSize: 20),
+            )
+          ],
+        ),
+      ),
+    ),
+    const Flexible(
+      flex: 282,
+      child: Center(
+        child: SizedBox(
+          width: 10,
+          child: Text(
+            "立即领取",
+            style:
+                TextStyle(color: Colors.yellow, fontSize: 20),
+          ),
+        ),
+      ),
+    ),
+  ],
+),
+),
+),
+```
+![优惠券](./images/coupon.jpg)
+
+
+
+
+
+
 
 
 
