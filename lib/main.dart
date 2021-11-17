@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_snippet/Common/my_colors.dart';
-import 'package:flutter_snippet/Widgets/coupon_shape_border.dart';
+
+import 'Widgets/flutter_wave_loading.dart';
 
 void main() {
   runApp(const MyApp());
@@ -68,91 +69,17 @@ class _MyHomePageState extends State<MyHomePage>
         ),
       ),
       body: Container(
+        color: Colors.grey.withAlpha(66),
         margin: const EdgeInsets.all(15),
-        child: Column(
-          children: <Widget>[
-            const Padding(padding: EdgeInsets.only(top: 20)),
-            Material(
-              color: Colors.red,
-              shape: const CouponShapeBorder(),
-              elevation: 2,
-              child: Container(
-                padding: const EdgeInsets.all(10),
-                height: 150,
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: <Widget>[
-                    Flexible(
-                      flex: 718,
-                      child: Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              mainAxisSize: MainAxisSize.min,
-                              children: <Widget>[
-                                const Text(
-                                  "￥",
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 17),
-                                ),
-                                const Text(
-                                  "200",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 60,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  children: const <Widget>[
-                                    Text(
-                                      "优",
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 12),
-                                    ),
-                                    Text(
-                                      "惠",
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 12),
-                                    ),
-                                    Text(
-                                      "券",
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 12),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            const Text(
-                              "订单满599元使用",
-                              style: TextStyle(
-                                  color: Colors.black45, fontSize: 20),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                    const Flexible(
-                      flex: 282,
-                      child: Center(
-                        child: SizedBox(
-                          width: 10,
-                          child: Text(
-                            "立即领取",
-                            style:
-                                TextStyle(color: Colors.yellow, fontSize: 20),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
+        alignment: Alignment.center,
+        child: const FlutterWaveLoading(
+          width: 75,
+          height: 75,
+          isOval: false,
+          progress: 0.5,
+          waveHeight: 3,
+          color: Colors.cyan,
+          curve: Curves.bounceInOut,
         ),
       ),
     );

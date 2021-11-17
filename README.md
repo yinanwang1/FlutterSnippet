@@ -254,6 +254,24 @@ child: Row(
 ```
 ![优惠券](./images/coupon.jpg)
 
+## 11. FlutterWaveLoading 波浪加载
+滚动的波浪，可以设置进度。
+使用示例
+```
+const FlutterWaveLoading(
+    width: 75,
+    height: 75,
+    isOval: false,
+    progress: 0.5,
+    waveHeight: 3,
+    color: Colors.cyan,
+    curve: Curves.bounceInOut,
+),
+```
+
+
+![旋转](./images/wave.gif)
+
 
 
 
