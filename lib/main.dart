@@ -5,6 +5,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_snippet/Common/my_colors.dart';
 
 import 'Widgets/flutter_wave_loading.dart';
+import 'Widgets/toggle_rotate.dart';
 
 void main() {
   runApp(const MyApp());
@@ -72,16 +73,66 @@ class _MyHomePageState extends State<MyHomePage>
         color: Colors.grey.withAlpha(66),
         margin: const EdgeInsets.all(15),
         alignment: Alignment.center,
-        child: const FlutterWaveLoading(
-          width: 75,
-          height: 75,
-          isOval: false,
-          progress: 0.5,
-          waveHeight: 3,
-          color: Colors.cyan,
-          curve: Curves.bounceInOut,
+        child: CustomSingleChildLayoutDemo(),
+      ),
+    );
+  }
+}
+
+class CustomSingleChildLayoutDemo extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 300,
+      height: 200,
+      color: Colors.grey.withAlpha(11),
+      child: CustomSingleChildLayout(
+        delegate: _TolySingleChildLayoutDelegate(),
+        child: Container(
+          color: Colors.orangeAccent,
         ),
       ),
     );
   }
 }
+
+class _TolySingleChildLayoutDelegate extends SingleChildLayoutDelegate {
+
+  @override
+  bool shouldRelayout(SingleChildLayoutDelegate oldDelegate) {
+    return true;
+  }
+
+  @override
+  Offset getPositionForChild(Size size, Size childSize) {
+    debugPrint("---size:$size---childSize:$childSize");
+
+    return Offset(size.width / 2, 0);
+  }
+
+  @override
+  BoxConstraints getConstraintsForChild(BoxConstraints constraints) {
+    debugPrint("getConstraintsForChild---constraints:$constraints");
+
+    return BoxConstraints(
+      maxHeight: constraints.maxHeight / 2,
+      maxWidth: constraints.maxWidth / 2,
+      minHeight: constraints.minHeight / 2,
+      minWidth: constraints.minWidth / 2
+    );
+  }
+
+  @override
+  Size getSize(BoxConstraints constraints) {
+    debugPrint("getSize---constraints:$constraints");
+
+    return super.getSize(constraints);
+  }
+}
+
+
+
+
+
+
