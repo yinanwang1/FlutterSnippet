@@ -272,6 +272,26 @@ const FlutterWaveLoading(
 
 ![旋转](./images/wave.gif)
 
+## 12. PointsCurve 根据多点绘制直线和曲线
+根据多个坐标，用直线和贝塞尔曲线连接。
+可以设置直线的颜色和坐标点的颜色，圆的半径。
+可以设置曲线的颜色和线的宽度。
+使用示例：
+```
+const SizedBox(
+    height: 500,
+    child: PointsCurve([
+      Offset(0, 20),
+      Offset(40, 40),
+      Offset(80, -20),
+      Offset(120, -40),
+      Offset(160, -80),
+      Offset(200, -20),
+      Offset(240, -40),
+    ],),
+),
+```
+![旋转](./images/curve.jpg)
 
 
 
