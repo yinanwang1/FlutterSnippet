@@ -294,6 +294,17 @@ const SizedBox(
 ![旋转](./images/curve.jpg)
 
 
+## 13. EfficientPage 联动滚动页面
+通过局部更新的方式，来降低全局刷新
+使用示例：
+```
+const EfficientPage()
+```
+![旋转](./images/page.gif)
+
+
+
+
 
 
 

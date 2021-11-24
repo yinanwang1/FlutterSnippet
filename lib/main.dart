@@ -6,7 +6,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_snippet/Common/my_colors.dart';
-import 'package:flutter_snippet/Widgets/points_curve.dart';
+import 'package:flutter_snippet/Widgets/efficient_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -60,6 +60,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage>
     with SingleTickerProviderStateMixin {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,20 +71,7 @@ class _MyHomePageState extends State<MyHomePage>
           onPressed: () {},
         ),
       ),
-      body: const SizedBox(
-        height: 500,
-        child: PointsCurve([
-          Offset(0, 20),
-          Offset(40, 40),
-          Offset(80, -20),
-          Offset(120, -40),
-          Offset(160, -80),
-          Offset(200, -20),
-          Offset(240, -40),
-        ],),
-      ),
+      body: const EfficientPage(),
     );
   }
 }
-
-// Test
