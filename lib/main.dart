@@ -6,7 +6,8 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_snippet/Common/my_colors.dart';
-import 'package:flutter_snippet/Widgets/efficient_page.dart';
+
+import 'Widgets/wave.dart';
 
 void main() {
   runApp(const MyApp());
@@ -60,7 +61,6 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage>
     with SingleTickerProviderStateMixin {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,7 +71,20 @@ class _MyHomePageState extends State<MyHomePage>
           onPressed: () {},
         ),
       ),
-      body: const EfficientPage(),
+      body: Wrap(
+        runSpacing: 10.0,
+        children: const <Widget>[
+          Wave(),
+          Wave(
+            waveSize: Size(100, 200),
+            centerColor: Colors.black,
+            waveColor: Colors.red,
+            centerRadius: 20,
+            durationMilliseconds: 3000,
+            isWaveUp: false,
+          ),
+        ],
+      ),
     );
   }
 }

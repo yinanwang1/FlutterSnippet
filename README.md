@@ -302,6 +302,22 @@ const EfficientPage()
 ```
 ![旋转](./images/page.gif)
 
+## 14. Wave 类似水波的效果，可以设置一个中心圆，然后一个波动的圆。
+波动波动。
+使用示例：
+```
+Wave(),
+Wave(
+    waveSize: Size(100, 200),
+    centerColor: Colors.black,
+    waveColor: Colors.red,
+    centerRadius: 20,
+    durationMilliseconds: 3000,
+    isWaveUp: false,
+),
+```
+![旋转](./images/wave_widget.gif)
+
 
 
 
