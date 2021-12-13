@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
@@ -7,6 +8,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_snippet/Common/my_colors.dart';
+import 'package:string_scanner/string_scanner.dart';
 
 import 'Widgets/wave.dart';
 import 'dart:ui' as ui show ParagraphBuilder, PlaceholderAlignment;
@@ -63,7 +65,6 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage>
     with SingleTickerProviderStateMixin {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -75,17 +76,19 @@ class _MyHomePageState extends State<MyHomePage>
         ),
       ),
       body: const Center(
-        child: Icon(Icons.android_rounded, size: 50,),
+        child: Icon(
+          Icons.android_rounded,
+          size: 50,
+        ),
       ),
     );
   }
 }
 
-class Person {
-  String name;
-  int age;
+class Point {
+  double x, y;
 
-  Person(this.name, this.age);
-
-  bool operator >(Person other) => age > other.age;
+  Point.polar(double theta, double radius)
+      : x = cos(theta) * radius,
+        y = sin(theta) * radius;
 }
