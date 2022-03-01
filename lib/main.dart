@@ -1,5 +1,3 @@
-import 'dart:collection';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_snippet/Common/my_colors.dart';
@@ -81,12 +79,11 @@ class Test extends StatefulWidget {
 class _TestState extends State<Test> with SingleTickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   late Animation<double> animation;
   late AnimationController controller;
+  int count = 0;
 
   @override
   void initState() {
     super.initState();
-
-    final map = HashMap();
 
     controller =
         AnimationController(vsync: this, duration: const Duration(seconds: 2));
@@ -109,11 +106,23 @@ class _TestState extends State<Test> with SingleTickerProviderStateMixin, Automa
     super.build(context);
 
     return Center(
-      child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 10),
-        height: animation.value,
-        width: animation.value,
-        child: const FlutterLogo(),
+      child: Column(
+        children: <Widget>[
+          Container(
+            margin: const EdgeInsets.symmetric(vertical: 10),
+            height: animation.value,
+            width: animation.value,
+            child: const FlutterLogo(),
+          ),
+          Text("$count"),
+          ElevatedButton(onPressed: () {
+            // debugPrint("parseNumber('123') is ${parseNumber("123")}");
+            // debugPrint("parseNumber('123.1') is ${parseNumber("123.1")}");
+            setState(() {
+              count++;
+            });
+          }, child: const Icon(Icons.add))
+        ],
       ),
     );
   }
