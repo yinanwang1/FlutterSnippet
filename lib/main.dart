@@ -1,6 +1,10 @@
+import 'dart:math';
+
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_snippet/Common/my_colors.dart';
+import 'package:flutter_snippet/Widgets/clock.dart';
 
 void main() {
   runApp(const MyApp());
@@ -76,10 +80,12 @@ class Test extends StatefulWidget {
   }
 }
 
-class _TestState extends State<Test> with SingleTickerProviderStateMixin, AutomaticKeepAliveClientMixin {
+class _TestState extends State<Test>
+    with SingleTickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   late Animation<double> animation;
   late AnimationController controller;
-  int count = 0;
+
+  int badgeNumber = 0;
 
   @override
   void initState() {
@@ -114,14 +120,14 @@ class _TestState extends State<Test> with SingleTickerProviderStateMixin, Automa
             width: animation.value,
             child: const FlutterLogo(),
           ),
-          Text("$count"),
-          ElevatedButton(onPressed: () {
-            // debugPrint("parseNumber('123') is ${parseNumber("123")}");
-            // debugPrint("parseNumber('123.1') is ${parseNumber("123.1")}");
-            setState(() {
-              count++;
-            });
-          }, child: const Icon(Icons.add))
+          const Clock(),
+          Container(
+            color: Colors.green,
+            child: CustomPaint(
+              painter: TestArc(),
+              size: const Size(100, 100),
+            ),
+          ),
         ],
       ),
     );
@@ -129,4 +135,22 @@ class _TestState extends State<Test> with SingleTickerProviderStateMixin, Automa
 
   @override
   bool get wantKeepAlive => true;
+}
+
+class TestArc extends CustomPainter {
+  Paint paintT = Paint()..color = Colors.red;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    Path path = Path();
+    RRect oval = RRect.fromLTRBR(10, 10, 90, 90, const Radius.circular(10));
+    path.addRRect(oval);
+
+    canvas.drawPath(path, paintT);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    return false;
+  }
 }
