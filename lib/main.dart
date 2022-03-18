@@ -115,18 +115,8 @@ class _TestState extends State<Test>
       child: Column(
         children: <Widget>[
           Container(
-            margin: const EdgeInsets.symmetric(vertical: 10),
-            height: animation.value,
-            width: animation.value,
-            child: const FlutterLogo(),
-          ),
-          const Clock(),
-          Container(
-            color: Colors.green,
-            child: CustomPaint(
-              painter: TestArc(),
-              size: const Size(100, 100),
-            ),
+            margin: const EdgeInsets.only(top: 50),
+            child: const Clock(),
           ),
         ],
       ),
@@ -135,22 +125,4 @@ class _TestState extends State<Test>
 
   @override
   bool get wantKeepAlive => true;
-}
-
-class TestArc extends CustomPainter {
-  Paint paintT = Paint()..color = Colors.red;
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    Path path = Path();
-    RRect oval = RRect.fromLTRBR(10, 10, 90, 90, const Radius.circular(10));
-    path.addRRect(oval);
-
-    canvas.drawPath(path, paintT);
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
-    return false;
-  }
 }
