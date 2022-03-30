@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_snippet/Common/my_colors.dart';
 import 'package:flutter_snippet/Widgets/clock.dart';
+import 'package:flutter_snippet/Widgets/umbrella.dart';
 
 void main() {
   runApp(const MyApp());
@@ -113,11 +114,8 @@ class _TestState extends State<Test>
 
     return Center(
       child: Column(
-        children: <Widget>[
-          Container(
-            margin: const EdgeInsets.only(top: 50),
-            child: const Clock(),
-          ),
+        children: const <Widget>[
+          Umbrella(),
         ],
       ),
     );
@@ -126,3 +124,5 @@ class _TestState extends State<Test>
   @override
   bool get wantKeepAlive => true;
 }
+
+

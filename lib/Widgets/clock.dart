@@ -54,7 +54,7 @@ class _ClockState extends State<_Clock> {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint("_Clock build");
+    // debugPrint("_Clock build");
     return CustomPaint(
       painter: ClockPainter(),
       size: const Size(200, 200),
