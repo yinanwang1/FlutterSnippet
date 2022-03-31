@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 /// 使用绘制60度的一个小三角来组成一个伞面
 /// 可以填充彩虹色
-///
+/// Beta  还有很多小问题
 
 class Umbrella extends StatelessWidget {
   final Offset startVertex;
@@ -38,34 +38,52 @@ class Umbrella extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Transform(
-          transform: Matrix4.rotationY(pi),
-          child: ClipPath(
-            clipper: circleClipper(),
-            child: CustomPaint(
-              painter: UmbrellaPainter(
-                  startVertex: startVertex,
-                  length: length,
-                  startAngle: startAngle,
-                  clockwise: clockwise,
-                  filled: filled,
-                  colors: colors,
-                  number: number),
-            ),
+        ClipPath(
+          clipper: circleClipper(startAngle),
+          child: CustomPaint(
+            painter: UmbrellaPainter(
+                startVertex: startVertex,
+                length: length,
+                startAngle: startAngle,
+                clockwise: clockwise,
+                filled: filled,
+                colors: colors,
+                number: number),
           ),
-        )
+        ),
+
+        ClipPath(
+          clipper: circleClipper(startAngle, half: true),
+          child: CustomPaint(
+            painter: UmbrellaPainter(
+                startVertex: startVertex,
+                length: length,
+                startAngle: startAngle + 180,
+                clockwise: clockwise,
+                filled: filled,
+                colors: colors,
+                number: number),
+          ),
+        ),
       ],
     );
   }
 }
 
 class circleClipper extends CustomClipper<Path> {
+  final double startAngle;
+  bool half;
+
+
+  circleClipper(this.startAngle, {this.half = false});
+
   @override
   Path getClip(Size size) {
     Path path = Path();
+    double angle = startAngle * pi * 180;
     path.addArc(
         Rect.fromCenter(center: const Offset(0, 150), width: 400, height: 400),
-        0,
+        half ? angle + pi : angle,
         pi);
 
     return path;
@@ -76,6 +94,7 @@ class circleClipper extends CustomClipper<Path> {
     return true;
   }
 }
+
 
 class UmbrellaPainter extends CustomPainter {
   Offset startVertex;

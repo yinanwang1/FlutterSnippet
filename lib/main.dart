@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_snippet/Common/my_colors.dart';
 import 'package:flutter_snippet/Widgets/clock.dart';
+import 'package:flutter_snippet/Widgets/rainbow.dart';
 import 'package:flutter_snippet/Widgets/umbrella.dart';
 
 void main() {
@@ -114,8 +115,15 @@ class _TestState extends State<Test>
 
     return Center(
       child: Column(
-        children: const <Widget>[
-          Umbrella(),
+        children: <Widget>[
+          ElevatedButton(
+            onPressed: () {
+              ScaffoldMessenger.of(context)
+                  .showSnackBar(const SnackBar(content: Text("你成功过了")));
+            },
+            child: const Text("点我哈"),
+          ),
+          const Rainbow(),
         ],
       ),
     );
@@ -124,5 +132,3 @@ class _TestState extends State<Test>
   @override
   bool get wantKeepAlive => true;
 }
-
-

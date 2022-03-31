@@ -270,7 +270,7 @@ const FlutterWaveLoading(
 ```
 
 
-![旋转](./images/wave.gif)
+![波浪](./images/wave.gif)
 
 ## 12. PointsCurve 根据多点绘制直线和曲线
 根据多个坐标，用直线和贝塞尔曲线连接。
@@ -291,7 +291,7 @@ const SizedBox(
     ],),
 ),
 ```
-![旋转](./images/curve.jpg)
+![直线和曲线](./images/curve.jpg)
 
 
 ## 13. EfficientPage 联动滚动页面
@@ -300,7 +300,7 @@ const SizedBox(
 ```
 const EfficientPage()
 ```
-![旋转](./images/page.gif)
+![联动滚动](./images/page.gif)
 
 ## 14. Wave 类似水波的效果，可以设置一个中心圆，然后一个波动的圆。
 波动波动。
@@ -316,7 +316,7 @@ Wave(
     isWaveUp: false,
 ),
 ```
-![旋转](./images/wave_widget.gif)
+![水波](./images/wave_widget.gif)
 
 
 ## 15. Clock 钟表
@@ -326,7 +326,29 @@ Wave(
 ```
 Clock()
 ```
-![旋转](./images/clock.gif)
+![钟表](./images/clock.gif)
+
+## 16 Umbrella
+使用绘制60度的一个小三角来组成一个伞面
+可以填充彩虹色
+Beta  还有很多小问题
+使用示例：
+```
+Umbrella()
+```
+![雨伞](./images/umbrella.jpg)
+
+## 17 Rainbow
+使用一道彩虹。可以设置大小。
+使用示例：
+```
+Rainbow()
+```
+![彩虹](./images/rainbow.jpg)
+
+
+
+
 
 
 
