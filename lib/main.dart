@@ -1,12 +1,8 @@
-import 'dart:math';
-
-import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_snippet/Common/my_colors.dart';
-import 'package:flutter_snippet/Widgets/clock.dart';
-import 'package:flutter_snippet/Widgets/rainbow.dart';
-import 'package:flutter_snippet/Widgets/umbrella.dart';
+import 'package:flutter_snippet/Widgets/red_packet.dart';
 
 void main() {
   runApp(const MyApp());
@@ -68,7 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
           onPressed: () {},
         ),
       ),
-      body: const Center(child: Test()),
+      body: const Test(),
     );
   }
 }
@@ -94,12 +90,12 @@ class _TestState extends State<Test>
     super.initState();
 
     controller =
-        AnimationController(vsync: this, duration: const Duration(seconds: 2));
-    animation = Tween<double>(begin: 0, end: 300).animate(controller)
+        AnimationController(vsync: this, duration: const Duration(seconds: 10));
+    animation = Tween<double>(begin: 0, end: 360).animate(controller)
       ..addListener(() {
         setState(() {});
       });
-    controller.forward(from: 0);
+    controller.repeat();
   }
 
   @override
@@ -113,22 +109,54 @@ class _TestState extends State<Test>
   Widget build(BuildContext context) {
     super.build(context);
 
-    return Center(
-      child: Column(
-        children: <Widget>[
-          ElevatedButton(
-            onPressed: () {
-              ScaffoldMessenger.of(context)
-                  .showSnackBar(const SnackBar(content: Text("你成功过了")));
-            },
-            child: const Text("点我哈"),
-          ),
-          const Rainbow(),
-        ],
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        const Padding(padding: EdgeInsets.only(top: 50)),
+        ElevatedButton(
+          onPressed: () {
+            showRedPacket(context, onOpen);
+          },
+          child: const Text("点我领红包"),
+        ),
+      ],
     );
+  }
+
+  void onOpen() {
+    Navigator.push(
+        context,
+        PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+                FadeTransition(
+                  opacity: animation,
+                  child: const ResultPage(),
+                ),
+            transitionDuration: const Duration(seconds: 1)));
   }
 
   @override
   bool get wantKeepAlive => true;
+}
+
+class ResultPage extends StatelessWidget {
+  const ResultPage({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("红包领取成功"),
+      ),
+      body: Container(
+        color: Colors.cyan,
+        child: Center(
+          child: Text(
+            "恭喜您获得666666666666元红包",
+            style: TextStyle(color: Colors.redAccent, fontSize: 20.sp),
+          ),
+        ),
+      ),
+    );
+  }
 }

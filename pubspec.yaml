@@ -41,6 +41,8 @@ dependencies:
   webview_flutter: ^3.0.1
   provider: ^6.0.2
   badges: ^2.0.2
+  # 屏幕比例尺寸配置
+  flutter_screenutil: ^5.3.1
 
 dev_dependencies:
   flutter_test:

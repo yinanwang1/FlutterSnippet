@@ -346,6 +346,44 @@ Rainbow()
 ```
 ![彩虹](./images/rainbow.jpg)
 
+## 18 RedPacket
+模仿微信的红包，弹出红包，点击"开"按钮后，旋转金币，然后跳转到结果页面。
+使用示例：
+```
+@override
+  Widget build(BuildContext context) {
+    super.build(context);
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        const Padding(padding: EdgeInsets.only(top: 50)),
+        ElevatedButton(
+          onPressed: () {
+            showRedPacket(context, onOpen);
+          },
+          child: const Text("点我领红包"),
+        ),
+      ],
+    );
+  }
+
+  void onOpen() {
+    Navigator.push(
+        context,
+        PageRouteBuilder(
+            pageBuilder: (context, animation, secondaryAnimation) =>
+                FadeTransition(
+                  opacity: animation,
+                  child: const ResultPage(),
+                ),
+            transitionDuration: const Duration(seconds: 1)));
+```
+ResultPage是结果页面，任意页面都可以。
+![红包](./images/redPacket.gif)
+
+
+
 
 
 
