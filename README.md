@@ -382,6 +382,17 @@ Rainbow()
 ResultPage是结果页面，任意页面都可以。
 ![红包](./images/redPacket.gif)
 
+## 19. 兔子
+使用CustomPainter绘制兔子，并采用animation控制绘制的进度。
+使用示例：
+```
+Rabbit();
+```
+![兔子](./images/rabbit.gif)
+
+
+
+
 
 
 

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_snippet/Common/my_colors.dart';
-import 'package:flutter_snippet/Widgets/red_packet.dart';
+import 'package:flutter_snippet/Widgets/rabbit.dart';
 
 void main() {
   runApp(const MyApp());
@@ -83,8 +82,6 @@ class _TestState extends State<Test>
   late Animation<double> animation;
   late AnimationController controller;
 
-  int badgeNumber = 0;
-
   @override
   void initState() {
     super.initState();
@@ -109,54 +106,19 @@ class _TestState extends State<Test>
   Widget build(BuildContext context) {
     super.build(context);
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        const Padding(padding: EdgeInsets.only(top: 50)),
-        ElevatedButton(
+    return Center(
+      child: ElevatedButton(
           onPressed: () {
-            showRedPacket(context, onOpen);
+            Navigator.of(context).push(PageRouteBuilder(pageBuilder:
+                (BuildContext context, Animation<double> animation,
+                    Animation<double> secondaryAnimation) {
+              return const Rabbit();
+            }));
           },
-          child: const Text("点我领红包"),
-        ),
-      ],
+          child: const Text("兔子来也")),
     );
-  }
-
-  void onOpen() {
-    Navigator.push(
-        context,
-        PageRouteBuilder(
-            pageBuilder: (context, animation, secondaryAnimation) =>
-                FadeTransition(
-                  opacity: animation,
-                  child: const ResultPage(),
-                ),
-            transitionDuration: const Duration(seconds: 1)));
   }
 
   @override
   bool get wantKeepAlive => true;
-}
-
-class ResultPage extends StatelessWidget {
-  const ResultPage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("红包领取成功"),
-      ),
-      body: Container(
-        color: Colors.cyan,
-        child: Center(
-          child: Text(
-            "恭喜您获得666666666666元红包",
-            style: TextStyle(color: Colors.redAccent, fontSize: 20.sp),
-          ),
-        ),
-      ),
-    );
-  }
 }
