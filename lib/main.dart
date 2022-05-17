@@ -1,7 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_snippet/Common/my_colors.dart';
-import 'package:flutter_snippet/Widgets/rabbit.dart';
 
 void main() {
   runApp(const MyApp());
@@ -87,7 +88,7 @@ class _TestState extends State<Test>
     super.initState();
 
     controller =
-        AnimationController(vsync: this, duration: const Duration(seconds: 10));
+        AnimationController(vsync: this, duration: const Duration(seconds: 2));
     animation = Tween<double>(begin: 0, end: 360).animate(controller)
       ..addListener(() {
         setState(() {});
@@ -106,19 +107,40 @@ class _TestState extends State<Test>
   Widget build(BuildContext context) {
     super.build(context);
 
-    return Center(
-      child: ElevatedButton(
-          onPressed: () {
-            Navigator.of(context).push(PageRouteBuilder(pageBuilder:
-                (BuildContext context, Animation<double> animation,
-                    Animation<double> secondaryAnimation) {
-              return const Rabbit();
-            }));
-          },
-          child: const Text("兔子来也")),
+    return Column(
+      children: <Widget>[
+        Expanded(
+          child: Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                const Padding(padding: EdgeInsets.only(top: 20)),
+                Image(
+                  image: const AssetImage("images/namei.png"),
+                  width: animation.value,
+                  height: animation.value,
+                ),
+                Container(width: 100, height: 100, child: const Text("123"),),
+              ],
+            ),
+          ),
+        ),
+      ],
     );
   }
 
   @override
   bool get wantKeepAlive => true;
+}
+
+class TestPaint extends CustomPainter {
+
+  @override
+  void paint(Canvas canvas, Size size) {
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    return false;
+  }
 }

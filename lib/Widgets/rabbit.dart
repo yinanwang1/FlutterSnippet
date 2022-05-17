@@ -45,7 +45,6 @@ class _RabbitState extends State<Rabbit> with TickerProviderStateMixin {
     animationControllerMap.values.first.forward();
   }
 
-
   @override
   void dispose() {
     for (AnimationController ctl in animationControllerMap.values) {
@@ -102,12 +101,8 @@ class _RabbitState extends State<Rabbit> with TickerProviderStateMixin {
   }
 
   void initScreenUtil(BuildContext context) {
-    ScreenUtil.init(
-        BoxConstraints(
-            maxWidth: MediaQuery.of(context).size.width,
-            maxHeight: MediaQuery.of(context).size.height),
-        designSize: const Size(375, 812),
-        context: context);
+    ScreenUtil.init(context,
+        designSize: const Size(375, 812),);
   }
 }
 
@@ -132,7 +127,8 @@ class RabbitPainter extends CustomPainter {
         fillLeftEarAnimation = animationMap[fillLeftEar],
         fillRightEarAnimation = animationMap[fillRightEar],
         fillLeftFaceAnimation = animationMap[fillLeftFace],
-        fillRightFaceAnimation = animationMap[fillRightFace], super(repaint: controller);
+        fillRightFaceAnimation = animationMap[fillRightFace],
+        super(repaint: controller);
 
   late final Paint _paint = Paint()
     ..isAntiAlias = true
@@ -219,7 +215,9 @@ class RabbitPainter extends CustomPainter {
     canvas.save();
     canvas.clipPath(bodyBorderPath);
     var bodyRect = bodyBorderPath.getBounds();
-    canvas.drawRect(bodyRect.clone(height: bodyRect.height * (fillAnimation?.value ?? 0.0)), _paint);
+    canvas.drawRect(
+        bodyRect.clone(height: bodyRect.height * (fillAnimation?.value ?? 0.0)),
+        _paint);
     canvas.restore();
 
     _paint.color = const Color(0xFFE79EC3);
@@ -243,7 +241,8 @@ class RabbitPainter extends CustomPainter {
     drawRadishLeafFill(canvas, radishLeafPath);
 
     // 创建胡萝卜填充
-    Path radishBorderPath = createRadishBorderPath(radishTopPath, rightHandsFeetPath, radishBottomPath, leftHandsFeetPath);
+    Path radishBorderPath = createRadishBorderPath(
+        radishTopPath, rightHandsFeetPath, radishBottomPath, leftHandsFeetPath);
 
     _paint.style = PaintingStyle.fill;
     _paint.color = Colors.orange;
@@ -252,7 +251,11 @@ class RabbitPainter extends CustomPainter {
     canvas.save();
     var radishRect = radishBorderPath.getBounds();
     canvas.clipPath(radishBorderPath);
-    canvas.drawRect(radishRect.clone(height: radishRect.height * (fillRadishBodyAnimation?.value ?? 0.0)), _paint);
+    canvas.drawRect(
+        radishRect.clone(
+            height:
+                radishRect.height * (fillRadishBodyAnimation?.value ?? 0.0)),
+        _paint);
     canvas.restore();
 
     _paint.color = Colors.black87;
@@ -525,7 +528,8 @@ class RabbitPainter extends CustomPainter {
     canvas.clipPath(rightEarPath);
     canvas.drawRect(
         rightEarDrawRect.clone(
-            height: rightEarDrawRect.height * (fillRightFaceAnimation?.value ?? 0.0)),
+            height: rightEarDrawRect.height *
+                (fillRightFaceAnimation?.value ?? 0.0)),
         _paint);
 
     canvas.restore();
@@ -548,7 +552,8 @@ class RabbitPainter extends CustomPainter {
     var leftEarDrawRect = newPath.getBounds();
     canvas.drawRect(
         leftEarDrawRect.clone(
-            height: leftEarDrawRect.height * (fillLeftEarAnimation?.value ?? 0.0)),
+            height:
+                leftEarDrawRect.height * (fillLeftEarAnimation?.value ?? 0.0)),
         _paint);
 
     canvas.restore();
@@ -565,7 +570,8 @@ class RabbitPainter extends CustomPainter {
     canvas.clipPath(rightFacePath);
     canvas.drawRect(
         rightFaceRect.clone(
-            height: rightFaceRect.height * (fillRightFaceAnimation?.value ?? 0.0)),
+            height:
+                rightFaceRect.height * (fillRightFaceAnimation?.value ?? 0.0)),
         _paint);
 
     canvas.restore();
@@ -582,7 +588,8 @@ class RabbitPainter extends CustomPainter {
     canvas.clipPath(leftFacePath);
     canvas.drawRect(
         leftFaceRect.clone(
-            height: leftFaceRect.height * (fillLeftFaceAnimation?.value ?? 0.0)),
+            height:
+                leftFaceRect.height * (fillLeftFaceAnimation?.value ?? 0.0)),
         _paint);
 
     canvas.restore();
