@@ -93,7 +93,7 @@ class _TestState extends State<Test>
       ..addListener(() {
         setState(() {});
       });
-    controller.repeat();
+    // controller.repeat();
   }
 
   @override
@@ -107,40 +107,29 @@ class _TestState extends State<Test>
   Widget build(BuildContext context) {
     super.build(context);
 
-    return Column(
-      children: <Widget>[
-        Expanded(
-          child: Center(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                const Padding(padding: EdgeInsets.only(top: 20)),
-                Image(
-                  image: const AssetImage("images/namei.png"),
-                  width: animation.value,
-                  height: animation.value,
-                ),
-                Container(width: 100, height: 100, child: const Text("123"),),
-              ],
-            ),
-          ),
-        ),
-      ],
-    );
+    var intValue = 1;
+    var stringValue = "string";
+
+    try {
+      var value = (intValue == 0) ?? "可以啊";
+
+      debugPrint("value is $value");
+      debugPrint("value is ${value.runtimeType}");
+    } on OutOfMemoryError {
+      debugPrint("111");
+    } on Exception catch (e) {
+      debugPrint(e.toString());
+    } catch (e) {
+      debugPrint("catch e e e ");
+    } finally {
+      debugPrint("一定会执行的代码");
+    }
+
+    return const Text("试试看");
   }
 
   @override
   bool get wantKeepAlive => true;
 }
 
-class TestPaint extends CustomPainter {
-
-  @override
-  void paint(Canvas canvas, Size size) {
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
-    return false;
-  }
-}
+Factory

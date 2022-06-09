@@ -58,8 +58,7 @@ class _RedPacketState extends State<RedPacket> with TickerProviderStateMixin {
     ScreenUtil.init(
         context,
         designSize: const Size(360, 690),
-        minTextAdapt: true,
-        orientation: Orientation.portrait);
+        minTextAdapt: true);
 
     return Material(
       color: const Color(0x88000000),
