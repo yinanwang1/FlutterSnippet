@@ -1,10 +1,12 @@
+import 'dart:math';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_snippet/Common/my_colors.dart';
 
-import 'Widgets/BubbleChat.dart';
+import 'Widgets/GradientBound.dart';
 
 void main() {
   runApp(const MyApp());
@@ -75,7 +77,7 @@ class Test extends StatefulWidget {
   const Test({Key? key}) : super(key: key);
 
   @override
-  _TestState createState() {
+  State createState() {
     return _TestState();
   }
 }
@@ -111,14 +113,13 @@ class _TestState extends State<Test>
 
     debugPrint("wyn build");
 
-    return const BubbleBackgroundChat();
+    return const GradientBoundDemo();
   }
 
   @override
   bool get wantKeepAlive => true;
 
   void onPressed() {
-    debugPrint("wyn 111");
+
   }
 }
-

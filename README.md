@@ -397,7 +397,16 @@ Rabbit();
 ```
 BubbleBackgroundChat();
 ```
-![兔子](./images/bubbleChat.jpeg)
+![渐变](./images/bubbleChat.jpeg)
+
+## 21. 流动渐变
+渐变色在流动。
+使用示例：
+```
+GradientBoundDemo();
+```
+![渐变](./images/gradientStroke.gif)
+![渐变](./images/gradientFill.gif)
 
 
 
