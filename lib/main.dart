@@ -4,6 +4,8 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_snippet/Common/my_colors.dart';
 
+import 'Widgets/BubbleChat.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -107,29 +109,16 @@ class _TestState extends State<Test>
   Widget build(BuildContext context) {
     super.build(context);
 
-    var intValue = 1;
-    var stringValue = "string";
+    debugPrint("wyn build");
 
-    try {
-      var value = (intValue == 0) ?? "可以啊";
-
-      debugPrint("value is $value");
-      debugPrint("value is ${value.runtimeType}");
-    } on OutOfMemoryError {
-      debugPrint("111");
-    } on Exception catch (e) {
-      debugPrint(e.toString());
-    } catch (e) {
-      debugPrint("catch e e e ");
-    } finally {
-      debugPrint("一定会执行的代码");
-    }
-
-    return const Text("试试看");
+    return const BubbleBackgroundChat();
   }
 
   @override
   bool get wantKeepAlive => true;
+
+  void onPressed() {
+    debugPrint("wyn 111");
+  }
 }
 
-Factory

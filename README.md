@@ -390,6 +390,15 @@ Rabbit();
 ```
 ![兔子](./images/rabbit.gif)
 
+## 20. 变色气泡
+聊天气泡，滚动的时候根据位置展示渐变的背景色。
+渐变色的展示，根据气泡所在的位置而变。
+使用示例：
+```
+BubbleBackgroundChat();
+```
+![兔子](./images/bubbleChat.jpeg)
+
 
 
 
