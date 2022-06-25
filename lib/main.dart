@@ -1,8 +1,12 @@
+import 'dart:async';
 import 'dart:math';
+import 'dart:typed_data';
+import 'dart:ui' as ui;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_snippet/Common/my_colors.dart';
 
@@ -58,8 +62,15 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  double? age;
+
   @override
   Widget build(BuildContext context) {
+    debugPrint("age is $age");
+    debugPrint("age is ${age.toString()}");
+
+    debugPrint("age is ${age?.toStringAsFixed(2)}");
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("花花世界"),
@@ -68,58 +79,39 @@ class _MyHomePageState extends State<MyHomePage> {
           onPressed: () {},
         ),
       ),
-      body: const Test(),
+      body: Container(),
     );
   }
 }
 
-class Test extends StatefulWidget {
-  const Test({Key? key}) : super(key: key);
+class CheckLength {
+  static bool checkPhoneLength(String? phone) {
+    if (phone == null || phone.isEmpty) {
+      return false;
+    }
 
-  @override
-  State createState() {
-    return _TestState();
+    return phone.length == 11;
   }
 }
 
-class _TestState extends State<Test>
-    with SingleTickerProviderStateMixin, AutomaticKeepAliveClientMixin {
-  late Animation<double> animation;
-  late AnimationController controller;
+class TestPage extends StatelessWidget {
+  final String title;
+  final String message;
 
-  @override
-  void initState() {
-    super.initState();
-
-    controller =
-        AnimationController(vsync: this, duration: const Duration(seconds: 2));
-    animation = Tween<double>(begin: 0, end: 360).animate(controller)
-      ..addListener(() {
-        setState(() {});
-      });
-    // controller.repeat();
-  }
-
-  @override
-  void dispose() {
-    controller.dispose();
-
-    super.dispose();
-  }
+  const TestPage({required this.title, required this.message, super.key});
 
   @override
   Widget build(BuildContext context) {
-    super.build(context);
-
-    debugPrint("wyn build");
-
-    return const GradientBoundDemo();
-  }
-
-  @override
-  bool get wantKeepAlive => true;
-
-  void onPressed() {
-
+    return MaterialApp(
+      title: "Flutter Demo",
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text(title),
+        ),
+        body: Center(
+          child: Text(message),
+        ),
+      ),
+    );
   }
 }

@@ -28,4 +28,15 @@ void main() {
     expect(find.text('1'), findsOneWidget);
     expect(find.text('2'), findsOneWidget);
   });
+
+  testWidgets("widget test", (tester) async {
+    await tester.pumpWidget(const TestPage(title: "T", message: "M"));
+
+    final titleFinder = find.text('T');
+    final messageFinder = find.text('M');
+
+    expect(titleFinder, findsOneWidget);
+    expect(messageFinder, findsOneWidget);
+
+  });
 }

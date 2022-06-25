@@ -2,12 +2,18 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
+import 'package:flutter_snippet/main.dart';
 import 'package:string_scanner/string_scanner.dart';
 import 'package:test/test.dart';
 
 import 'utils.dart';
 
 void main() {
+  test("check phone length", () {
+    expect(CheckLength.checkPhoneLength('01234567890'), true);
+    expect(CheckLength.checkPhoneLength('0123456789'), false);
+  });
+
   test('defaults to the last match', () {
     final scanner = StringScanner('foo bar baz');
     scanner.expect('foo ');
