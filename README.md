@@ -408,6 +408,16 @@ GradientBoundDemo();
 ![渐变](./images/gradientStroke.gif)
 ![渐变](./images/gradientFill.gif)
 
+## 22. 模糊图片
+高斯模糊，设置模糊图片。
+使用示例：
+```
+const BlurImageDemo()
+```
+![模糊图片](./images/blurImage.png)
+
+
+
 
 
 
