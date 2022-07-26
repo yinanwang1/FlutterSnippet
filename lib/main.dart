@@ -61,7 +61,7 @@ class _MyHomePageState extends State<MyHomePage>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
-  static const int durationMilliseconds = 3000;
+  static const int durationMilliseconds = 5000;
   late Size windowSize;
 
   @override
@@ -70,13 +70,17 @@ class _MyHomePageState extends State<MyHomePage>
         vsync: this,
         duration: const Duration(milliseconds: durationMilliseconds));
     _animation = Tween<double>(begin: 0.0, end: 1.0)
-        .animate(CurvedAnimation(parent: _controller, curve: Curves.easeInCirc))
+        .animate(CurvedAnimation(parent: _controller, curve: Curves.linear))
       ..addListener(() {
         setState(() {
           debugPrint("wyn 222");
         });
-      })..addStatusListener((status) {
+      })
+      ..addStatusListener((status) {
         if (AnimationStatus.completed == status) {
+          setState(() {
+            pointsList.clear();
+          });
           _controller.reset();
         }
       });
@@ -114,11 +118,9 @@ class _MyHomePageState extends State<MyHomePage>
             width: windowSize.width,
             height: windowSize.height,
           ),
-          LightningView(
-            pointsList,
-            showStraight: false,
-            showStraightCircle: false,
-            curveColor: Colors.red,
+          CustomPaint(
+            painter:
+                LightningPainter(pointsList, 1, Colors.red, _animation.value),
           ),
           ElevatedButton(
               onPressed: () {
@@ -170,11 +172,13 @@ class _MyHomePageState extends State<MyHomePage>
   }
 
   Offset _createStart() {
-    return Offset(random.nextDouble() * windowSize.width, random.nextDouble() * 20);
+    return Offset(
+        random.nextDouble() * windowSize.width, random.nextDouble() * 20);
   }
 
   Offset _createEnd() {
-    return Offset(random.nextDouble() * windowSize.width, windowSize.height - random.nextDouble() * 20);
+    return Offset(random.nextDouble() * windowSize.width,
+        windowSize.height - random.nextDouble() * 20);
   }
 
   void drawLightning(
@@ -194,36 +198,9 @@ class _MyHomePageState extends State<MyHomePage>
   }
 }
 
-class LightningView extends StatelessWidget {
+class LightningPainter extends CustomPainter {
   // 点集合
   final List<Offset> points;
-
-  // 是否显示直线
-  final bool showStraight;
-
-  // 是否显示直线的线
-  final bool showStraightLine;
-
-  // 是否显示点的圆圈
-  final bool showStraightCircle;
-
-  // 是否显示曲线
-  final bool showCurve;
-
-  // 直线圆圈的半径
-  final double radius;
-
-  // 直线圆圈的绘制宽度
-  final double circleStrokeWidth;
-
-  // 直线圆圈的颜色
-  final Color circleColor;
-
-  // 直线的绘制宽度
-  final double straightLineStrokeWidth;
-
-  // 直线的颜色
-  final Color straightLineColor;
 
   // 曲线的绘制宽度
   final double curveStrokeWidth;
@@ -231,90 +208,13 @@ class LightningView extends StatelessWidget {
   // 曲线的颜色
   final Color curveColor;
 
-  const LightningView(this.points,
-      {this.showStraight = true,
-        this.showStraightLine = true,
-        this.showStraightCircle = true,
-        this.showCurve = true,
-        this.radius = 2,
-        this.circleStrokeWidth = 1,
-        this.circleColor = Colors.orange,
-        this.straightLineStrokeWidth = 0.5,
-        this.straightLineColor = Colors.red,
-        this.curveStrokeWidth = 1,
-        this.curveColor = Colors.blue,
-        Key? key})
-      : super(key: key);
+  final double animationValue;
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      child: CustomPaint(
-        painter: PaperPainter(
-            points,
-            showStraight,
-            showStraightLine,
-            showStraightCircle,
-            showCurve,
-            radius,
-            circleStrokeWidth,
-            circleColor,
-            straightLineStrokeWidth,
-            straightLineColor,
-            curveStrokeWidth,
-            curveColor),
-      ),
-    );
-  }
-}
-
-class PaperPainter extends CustomPainter {
-  // 点集合
-  final List<Offset> points;
-
-  // 是否显示直线
-  final bool showStraight;
-
-  // 是否显示直线的线
-  final bool showStraightLine;
-
-  // 是否显示点的圆圈
-  final bool showStraightCircle;
-
-  // 是否显示曲线
-  final bool showCurve;
-
-  // 直线圆圈的半径
-  final double radius;
-
-  // 直线圆圈的绘制宽度
-  final double circleStrokeWidth;
-
-  // 直线圆圈的颜色
-  final Color circleColor;
-
-  // 直线的绘制宽度
-  final double straightLineStrokeWidth;
-
-  // 直线的颜色
-  final Color straightLineColor;
-
-  // 曲线的绘制宽度
-  final double curveStrokeWidth;
-
-  // 曲线的颜色
-  final Color curveColor;
-
-  final Paint _helpPaint = Paint();
   final Paint _mainPaint = Paint();
   final Path _linePath = Path();
 
-
-  PaperPainter(this.points, this.showStraight, this.showStraightLine,
-      this.showStraightCircle, this.showCurve, this.radius,
-      this.circleStrokeWidth, this.circleColor, this.straightLineStrokeWidth,
-      this.straightLineColor, this.curveStrokeWidth, this.curveColor,);
+  LightningPainter(
+      this.points, this.curveStrokeWidth, this.curveColor, this.animationValue);
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -327,47 +227,23 @@ class PaperPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(CustomPainter oldDelegate) {
-    return false;
+    return true;
   }
 
   /// Private Methods
 
   void _drawHelp(Canvas canvas) {
-    _helpPaint.style = PaintingStyle.stroke;
-
-    if (showStraight) {
-      if (showStraightCircle) {
-        // 绘制圆点
-        for (var element in points) {
-          canvas.drawCircle(
-              element,
-              radius,
-              _helpPaint
-                ..strokeWidth = circleStrokeWidth
-                ..color = circleColor);
-        }
-      }
-      if (showStraightLine) {
-        // 连接点的线
-        canvas.drawPoints(
-            PointMode.polygon,
-            points,
-            _helpPaint
-              ..strokeWidth = straightLineStrokeWidth
-              ..color = straightLineColor);
-      }
-    }
-
-    if (showCurve) {
-      // 绘制曲线
-      addBezierPathWithPoints(_linePath, points);
-      canvas.drawPath(
-          _linePath,
-          _mainPaint
-            ..color = curveColor
-            ..style = PaintingStyle.stroke
-            ..strokeWidth = curveStrokeWidth);
-    }
+    // 绘制曲线
+    addBezierPathWithPoints(_linePath, points);
+    var pathMetric = _linePath.computeMetrics();
+    var metric = pathMetric.first;
+    var subPath = metric.extractPath(0.0, metric.length * animationValue);
+    canvas.drawPath(
+        subPath,
+        _mainPaint
+          ..color = curveColor
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = curveStrokeWidth);
   }
 
   void addBezierPathWithPoints(Path path, List<Offset> points) {
