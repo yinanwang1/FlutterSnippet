@@ -73,7 +73,7 @@ class _MyHomePageState extends State<MyHomePage>
         .animate(CurvedAnimation(parent: _controller, curve: Curves.linear))
       ..addListener(() {
         setState(() {
-          debugPrint("wyn 222");
+          debugPrint("");
         });
       })
       ..addStatusListener((status) {
@@ -138,7 +138,6 @@ class _MyHomePageState extends State<MyHomePage>
   }
 
   Color backgroundColor(double value) {
-    debugPrint("wyn 111");
     var whiteColors = [
       Colors.white10,
       Colors.white10,
@@ -218,9 +217,6 @@ class LightningPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    // 从视图的左边中间点开始绘制
-    canvas.translate(0, size.height / 2);
-
     // 绘制
     _drawHelp(canvas);
   }
@@ -236,14 +232,16 @@ class LightningPainter extends CustomPainter {
     // 绘制曲线
     addBezierPathWithPoints(_linePath, points);
     var pathMetric = _linePath.computeMetrics();
-    var metric = pathMetric.first;
-    var subPath = metric.extractPath(0.0, metric.length * animationValue);
-    canvas.drawPath(
-        subPath,
-        _mainPaint
-          ..color = curveColor
-          ..style = PaintingStyle.stroke
-          ..strokeWidth = curveStrokeWidth);
+    for (var metric in pathMetric) {
+      var subPath = metric.extractPath(0.0, metric.length * animationValue);
+      canvas.drawPath(
+          subPath,
+          _mainPaint
+            ..color = curveColor
+            ..style = PaintingStyle.stroke
+            ..strokeWidth = curveStrokeWidth);
+      break;
+    }
   }
 
   void addBezierPathWithPoints(Path path, List<Offset> points) {
