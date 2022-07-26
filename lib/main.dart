@@ -1,5 +1,6 @@
-import 'dart:collection';
+import 'dart:async';
 import 'dart:math';
+import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -7,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_snippet/Common/my_colors.dart';
+
+import 'Widgets/points_curve.dart';
 
 void main() {
   runApp(const MyApp());
@@ -56,9 +59,31 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _animation;
+  static const int durationMilliseconds = 3000;
+
   @override
   void initState() {
+    _controller = AnimationController(
+        vsync: this,
+        duration: const Duration(milliseconds: durationMilliseconds));
+    _animation = Tween<double>(begin: 0.0, end: 1.0)
+        .animate(CurvedAnimation(parent: _controller, curve: Curves.easeInCirc))
+      ..addListener(() {
+        setState(() {
+          debugPrint("wyn 222");
+        });
+      })..addStatusListener((status) {
+        if (AnimationStatus.completed == status) {
+          _controller.reset();
+        }
+      });
+
+    create();
+
     super.initState();
   }
 
@@ -69,60 +94,96 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint("pointsList is $pointsList");
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("我就是我"),
       ),
-      body: CustomPaint(
-        painter: MyPainter(),
-        child: const Text("哇哈哈"),
+      body: Stack(
+        children: <Widget>[
+          SizedBox(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            child: Image.asset(
+              "images/darkSky.jpeg",
+              fit: BoxFit.fitHeight,
+            ),
+          ),
+          Container(
+            color: backgroundColor(_animation.value),
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+          ),
+          SizedBox(
+            height: 500,
+            child: PointsCurve(
+              pointsList,
+              showStraight: false,
+              showStraightCircle: false,
+              curveColor: Colors.red,
+            ),
+          ),
+          ElevatedButton(
+              onPressed: () {
+                _controller.forward();
+                setState(() {
+                  pointsList.clear();
+
+                  create();
+                });
+              },
+              child: const Text("点我")),
+        ],
       ),
     );
   }
-}
 
-class MyPainter extends CustomPainter {
-  var painter = Paint()
-    ..color = Colors.red
-    ..style = PaintingStyle.stroke
-    ..strokeWidth = 6
-    ..isAntiAlias = true
-  ..strokeCap = StrokeCap.round;
-  var curDetail = 25.0;
-  Path path = Path();
-  var random = Random();
+  Color backgroundColor(double value) {
+    debugPrint("wyn 111");
+    var whiteColors = [
+      Colors.white10,
+      Colors.white10,
+      Colors.white12,
+      Colors.white24,
+      Colors.white54,
+      Colors.white70,
+      Colors.white70,
+      Colors.white54,
+      Colors.white24,
+      Colors.white12,
+      Colors.white10,
+      Colors.white10,
+    ];
 
-  @override
-  void paint(Canvas canvas, Size size) {
-    drawLightning(100, 50, 400, 500, 500);
+    var index = (value * 10).floor();
 
-    canvas.drawPath(path, painter);
+    return whiteColors[index];
   }
 
-  void drawLightning(double x1, double y1, double x2, double y2,
-      double displace) {
+  var curDetail = 100.0;
+  var random = Random();
+  var pointsList = <Offset>[];
+
+  Future<List<Offset>> create() async {
+    drawLightning(100, 50, 400, 500, 300);
+
+    return pointsList;
+  }
+
+  void drawLightning(
+      double x1, double y1, double x2, double y2, double displace) {
     if (displace < curDetail) {
-      path.moveTo(x1, y1);
-      var midX = (x2 + x1) / 2;
-      var midY = (y2 + y1) / 2;
-      var temp = random.nextInt((curDetail / 2).floor());
-      if (temp % 2 == 1) {
-        temp = -temp;
-      }
-      path.quadraticBezierTo(midX + temp, midY - temp, x2, y2);
+      pointsList.add(Offset(x1, y1));
+      pointsList.add(Offset(x2, y2));
     } else {
       var midX = (x2 + x1) / 2;
       var midY = (y2 + y1) / 2;
-      midX += (random.nextDouble() - 0.5) * displace;
-      midY += (random.nextDouble() - 0.5) * displace;
+      midX += (random.nextDouble() - 0.8) * displace;
+      midY += (random.nextDouble() - 0.8) * displace;
 
       drawLightning(x1, y1, midX, midY, displace / 2);
-      drawLightning(x2, y2, midX, midY, displace / 2);
+      drawLightning(midX, midY, x2, y2, displace / 2);
     }
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
-    return true;
   }
 }
