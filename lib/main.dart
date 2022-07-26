@@ -1,4 +1,5 @@
-import 'dart:async';
+import 'dart:collection';
+import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -56,63 +57,72 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  late StreamController streamController;
-
   @override
   void initState() {
     super.initState();
+  }
 
-    streamController = StreamController<String>();
-    streamController.add("0 init");
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text("我就是我"),
-        ),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            const Text("试试看"),
-            TextButton(
-                onPressed: onPress,
-                child: const Text(
-                  "Push",
-                  style: TextStyle(color: Colors.black, fontSize: 30),
-                )),
-            StreamBuilder(
-              builder: (context, snapshot) {
-                return Text("Result: ${snapshot.data}");
-              },
-              stream: streamController.stream,
-            ),
-          ],
-        ));
+      appBar: AppBar(
+        title: const Text("我就是我"),
+      ),
+      body: CustomPaint(
+        painter: MyPainter(),
+        child: const Text("哇哈哈"),
+      ),
+    );
+  }
+}
+
+class MyPainter extends CustomPainter {
+  var painter = Paint()
+    ..color = Colors.red
+    ..style = PaintingStyle.stroke
+    ..strokeWidth = 6
+    ..isAntiAlias = true
+  ..strokeCap = StrokeCap.round;
+  var curDetail = 25.0;
+  Path path = Path();
+  var random = Random();
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    drawLightning(100, 50, 400, 500, 500);
+
+    canvas.drawPath(path, painter);
   }
 
-  void onPress() async {
-    debugPrint("wyn 111");
+  void drawLightning(double x1, double y1, double x2, double y2,
+      double displace) {
+    if (displace < curDetail) {
+      path.moveTo(x1, y1);
+      var midX = (x2 + x1) / 2;
+      var midY = (y2 + y1) / 2;
+      var temp = random.nextInt((curDetail / 2).floor());
+      if (temp % 2 == 1) {
+        temp = -temp;
+      }
+      path.quadraticBezierTo(midX + temp, midY - temp, x2, y2);
+    } else {
+      var midX = (x2 + x1) / 2;
+      var midY = (y2 + y1) / 2;
+      midX += (random.nextDouble() - 0.5) * displace;
+      midY += (random.nextDouble() - 0.5) * displace;
 
-    streamController.add(DateTime.now().toIso8601String());
-
-    _createStream().forEach((element) {
-      debugPrint("event is $element");
-      debugPrint("event is ${element.runtimeType}");
-    });
-
-    // await for (var event in _createStream()) {
-    //   debugPrint("event is $event");
-    //   debugPrint("event is ${event.runtimeType}");
-    // }
-
-    debugPrint("wyn 222");
-  }
-
-  Stream<String> _createStream() async* {
-    for (int i = 0; i < 10; i++) {
-      yield "$i";
+      drawLightning(x1, y1, midX, midY, displace / 2);
+      drawLightning(x2, y2, midX, midY, displace / 2);
     }
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    return true;
   }
 }
