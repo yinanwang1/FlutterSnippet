@@ -4,15 +4,14 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class Lightning extends StatefulWidget {
-
-
   const Lightning({Key? key}) : super(key: key);
 
   @override
   _LightningState createState() => _LightningState();
 }
 
-class _LightningState extends State<Lightning> with SingleTickerProviderStateMixin {
+class _LightningState extends State<Lightning>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
   static const int durationMilliseconds = 1000;
@@ -40,14 +39,14 @@ class _LightningState extends State<Lightning> with SingleTickerProviderStateMix
       });
 
     Timer.periodic(const Duration(milliseconds: durationMilliseconds * 2),
-            (timer) {
-          _controller.forward();
-          setState(() {
-            pointsList.clear();
+        (timer) {
+      _controller.forward();
+      setState(() {
+        pointsList.clear();
 
-            create();
-          });
-        });
+        create();
+      });
+    });
 
     super.initState();
   }
@@ -80,7 +79,7 @@ class _LightningState extends State<Lightning> with SingleTickerProviderStateMix
         ),
         CustomPaint(
           painter:
-          LightningPainter(pointsList, 1, Colors.red, _animation.value),
+              LightningPainter(pointsList, 1, Colors.red, _animation.value),
         ),
       ],
     );
@@ -99,13 +98,13 @@ class _LightningState extends State<Lightning> with SingleTickerProviderStateMix
       Colors.white12,
       Colors.white12,
       Colors.white24,
-      Colors.white38,
-      Colors.white38,
-      Colors.white38,
-      Colors.white38,
-      Colors.white70,
-      Colors.white70,
-      Colors.white70,
+      Colors.white24,
+      Colors.white24,
+      Colors.white24,
+      Colors.white24,
+      Colors.white24,
+      Colors.white24,
+      Colors.white24,
       Colors.white70,
       Colors.white70,
     ];
@@ -208,7 +207,7 @@ class LightningPainter extends CustomPainter {
               ..color = whiteColors[i]
               ..style = PaintingStyle.stroke
               ..strokeJoin = StrokeJoin.round
-              ..strokeWidth = strokeWidths[i]);
+              ..strokeWidth = strokeWidths[i] * animationValue);
       }
       break;
     }
