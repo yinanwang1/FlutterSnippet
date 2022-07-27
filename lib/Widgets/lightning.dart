@@ -22,8 +22,8 @@ class _LightningState extends State<Lightning>
     _controller = AnimationController(
         vsync: this,
         duration: const Duration(milliseconds: durationMilliseconds));
-    _animation = Tween<double>(begin: 0.0, end: 1.0)
-        .animate(CurvedAnimation(parent: _controller, curve: Curves.linear))
+    _animation = Tween<double>(begin: 0.0, end: 1.0).animate(
+        CurvedAnimation(parent: _controller, curve: Curves.easeOutCubic))
       ..addListener(() {
         setState(() {
           debugPrint("");
@@ -78,8 +78,7 @@ class _LightningState extends State<Lightning>
           height: windowSize.height,
         ),
         CustomPaint(
-          painter:
-              LightningPainter(pointsList, 1, Colors.red, _animation.value),
+          painter: LightningPainter(pointsList, _animation.value),
         ),
       ],
     );
@@ -105,8 +104,10 @@ class _LightningState extends State<Lightning>
       Colors.white24,
       Colors.white24,
       Colors.white24,
-      Colors.white70,
-      Colors.white70,
+      Colors.white54,
+      Colors.white54,
+      Colors.white54,
+      Colors.white54,
     ];
 
     var index = (value * whiteColors.length).floor();
@@ -160,43 +161,18 @@ class LightningPainter extends CustomPainter {
   // 点集合
   final List<Offset> points;
 
-  // 曲线的绘制宽度
-  final double curveStrokeWidth;
-
-  // 曲线的颜色
-  final Color curveColor;
-
   final double animationValue;
 
   final Paint _mainPaint = Paint();
   final Path _linePath = Path();
 
-  LightningPainter(
-      this.points, this.curveStrokeWidth, this.curveColor, this.animationValue);
+  LightningPainter(this.points, this.animationValue);
 
   @override
   void paint(Canvas canvas, Size size) {
-    // 绘制
-    _drawHelp(canvas);
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
-    return true;
-  }
-
-  /// Private Methods
-  var whiteColors = [
-    const Color(0x05FFFFFF),
-    Colors.white12,
-    Colors.white30,
-    Colors.white,
-  ];
-  var strokeWidths = [60.0, 40.0, 20.0, 10.0];
-
-  void _drawHelp(Canvas canvas) {
     // 绘制曲线
     addBezierPathWithPoints(_linePath, points);
+
     var pathMetric = _linePath.computeMetrics();
     for (var metric in pathMetric) {
       var subPath = metric.extractPath(0.0, metric.length * animationValue);
@@ -212,6 +188,20 @@ class LightningPainter extends CustomPainter {
       break;
     }
   }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    return true;
+  }
+
+  /// Private Methods
+  var whiteColors = [
+    const Color(0x05FFFFFF),
+    Colors.white12,
+    Colors.white30,
+    Colors.white,
+  ];
+  var strokeWidths = [60.0, 40.0, 20.0, 10.0];
 
   void addBezierPathWithPoints(Path path, List<Offset> points) {
     for (int i = 0; i < points.length - 1; i++) {
