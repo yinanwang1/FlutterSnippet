@@ -416,6 +416,14 @@ const BlurImageDemo()
 ```
 ![模糊图片](./images/blurImage.png)
 
+## 23. 闪电
+模拟一条闪电，随机路线，从屏幕上方向下方闪过。
+使用示例：
+```
+const Lightning()
+```
+![闪电](./images/lightningMV.gif)
+
 
 
 
