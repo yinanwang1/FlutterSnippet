@@ -6,7 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_snippet/Common/my_colors.dart';
-import 'package:flutter_snippet/Widgets/lightning.dart';
+
+import 'Widgets/loading.dart';
 
 void main() {
   runApp(const MyApp());
@@ -56,11 +57,10 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateMixin {
 
   @override
   void initState() {
-
     super.initState();
   }
 
@@ -69,9 +69,33 @@ class _MyHomePageState extends State<MyHomePage> {
     super.dispose();
   }
 
+
   @override
   Widget build(BuildContext context) {
-    return const Lightning();
-  }
 
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("美丽新世界"),
+      ),
+      body: Center(
+          child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: const <Widget>[
+          BallLoading(),
+          DoubleBallLoading(),
+          ClockPendulum(),
+        ],
+      )),
+    );
+  }
 }
+
+
+
+
+
+
+
+
+
+

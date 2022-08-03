@@ -424,6 +424,16 @@ const Lightning()
 ```
 ![闪电](./images/lightningMV.gif)
 
+## 24. 加载动画
+单个转圈，双个转圈和钟摆的加载动画。
+主要还是使用到了computeMetrics来获取到每一时刻的位置，然后进行绘制圆点。
+使用示例：
+```
+BallLoading(),
+DoubleBallLoading(),
+ClockPendulum(),
+```
+![加载动画](./images/pendulum.gif)
 
 
 
