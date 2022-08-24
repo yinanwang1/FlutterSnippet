@@ -1,4 +1,6 @@
 
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 class MyColors {
@@ -22,4 +24,10 @@ class MyColors {
 
   // 标题颜色
   static const Color title = Color(0xFF333333);
+
+  // 随机颜色
+  static Color randomColor() {
+    var random = Random();
+    return Color.fromARGB(random.nextInt(256), random.nextInt(256), random.nextInt(256), 1);
+  }
 }

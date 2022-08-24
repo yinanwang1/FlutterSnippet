@@ -37,12 +37,14 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.5
   path_provider: ^2.0.11
-  http: ^0.13.4
+  http: ^0.13.5
   webview_flutter: ^3.0.4
   provider: ^6.0.3
   badges: ^2.0.3
   # 屏幕比例尺寸配置
   flutter_screenutil: ^5.5.3+2
+  # 多张图片选择
+  images_picker: ^1.2.11
 
 dev_dependencies:
   flutter_test:
