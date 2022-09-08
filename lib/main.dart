@@ -1,15 +1,10 @@
-import 'dart:async';
-import 'dart:ui';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_snippet/Common/my_colors.dart';
-import 'package:images_picker/images_picker.dart';
-
-import 'Widgets/loading.dart';
+import 'package:flutter_snippet/Widgets/loading_animations.dart';
 
 void main() {
   runApp(const MyApp());
@@ -76,57 +71,18 @@ class _MyHomePageState extends State<MyHomePage>
 
   @override
   Widget build(BuildContext context) {
-    List<String> languageList = <String>['Java', 'Dart', 'Kotlin'];
-    Map<String, int> markMap = <String,int>{'Java':100, 'Dart':80, 'Kotlin':60};
-    Set<String> languageSet = <String>{'Java', 'Dart','Kotlin'}; // 集合
-
-
-
-
     return Scaffold(
       appBar: AppBar(
         title: const Text("美丽新世界"),
       ),
-      body: Center(
-        child: Column(
-          children: [
-            TextButton(
-                onPressed: () async {
-                  testSX();
-                },
-                child: const Text(
-                  "点我试试",
-                  style: TextStyle(color: Colors.black),
-                )),
-            ElevatedButton(
-                onPressed: testSX,
-                child: const Text(
-                  "你要不试试",
-                  style: TextStyle(color: Colors.black),
-                )),
-            OutlinedButton(
-                onPressed: () {
-                  testSX();
-                },
-                child: const Text(
-                  "试试就试试",
-                  style: TextStyle(color: Colors.black),
-                )),
-          ],
+      body: const Center(
+        child: LoadingAnimations(
+          bgColor: Colors.white,
+          foregroundColor: Colors.red,
+          size: 300,
+          loadingText: "我就是我，不一样的烟火",
         ),
       ),
     );
   }
-
-  void testSX() async {
-    List<Media>? res =  await ImagesPicker.pick(
-      count: 3,
-      gif: false,
-    );
-
-    debugPrint("wyn res is $res");
-
-
-  }
 }
-

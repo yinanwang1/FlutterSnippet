@@ -435,6 +435,22 @@ ClockPendulum(),
 ```
 ![加载动画](./images/pendulum.gif)
 
+## 25. 加载动画（转圈）
+圆形、椭圆（可修改路径支持任何形状）
+使用示例
+```
+LoadingAnimations(
+  bgColor: Colors.white,
+  foregroundColor: Colors.red,
+  size: 300,
+  loadingText: "我就是我，不一样的烟火",
+)
+```
+![加载动画2](./images/md/loadingAnimations.gif)
+
+
+## 26. 
+
 
 
 
