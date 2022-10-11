@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_snippet/Common/my_colors.dart';
-import 'package:flutter_snippet/Widgets/loading_animations.dart';
+import 'package:flutter_snippet/Widgets/stop_watch_widget.dart';
 
 void main() {
   runApp(const MyApp());
@@ -54,34 +54,17 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-int maxValue = 100;
-int minValue = 1;
-
 class _MyHomePageState extends State<MyHomePage>
     with SingleTickerProviderStateMixin {
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("美丽新世界"),
       ),
+      extendBody: true,
       body: const Center(
-        child: LoadingAnimations(
-          bgColor: Colors.white,
-          foregroundColor: Colors.red,
-          size: 300,
-          loadingText: "我就是我，不一样的烟火",
-        ),
+        child: StopWatchWidget(),
       ),
     );
   }

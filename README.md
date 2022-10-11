@@ -449,7 +449,15 @@ LoadingAnimations(
 ![加载动画2](./images/md/loadingAnimations.gif)
 
 
-## 26. 
+## 26. 秒表
+秒表的外观，及时。
+使用示例
+```
+StopWatchWidget()
+```
+![加载动画2](./images/md/stopWatch.gif)
+
+## 27. 
 
 
 
