@@ -1,10 +1,7 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_snippet/Common/my_colors.dart';
-import 'package:flutter_snippet/Widgets/stop_watch_widget.dart';
+import 'package:flutter_snippet/Widgets/progress_image.dart';
 
 void main() {
   runApp(const MyApp());
@@ -25,12 +22,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: const MyHomePage(),
       // 国际化配置 __START__
-      localeListResolutionCallback:
-          (List<Locale>? locals, Iterable<Locale>? supportedLocales) {
+      localeListResolutionCallback: (List<Locale>? locals, Iterable<Locale>? supportedLocales) {
         return const Locale('zh');
       },
-      localeResolutionCallback:
-          (Locale? locale, Iterable<Locale>? supportedLocales) {
+      localeResolutionCallback: (Locale? locale, Iterable<Locale>? supportedLocales) {
         return const Locale("zh");
       },
       localizationsDelegates: const [
@@ -54,8 +49,7 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage>
-    with SingleTickerProviderStateMixin {
+class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,7 +58,7 @@ class _MyHomePageState extends State<MyHomePage>
       ),
       extendBody: true,
       body: const Center(
-        child: StopWatchWidget(),
+        child: ProgressImage(0.15),
       ),
     );
   }

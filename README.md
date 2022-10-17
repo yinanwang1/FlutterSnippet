@@ -1,12 +1,13 @@
 # FlutterSnippet
-## 声明： 如果有任何代码侵权，请联系我wyn18968158629@gmail.com。 
+
+## 声明： 如果有任何代码侵权，请联系我wyn18968158629@gmail.com。
 
 **在项目使用到或者网上看到好的组件，整理一份方便以后开发的时候使用。**
 
 ## 1. FlutterText 字体抖动
-一个字体抖动的组件，继承自Text。用法和Text一样，可以设置Text的所有属性。
-可以传入一个动画的配置项，实现动画。支持重复播放。
-使用示例：
+
+一个字体抖动的组件，继承自Text。用法和Text一样，可以设置Text的所有属性。 可以传入一个动画的配置项，实现动画。支持重复播放。 使用示例：
+
 ```
 FlutterText(
               "我们都是孩子",
@@ -14,27 +15,33 @@ FlutterText(
               config: AnimationConfig(curveTween: CurveTween(curve: Curves.ease), repeat: true),
             ),
 ```
+
 ![flutter](./images/flutter.gif)
 
 ## 2. NormalCell 一行显示左边的图标，标题，和右边的尾部组件
-提供了（1）标题图片（2）标题（3）内容（4）尾部内容（或箭头）（5）是否需要底部分割线（6）点击事件
-使用示例：
+
+提供了（1）标题图片（2）标题（3）内容（4）尾部内容（或箭头）（5）是否需要底部分割线（6）点击事件 使用示例：
+
 ```
 const NormalCell(leading: Text("leading"), title: Text("title"), middle: Text("middle"), trailing: Text("trailing")),
 ```
+
 ![cell](./images/cell.jpg)
 
 ## 3. NStarView 多边形
-绘制多边形，传入多边形的个数n，外半径R，内半径r，填充的颜色color
-使用示例：
+
+绘制多边形，传入多边形的个数n，外半径R，内半径r，填充的颜色color 使用示例：
+
 ```
 NStarView(15, 30, 20, color: Colors.red,)
 ```
+
 ![多边形](./images/nStar.jpg)
 
 ## 4. AbilityWidget 蛛网显示能力图
-蛛网的样式显示不同能力值，并伴有动画。
-使用示例：
+
+蛛网的样式显示不同能力值，并伴有动画。 使用示例：
+
 ```
 AbilityWidget(
           ability: Ability(100, 1500, AssetImage("images/namei.png"), {
@@ -47,20 +54,23 @@ AbilityWidget(
           }, Colors.black),
         ),
 ```
+
 ![蛛网显示能力图](./images/network.gif)
 
-## 5. CircleProgressWidget  圆形进度条 
-通过Progress来设置属性. 使用时设置动画，可实现动态显示
-使用示例：
+## 5. CircleProgressWidget 圆形进度条
+
+通过Progress来设置属性. 使用时设置动画，可实现动态显示 使用示例：
+
 ```
 CircleProgressWidget(Progress(value: value, backgroundColor: Colors.red))
 ```
+
 ![圆形进度条](./images/circle.gif)
 
 ## 6. FlutterWebView 浏览器
-传入url和title，打开新页面在浏览器展示内容。
-iOS使用时，需要在ViewDidLoad中添加`GeneratedPluginRegistrant.register(with: self)`。
-使用示例：
+
+传入url和title，打开新页面在浏览器展示内容。 iOS使用时，需要在ViewDidLoad中添加`GeneratedPluginRegistrant.register(with: self)`。 使用示例：
+
 ```
 Navigator.of(context).push(
               MaterialPageRoute(builder: (BuildContext context) {
@@ -69,11 +79,13 @@ Navigator.of(context).push(
                     title: "我就是我");
               }));
 ```
+
 *需要在pubspec.yaml中依赖webview_flutter: ^2.1.1*
 
 ## 7. MathRunner 按函数移动
-封装了一个动画，传入x和y的函数，使组件按函数动起来。
-使用示例：
+
+封装了一个动画，传入x和y的函数，使组件按函数动起来。 使用示例：
+
 ```
 Stack(
         alignment: Alignment.center,
@@ -124,12 +136,13 @@ Stack(
         ],
       )
 ```
+
 ![按函数移动](./images/math_runner.gif)
 
 ## 8. 评分
-StarScore显示评分结果
-CustomRating打分
-使用示例：
+
+StarScore显示评分结果 CustomRating打分 使用示例：
+
 ```
 Column(
   mainAxisSize: MainAxisSize.min,
@@ -148,11 +161,13 @@ Column(
   ],
 ),
 ```
+
 ![评分](./images/star.jpg)
 
 ## 9. ToggleRotate 点击旋转组件
-点击一个组件的时候，可以将组件旋转到指定的角度，并可指定动画效果。
-使用示例：
+
+点击一个组件的时候，可以将组件旋转到指定的角度，并可指定动画效果。 使用示例：
+
 ```
 ToggleRotate(
   onTap: () {},
@@ -165,11 +180,13 @@ ToggleRotate(
   curve: Curves.bounceInOut,
 ),
 ```
+
 ![旋转](./images/rotate.gif)
 
 ## 10. CouponShapeBorder 优惠券
-用自定义shape绘制外边框的形状，实现优惠券的样式
-使用示例：
+
+用自定义shape绘制外边框的形状，实现优惠券的样式 使用示例：
+
 ```
 Material(
 color: Colors.red,
@@ -252,11 +269,13 @@ child: Row(
 ),
 ),
 ```
+
 ![优惠券](./images/coupon.jpg)
 
 ## 11. FlutterWaveLoading 波浪加载
-滚动的波浪，可以设置进度。
-使用示例
+
+滚动的波浪，可以设置进度。 使用示例
+
 ```
 const FlutterWaveLoading(
     width: 75,
@@ -269,14 +288,12 @@ const FlutterWaveLoading(
 ),
 ```
 
-
 ![波浪](./images/wave.gif)
 
 ## 12. PointsCurve 根据多点绘制直线和曲线
-根据多个坐标，用直线和贝塞尔曲线连接。
-可以设置直线的颜色和坐标点的颜色，圆的半径。
-可以设置曲线的颜色和线的宽度。
-使用示例：
+
+根据多个坐标，用直线和贝塞尔曲线连接。 可以设置直线的颜色和坐标点的颜色，圆的半径。 可以设置曲线的颜色和线的宽度。 使用示例：
+
 ```
 const SizedBox(
     height: 500,
@@ -291,20 +308,23 @@ const SizedBox(
     ],),
 ),
 ```
+
 ![直线和曲线](./images/curve.jpg)
 
-
 ## 13. EfficientPage 联动滚动页面
-通过局部更新的方式，来降低全局刷新
-使用示例：
+
+通过局部更新的方式，来降低全局刷新 使用示例：
+
 ```
 const EfficientPage()
 ```
+
 ![联动滚动](./images/page.gif)
 
 ## 14. Wave 类似水波的效果，可以设置一个中心圆，然后一个波动的圆。
-波动波动。
-使用示例：
+
+波动波动。 使用示例：
+
 ```
 Wave(),
 Wave(
@@ -316,39 +336,43 @@ Wave(
     isWaveUp: false,
 ),
 ```
+
 ![水波](./images/wave_widget.gif)
 
-
 ## 15. Clock 钟表
-表盘绘制一次，时分秒针每秒更新。 
-如果项目中要用到，需要将颜色提取出来，作为变量。
-使用示例：
+
+表盘绘制一次，时分秒针每秒更新。 如果项目中要用到，需要将颜色提取出来，作为变量。 使用示例：
+
 ```
 Clock()
 ```
+
 ![钟表](./images/clock.gif)
 
 ## 16 Umbrella
-使用绘制60度的一个小三角来组成一个伞面
-可以填充彩虹色
-Beta  还有很多小问题
-使用示例：
+
+使用绘制60度的一个小三角来组成一个伞面 可以填充彩虹色 Beta 还有很多小问题 使用示例：
+
 ```
 Umbrella()
 ```
+
 ![雨伞](./images/umbrella.jpg)
 
 ## 17 Rainbow
-使用一道彩虹。可以设置大小。
-使用示例：
+
+使用一道彩虹。可以设置大小。 使用示例：
+
 ```
 Rainbow()
 ```
+
 ![彩虹](./images/rainbow.jpg)
 
 ## 18 RedPacket
-模仿微信的红包，弹出红包，点击"开"按钮后，旋转金币，然后跳转到结果页面。
-使用示例：
+
+模仿微信的红包，弹出红包，点击"开"按钮后，旋转金币，然后跳转到结果页面。 使用示例：
+
 ```
 @override
   Widget build(BuildContext context) {
@@ -379,65 +403,77 @@ Rainbow()
                 ),
             transitionDuration: const Duration(seconds: 1)));
 ```
+
 ResultPage是结果页面，任意页面都可以。
 ![红包](./images/redPacket.gif)
 
 ## 19. 兔子
-使用CustomPainter绘制兔子，并采用animation控制绘制的进度。
-使用示例：
+
+使用CustomPainter绘制兔子，并采用animation控制绘制的进度。 使用示例：
+
 ```
 Rabbit();
 ```
+
 ![兔子](./images/rabbit.gif)
 
 ## 20. 变色气泡
-聊天气泡，滚动的时候根据位置展示渐变的背景色。
-渐变色的展示，根据气泡所在的位置而变。
-使用示例：
+
+聊天气泡，滚动的时候根据位置展示渐变的背景色。 渐变色的展示，根据气泡所在的位置而变。 使用示例：
+
 ```
 BubbleBackgroundChat();
 ```
+
 ![渐变](./images/bubbleChat.jpeg)
 
 ## 21. 流动渐变
-渐变色在流动。
-使用示例：
+
+渐变色在流动。 使用示例：
+
 ```
 GradientBoundDemo();
 ```
+
 ![渐变](./images/gradientStroke.gif)
 ![渐变](./images/gradientFill.gif)
 
 ## 22. 模糊图片
-高斯模糊，设置模糊图片。
-使用示例：
+
+高斯模糊，设置模糊图片。 使用示例：
+
 ```
 const BlurImageDemo()
 ```
+
 ![模糊图片](./images/blurImage.png)
 
 ## 23. 闪电
-模拟一条闪电，随机路线，从屏幕上方向下方闪过。
-使用示例：
+
+模拟一条闪电，随机路线，从屏幕上方向下方闪过。 使用示例：
+
 ```
 const Lightning()
 ```
+
 ![闪电](./images/lightningMV.gif)
 
 ## 24. 加载动画
-单个转圈，双个转圈和钟摆的加载动画。
-主要还是使用到了computeMetrics来获取到每一时刻的位置，然后进行绘制圆点。
-使用示例：
+
+单个转圈，双个转圈和钟摆的加载动画。 主要还是使用到了computeMetrics来获取到每一时刻的位置，然后进行绘制圆点。 使用示例：
+
 ```
 BallLoading(),
 DoubleBallLoading(),
 ClockPendulum(),
 ```
+
 ![加载动画](./images/pendulum.gif)
 
 ## 25. 加载动画（转圈）
-圆形、椭圆（可修改路径支持任何形状）
-使用示例
+
+圆形、椭圆（可修改路径支持任何形状） 使用示例
+
 ```
 LoadingAnimations(
   bgColor: Colors.white,
@@ -446,18 +482,30 @@ LoadingAnimations(
   loadingText: "我就是我，不一样的烟火",
 )
 ```
+
 ![加载动画2](./images/md/loadingAnimations.gif)
 
-
 ## 26. 秒表
-秒表的外观，及时。
-使用示例
+
+秒表的外观，及时。 使用示例
+
 ```
 StopWatchWidget()
 ```
+
 ![加载动画2](./images/md/stopWatch.gif)
 
-## 27. 
+## 27. 图片展示进度条
+
+上传或下载图片时，成功的进度清晰展示，未成功的模糊展示。 是用示例：
+
+```
+ProgressImage(0.15);
+```
+
+![进度图片](./images/md/progressImage.png)
+
+## 28. 
 
 
 
