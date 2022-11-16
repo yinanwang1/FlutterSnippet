@@ -1,10 +1,13 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_snippet/Common/my_colors.dart';
-import 'package:flutter_snippet/Widgets/progress_image.dart';
+import 'package:flutter_snippet/Widgets/windmill.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -42,23 +45,30 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatefulWidget {
+class MyHomePage extends ConsumerStatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  ConsumerState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateMixin {
+class _MyHomePageState extends ConsumerState<MyHomePage> with SingleTickerProviderStateMixin {
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: MaterialStateColor.resolveWith(
+            (states) => states.contains(MaterialState.scrolledUnder) ? Colors.deepPurpleAccent : Colors.blue),
         title: const Text("美丽新世界"),
       ),
       extendBody: true,
       body: const Center(
-        child: ProgressImage(0.15),
+        child: Windmill(),
       ),
     );
   }

@@ -19,6 +19,7 @@ version: 1.0.0+1
 
 environment:
   sdk: ">=2.17.0 <3.0.0"
+  flutter: ">=3.0.0"
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -39,12 +40,14 @@ dependencies:
   path_provider: ^2.0.11
   http: ^0.13.5
   webview_flutter: ^3.0.4
-  provider: ^6.0.3
+  provider: ^6.0.4
   badges: ^2.0.3
   # 屏幕比例尺寸配置
-  flutter_screenutil: ^5.5.4
+  flutter_screenutil: ^5.6.0
   # 多张图片选择
   images_picker: ^1.2.11
+  # 状态管理
+  flutter_riverpod: ^2.1.1
 
 dev_dependencies:
   flutter_test:

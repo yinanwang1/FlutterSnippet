@@ -505,7 +505,15 @@ ProgressImage(0.15);
 
 ![进度图片](./images/md/progressImage.png)
 
-## 28. 
+## 28. 风车
+一直转动的四页风车。使用CustomPainter的repaint传入一个动画来实现。
+可以将风车设置成其他页数。
+```
+Windmill()
+```
+![疯车](./images/md/windmill.gif)
+
+## 29.
 
 
 
