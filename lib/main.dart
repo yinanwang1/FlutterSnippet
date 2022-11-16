@@ -1,10 +1,7 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_snippet/Common/my_colors.dart';
-import 'package:flutter_snippet/Widgets/windmill.dart';
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
@@ -53,6 +50,8 @@ class MyHomePage extends ConsumerStatefulWidget {
 }
 
 class _MyHomePageState extends ConsumerState<MyHomePage> with SingleTickerProviderStateMixin {
+  get builder => null;
+
   @override
   void initState() {
     super.initState();
@@ -60,6 +59,8 @@ class _MyHomePageState extends ConsumerState<MyHomePage> with SingleTickerProvid
 
   @override
   Widget build(BuildContext context) {
+    debugPrint("wyn MediaQuery.of(context).size.height is ${MediaQuery.of(context).size.height}");
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: MaterialStateColor.resolveWith(
@@ -67,9 +68,45 @@ class _MyHomePageState extends ConsumerState<MyHomePage> with SingleTickerProvid
         title: const Text("美丽新世界"),
       ),
       extendBody: true,
-      body: const Center(
-        child: Windmill(),
+      body: LayoutBuilder(
+        builder: (_, constraints) {
+          return Container(
+            color: Colors.cyanAccent,
+            child: Stack(
+              children: [
+                Container(
+                  color: Colors.black12,
+                ),
+                Container(
+                  height: 250,
+                  color: Colors.black,
+                ),
+                Positioned.fill(
+                  child: DraggableScrollableSheet(
+                    minChildSize: 1 - 250 / constraints.maxHeight,
+                    initialChildSize: 1 - 250 / constraints.maxHeight,
+                    builder: (_, ScrollController scrollController) {
+                      return ListView.builder(
+                          itemCount: strings.length,
+                          controller: scrollController,
+                          itemBuilder: (_, index) {
+                            return Container(
+                              alignment: Alignment.center,
+                              color: 0 == index % 2 ? Colors.red : Colors.blue,
+                              height: 30,
+                              child: Text(strings[index]),
+                            );
+                          });
+                    },
+                  ),
+                )
+              ],
+            ),
+          );
+        },
       ),
     );
   }
+
+  List<String> strings = List.generate(100, (index) => "index $index");
 }
