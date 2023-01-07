@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-
 /// 展示网页
 /// 依赖webview_flutter: ^2.1.1
 /// @author 阿南
@@ -14,17 +13,24 @@ class FlutterWebView extends StatefulWidget {
   const FlutterWebView(this.url, {this.title = "", Key? key}) : super(key: key);
 
   @override
-  _FlutterWebViewState createState() => _FlutterWebViewState();
+  State createState() => _FlutterWebViewState();
 }
 
 class _FlutterWebViewState extends State<FlutterWebView> {
+  late WebViewController controller;
+
+  @override
+  void initState() {
+    super.initState();
+
+    controller = WebViewController()..loadRequest(Uri.parse(widget.url));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text(widget.title),),
-      body: WebView(
-        initialUrl: widget.url,
-      ),
+      body: WebViewWidget(controller: controller,),
     );
   }
 }
