@@ -16,7 +16,7 @@ FlutterText(
             ),
 ```
 
-![flutter](./images/flutter.gif)
+![flutter](./images/md/flutter.gif)
 
 ## 2. NormalCell 一行显示左边的图标，标题，和右边的尾部组件
 
@@ -26,7 +26,7 @@ FlutterText(
 const NormalCell(leading: Text("leading"), title: Text("title"), middle: Text("middle"), trailing: Text("trailing")),
 ```
 
-![cell](./images/cell.jpg)
+![cell](./images/md/cell.jpg)
 
 ## 3. NStarView 多边形
 
@@ -36,7 +36,7 @@ const NormalCell(leading: Text("leading"), title: Text("title"), middle: Text("m
 NStarView(15, 30, 20, color: Colors.red,)
 ```
 
-![多边形](./images/nStar.jpg)
+![多边形](./images/md/nStar.jpg)
 
 ## 4. AbilityWidget 蛛网显示能力图
 
@@ -55,7 +55,7 @@ AbilityWidget(
         ),
 ```
 
-![蛛网显示能力图](./images/network.gif)
+![蛛网显示能力图](./images/md/network.gif)
 
 ## 5. CircleProgressWidget 圆形进度条
 
@@ -65,7 +65,7 @@ AbilityWidget(
 CircleProgressWidget(Progress(value: value, backgroundColor: Colors.red))
 ```
 
-![圆形进度条](./images/circle.gif)
+![圆形进度条](./images/md/circle.gif)
 
 ## 6. FlutterWebView 浏览器
 
@@ -137,7 +137,7 @@ Stack(
       )
 ```
 
-![按函数移动](./images/math_runner.gif)
+![按函数移动](./images/md/math_runner.gif)
 
 ## 8. 评分
 
@@ -162,7 +162,7 @@ Column(
 ),
 ```
 
-![评分](./images/star.jpg)
+![评分](./images/md/star.jpg)
 
 ## 9. ToggleRotate 点击旋转组件
 
@@ -181,7 +181,7 @@ ToggleRotate(
 ),
 ```
 
-![旋转](./images/rotate.gif)
+![旋转](./images/md/rotate.gif)
 
 ## 10. CouponShapeBorder 优惠券
 
@@ -270,7 +270,7 @@ child: Row(
 ),
 ```
 
-![优惠券](./images/coupon.jpg)
+![优惠券](./images/md/coupon.jpg)
 
 ## 11. FlutterWaveLoading 波浪加载
 
@@ -288,7 +288,7 @@ const FlutterWaveLoading(
 ),
 ```
 
-![波浪](./images/wave.gif)
+![波浪](./images/md/wave.gif)
 
 ## 12. PointsCurve 根据多点绘制直线和曲线
 
@@ -309,7 +309,7 @@ const SizedBox(
 ),
 ```
 
-![直线和曲线](./images/curve.jpg)
+![直线和曲线](./images/md/curve.jpg)
 
 ## 13. EfficientPage 联动滚动页面
 
@@ -319,7 +319,7 @@ const SizedBox(
 const EfficientPage()
 ```
 
-![联动滚动](./images/page.gif)
+![联动滚动](./images/md/page.gif)
 
 ## 14. Wave 类似水波的效果，可以设置一个中心圆，然后一个波动的圆。
 
@@ -337,7 +337,7 @@ Wave(
 ),
 ```
 
-![水波](./images/wave_widget.gif)
+![水波](./images/md/wave_widget.gif)
 
 ## 15. Clock 钟表
 
@@ -347,7 +347,7 @@ Wave(
 Clock()
 ```
 
-![钟表](./images/clock.gif)
+![钟表](./images/md/clock.gif)
 
 ## 16 Umbrella
 
@@ -357,7 +357,7 @@ Clock()
 Umbrella()
 ```
 
-![雨伞](./images/umbrella.jpg)
+![雨伞](./images/md/umbrella.jpg)
 
 ## 17 Rainbow
 
@@ -367,7 +367,7 @@ Umbrella()
 Rainbow()
 ```
 
-![彩虹](./images/rainbow.jpg)
+![彩虹](./images/md/rainbow.jpg)
 
 ## 18 RedPacket
 
@@ -405,7 +405,7 @@ Rainbow()
 ```
 
 ResultPage是结果页面，任意页面都可以。
-![红包](./images/redPacket.gif)
+![红包](./images/md/redPacket.gif)
 
 ## 19. 兔子
 
@@ -415,7 +415,7 @@ ResultPage是结果页面，任意页面都可以。
 Rabbit();
 ```
 
-![兔子](./images/rabbit.gif)
+![兔子](./images/md/rabbit.gif)
 
 ## 20. 变色气泡
 
@@ -425,7 +425,7 @@ Rabbit();
 BubbleBackgroundChat();
 ```
 
-![渐变](./images/bubbleChat.jpeg)
+![渐变](./images/md/bubbleChat.jpeg)
 
 ## 21. 流动渐变
 
@@ -435,8 +435,8 @@ BubbleBackgroundChat();
 GradientBoundDemo();
 ```
 
-![渐变](./images/gradientStroke.gif)
-![渐变](./images/gradientFill.gif)
+![渐变](./images/md/gradientStroke.gif)
+![渐变](./images/md/gradientFill.gif)
 
 ## 22. 模糊图片
 
@@ -446,7 +446,7 @@ GradientBoundDemo();
 const BlurImageDemo()
 ```
 
-![模糊图片](./images/blurImage.png)
+![模糊图片](./images/md/blurImage.png)
 
 ## 23. 闪电
 
@@ -456,7 +456,7 @@ const BlurImageDemo()
 const Lightning()
 ```
 
-![闪电](./images/lightningMV.gif)
+![闪电](./images/md/lightningMV.gif)
 
 ## 24. 加载动画
 
@@ -468,7 +468,7 @@ DoubleBallLoading(),
 ClockPendulum(),
 ```
 
-![加载动画](./images/pendulum.gif)
+![加载动画](./images/md/pendulum.gif)
 
 ## 25. 加载动画（转圈）
 
@@ -506,38 +506,14 @@ ProgressImage(0.15);
 ![进度图片](./images/md/progressImage.png)
 
 ## 28. 风车
+
 一直转动的四页风车。使用CustomPainter的repaint传入一个动画来实现。
 可以将风车设置成其他页数。
+
 ```
 Windmill()
 ```
+
 ![疯车](./images/md/windmill.gif)
 
 ## 29.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
