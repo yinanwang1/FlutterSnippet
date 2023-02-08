@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_snippet/Common/MaterialAppUtil.dart';
 
 void main() {
-  runApp(createMaterialApp((settings) => MaterialPageRoute(builder: (_) => const MyHomePage()), {}));
+  runApp(ProviderScope(child: createMaterialApp((settings) => MaterialPageRoute(builder: (_) => const MyHomePage()), {})));
 }
 
 class MyHomePage extends ConsumerStatefulWidget {
@@ -25,60 +25,59 @@ class _MyHomePageState extends ConsumerState<MyHomePage> with SingleTickerProvid
   Widget build(BuildContext context) {
     debugPrint("wyn MediaQuery.of(context).size.height is ${MediaQuery.of(context).size.height}");
 
-    return LayoutBuilder(
-      builder: (_, constraints) {
-        return Container(
-          color: Colors.cyanAccent,
-          child: Stack(
-            children: [
-              SizedBox(
-                width: constraints.maxWidth,
-                height: 310,
-                child: Image.asset(
-                  "images/namei.png",
-                  fit: BoxFit.fitHeight,
-                ),
-              ),
-              Positioned.fill(
-                child: DraggableScrollableSheet(
-                  minChildSize: 1 - 250 / constraints.maxHeight,
-                  initialChildSize: 1 - 250 / constraints.maxHeight,
-                  builder: (_, ScrollController scrollController) {
-                    return ListView.builder(
-                        itemCount: strings.length,
-                        controller: scrollController,
-                        itemBuilder: (_, index) {
-                          return Container(
-                            alignment: Alignment.center,
-                            color: 0 == index % 2 ? Colors.red : Colors.blue,
-                            height: 30,
-                            child: Text(strings[index]),
-                          );
-                        });
-                  },
-                ),
-              ),
-              Container(
-                height: (AppBarTheme.of(context).toolbarHeight ?? kToolbarHeight) + MediaQuery.of(context).padding.top,
-                width: constraints.maxWidth,
-                color: Colors.transparent,
-                child: AppBar(
-                  backgroundColor: Colors.transparent,
-                  title: const Text("美丽新世嘉"),
-                  leading: IconButton(
-                    icon: const Icon(Icons.arrow_back_ios, color: Colors.black,),
-                    onPressed: () {
-                      debugPrint("wyn 111");
-                    },
-                  ),
-                ),
-              ),
-            ],
-          ),
-        );
-      },
+    return const Scaffold(
+      // appBar: AppBar(
+      //   title: const Text("突飞猛进"),
+      // ),
+      body: Center(
+        child: MyApp(),
+      ),
     );
   }
+}
 
-  List<String> strings = List.generate(100, (index) => "index $index");
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  final imageSrc =
+      'https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/19524295f8a34d7d83dd3a4ea4643774~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp?';
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+        home: Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Image.asset(
+              "images/number.png",
+              width: 300,
+              height: 300,
+              fit: BoxFit.fill,
+            ),
+            Image.asset(
+              "images/number.png",
+              centerSlice: const Rect.fromLTRB(100, 100, 200, 200),
+              width: 400,
+              height: 400,
+            ),
+          ],
+        ),
+      ),
+    ));
+  }
+}
+
+class Solution {
+  int differenceOfSum(List<int> nums) {
+    var x = nums.reduce((value, element) => value + element);
+    var y = nums.fold<int>(0, (previousValue, element) {
+      var sum = element.toString().split("").fold<int>(0, (previousValue, element) => previousValue + (int.tryParse(element) ?? 0));
+
+      return previousValue + sum;
+    });
+
+    return (x - y).abs();
+  }
 }
