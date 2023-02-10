@@ -43,7 +43,7 @@ dependencies:
   provider: ^6.0.5
   badges: ^3.0.2
   # 屏幕比例尺寸配置
-  flutter_screenutil: ^5.6.0
+  flutter_screenutil: ^5.6.1
   # 多张图片选择
   images_picker: ^1.2.11
   # 状态管理
@@ -53,6 +53,10 @@ dependencies:
   fl_chart: ^0.60.0
   # 路径 1.8.3报错
   path: ^1.8.2
+
+  # 生成代码
+  source_gen: ^1.2.7
+  build_runner: ^2.3.3
 
 dev_dependencies:
   flutter_test:

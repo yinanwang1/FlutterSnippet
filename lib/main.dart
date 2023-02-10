@@ -1,6 +1,10 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_snippet/Common/MaterialAppUtil.dart';
+import 'package:flutter_snippet/Common/my_colors.dart';
+import 'package:flutter_snippet/learnAnnotation.g.dart';
 
 void main() {
   runApp(ProviderScope(child: createMaterialApp((settings) => MaterialPageRoute(builder: (_) => const MyHomePage()), {})));
@@ -23,61 +27,64 @@ class _MyHomePageState extends ConsumerState<MyHomePage> with SingleTickerProvid
 
   @override
   Widget build(BuildContext context) {
-    debugPrint("wyn MediaQuery.of(context).size.height is ${MediaQuery.of(context).size.height}");
-
-    return const Scaffold(
-      // appBar: AppBar(
-      //   title: const Text("突飞猛进"),
-      // ),
-      body: Center(
-        child: MyApp(),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("突飞猛进"),
       ),
+      body: const MyApp(),
     );
   }
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
-  final imageSrc =
-      'https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/19524295f8a34d7d83dd3a4ea4643774~tplv-k3u1fbpfcp-zoom-in-crop-mark:4536:0:0:0.awebp?';
+  @override
+  State createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        home: Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Image.asset(
-              "images/number.png",
-              width: 300,
-              height: 300,
-              fit: BoxFit.fill,
+
+    var test = Wang();
+
+    var random = Random();
+    return CustomScrollView(
+      // physics: const AlwaysScrollableScrollPhysics(),
+      slivers: [
+        SliverAppBar(
+          actions: <Widget>[IconButton(onPressed: () => {}, icon: const Icon(Icons.add))],
+          expandedHeight: 200,
+          pinned: true,
+          stretch: true,
+          flexibleSpace: FlexibleSpaceBar(
+            title: const Text(
+              "First FlexibleSpace",
+              style: TextStyle(color: Colors.blue),
             ),
-            Image.asset(
-              "images/number.png",
-              centerSlice: const Rect.fromLTRB(100, 100, 200, 200),
-              width: 400,
-              height: 400,
-            ),
-          ],
+            background: Image.network(
+                "https://p3-passport.byteimg.com/img/user-avatar/af5f7ee5f0c449f25fc0b32c050bf100~180x180.awebp",
+                fit: BoxFit.cover),
+            stretchModes: const [
+              StretchMode.zoomBackground,
+              StretchMode.blurBackground,
+              StretchMode.fadeTitle
+            ],
+          ),
         ),
-      ),
-    ));
-  }
-}
-
-class Solution {
-  int differenceOfSum(List<int> nums) {
-    var x = nums.reduce((value, element) => value + element);
-    var y = nums.fold<int>(0, (previousValue, element) {
-      var sum = element.toString().split("").fold<int>(0, (previousValue, element) => previousValue + (int.tryParse(element) ?? 0));
-
-      return previousValue + sum;
-    });
-
-    return (x - y).abs();
+        SliverGrid.extent(
+          maxCrossAxisExtent: 150.0,
+          children: List.generate(
+              100,
+              (index) => Container(
+                    color: MyColors.randomColor(),
+                    margin: EdgeInsets.all(random.nextInt(30).toDouble()),
+                    child: const Text("测试下"),
+                  )),
+        ),
+      ],
+    );
   }
 }
