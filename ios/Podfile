@@ -35,7 +35,7 @@ target 'Runner' do
 end
 
 post_install do |installer|
- installer.pod_target_subprojects.flat_map { |p| p.targets }.each do |target|
+  installer.pod_target_subprojects.flat_map { |p| p.targets }.each do |target|
     flutter_additional_ios_build_settings(target)
   end
 end
