@@ -37,17 +37,17 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.5
-  path_provider: ^2.0.13
+  path_provider: ^2.0.14
   http: ^0.13.5
-  webview_flutter: ^4.0.5
+  webview_flutter: ^4.0.7
   provider: ^6.0.5
   badges: ^3.0.2
   # 屏幕比例尺寸配置
-  flutter_screenutil: ^5.6.1
+  flutter_screenutil: ^5.7.0
   # 多张图片选择
   images_picker: ^1.2.11
   # 状态管理
-  flutter_riverpod: ^2.2.0
+  flutter_riverpod: ^2.3.2
   # 加载框
   flutter_easyloading: ^3.0.5
   fl_chart: ^0.61.0
@@ -57,6 +57,9 @@ dependencies:
   # 生成代码
   source_gen: ^1.2.7
   build_runner: ^2.3.3
+
+  # 绘制多边形
+  polygon: ^0.1.0
 
 dev_dependencies:
   flutter_test:

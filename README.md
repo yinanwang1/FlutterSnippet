@@ -516,4 +516,16 @@ Windmill()
 
 ![疯车](./images/md/windmill.gif)
 
-## 29.
+## 29. 霓虹灯文本
+霓虹灯文本的「故障」效果的实现。
+
+```
+Container(
+  color: Colors.black,
+  child: const TearingText("美丽蝴蝶"),
+)
+```
+
+![霓虹灯文本](./images/md/tearing.gif)
+
+## 30.
