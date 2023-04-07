@@ -11,7 +11,7 @@ import 'package:flutter_snippet/Common/my_colors.dart';
 MaterialApp createMaterialApp(RouteFactory? onGenerateRoute, Map<String, WidgetBuilder> routes) {
   if (Platform.isAndroid) {
     SystemChrome.setSystemUIOverlayStyle(
-        const SystemUiOverlayStyle(statusBarColor: Colors.white, statusBarIconBrightness: Brightness.light));
+        const SystemUiOverlayStyle(statusBarColor: Colors.transparent, statusBarIconBrightness: Brightness.light));
   }
 
   return MaterialApp(
