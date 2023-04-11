@@ -42,13 +42,13 @@ dependencies:
   http: ^0.13.5
   webview_flutter: ^4.0.7
   provider: ^6.0.5
-  badges: ^3.0.2
+  badges: ^3.0.3
   # 屏幕比例尺寸配置
   flutter_screenutil: ^5.7.0
   # 多张图片选择
   images_picker: ^1.2.11
   # 状态管理
-  flutter_riverpod: ^2.3.2
+  flutter_riverpod: ^2.3.4
   # 加载框
   flutter_easyloading: ^3.0.5
   fl_chart: ^0.61.0
