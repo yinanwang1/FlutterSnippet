@@ -40,18 +40,18 @@ dependencies:
   cupertino_icons: ^1.0.5
   path_provider: ^2.0.14
   http: ^0.13.5
-  webview_flutter: ^4.0.7
+  webview_flutter: ^4.1.0
   provider: ^6.0.5
-  badges: ^3.0.3
+  badges: ^3.1.1
   # 屏幕比例尺寸配置
   flutter_screenutil: ^5.7.0
   # 多张图片选择
   images_picker: ^1.2.11
   # 状态管理
-  flutter_riverpod: ^2.3.4
+  flutter_riverpod: ^2.3.5
   # 加载框
   flutter_easyloading: ^3.0.5
-  fl_chart: ^0.61.0
+  fl_chart: ^0.62.0
   # 路径 1.8.3报错
   path: ^1.8.2
 

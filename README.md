@@ -538,6 +538,13 @@ const RunCar(),
 ![运动汽车](./images/md/runCar.gif)
 
 
-## 31. 
+## 31. 计算器
+简单的实现了加减乘除的计算，算法采用"工厂方法"设计模式。
+```
+const Calculator()
+```
+![计算器](./images/md/calculator.gif)
+
+## 32. 
 
 

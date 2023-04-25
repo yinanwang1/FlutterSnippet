@@ -1,10 +1,18 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_snippet/Common/MaterialAppUtil.dart';
-import 'package:flutter_snippet/Widgets/RunCar.dart';
+import 'package:flutter_snippet/Common/my_colors.dart';
+import 'package:flutter_snippet/Widgets/calculator.dart';
+
+final themeProvider = StreamProvider<ThemeData>((ref) {
+  var interval = const Duration(seconds: 2);
+  return Stream<ThemeData>.periodic(interval, (count) => count % 2 == 0 ? ThemeData.light() : ThemeData.dark());
+});
 
 void main() {
-  runApp(ProviderScope(child: createMaterialApp((settings) => MaterialPageRoute(builder: (_) => const MyApp()), {})));
+  // runApp(ProviderScope(child: createMaterialApp((settings) => MaterialPageRoute(builder: (_) => const MyHomePage()), {})));
+  runApp(const ProviderScope(child: MyHomePage()));
 }
 
 class MyHomePage extends ConsumerStatefulWidget {
@@ -22,32 +30,27 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("突飞猛进"),
-      ),
-      body: const SafeArea(
-        child: MyApp(),
+    return MaterialApp(
+      home: Scaffold(
+        appBar: AppBar(title: const Text("静下来")),
+        body: const SafeArea(
+          child: MyApp(),
+        ),
       ),
     );
   }
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends ConsumerStatefulWidget {
   const MyApp({super.key});
 
   @override
-  State createState() => _MyAppState();
+  ConsumerState createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp> with SingleTickerProviderStateMixin {
+class _MyAppState extends ConsumerState<MyApp> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("心有猛虎"),
-      ),
-      body: const Text("好的吧"),
-    );
+    return const Calculator();
   }
 }
