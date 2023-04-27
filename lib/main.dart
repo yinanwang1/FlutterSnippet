@@ -1,9 +1,11 @@
 import 'dart:async';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_snippet/Common/my_colors.dart';
-import 'package:flutter_snippet/Widgets/calculator.dart';
+import 'package:flutter_snippet/Widgets/cashier_system.dart';
 
 final themeProvider = StreamProvider<ThemeData>((ref) {
   var interval = const Duration(seconds: 2);
@@ -32,7 +34,7 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(title: const Text("静下来")),
+        appBar: AppBar(title: const Text("收银系统")),
         body: const SafeArea(
           child: MyApp(),
         ),
@@ -51,6 +53,10 @@ class MyApp extends ConsumerStatefulWidget {
 class _MyAppState extends ConsumerState<MyApp> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
-    return const Calculator();
+    return Container(
+      color: MyColors.background,
+      padding: const EdgeInsets.all(15),
+      child: const CashierSystem(),
+    );
   }
 }

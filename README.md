@@ -69,7 +69,8 @@ CircleProgressWidget(Progress(value: value, backgroundColor: Colors.red))
 
 ## 6. FlutterWebView 浏览器
 
-传入url和title，打开新页面在浏览器展示内容。 iOS使用时，需要在ViewDidLoad中添加`GeneratedPluginRegistrant.register(with: self)`。 使用示例：
+传入url和title，打开新页面在浏览器展示内容。 iOS使用时，需要在ViewDidLoad中添加`GeneratedPluginRegistrant.register(with: self)`。
+使用示例：
 
 ```
 Navigator.of(context).push(
@@ -517,6 +518,7 @@ Windmill()
 ![疯车](./images/md/windmill.gif)
 
 ## 29. 霓虹灯文本
+
 霓虹灯文本的「故障」效果的实现。
 
 ```
@@ -529,6 +531,7 @@ Container(
 ![霓虹灯文本](./images/md/tearing.gif)
 
 ## 30. 运动汽车
+
 控制骑车的运动，包括转弯和前进。
 
 ```
@@ -537,14 +540,27 @@ const RunCar(),
 
 ![运动汽车](./images/md/runCar.gif)
 
+## 31. 计算器 （简单工厂模式）
 
-## 31. 计算器
 简单的实现了加减乘除的计算，算法采用"工厂方法"设计模式。
+
 ```
 const Calculator()
 ```
+
 ![计算器](./images/md/calculator.gif)
 
-## 32. 
+## 32. 收银系统 （策略模式）
+
+收银系统，根据单价和数量，按计算方式得到金额。采用策略模式实现算法。
+
+```
+const CashierSystem()
+```
+
+![计算器](./images/md/cashierSystem.gif)
+
+## 33.
+
 
 
