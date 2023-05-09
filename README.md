@@ -560,7 +560,26 @@ const CashierSystem()
 
 ![计算器](./images/md/cashierSystem.gif)
 
-## 33.
+## 33. 穿衣打扮（装饰模式）
+
+穿衣时，进行不同服饰的打扮，方便重用和调整。采用装饰模式。
+相当于链式调用。
+
+```
+Person xc = Person(name: "小菜");
+Sneakers pqx = Sneakers();
+BigTrouser kk = BigTrouser();
+TShirts dtx = TShirts();
+
+pqx.decorate(xc);
+kk.decorate(pqx);
+dtx.decorate(kk);
+dtx.show();
+```
+
+打印内容为 ![计算器](./images/md/decorator.jpg)
+
+## 34.
 
 
 
