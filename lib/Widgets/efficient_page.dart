@@ -10,7 +10,7 @@ class EfficientPage extends StatefulWidget {
   const EfficientPage({Key? key}) : super(key: key);
 
   @override
-  _EfficientPageState createState() => _EfficientPageState();
+  State createState() => _EfficientPageState();
 }
 
 class _EfficientPageState extends State<EfficientPage> {
@@ -22,13 +22,11 @@ class _EfficientPageState extends State<EfficientPage> {
 
   // 页面滚动控制器
   late PageController _ctrl;
-  final List<Widget> colorsWidget =
-      [Colors.red, Colors.yellow, Colors.blue, Colors.green, Colors.orange]
-          .map((e) => Container(
-                decoration:
-                    BoxDecoration(color: e, borderRadius: const BorderRadius.all(Radius.circular(20))),
-              ))
-          .toList();
+  final List<Widget> colorsWidget = [Colors.red, Colors.yellow, Colors.blue, Colors.green, Colors.orange]
+      .map((e) => Container(
+            decoration: BoxDecoration(color: e, borderRadius: const BorderRadius.all(Radius.circular(20))),
+          ))
+      .toList();
 
   Color get startColor => Colors.red;
 
@@ -36,9 +34,7 @@ class _EfficientPageState extends State<EfficientPage> {
 
   // 圆角装饰
   BoxDecoration get boxDecoration => const BoxDecoration(
-      color: Colors.white,
-      borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(40), topRight: Radius.circular(40)));
+      color: Colors.white, borderRadius: BorderRadius.only(topLeft: Radius.circular(40), topRight: Radius.circular(40)));
 
   @override
   void initState() {
@@ -75,9 +71,9 @@ class _EfficientPageState extends State<EfficientPage> {
           _buildTitle(context),
           Expanded(
             child: Container(
-              child: _buildContent(),
               margin: const EdgeInsets.only(left: 8, right: 8),
               decoration: boxDecoration,
+              child: _buildContent(),
             ),
           ),
         ],
@@ -92,8 +88,7 @@ class _EfficientPageState extends State<EfficientPage> {
           valueListenable: factor,
           builder: (context, value, child) {
             return LinearProgressIndicator(
-              valueColor: AlwaysStoppedAnimation(
-                  Color.lerp(startColor, endColor, factor.value)),
+              valueColor: AlwaysStoppedAnimation(Color.lerp(startColor, endColor, factor.value)),
               value: factor.value,
             );
           },
@@ -115,8 +110,7 @@ class _EfficientPageState extends State<EfficientPage> {
           const SizedBox(
             width: 20,
           ),
-          ValueListenableBuilder(
-              valueListenable: page, builder: _buildWithPageChange)
+          ValueListenableBuilder(valueListenable: page, builder: _buildWithPageChange)
         ],
       ),
     );
@@ -139,8 +133,7 @@ class _EfficientPageState extends State<EfficientPage> {
               itemBuilder: (_, index) {
                 return AnimatedBuilder(
                   animation: _ctrl,
-                  builder: (context, child) =>
-                      _buildAnimOfItem(context, child, index),
+                  builder: (context, child) => _buildAnimOfItem(context, child, index),
                   child: Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: colorsWidget[index],

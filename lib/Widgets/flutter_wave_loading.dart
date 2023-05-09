@@ -34,18 +34,16 @@ class FlutterWaveLoading extends StatefulWidget {
       : super(key: key);
 
   @override
-  _FlutterWaveLoadingState createState() => _FlutterWaveLoadingState();
+  State createState() => _FlutterWaveLoadingState();
 }
 
-class _FlutterWaveLoadingState extends State<FlutterWaveLoading>
-    with SingleTickerProviderStateMixin {
+class _FlutterWaveLoadingState extends State<FlutterWaveLoading> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation _animation;
 
   @override
   void initState() {
-    _controller = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 1200))
+    _controller = AnimationController(vsync: this, duration: const Duration(milliseconds: 1200))
       ..addListener(() {
         setState(() {});
       })
@@ -125,8 +123,7 @@ class BezierPainter extends CustomPainter {
             ..strokeWidth = strokeWidth
             ..color = color);
     } else {
-      path.addRRect(RRect.fromRectXY(
-          const Offset(0, 0) & size, borderRadius, borderRadius));
+      path.addRRect(RRect.fromRectXY(const Offset(0, 0) & size, borderRadius, borderRadius));
       canvas.clipPath(path);
       canvas.drawPath(
           path,
@@ -166,18 +163,12 @@ class BezierPainter extends CustomPainter {
   void drawWave(Canvas canvas) {
     _mainPath.moveTo(0, 0);
     _mainPath.relativeLineTo(0, -wrapHeight * progress);
-    _mainPath.relativeQuadraticBezierTo(
-        waveWidth / 2, -waveHeight * 2, waveWidth, 0);
-    _mainPath.relativeQuadraticBezierTo(
-        waveWidth / 2, waveHeight * 2, waveWidth, 0);
-    _mainPath.relativeQuadraticBezierTo(
-        waveWidth / 2, -waveHeight * 2, waveWidth, 0);
-    _mainPath.relativeQuadraticBezierTo(
-        waveWidth / 2, waveHeight * 2, waveWidth, 0);
-    _mainPath.relativeQuadraticBezierTo(
-        waveWidth / 2, -waveHeight * 2, waveWidth, 0);
-    _mainPath.relativeQuadraticBezierTo(
-        waveWidth / 2, waveHeight * 2, waveWidth, 0);
+    _mainPath.relativeQuadraticBezierTo(waveWidth / 2, -waveHeight * 2, waveWidth, 0);
+    _mainPath.relativeQuadraticBezierTo(waveWidth / 2, waveHeight * 2, waveWidth, 0);
+    _mainPath.relativeQuadraticBezierTo(waveWidth / 2, -waveHeight * 2, waveWidth, 0);
+    _mainPath.relativeQuadraticBezierTo(waveWidth / 2, waveHeight * 2, waveWidth, 0);
+    _mainPath.relativeQuadraticBezierTo(waveWidth / 2, -waveHeight * 2, waveWidth, 0);
+    _mainPath.relativeQuadraticBezierTo(waveWidth / 2, waveHeight * 2, waveWidth, 0);
     _mainPath.relativeLineTo(0, wrapHeight);
     _mainPath.relativeLineTo(-waveHeight * 3 * 2.0, 0);
   }

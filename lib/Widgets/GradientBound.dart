@@ -1,4 +1,3 @@
-
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -12,8 +11,7 @@ class GradientBoundDemo extends StatefulWidget {
   }
 }
 
-class _GradientBoundDemoState extends State<GradientBoundDemo>
-    with SingleTickerProviderStateMixin {
+class _GradientBoundDemoState extends State<GradientBoundDemo> with SingleTickerProviderStateMixin {
   late Animation<double> animation;
   late AnimationController controller;
 
@@ -21,10 +19,8 @@ class _GradientBoundDemoState extends State<GradientBoundDemo>
   void initState() {
     super.initState();
 
-    controller =
-        AnimationController(vsync: this, duration: const Duration(seconds: 2));
-    animation = Tween<double>(begin: 0, end: 1.0)
-        .animate(CurvedAnimation(parent: controller, curve: Curves.linear))
+    controller = AnimationController(vsync: this, duration: const Duration(seconds: 2));
+    animation = Tween<double>(begin: 0, end: 1.0).animate(CurvedAnimation(parent: controller, curve: Curves.linear))
       ..addListener(() {
         setState(() {});
       });
@@ -49,8 +45,7 @@ class _GradientBoundDemoState extends State<GradientBoundDemo>
         ),
         child: const Text(
           "流动的渐变",
-          style: TextStyle(
-              color: Colors.yellow, fontSize: 20, fontWeight: FontWeight.bold),
+          style: TextStyle(color: Colors.yellow, fontSize: 20, fontWeight: FontWeight.bold),
         ),
       ),
     );
@@ -62,16 +57,14 @@ class GradientBoundPainter extends CustomPainter {
   final double animation;
 
   GradientBoundPainter(
-      this.colors,
-      this.animation,
-      );
+    this.colors,
+    this.animation,
+  );
 
   @override
   void paint(Canvas canvas, Size size) {
     const rectWidth = 300.0, rectHeight = 200.0;
-    Rect rect = Offset(
-        size.width / 2 - rectWidth / 2, size.height / 2 - rectHeight / 2) &
-    const Size(rectWidth, rectHeight);
+    Rect rect = Offset(size.width / 2 - rectWidth / 2, size.height / 2 - rectHeight / 2) & const Size(rectWidth, rectHeight);
 
     final paint = Paint()
       ..shader = LinearGradient(

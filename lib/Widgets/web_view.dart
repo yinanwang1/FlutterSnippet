@@ -29,8 +29,12 @@ class _FlutterWebViewState extends State<FlutterWebView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(widget.title),),
-      body: WebViewWidget(controller: controller,),
+      appBar: AppBar(
+        title: Text(widget.title),
+      ),
+      body: WebViewWidget(
+        controller: controller,
+      ),
     );
   }
 }

@@ -22,11 +22,10 @@ class AbilityWidget extends StatefulWidget {
   const AbilityWidget({Key? key, required this.ability}) : super(key: key);
 
   @override
-  _AbilityWidgetState createState() => _AbilityWidgetState();
+  State createState() => _AbilityWidgetState();
 }
 
-class _AbilityWidgetState extends State<AbilityWidget>
-    with SingleTickerProviderStateMixin {
+class _AbilityWidgetState extends State<AbilityWidget> with SingleTickerProviderStateMixin {
   var _angle = 0.0;
   late AnimationController controller;
   late Animation<double> animation;
@@ -35,9 +34,7 @@ class _AbilityWidgetState extends State<AbilityWidget>
   void initState() {
     super.initState();
 
-    controller = AnimationController(
-        duration: Duration(milliseconds: widget.ability.duration),
-        vsync: this);
+    controller = AnimationController(duration: Duration(milliseconds: widget.ability.duration), vsync: this);
     var curveTween = CurveTween(curve: const Cubic(0.96, 0.13, 0.1, 1.2));
     var tween = Tween(begin: 0.0, end: 360.0);
     animation = tween.animate(curveTween.animate(controller));
@@ -108,8 +105,7 @@ class Ability {
   final Map<String, double> data;
   final Color color;
 
-  const Ability(
-      this.radius, this.duration, this.imageProvider, this.data, this.color);
+  const Ability(this.radius, this.duration, this.imageProvider, this.data, this.color);
 }
 
 class AbilityPainter extends CustomPainter {
@@ -188,8 +184,7 @@ class AbilityPainter extends CustomPainter {
       canvas.save();
 
       canvas.rotate(360 / data.length * i / 180 * pi + pi);
-      drawText(canvas, data.keys.toList()[i], Offset(-50, r2 - 0.22 * mRadius),
-          fontSize: mRadius * 0.1);
+      drawText(canvas, data.keys.toList()[i], Offset(-50, r2 - 0.22 * mRadius), fontSize: mRadius * 0.1);
 
       canvas.restore();
     }
@@ -208,8 +203,7 @@ class AbilityPainter extends CustomPainter {
       fontSize: fontSize,
       fontWeight: fontWeight,
     ));
-    paragraphBuilder.pushStyle(
-        ui.TextStyle(color: color, textBaseline: TextBaseline.alphabetic));
+    paragraphBuilder.pushStyle(ui.TextStyle(color: color, textBaseline: TextBaseline.alphabetic));
     paragraphBuilder.addText(text);
 
     var paragraph = paragraphBuilder.build();
@@ -223,8 +217,7 @@ class AbilityPainter extends CustomPainter {
     mAbilityPath.moveTo(0, -value[0] / 20 * step);
     for (int i = 1; i < 6; i++) {
       double mark = value[i] / 20;
-      mAbilityPath.lineTo(mark * step * cos(pi / 180 * (-30 + 60 * (i - 1))),
-          mark * step * sin(pi / 180 * (-30 + 60 * (i - 1))));
+      mAbilityPath.lineTo(mark * step * cos(pi / 180 * (-30 + 60 * (i - 1))), mark * step * sin(pi / 180 * (-30 + 60 * (i - 1))));
     }
     mAbilityPath.close();
 

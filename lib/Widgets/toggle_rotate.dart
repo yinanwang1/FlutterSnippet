@@ -25,11 +25,10 @@ class ToggleRotate extends StatefulWidget {
       : super(key: key);
 
   @override
-  _ToggleRotateState createState() => _ToggleRotateState();
+  State createState() => _ToggleRotateState();
 }
 
-class _ToggleRotateState extends State<ToggleRotate>
-    with SingleTickerProviderStateMixin {
+class _ToggleRotateState extends State<ToggleRotate> with SingleTickerProviderStateMixin {
   double _rad = 0;
   bool _rotated = false;
   late AnimationController _controller;

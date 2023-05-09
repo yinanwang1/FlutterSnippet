@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 /// 使用绘制60度的一个小三角来组成一个伞面
@@ -39,7 +38,7 @@ class Umbrella extends StatelessWidget {
     return Column(
       children: [
         ClipPath(
-          clipper: circleClipper(startAngle),
+          clipper: CircleClipper(startAngle),
           child: CustomPaint(
             painter: UmbrellaPainter(
                 startVertex: startVertex,
@@ -51,9 +50,8 @@ class Umbrella extends StatelessWidget {
                 number: number),
           ),
         ),
-
         ClipPath(
-          clipper: circleClipper(startAngle, half: true),
+          clipper: CircleClipper(startAngle, half: true),
           child: CustomPaint(
             painter: UmbrellaPainter(
                 startVertex: startVertex,
@@ -70,21 +68,17 @@ class Umbrella extends StatelessWidget {
   }
 }
 
-class circleClipper extends CustomClipper<Path> {
+class CircleClipper extends CustomClipper<Path> {
   final double startAngle;
   bool half;
 
-
-  circleClipper(this.startAngle, {this.half = false});
+  CircleClipper(this.startAngle, {this.half = false});
 
   @override
   Path getClip(Size size) {
     Path path = Path();
     double angle = startAngle * pi * 180;
-    path.addArc(
-        Rect.fromCenter(center: const Offset(0, 150), width: 400, height: 400),
-        half ? angle + pi : angle,
-        pi);
+    path.addArc(Rect.fromCenter(center: const Offset(0, 150), width: 400, height: 400), half ? angle + pi : angle, pi);
 
     return path;
   }
@@ -94,7 +88,6 @@ class circleClipper extends CustomClipper<Path> {
     return true;
   }
 }
-
 
 class UmbrellaPainter extends CustomPainter {
   Offset startVertex;
@@ -136,8 +129,7 @@ class UmbrellaPainter extends CustomPainter {
     return false;
   }
 
-  List<Offset> getEquilateralTriangleVertexes(Offset startVertex, double length,
-      {double startAngle = 0, bool clockwise = true}) {
+  List<Offset> getEquilateralTriangleVertexes(Offset startVertex, double length, {double startAngle = 0, bool clockwise = true}) {
     double point2X, point2Y, point3X, point3Y;
     point2X = startVertex.dx + length * cos(startAngle);
     point2Y = startVertex.dy - length * sin(startAngle);
@@ -161,8 +153,7 @@ class UmbrellaPainter extends CustomPainter {
       bool filled = true}) {
     assert(length > 0);
     Path trianglePath = Path();
-    List<Offset> vertexes = getEquilateralTriangleVertexes(startVertex, length,
-        clockwise: clockwise, startAngle: startAngle);
+    List<Offset> vertexes = getEquilateralTriangleVertexes(startVertex, length, clockwise: clockwise, startAngle: startAngle);
     trianglePath.moveTo(vertexes[0].dx, vertexes[0].dy);
     for (int i = 1; i < vertexes.length; i++) {
       trianglePath.lineTo(vertexes[i].dx, vertexes[i].dy);

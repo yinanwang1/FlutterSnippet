@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
 
@@ -10,13 +9,11 @@ class Clock extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Stack(
-        children: <Widget>[
-          _ClockPlate(),
-          const _Clock(),
-        ],
-      ),
+    return Stack(
+      children: <Widget>[
+        _ClockPlate(),
+        const _Clock(),
+      ],
     );
   }
 }
@@ -101,9 +98,7 @@ class _ClockPlatePainter extends CustomPainter {
 
   void drawClock(Canvas canvas) {
     // 绘制一个线性渐变的圆
-    var gradient = ui.Gradient.linear(
-        Offset(width / 2, height / 2 - radius),
-        Offset(width / 2, height / 2 + radius),
+    var gradient = ui.Gradient.linear(Offset(width / 2, height / 2 - radius), Offset(width / 2, height / 2 + radius),
         [const Color(0xFFF9F9F9), const Color(0xFF666666)]);
 
     _paint.shader = gradient;
@@ -124,8 +119,7 @@ class _ClockPlatePainter extends CustomPainter {
     );
 
     _paint.shader = radialGradient;
-    canvas.drawCircle(
-        Offset(width / 2, height / 2), radius - 0.3 * unit, _paint);
+    canvas.drawCircle(Offset(width / 2, height / 2), radius - 0.3 * unit, _paint);
 
     // 绘制一层border
     var shadowRadius = radius - 0.8 * unit;
@@ -135,17 +129,13 @@ class _ClockPlatePainter extends CustomPainter {
       ..style = PaintingStyle.stroke
       ..strokeWidth = 0.1 * unit;
 
-    canvas.drawCircle(
-        Offset(width / 2, height / 2), shadowRadius - 0.2 * unit, _paint);
+    canvas.drawCircle(Offset(width / 2, height / 2), shadowRadius - 0.2 * unit, _paint);
 
     // 绘制阴影
     Path path = Path();
     path.moveTo(width / 2, height / 2);
-    var rect = Rect.fromLTRB(
-        width / 2 - shadowRadius,
-        height / 2 - shadowRadius,
-        width / 2 + shadowRadius,
-        height / 2 + shadowRadius);
+    var rect =
+        Rect.fromLTRB(width / 2 - shadowRadius, height / 2 - shadowRadius, width / 2 + shadowRadius, height / 2 + shadowRadius);
     path.addOval(rect);
     canvas.drawShadow(path, const Color.fromARGB(51, 0, 0, 0), 1 * unit, true);
   }
@@ -179,11 +169,7 @@ class _ClockPlatePainter extends CustomPainter {
     var textPainter = TextPainter(
         text: const TextSpan(
           text: "3",
-          style: TextStyle(
-              color: Colors.black,
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              height: 1.0),
+          style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold, height: 1.0),
         ),
         textDirection: TextDirection.rtl,
         textWidthBasis: TextWidthBasis.longestLine,
@@ -191,25 +177,17 @@ class _ClockPlatePainter extends CustomPainter {
       ..layout();
     var offset = 2.25 * unit;
     var points = [
-      Offset(width / 2 + dialCanvasRadius - offset - textPainter.width,
-          height / 2 - textPainter.height / 2),
-      Offset(width / 2 - textPainter.width / 2,
-          height / 2 + dialCanvasRadius - offset - textPainter.height / 2),
-      Offset(width / 2 - dialCanvasRadius + offset,
-          height / 2 - textPainter.height / 2),
-      Offset(width / 2 - textPainter.width,
-          height / 2 - dialCanvasRadius + offset),
+      Offset(width / 2 + dialCanvasRadius - offset - textPainter.width, height / 2 - textPainter.height / 2),
+      Offset(width / 2 - textPainter.width / 2, height / 2 + dialCanvasRadius - offset - textPainter.height / 2),
+      Offset(width / 2 - dialCanvasRadius + offset, height / 2 - textPainter.height / 2),
+      Offset(width / 2 - textPainter.width, height / 2 - dialCanvasRadius + offset),
     ];
 
     for (int i = 0; i < 4; i++) {
       textPainter = TextPainter(
           text: TextSpan(
             text: "${(i + 1) * 3}",
-            style: const TextStyle(
-                color: Colors.black,
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                height: 1.0),
+            style: const TextStyle(color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold, height: 1.0),
           ),
           textDirection: TextDirection.rtl,
           textWidthBasis: TextWidthBasis.longestLine,
@@ -221,8 +199,7 @@ class _ClockPlatePainter extends CustomPainter {
   }
 
   void drawCenter(Canvas canvas) {
-    var radialGradient =
-        ui.Gradient.radial(Offset(width / 2, height / 2), radius, const [
+    var radialGradient = ui.Gradient.radial(Offset(width / 2, height / 2), radius, const [
       Color.fromARGB(255, 200, 200, 200),
       Color.fromARGB(255, 190, 190, 190),
       Color.fromARGB(255, 130, 130, 130),
@@ -292,27 +269,19 @@ class ClockPainter extends CustomPainter {
     double arcWidth = 1.5 * unit;
     double arrowWidth = 2.17 * unit;
     double offset = 0.42 * unit;
-    var rect = Rect.fromLTWH(
-        hourRectRight - offset,
-        0 - hourHalfHeight - offsetTop,
-        arcWidth,
-        hourHalfHeight * 2 + offsetTop * 2);
+    var rect =
+        Rect.fromLTWH(hourRectRight - offset, 0 - hourHalfHeight - offsetTop, arcWidth, hourHalfHeight * 2 + offsetTop * 2);
     hourPath.addArc(rect, pi / 2, pi);
 
     // 时针箭头
-    hourPath.moveTo(
-        hourRectRight - offset + arcWidth / 2, 0 - hourHalfHeight - offsetTop);
+    hourPath.moveTo(hourRectRight - offset + arcWidth / 2, 0 - hourHalfHeight - offsetTop);
     hourPath.lineTo(hourRectRight - offset + arcWidth / 2 + arrowWidth, 0);
-    hourPath.lineTo(
-        hourRectRight - offset + arcWidth / 2, 0 + hourHalfHeight + offsetTop);
+    hourPath.lineTo(hourRectRight - offset + arcWidth / 2, 0 + hourHalfHeight + offsetTop);
     hourPath.close();
 
     canvas.save();
     canvas.translate(width / 2, height / 2);
-    canvas.rotate(2 *
-        pi /
-        60 *
-        ((date.hour - 3 + date.minute / 60 + date.second / 60 / 60) * 5));
+    canvas.rotate(2 * pi / 60 * ((date.hour - 3 + date.minute / 60 + date.second / 60 / 60) * 5));
 
     // 绘制
     _paint.color = const Color(0xFF232425);
@@ -332,8 +301,7 @@ class ClockPainter extends CustomPainter {
     canvas.rotate(2 * pi / 60 * (date.minute - 15 + date.second / 60));
 
     // 绘制分针
-    var rRect = RRect.fromLTRBR(minutesLeft, minutesTop, minutesRight,
-        minutesBottom, Radius.circular(0.42 * unit));
+    var rRect = RRect.fromLTRBR(minutesLeft, minutesTop, minutesRight, minutesBottom, Radius.circular(0.42 * unit));
     _paint.color = const Color(0xFF343536);
     canvas.drawRRect(rRect, _paint);
 
@@ -351,13 +319,11 @@ class ClockPainter extends CustomPainter {
     secondsPath.moveTo(secondsLeft, secondsTop);
 
     // 尾部弧形
-    var rect =
-        Rect.fromLTWH(secondsLeft, secondsTop, 2.5 * unit, hourHalfHeight * 2);
+    var rect = Rect.fromLTWH(secondsLeft, secondsTop, 2.5 * unit, hourHalfHeight * 2);
     secondsPath.addArc(rect, pi / 2, pi);
 
     // 尾部圆角矩形
-    var rRect = RRect.fromLTRBR(secondsLeft + 1 * unit, secondsTop, -2 * unit,
-        secondsBottom, Radius.circular(0.25 * unit));
+    var rRect = RRect.fromLTRBR(secondsLeft + 1 * unit, secondsTop, -2 * unit, secondsBottom, Radius.circular(0.25 * unit));
     secondsPath.addRRect(rRect);
 
     // 指针
@@ -366,8 +332,7 @@ class ClockPainter extends CustomPainter {
     secondsPath.lineTo(-2 * unit, 0.125 * unit);
 
     // 中心圆
-    var ovalRect =
-        Rect.fromLTWH(-0.67 * unit, -0.67 * unit, 1.33 * unit, 1.33 * unit);
+    var ovalRect = Rect.fromLTWH(-0.67 * unit, -0.67 * unit, 1.33 * unit, 1.33 * unit);
     secondsPath.addOval(ovalRect);
 
     canvas.save();

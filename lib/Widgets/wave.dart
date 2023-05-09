@@ -34,7 +34,7 @@ class Wave extends StatefulWidget {
       : super(key: key);
 
   @override
-  _WaveState createState() => _WaveState();
+  State createState() => _WaveState();
 }
 
 class _WaveState extends State<Wave> with SingleTickerProviderStateMixin {
@@ -44,10 +44,7 @@ class _WaveState extends State<Wave> with SingleTickerProviderStateMixin {
   void initState() {
     super.initState();
 
-    spread = AnimationController(
-        vsync: this,
-        duration: Duration(milliseconds: widget.durationMilliseconds))
-      ..repeat();
+    spread = AnimationController(vsync: this, duration: Duration(milliseconds: widget.durationMilliseconds))..repeat();
   }
 
   @override
@@ -66,8 +63,7 @@ class _WaveState extends State<Wave> with SingleTickerProviderStateMixin {
 
     return CustomPaint(
       size: widget.waveSize,
-      painter: ShapePainter(spread, widget.centerColor, widget.waveColor,
-          radius, widget.isWaveUp),
+      painter: ShapePainter(spread, widget.centerColor, widget.waveColor, radius, widget.isWaveUp),
     );
   }
 }
@@ -79,9 +75,7 @@ class ShapePainter extends CustomPainter {
   final double centerRadius;
   final bool isWaveUp;
 
-  ShapePainter(this.spread, this.centerColor, this.waveColor, this.centerRadius,
-      this.isWaveUp)
-      : super(repaint: spread);
+  ShapePainter(this.spread, this.centerColor, this.waveColor, this.centerRadius, this.isWaveUp) : super(repaint: spread);
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -109,8 +103,7 @@ class ShapePainter extends CustomPainter {
 
   void _drawWave(Canvas canvas, Paint paint, Size size) {
     if (0 != spread.value) {
-      double radius =
-          size.width < size.height ? size.width / 2 : size.height / 2;
+      double radius = size.width < size.height ? size.width / 2 : size.height / 2;
       paint.color = waveColor.withOpacity(1 - spread.value);
       canvas.drawCircle(const Offset(0, 0), radius * spread.value, paint);
     }

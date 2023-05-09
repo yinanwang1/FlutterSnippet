@@ -11,7 +11,7 @@ void showRedPacket(BuildContext context, Function? onOpen) {
             onFinish: _removeRedPacket,
             onOpen: onOpen,
           ));
-  Overlay.of(context)?.insert(entry!);
+  Overlay.of(context).insert(entry!);
 }
 
 void _removeRedPacket() {
@@ -55,17 +55,14 @@ class _RedPacketState extends State<RedPacket> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(
-        context,
-        designSize: const Size(360, 690),
-        minTextAdapt: true);
+    ScreenUtil.init(context, designSize: const Size(360, 690), minTextAdapt: true);
 
     return Material(
       color: const Color(0x88000000),
       child: GestureDetector(
         child: ScaleTransition(
-          scale: Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(
-              parent: scaleController, curve: Curves.fastOutSlowIn)),
+          scale:
+              Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(parent: scaleController, curve: Curves.fastOutSlowIn)),
           child: buildRedPacket(),
         ),
         onPanDown: (d) => controller.handleClick(d.globalPosition),
@@ -88,8 +85,7 @@ class _RedPacketState extends State<RedPacket> with TickerProviderStateMixin {
     return AnimatedBuilder(
       animation: controller.translateController,
       builder: (context, child) => Container(
-        padding:
-            EdgeInsets.only(top: 0.3.sh * (1 - controller.translateCtrl.value)),
+        padding: EdgeInsets.only(top: 0.3.sh * (1 - controller.translateCtrl.value)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -160,8 +156,7 @@ class RedPacketPainter extends CustomPainter {
 
   final RedPacketController controller;
 
-  RedPacketPainter({required this.controller})
-      : super(repaint: controller.repaint);
+  RedPacketPainter({required this.controller}) : super(repaint: controller.repaint);
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -197,8 +192,7 @@ class RedPacketPainter extends CustomPainter {
   Path getTopBezierPath() {
     Path bezierPath = Path();
     bezierPath.moveTo(left, topBezierStart);
-    bezierPath.quadraticBezierTo(
-        centerWidth, topBezierEnd, right, topBezierStart);
+    bezierPath.quadraticBezierTo(centerWidth, topBezierEnd, right, topBezierStart);
 
     var pms = bezierPath.computeMetrics();
     var pm = pms.first;
@@ -219,8 +213,7 @@ class RedPacketPainter extends CustomPainter {
     path.lineTo(left, topBezierEnd);
 
     path.addRRect(RRect.fromLTRBAndCorners(left, topBezierEnd, right, bottom,
-        bottomLeft: const Radius.circular(5),
-        bottomRight: const Radius.circular(5)));
+        bottomLeft: const Radius.circular(5), bottomRight: const Radius.circular(5)));
     path.close();
 
     canvas.drawShadow(path, Colors.redAccent, 2, true);
@@ -299,23 +292,16 @@ class RedPacketPainter extends CustomPainter {
     if (controller.showOpenText) {
       TextPainter textPainter = TextPainter(
           text: TextSpan(
-              text: "開",
-              style: TextStyle(
-                  fontSize: 34.sp,
-                  color: Colors.black87,
-                  height: 1.0,
-                  fontWeight: FontWeight.w400)),
+              text: "開", style: TextStyle(fontSize: 34.sp, color: Colors.black87, height: 1.0, fontWeight: FontWeight.w400)),
           textDirection: TextDirection.ltr,
           maxLines: 1,
           textWidthBasis: TextWidthBasis.longestLine,
-          textHeightBehavior: const TextHeightBehavior(
-              applyHeightToFirstAscent: false, applyHeightToLastDescent: false))
+          textHeightBehavior: const TextHeightBehavior(applyHeightToFirstAscent: false, applyHeightToLastDescent: false))
         ..layout();
 
       canvas.save();
       canvas.translate(0.5.sw, goldCenter.dy);
-      textPainter.paint(
-          canvas, Offset(-textPainter.width / 2, -textPainter.height / 2));
+      textPainter.paint(canvas, Offset(-textPainter.width / 2, -textPainter.height / 2));
       canvas.restore();
     }
   }
@@ -350,18 +336,13 @@ class RedPacketController {
       vsync: tickerProviderStateMixin,
       duration: const Duration(milliseconds: 300),
     );
-    translateController = AnimationController(
-        vsync: tickerProviderStateMixin,
-        duration: const Duration(milliseconds: 800));
-    scaleController = AnimationController(
-        vsync: tickerProviderStateMixin,
-        duration: const Duration(milliseconds: 500))
+    translateController = AnimationController(vsync: tickerProviderStateMixin, duration: const Duration(milliseconds: 800));
+    scaleController = AnimationController(vsync: tickerProviderStateMixin, duration: const Duration(milliseconds: 500))
       ..forward();
 
     angleCtrl = angleController.drive(Tween(begin: 1.0, end: 0.0));
     translateCtrl = translateController.drive(Tween(begin: 0.0, end: 1.0));
-    colorCtrl = translateController.drive(
-        ColorTween(begin: Colors.redAccent, end: const Color(0x00FF5252)));
+    colorCtrl = translateController.drive(ColorTween(begin: Colors.redAccent, end: const Color(0x00FF5252)));
 
     translateController.addStatusListener((status) {
       if (status == AnimationStatus.completed) {

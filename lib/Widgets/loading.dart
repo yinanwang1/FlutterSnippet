@@ -1,5 +1,4 @@
 import 'dart:math';
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
@@ -10,15 +9,13 @@ class BallLoading extends StatefulWidget {
   State createState() => _BallLoadingState();
 }
 
-class _BallLoadingState extends State<BallLoading>
-    with SingleTickerProviderStateMixin {
-  late final _controller =
-      AnimationController(vsync: this, duration: const Duration(seconds: 3));
-  late final _animation = Tween<double>(begin: 0, end: 1.0).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeInOutSine))
-    ..addListener(() {
-      setState(() {});
-    });
+class _BallLoadingState extends State<BallLoading> with SingleTickerProviderStateMixin {
+  late final _controller = AnimationController(vsync: this, duration: const Duration(seconds: 3));
+  late final _animation =
+      Tween<double>(begin: 0, end: 1.0).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOutSine))
+        ..addListener(() {
+          setState(() {});
+        });
 
   @override
   void initState() {
@@ -59,14 +56,12 @@ class BallPinter extends CustomPainter {
 
     var innerPath = Path();
     const ballRadius = 4.0;
-    innerPath
-        .addOval(Rect.fromCircle(center: center, radius: radius - ballRadius));
+    innerPath.addOval(Rect.fromCircle(center: center, radius: radius - ballRadius));
     var metrics = innerPath.computeMetrics();
     paint.color = Colors.red;
     paint.style = PaintingStyle.fill;
     for (var pathMetric in metrics) {
-      var tangent =
-          pathMetric.getTangentForOffset(pathMetric.length * animationValue);
+      var tangent = pathMetric.getTangentForOffset(pathMetric.length * animationValue);
       canvas.drawCircle(tangent!.position, ballRadius, paint);
     }
   }
@@ -84,15 +79,13 @@ class DoubleBallLoading extends StatefulWidget {
   State createState() => _DoubleBallLoadingState();
 }
 
-class _DoubleBallLoadingState extends State<DoubleBallLoading>
-    with SingleTickerProviderStateMixin {
-  late final _controller =
-      AnimationController(vsync: this, duration: const Duration(seconds: 2));
-  late final _animation = Tween<double>(begin: 0, end: 1.0).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeInOutSine))
-    ..addListener(() {
-      setState(() {});
-    });
+class _DoubleBallLoadingState extends State<DoubleBallLoading> with SingleTickerProviderStateMixin {
+  late final _controller = AnimationController(vsync: this, duration: const Duration(seconds: 2));
+  late final _animation =
+      Tween<double>(begin: 0, end: 1.0).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOutSine))
+        ..addListener(() {
+          setState(() {});
+        });
 
   @override
   void initState() {
@@ -130,16 +123,14 @@ class DoubleBallPainter extends CustomPainter {
     var center = Offset(size.width / 2, size.height / 2);
 
     // 第一个圆
-    var circlePath = Path()
-      ..addOval(Rect.fromCircle(center: center, radius: radius));
+    var circlePath = Path()..addOval(Rect.fromCircle(center: center, radius: radius));
     paint.style = PaintingStyle.stroke;
     paint.color = Colors.blue[400]!;
     canvas.drawPath(circlePath, paint);
 
     var circleMetrics = circlePath.computeMetrics();
     for (var element in circleMetrics) {
-      var tangent =
-          element.getTangentForOffset(element.length * animationValue);
+      var tangent = element.getTangentForOffset(element.length * animationValue);
       paint.style = PaintingStyle.fill;
       paint.color = Colors.blue;
       canvas.drawCircle(tangent!.position, ballRadius, paint);
@@ -148,13 +139,11 @@ class DoubleBallPainter extends CustomPainter {
     // 第二个圆
     paint.style = PaintingStyle.stroke;
     paint.color = Colors.green[600]!;
-    var ovalPath = Path()
-      ..addOval(Rect.fromCenter(center: center, width: 3 * radius, height: 40));
+    var ovalPath = Path()..addOval(Rect.fromCenter(center: center, width: 3 * radius, height: 40));
     canvas.drawPath(ovalPath, paint);
     var ovalMetrics = ovalPath.computeMetrics();
     for (var element in ovalMetrics) {
-      var tangent = element
-          .getTangentForOffset(element.length * ((animationValue + 0.5) % 1.0));
+      var tangent = element.getTangentForOffset(element.length * ((animationValue + 0.5) % 1.0));
       paint.style = PaintingStyle.fill;
       canvas.drawCircle(tangent!.position, ballRadius, paint);
     }
@@ -173,15 +162,13 @@ class ClockPendulum extends StatefulWidget {
   State createState() => _ClockPendulumState();
 }
 
-class _ClockPendulumState extends State<ClockPendulum>
-    with SingleTickerProviderStateMixin {
-  late final _controller =
-      AnimationController(vsync: this, duration: const Duration(seconds: 2));
-  late final _animation = Tween<double>(begin: 0, end: 1.0).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeInOutQuart))
-    ..addListener(() {
-      setState(() {});
-    });
+class _ClockPendulumState extends State<ClockPendulum> with SingleTickerProviderStateMixin {
+  late final _controller = AnimationController(vsync: this, duration: const Duration(seconds: 2));
+  late final _animation =
+      Tween<double>(begin: 0, end: 1.0).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOutQuart))
+        ..addListener(() {
+          setState(() {});
+        });
 
   @override
   void initState() {
@@ -218,17 +205,14 @@ class ClockPendulumPainter extends CustomPainter {
     const pendulumHeight = 200.0;
 
     // 天花板
-    var ceilCenter =
-        Offset(size.width / 2, size.height / 2 - pendulumHeight / 2);
+    var ceilCenter = Offset(size.width / 2, size.height / 2 - pendulumHeight / 2);
     var ceilPath = Path()
       ..moveTo(ceilCenter.dx - ceilWidth / 2, ceilCenter.dy)
       ..lineTo(ceilCenter.dx + ceilWidth / 2, ceilCenter.dy);
     canvas.drawPath(ceilPath, paint);
 
     // 钟摆
-    var pendulumArcPath = Path()
-      ..addArc(Rect.fromCircle(center: ceilCenter, radius: pendulumHeight),
-          3 * pi / 4, -pi / 2);
+    var pendulumArcPath = Path()..addArc(Rect.fromCircle(center: ceilCenter, radius: pendulumHeight), 3 * pi / 4, -pi / 2);
     paint.color = Colors.white70;
     var metrics = pendulumArcPath.computeMetrics();
     for (var element in metrics) {

@@ -1,5 +1,4 @@
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class BubbleBackgroundChat extends StatelessWidget {
@@ -33,7 +32,7 @@ class BubbleBackgroundChat extends StatelessWidget {
                     style: const TextStyle(fontSize: 18.0, color: Colors.white),
                   ),
                 ),
-                Scrollable.of(context)!),
+                Scrollable.of(context)),
           );
         });
   }

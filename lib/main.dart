@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_snippet/Common/MaterialAppUtil.dart';
+import 'package:flutter_snippet/Widgets/flutter_text.dart';
 
 void main() {
   runApp(ProviderScope(child: createMaterialApp((settings) => MaterialPageRoute(builder: (_) => const MyHomePage()), {})));
@@ -17,32 +18,34 @@ class MyHomePage extends ConsumerStatefulWidget {
 }
 
 class _MyHomePageState extends ConsumerState<MyHomePage> {
-
   @override
   Widget build(BuildContext context) {
-    debugPrint("wyn MediaQuery.of(context).size.height is ${MediaQuery.of(context).size.height}");
-
     return Scaffold(
       appBar: AppBar(
         title: const Text("我的新世界"),
       ),
       body: Center(
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
             const Text("试试看"),
             TextButton(onPressed: () {
-              // ConcreteComponent c = ConcreteComponent();
-              // ConcreteDecoratorA d1 = ConcreteDecoratorA();
-              // ConcreteDecoratorB d2 = ConcreteDecoratorB();
-              //
-              // d1.component = c;
-              // d2.component = d1;
-              // d2.operation();
-              while (true) {
+              Person xc = Person(name: "小菜");
+              Sneakers pqx = Sneakers();
+              BigTrouser kk = BigTrouser();
+              TShirts dtx = TShirts();
 
-              }
+              pqx.decorate(xc);
+              kk.decorate(pqx);
+              dtx.decorate(kk);
+              dtx.show();
 
             }, child: const Text("点我执行")),
+            FlutterText(
+              "我们都是孩子",
+              style: const TextStyle(fontSize: 30, color: Colors.cyan),
+              config: AnimationConfig(curveTween: CurveTween(curve: Curves.ease), repeat: true),
+            ),
           ],
         ),
       ),
@@ -51,54 +54,51 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
 }
 
 // 装饰模式 Demo
+class Person {
+  String? name;
 
-abstract class Component {
-  void operation();
-}
+  Person({this.name});
 
-class ConcreteComponent extends Component {
-  @override
-  void operation() {
-    debugPrint("具体对象的操作。");
+  void show() {
+    debugPrint("装扮的$name");
   }
 }
 
-abstract class Decorator extends Component {
-  Component? _component;
+// 服饰类 Decorator
+class Finery extends Person {
+  Person? _person;
 
-  set component(value) {
-    _component = value;
+  void decorate(Person? person) {
+    _person = person;
   }
 
   @override
-  void operation() {
-    _component?.operation();
+  void show() {
+    _person?.show();
   }
 }
 
-class ConcreteDecoratorA extends Decorator {
-  String? _addedState;
-
+// 具体服饰类 ConcreteDecorator
+class TShirts extends Finery {
   @override
-  void operation() {
-    super.operation();
-
-    _addedState = "New State";
-    debugPrint("具体装饰对象A的操作");
+  void show() {
+    debugPrint("大T恤");
+    super.show();
   }
 }
 
-class ConcreteDecoratorB extends Decorator {
+class BigTrouser extends Finery {
   @override
-  void operation() {
-    super.operation();
-
-    _addedBehavior();
-
-    debugPrint("具体装饰对象B的操作");
+  void show() {
+    debugPrint("垮裤");
+    super.show();
   }
+}
 
-  void _addedBehavior() {
-    // TODO
+class Sneakers extends Finery {
+  @override
+  void show() {
+    debugPrint("破球鞋");
+    super.show();
   }
 }

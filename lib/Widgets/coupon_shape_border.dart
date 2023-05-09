@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CouponShapeBorder extends ShapeBorder {
@@ -9,11 +8,7 @@ class CouponShapeBorder extends ShapeBorder {
   final bool dash;
   final Color color;
 
-  const CouponShapeBorder(
-      {this.holeCount = 6,
-      this.lineRate = 0.718,
-      this.dash = true,
-      this.color = Colors.white});
+  const CouponShapeBorder({this.holeCount = 6, this.lineRate = 0.718, this.dash = true, this.color = Colors.white});
 
   @override
   EdgeInsetsGeometry get dimensions {
@@ -29,11 +24,9 @@ class CouponShapeBorder extends ShapeBorder {
       ..strokeJoin = StrokeJoin.round;
     var d = rect.height / (1 + 2 * holeCount);
     if (dash) {
-      _drawDashLine(canvas, Offset(lineRate * rect.width, d / 2),
-          rect.height / 16, rect.height - 13, paint);
+      _drawDashLine(canvas, Offset(lineRate * rect.width, d / 2), rect.height / 16, rect.height - 13, paint);
     } else {
-      canvas.drawLine(Offset(lineRate * rect.width, d / 2),
-          Offset(lineRate * rect.width, rect.height - d / 2), paint);
+      canvas.drawLine(Offset(lineRate * rect.width, d / 2), Offset(lineRate * rect.width, rect.height - d / 2), paint);
     }
   }
 
@@ -68,23 +61,11 @@ class CouponShapeBorder extends ShapeBorder {
   // Private Methods
 
   void _formHoleBottom(Path path, Rect rect) {
-    path.addArc(
-        Rect.fromCenter(
-            center: Offset(lineRate * rect.width, rect.height),
-            width: 13.0,
-            height: 13.0),
-        pi,
-        pi);
+    path.addArc(Rect.fromCenter(center: Offset(lineRate * rect.width, rect.height), width: 13.0, height: 13.0), pi, pi);
   }
 
   void _formHoleTop(Path path, Rect rect) {
-    path.addArc(
-        Rect.fromCenter(
-            center: Offset(lineRate * rect.width, 0),
-            width: 13.0,
-            height: 13.0),
-        0,
-        pi);
+    path.addArc(Rect.fromCenter(center: Offset(lineRate * rect.width, 0), width: 13.0, height: 13.0), 0, pi);
   }
 
   void _formHoleLeft(Path path, double d) {
@@ -109,8 +90,7 @@ class CouponShapeBorder extends ShapeBorder {
     }
   }
 
-  void _drawDashLine(
-      Canvas canvas, Offset start, double count, double length, Paint paint) {
+  void _drawDashLine(Canvas canvas, Offset start, double count, double length, Paint paint) {
     var step = length / count / 2;
     for (int i = 0; i < count; i++) {
       var offset = start + Offset(0, 2 * step * i);

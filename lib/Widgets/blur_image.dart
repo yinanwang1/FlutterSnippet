@@ -1,10 +1,6 @@
-
-
 import 'dart:async';
-import 'dart:typed_data';
 import 'dart:ui' as ui;
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -17,8 +13,7 @@ class BlurImageDemo extends StatefulWidget {
   }
 }
 
-class _BlurImageDemoState extends State<BlurImageDemo>
-    with SingleTickerProviderStateMixin {
+class _BlurImageDemoState extends State<BlurImageDemo> with SingleTickerProviderStateMixin {
   late ui.Image fillImage;
   var slideValue = 0.0;
   bool isImageLoaded = false;
@@ -59,7 +54,7 @@ class _BlurImageDemoState extends State<BlurImageDemo>
         children: <Widget>[
           CustomPaint(
             painter: BlurImagePainter(bgImage: fillImage, blur: blurValue),
-            child: Container(
+            child: SizedBox(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height,
             ),
@@ -109,7 +104,7 @@ class _BlurImageDemoState extends State<BlurImageDemo>
         ],
       );
     } else {
-      return CircularProgressIndicator();
+      return const CircularProgressIndicator();
     }
   }
 }
@@ -125,16 +120,11 @@ class BlurImagePainter extends CustomPainter {
     var paint = Paint();
 
     if (blur > 0) {
-      paint.imageFilter = ui.ImageFilter.blur(
-          sigmaX: blur, sigmaY: blur, tileMode: TileMode.mirror);
+      paint.imageFilter = ui.ImageFilter.blur(sigmaX: blur, sigmaY: blur, tileMode: TileMode.mirror);
     }
 
     canvas.drawImageRect(
-        bgImage,
-        Rect.fromLTRB(
-            0, 0, bgImage.width.toDouble(), bgImage.height.toDouble()),
-        Offset.zero & size,
-        paint);
+        bgImage, Rect.fromLTRB(0, 0, bgImage.width.toDouble(), bgImage.height.toDouble()), Offset.zero & size, paint);
   }
 
   @override

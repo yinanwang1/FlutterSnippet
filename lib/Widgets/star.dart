@@ -11,17 +11,12 @@ class CustomRating extends StatefulWidget {
   final double score;
   final Function(double) onRating;
 
-  const CustomRating(
-      {this.max = 5,
-      this.star = const Star(),
-      this.score = 0,
-      required this.onRating,
-      Key? key})
+  const CustomRating({this.max = 5, this.star = const Star(), this.score = 0, required this.onRating, Key? key})
       : assert(score <= max),
         super(key: key);
 
   @override
-  _CustomRatingState createState() {
+  State createState() {
     return _CustomRatingState();
   }
 }
@@ -92,9 +87,7 @@ class StarScore extends StatelessWidget {
   final double score;
   final Widget? tail;
 
-  const StarScore(
-      {this.star = const Star(), required this.score, this.tail, Key? key})
-      : super(key: key);
+  const StarScore({this.star = const Star(), required this.score, this.tail, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -157,13 +150,7 @@ class Star {
       this.size = 25,
       this.fat = 0.5});
 
-  Star copyWith(
-      {int? num,
-      double? progress = 0,
-      Color? emptyColor,
-      Color? fillColor,
-      double? size,
-      double? fat}) {
+  Star copyWith({int? num, double? progress = 0, Color? emptyColor, Color? fillColor, double? size, double? fat}) {
     return Star(
         num: num ?? this.num,
         progress: progress ?? this.progress,
@@ -196,8 +183,7 @@ class _StarPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     canvas.translate(_radius, _radius);
     canvas.drawPath(_path, _paint);
-    canvas.clipRect(Rect.fromLTRB(
-        -_radius, -_radius, _radius * 2 * star.progress - _radius, _radius));
+    canvas.clipRect(Rect.fromLTRB(-_radius, -_radius, _radius * 2 * star.progress - _radius, _radius));
     canvas.drawPath(_path, _fillPaint);
   }
 
@@ -213,10 +199,8 @@ class _StarPainter extends CustomPainter {
     double radB = 2 * pi / (num - 1) / 2 - radA / 2 + radA + rotate;
     _path.moveTo(cos(radA) * R + dx, -sin(radA) * R + dy);
     for (int i = 0; i < num; i++) {
-      _path.lineTo(
-          cos(radA + perRad * i) * R + dx, -sin(radA + perRad * i) * R + dy);
-      _path.lineTo(
-          cos(radB + perRad * i) * r + dx, -sin(radB + perRad * i) * r + dy);
+      _path.lineTo(cos(radA + perRad * i) * R + dx, -sin(radA + perRad * i) * R + dy);
+      _path.lineTo(cos(radB + perRad * i) * r + dx, -sin(radB + perRad * i) * r + dy);
     }
     _path.close();
 

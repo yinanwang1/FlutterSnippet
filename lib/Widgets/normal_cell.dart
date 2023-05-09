@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 /// 一行显示左边的图标，标题，和右边的尾部组件
@@ -8,14 +7,7 @@ import 'package:flutter/material.dart';
 
 class NormalCell extends StatelessWidget {
   const NormalCell(
-      {Key? key,
-      this.height = 50,
-      this.leading,
-      this.title,
-      this.middle,
-      this.trailing,
-      this.showBottomLine = true,
-      this.onTap})
+      {Key? key, this.height = 50, this.leading, this.title, this.middle, this.trailing, this.showBottomLine = true, this.onTap})
       : super(key: key);
 
   final double height;
@@ -29,6 +21,7 @@ class NormalCell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      onTap: onTap ?? () {},
       child: Container(
         height: height,
         color: Colors.white,
@@ -75,7 +68,6 @@ class NormalCell extends StatelessWidget {
           ],
         ),
       ),
-      onTap: onTap ?? () {},
     );
   }
 }

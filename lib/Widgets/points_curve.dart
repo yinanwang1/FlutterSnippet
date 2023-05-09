@@ -50,17 +50,17 @@ class PointsCurve extends StatelessWidget {
 
   const PointsCurve(this.points,
       {this.showStraight = true,
-        this.showStraightLine = true,
-        this.showStraightCircle = true,
-        this.showCurve = true,
-        this.radius = 2,
-        this.circleStrokeWidth = 1,
-        this.circleColor = Colors.orange,
-        this.straightLineStrokeWidth = 0.5,
-        this.straightLineColor = Colors.red,
-        this.curveStrokeWidth = 1,
-        this.curveColor = Colors.blue,
-        Key? key})
+      this.showStraightLine = true,
+      this.showStraightCircle = true,
+      this.showCurve = true,
+      this.radius = 2,
+      this.circleStrokeWidth = 1,
+      this.circleColor = Colors.orange,
+      this.straightLineStrokeWidth = 0.5,
+      this.straightLineColor = Colors.red,
+      this.curveStrokeWidth = 1,
+      this.curveColor = Colors.blue,
+      Key? key})
       : super(key: key);
 
   @override
@@ -68,19 +68,8 @@ class PointsCurve extends StatelessWidget {
     return Container(
       color: Colors.white,
       child: CustomPaint(
-        painter: PaperPainter(
-            points,
-            showStraight,
-            showStraightLine,
-            showStraightCircle,
-            showCurve,
-            radius,
-            circleStrokeWidth,
-            circleColor,
-            straightLineStrokeWidth,
-            straightLineColor,
-            curveStrokeWidth,
-            curveColor),
+        painter: PaperPainter(points, showStraight, showStraightLine, showStraightCircle, showCurve, radius, circleStrokeWidth,
+            circleColor, straightLineStrokeWidth, straightLineColor, curveStrokeWidth, curveColor),
       ),
     );
   }
@@ -127,11 +116,20 @@ class PaperPainter extends CustomPainter {
   final Paint _mainPaint = Paint();
   final Path _linePath = Path();
 
-
-  PaperPainter(this.points, this.showStraight, this.showStraightLine,
-      this.showStraightCircle, this.showCurve, this.radius,
-      this.circleStrokeWidth, this.circleColor, this.straightLineStrokeWidth,
-      this.straightLineColor, this.curveStrokeWidth, this.curveColor,);
+  PaperPainter(
+    this.points,
+    this.showStraight,
+    this.showStraightLine,
+    this.showStraightCircle,
+    this.showCurve,
+    this.radius,
+    this.circleStrokeWidth,
+    this.circleColor,
+    this.straightLineStrokeWidth,
+    this.straightLineColor,
+    this.curveStrokeWidth,
+    this.curveColor,
+  );
 
   @override
   void paint(Canvas canvas, Size size) {

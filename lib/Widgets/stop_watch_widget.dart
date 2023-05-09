@@ -37,8 +37,7 @@ class StopWatchWidgetState extends State<StopWatchWidget> {
     int minutes = elapsed.inMinutes % 60;
     int seconds = elapsed.inSeconds % 60;
     int milliseconds = elapsed.inMilliseconds % 1000;
-    durationNotifier.value = Duration(
-        minutes: minutes, seconds: seconds, milliseconds: milliseconds);
+    durationNotifier.value = Duration(minutes: minutes, seconds: seconds, milliseconds: milliseconds);
   }
 
   @override
@@ -59,8 +58,7 @@ class StopWatchWidgetState extends State<StopWatchWidget> {
 }
 
 const double _kScaleWidthRate = 0.4 / 10;
-TextPainter textPainter =
-    TextPainter(textAlign: TextAlign.center, textDirection: TextDirection.ltr);
+TextPainter textPainter = TextPainter(textAlign: TextAlign.center, textDirection: TextDirection.ltr);
 TextStyle commonStyle = const TextStyle(color: Colors.black, fontSize: 25);
 TextStyle highlightStyle = const TextStyle(color: Colors.blue, fontSize: 25);
 
@@ -80,8 +78,7 @@ class StopWatchPaint extends CustomPainter {
 
     canvas.save();
     for (int i = 0; i < 180; i++) {
-      canvas.drawLine(Offset(size.width / 2, 0),
-          Offset(size.width / 2 - scaleLineWidth, 0), scalePainter);
+      canvas.drawLine(Offset(size.width / 2, 0), Offset(size.width / 2 - scaleLineWidth, 0), scalePainter);
 
       canvas.rotate(pi / 180 * 2);
     }
@@ -94,8 +91,7 @@ class StopWatchPaint extends CustomPainter {
     int minutes = duration.inMinutes % 60;
     int seconds = duration.inSeconds % 60;
     int milliseconds = duration.inMilliseconds % 1000;
-    String commonStr =
-        '${minutes.toString().padLeft(2, "0")}:${seconds.toString().padLeft(2, "0")}';
+    String commonStr = '${minutes.toString().padLeft(2, "0")}:${seconds.toString().padLeft(2, "0")}';
     String highlightStr = ".${(milliseconds ~/ 10).toString().padLeft(2, "0")}";
 
     textPainter.text = TextSpan(text: commonStr, style: commonStyle, children: [

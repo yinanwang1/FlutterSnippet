@@ -9,11 +9,7 @@ class Rainbow extends StatelessWidget {
   final Widget? child;
 
   const Rainbow(
-      {this.startPoint = const Offset(0, 50),
-      this.rowHeight = 12,
-      this.size = const Size(300, 300),
-      this.child,
-      Key? key})
+      {this.startPoint = const Offset(0, 50), this.rowHeight = 12, this.size = const Size(300, 300), this.child, Key? key})
       : super(key: key);
 
   @override
@@ -52,8 +48,7 @@ class RainbowPainter extends CustomPainter {
     for (var i = 0; i < 7; i++) {
       Path path = Path();
       double innerWidth = width - i * rowHeight;
-      Rect rect = Rect.fromLTWH(startPoint.dx + i * rowHeight / 2,
-          startPoint.dy + i * rowHeight / 2, innerWidth, innerWidth);
+      Rect rect = Rect.fromLTWH(startPoint.dx + i * rowHeight / 2, startPoint.dy + i * rowHeight / 2, innerWidth, innerWidth);
       path.arcTo(rect, -pi / 6, -2 * pi / 3, true);
       _paint.color = _colors[i];
 

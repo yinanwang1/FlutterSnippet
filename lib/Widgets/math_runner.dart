@@ -12,35 +12,33 @@ typedef FunNum1 = Function(double t);
 class MathRunner extends StatefulWidget {
   // 子组件
   final Widget child;
+
   // x函数
   final FunNum1 f;
+
   // y函数
   final FunNum1 g;
+
   // 是否倒转
   final bool reverse;
+
   // 分几部分
   final int parts;
+
   // 第几部分
   final int index;
 
   const MathRunner(
-      {Key? key,
-        required this.child,
-        required this.f,
-        required this.g,
-        this.parts = 1,
-        this.index = 0,
-        this.reverse = true})
+      {Key? key, required this.child, required this.f, required this.g, this.parts = 1, this.index = 0, this.reverse = true})
       : super(key: key);
 
   @override
-  _MathRunnerState createState() {
+  State createState() {
     return _MathRunnerState();
   }
 }
 
-class _MathRunnerState extends State<MathRunner>
-    with SingleTickerProviderStateMixin {
+class _MathRunnerState extends State<MathRunner> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation animationX;
   double _x = -1.0;
@@ -48,8 +46,7 @@ class _MathRunnerState extends State<MathRunner>
 
   @override
   void initState() {
-    _controller =
-        AnimationController(vsync: this, duration: const Duration(seconds: 3));
+    _controller = AnimationController(vsync: this, duration: const Duration(seconds: 3));
     animationX = Tween(begin: -1.0, end: 1.0).animate(_controller)
       ..addListener(() {
         setState(() {

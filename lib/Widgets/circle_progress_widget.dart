@@ -11,7 +11,7 @@ class CircleProgressWidget extends StatefulWidget {
   const CircleProgressWidget(this.progress, {Key? key}) : super(key: key);
 
   @override
-  _CircleProgressWidgetState createState() => _CircleProgressWidgetState();
+  State createState() => _CircleProgressWidgetState();
 }
 
 class _CircleProgressWidgetState extends State<CircleProgressWidget> {
@@ -28,8 +28,7 @@ class _CircleProgressWidgetState extends State<CircleProgressWidget> {
     String txt = "${(100 * widget.progress.value).toStringAsFixed(1)} %";
     var text = Text(
       widget.progress.value >= 1.0 ? widget.progress.completeText : txt,
-      style: widget.progress.style ??
-          TextStyle(fontSize: widget.progress.radius / 4),
+      style: widget.progress.style ?? TextStyle(fontSize: widget.progress.radius / 4),
     );
 
     return Stack(
@@ -106,8 +105,7 @@ class ProgressPainter extends CustomPainter {
 
     double sweepAngle = _progress.value * 360;
     debugPrint("sweepAngle is $sweepAngle");
-    canvas.drawArc(Rect.fromLTRB(0, 0, _radius * 2, _radius * 2),
-        -90 / 180 * pi, sweepAngle / 180 * pi, false, _paint);
+    canvas.drawArc(Rect.fromLTRB(0, 0, _radius * 2, _radius * 2), -90 / 180 * pi, sweepAngle / 180 * pi, false, _paint);
 
     canvas.restore();
   }
@@ -147,13 +145,10 @@ class ProgressPainter extends CustomPainter {
 
       _paint
         ..strokeWidth = _progress.strokeWidth / 2
-        ..color = i / num > _progress.value
-            ? _progress.backgroundColor
-            : _progress.color
+        ..color = i / num > _progress.value ? _progress.backgroundColor : _progress.color
         ..strokeCap = StrokeCap.round;
 
-      canvas.drawLine(
-          Offset(0, _radius * 3 / 4), Offset(0, _radius * 4 / 5), _paint);
+      canvas.drawLine(Offset(0, _radius * 3 / 4), Offset(0, _radius * 4 / 5), _paint);
 
       canvas.restore();
     }

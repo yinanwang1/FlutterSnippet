@@ -1,16 +1,11 @@
-
-
 import 'dart:math';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 
 /// 绘制n多边形
 /// 传入多边形的个数n，外半径R，内半径r，填充的颜色color
 
 class NStarView extends StatelessWidget {
-
   final int num;
   final double R;
   final double r;
@@ -23,13 +18,14 @@ class NStarView extends StatelessWidget {
     return SizedBox(
       width: 2 * R,
       height: 2 * R,
-      child: CustomPaint(painter: NStarPainter(num, R, r, color),),
+      child: CustomPaint(
+        painter: NStarPainter(num, R, r, color),
+      ),
     );
   }
 }
 
 class NStarPainter extends CustomPainter {
-
   final int num;
   final double R;
   final double r;
@@ -60,7 +56,7 @@ class NStarPainter extends CustomPainter {
     double degB = 360 / (num - 1) / 2 - degA / 2 + degA;
 
     path.moveTo(cos(_rad(degA)) * R, (-sin(_rad(degA)) * R));
-    for(int i = 0; i < num; i++) {
+    for (int i = 0; i < num; i++) {
       path.lineTo(cos(_rad(degA + perDeg * i)) * R, -sin(_rad(degA + perDeg * i)) * R);
       path.lineTo(cos(_rad(degB + perDeg * i)) * r, -sin(_rad(degB + perDeg * i)) * r);
     }

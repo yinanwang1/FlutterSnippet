@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 /// 抖动的文字。
 /// 每一个字都可以抖动。
 
-class FlutterText extends Text {
+class FlutterText extends StatelessWidget {
   final String content;
   final AnimationConfig? config;
 
@@ -37,7 +37,7 @@ class FlutterText extends Text {
     this.maxLines,
     this.semanticsLabel,
     this.textWidthBasis,
-  }) : super(content, key: key);
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -80,13 +80,12 @@ class FlutterLayout extends StatefulWidget {
   const FlutterLayout(this.child, this.config, {Key? key}) : super(key: key);
 
   @override
-  _FlutterLayoutState createState() {
+  State createState() {
     return _FlutterLayoutState();
   }
 }
 
-class _FlutterLayoutState extends State<FlutterLayout>
-    with SingleTickerProviderStateMixin {
+class _FlutterLayoutState extends State<FlutterLayout> with SingleTickerProviderStateMixin {
   late Animation<double> _animation;
   late AnimationController _controller;
 
@@ -106,13 +105,11 @@ class _FlutterLayoutState extends State<FlutterLayout>
       TweenSequenceItem<double>(tween: Tween(begin: dx, end: 0), weight: 4),
     ]);
     var curveTween = widget.config.curveTween;
-    _animation = sequence.animate(
-        null == curveTween ? _controller : curveTween.animate(_controller))
+    _animation = sequence.animate(null == curveTween ? _controller : curveTween.animate(_controller))
       ..addStatusListener((status) {
-        print("status is $status");
+        debugPrint("status is $status");
 
         if (status == AnimationStatus.completed) {
-          print("wyn 111");
           _controller.forward();
         }
       });
@@ -121,7 +118,6 @@ class _FlutterLayoutState extends State<FlutterLayout>
     } else {
       _controller.forward();
     }
-
   }
 
   @override
@@ -167,12 +163,7 @@ class AnimationConfig {
   /// 循环播放动画，默认为false
   bool repeat;
 
-  AnimationConfig(
-      {this.duration = 2000,
-      this.offset = 1,
-      this.mode = RockMode.leftRight,
-      this.curveTween,
-      this.repeat = false});
+  AnimationConfig({this.duration = 2000, this.offset = 1, this.mode = RockMode.leftRight, this.curveTween, this.repeat = false});
 }
 
 class FlutterAnimation extends StatelessWidget {
@@ -180,8 +171,7 @@ class FlutterAnimation extends StatelessWidget {
   final Animation<double> _animation;
   final AnimationConfig _config;
 
-  const FlutterAnimation(this._child, this._animation, this._config, {Key? key})
-      : super(key: key);
+  const FlutterAnimation(this._child, this._animation, this._config, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -202,19 +192,17 @@ class FlutterAnimation extends StatelessWidget {
   }
 
   Matrix4 _formTransform(AnimationConfig config) {
-    Random _random = Random();
+    Random random = Random();
     Matrix4 result;
     switch (config.mode) {
       case RockMode.random:
         result = Matrix4.rotationZ(_animation.value * pi / 180);
         break;
       case RockMode.upDown:
-        result = Matrix4.translationValues(
-            0, _animation.value * pow(-1, _random.nextInt(20)), 0);
+        result = Matrix4.translationValues(0, _animation.value * pow(-1, random.nextInt(20)), 0);
         break;
       case RockMode.leftRight:
-        result = Matrix4.translationValues(
-            _animation.value * pow(-1, _random.nextInt(20)), 0, 0);
+        result = Matrix4.translationValues(_animation.value * pow(-1, random.nextInt(20)), 0, 0);
         break;
       case RockMode.lean:
         result = Matrix4.rotationZ(_animation.value * pi / 180);

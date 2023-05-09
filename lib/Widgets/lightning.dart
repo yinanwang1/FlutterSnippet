@@ -7,11 +7,10 @@ class Lightning extends StatefulWidget {
   const Lightning({Key? key}) : super(key: key);
 
   @override
-  _LightningState createState() => _LightningState();
+  State createState() => _LightningState();
 }
 
-class _LightningState extends State<Lightning>
-    with SingleTickerProviderStateMixin {
+class _LightningState extends State<Lightning> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
   static const int durationMilliseconds = 1000;
@@ -19,11 +18,8 @@ class _LightningState extends State<Lightning>
 
   @override
   void initState() {
-    _controller = AnimationController(
-        vsync: this,
-        duration: const Duration(milliseconds: durationMilliseconds));
-    _animation = Tween<double>(begin: 0.0, end: 1.0).animate(
-        CurvedAnimation(parent: _controller, curve: Curves.easeOutCubic))
+    _controller = AnimationController(vsync: this, duration: const Duration(milliseconds: durationMilliseconds));
+    _animation = Tween<double>(begin: 0.0, end: 1.0).animate(CurvedAnimation(parent: _controller, curve: Curves.easeOutCubic))
       ..addListener(() {
         setState(() {
           debugPrint("");
@@ -38,8 +34,7 @@ class _LightningState extends State<Lightning>
         }
       });
 
-    Timer.periodic(const Duration(milliseconds: durationMilliseconds * 2),
-        (timer) {
+    Timer.periodic(const Duration(milliseconds: durationMilliseconds * 2), (timer) {
       _controller.forward();
       setState(() {
         pointsList.clear();
@@ -49,11 +44,6 @@ class _LightningState extends State<Lightning>
     });
 
     super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
   }
 
   @override
@@ -128,17 +118,14 @@ class _LightningState extends State<Lightning>
   }
 
   Offset _createStart() {
-    return Offset(
-        random.nextDouble() * windowSize.width, -random.nextDouble() * 20);
+    return Offset(random.nextDouble() * windowSize.width, -random.nextDouble() * 20);
   }
 
   Offset _createEnd() {
-    return Offset(random.nextDouble() * windowSize.width,
-        windowSize.height + random.nextDouble() * 20);
+    return Offset(random.nextDouble() * windowSize.width, windowSize.height + random.nextDouble() * 20);
   }
 
-  void drawLightning(
-      double x1, double y1, double x2, double y2, double displace) {
+  void drawLightning(double x1, double y1, double x2, double y2, double displace) {
     if (displace < curDetail) {
       pointsList.add(Offset(x1, y1));
       pointsList.add(Offset(x2, y2));
