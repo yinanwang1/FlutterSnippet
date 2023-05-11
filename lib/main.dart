@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_snippet/Common/MaterialAppUtil.dart';
+import 'package:flutter_snippet/DesignMode/lei_feng.dart';
 import 'package:flutter_snippet/DesignMode/person.dart';
-import 'package:flutter_snippet/Widgets/flutter_text.dart';
+import 'package:flutter_snippet/DesignMode/proxy.dart';
 
 void main() {
   runApp(ProviderScope(child: createMaterialApp((settings) => MaterialPageRoute(builder: (_) => const MyHomePage()), {})));
@@ -30,15 +31,13 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
             const Text("试试看"),
             TextButton(
                 onPressed: () {
-                  Person xc = Person(name: "小菜");
-                  Sneakers pqx = Sneakers();
-                  BigTrouser kk = BigTrouser();
-                  TShirts dtx = TShirts();
-
-                  pqx.decorate(xc);
-                  kk.decorate(pqx);
-                  dtx.decorate(kk);
-                  dtx.show();
+                  IFactory factory = UndergraduateFactory();
+                  LeiFeng studentA = factory.createLeiFeng();
+                  studentA.buyRice();
+                  LeiFeng studentB = factory.createLeiFeng();
+                  studentB.sweep();
+                  LeiFeng studentC = factory.createLeiFeng();
+                  studentC.wash();
                 },
                 child: const Text("点我执行")),
           ],

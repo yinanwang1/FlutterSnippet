@@ -577,9 +577,37 @@ dtx.decorate(kk);
 dtx.show();
 ```
 
-打印内容为 ![计算器](./images/md/decorator.jpg)
+打印内容为 ![穿衣打扮](./images/md/decorator.jpg)
 
-## 34.
+## 34. 代送花(代理模式)
 
+Pursuit请别人Proxy帮忙去送花追求SchoolGirl。此时SchoolGirl不认识Pursuit，由Proxy来代理Pursuit。
+使用：使用第三方库时，做一个封装。比较项目直接依赖第三方库。当需要更换第三方库时，可以不修改项目代码。
+
+```
+SchoolGirl jiaoJiao = SchoolGirl("李娇娇");
+Proxy daiLi = Proxy(jiaoJiao);
+daiLi.giveDolls();
+daiLi.giveFlowers();
+daiLi.giveChocolate();
+```
+
+打印内容为 ![代送花](./images/md/proxy.jpg)
+
+## 35. 雷锋(工厂方法模式)
+
+为每一个产品创建一个工厂方法。在使用的时候，调用工厂方法创建实例，使用实例。
+
+```
+IFactory factory = UndergraduateFactory();
+LeiFeng studentA = factory.createLeiFeng();
+studentA.buyRice();
+LeiFeng studentB = factory.createLeiFeng();
+studentB.sweep();
+LeiFeng studentC = factory.createLeiFeng();
+studentC.wash();
+```
+
+打印内容为 ![雷锋](./images/md/leiFeng.jpg)
 
 
