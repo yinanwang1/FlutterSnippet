@@ -1,6 +1,10 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_snippet/Common/MaterialAppUtil.dart';
+import 'package:flutter_snippet/Common/my_colors.dart';
+import 'package:flutter_snippet/Common/paging_list.dart';
 import 'package:flutter_snippet/DesignMode/lei_feng.dart';
 import 'package:flutter_snippet/DesignMode/person.dart';
 import 'package:flutter_snippet/DesignMode/proxy.dart';
@@ -31,13 +35,7 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
             const Text("试试看"),
             TextButton(
                 onPressed: () {
-                  IFactory factory = UndergraduateFactory();
-                  LeiFeng studentA = factory.createLeiFeng();
-                  studentA.buyRice();
-                  LeiFeng studentB = factory.createLeiFeng();
-                  studentB.sweep();
-                  LeiFeng studentC = factory.createLeiFeng();
-                  studentC.wash();
+                  Navigator.of(context).push(MaterialPageRoute(builder: (_) => const MyList()));
                 },
                 child: const Text("点我执行")),
           ],
@@ -47,3 +45,41 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
   }
 }
 
+class MyList extends PagingListWidget {
+  const MyList({super.key});
+
+  @override
+  PagingListWidgetState<PagingListWidget, dynamic> createState() => _MyListState();
+}
+
+class _MyListState extends PagingListWidgetState<MyList, String> {
+  var random = Random();
+
+  @override
+  Future<void> fetchData() async {
+    return Future.delayed(const Duration(seconds: 3), () {
+      super.total = 100000;
+      super.dataList.addAll(List.generate(super.pageSize, (index) => "测试下 ${random.nextInt(10000000)}"));
+
+      setState(() {
+        super.showLoadingMore = false;
+        super.hasInitialed = true;
+      });
+    });
+  }
+
+  @override
+  Widget listItem(int index) {
+    return Container(
+      color: MyColors.randomColor(),
+      height: 44,
+      padding: const EdgeInsets.only(top: 8, left: 8),
+      child: Text(super.dataList[index], style: TextStyle(color: MyColors.randomColor(), fontSize: 16),),
+    );
+  }
+
+  @override
+  String? navigationTitle() {
+    return "测试分页列表";
+  }
+}

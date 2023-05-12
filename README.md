@@ -610,4 +610,53 @@ studentC.wash();
 
 打印内容为 ![雷锋](./images/md/leiFeng.jpg)
 
+## 36. 分页列表
 
+列表页面，（1）开始时的加载。（2）下拉刷新（3）上拉加载。将通用的功能提取成一个虚类。
+使用时，只要实例化虚类并实现虚方法。一个分页列表就完成了。
+
+```
+
+class MyList extends PagingListWidget {
+  const MyList({super.key});
+
+  @override
+  PagingListWidgetState<PagingListWidget, dynamic> createState() => _MyListState();
+}
+
+class _MyListState extends PagingListWidgetState<MyList, String> {
+  var random = Random();
+
+  @override
+  Future<void> fetchData() async {
+    return Future.delayed(const Duration(seconds: 3), () {
+      super.total = 100000;
+      super.dataList.addAll(List.generate(super.pageSize, (index) => "测试下 ${random.nextInt(10000000)}"));
+
+      setState(() {
+        super.showLoadingMore = false;
+        super.hasInitialed = true;
+      });
+    });
+  }
+
+  @override
+  Widget listItem(int index) {
+    return Container(
+      color: MyColors.randomColor(),
+      height: 44,
+      padding: const EdgeInsets.only(top: 8, left: 8),
+      child: Text(super.dataList[index], style: TextStyle(color: MyColors.randomColor(), fontSize: 16),),
+    );
+  }
+
+  @override
+  String? navigationTitle() {
+    return "测试分页列表";
+  }
+}
+```
+
+打印内容为 ![分页列表](./images/md/pagingList.gif)
+
+## 37.
