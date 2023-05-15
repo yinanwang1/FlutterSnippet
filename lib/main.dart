@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -5,9 +6,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_snippet/Common/MaterialAppUtil.dart';
 import 'package:flutter_snippet/Common/my_colors.dart';
 import 'package:flutter_snippet/Common/paging_list.dart';
-import 'package:flutter_snippet/DesignMode/lei_feng.dart';
-import 'package:flutter_snippet/DesignMode/person.dart';
-import 'package:flutter_snippet/DesignMode/proxy.dart';
 
 void main() {
   runApp(ProviderScope(child: createMaterialApp((settings) => MaterialPageRoute(builder: (_) => const MyHomePage()), {})));
@@ -22,6 +20,14 @@ class MyHomePage extends ConsumerStatefulWidget {
 }
 
 class _MyHomePageState extends ConsumerState<MyHomePage> {
+  final streamController = StreamController(
+    onPause: () => debugPrint("Paused"),
+    onResume: () => debugPrint("Resumed"),
+    onCancel: () => debugPrint("Cancelled"),
+    onListen: () => debugPrint("Listens"),
+  );
+  final stream = Stream<int>.periodic(const Duration(milliseconds: 200), (count) => count * count).take(4);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,51 +41,43 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
             const Text("试试看"),
             TextButton(
                 onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (_) => const MyList()));
+                  debugPrint("wyn streamController.stream is ${streamController.stream.hashCode}");
+
+                  streamController.stream.listen((event) {
+                    debugPrint("Event: $event");
+                  }, onDone: () => debugPrint("Done"), onError: (error) => debugPrint("error is $error"));
+                  //
+                  // streamController.stream.listen((event) {
+                  //   debugPrint("2Event: $event");
+                  // }, onDone: () => debugPrint("2Done"), onError: (error) => debugPrint("2error is $error"));
+                },
+                child: const Text("监听起来")),
+            const Padding(padding: EdgeInsets.only(top: 10)),
+            TextButton(
+                onPressed: () {
+                  // _addStreamTest();
+                  // streamController.add(9);
+                  streamController.addStream(Stream.value(100));
+
+                  debugPrint("wyn 222 streamController.stream is ${streamController.stream.hashCode}");
+
                 },
                 child: const Text("点我执行")),
+            const Padding(padding: EdgeInsets.only(top: 10)),
+            TextButton(
+                onPressed: () {
+                  streamController.close();
+                },
+                child: const Text("取消监听")),
           ],
         ),
       ),
     );
   }
-}
 
-class MyList extends PagingListWidget {
-  const MyList({super.key});
+  void _addStreamTest() async {
+    // streamController.addStream(stream);
 
-  @override
-  PagingListWidgetState<PagingListWidget, dynamic> createState() => _MyListState();
-}
-
-class _MyListState extends PagingListWidgetState<MyList, String> {
-  var random = Random();
-
-  @override
-  Future<void> fetchData() async {
-    return Future.delayed(const Duration(seconds: 3), () {
-      super.total = 100000;
-      super.dataList.addAll(List.generate(super.pageSize, (index) => "测试下 ${random.nextInt(10000000)}"));
-
-      setState(() {
-        super.showLoadingMore = false;
-        super.hasInitialed = true;
-      });
-    });
-  }
-
-  @override
-  Widget listItem(int index) {
-    return Container(
-      color: MyColors.randomColor(),
-      height: 44,
-      padding: const EdgeInsets.only(top: 8, left: 8),
-      child: Text(super.dataList[index], style: TextStyle(color: MyColors.randomColor(), fontSize: 16),),
-    );
-  }
-
-  @override
-  String? navigationTitle() {
-    return "测试分页列表";
+    streamController.addStream(Stream.error(Exception("Issue 101")));
   }
 }

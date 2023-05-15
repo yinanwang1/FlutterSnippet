@@ -87,7 +87,7 @@ Navigator.of(context).push(
 
 封装了一个动画，传入x和y的函数，使组件按函数动起来。 使用示例：
 
-```
+```dart
 Stack(
         alignment: Alignment.center,
         children: <Widget>[
