@@ -50,6 +50,7 @@ abstract class PagingListWidgetState<T extends PagingListWidget, S> extends Stat
   @override
   void dispose() {
     _disposed = true;
+    _scrollController.dispose();
 
     super.dispose();
   }
