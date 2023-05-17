@@ -61,10 +61,6 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
 
                   debugPrint("wyn 222 streamController.stream is ${streamController.stream.hashCode}");
 
-                  var (a, b) = _testRecords();
-                  debugPrint("a is $a, b is $b");
-
-
                 },
                 child: const Text("点我执行")),
             const Padding(padding: EdgeInsets.only(top: 10)),
@@ -85,9 +81,6 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
     streamController.addStream(Stream.error(Exception("Issue 101")));
   }
 
-  (int, int) _testRecords() {
-    return (5, 6);
-  }
 
 
 }
