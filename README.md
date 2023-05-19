@@ -659,4 +659,16 @@ class _MyListState extends PagingListWidgetState<MyList, String> {
 
 打印内容为 ![分页列表](./images/md/pagingList.gif)
 
-## 37.
+## 37. 建造者(建造者模式)
+
+创建一个PersonBuilder抽象了所有的操作，新创建类时继承PersonBuilder则完成了所有内容编写。
+建造者PersonDirector则只需要添加一个PersonBuilder的子类，并规范好操作。
+
+```
+const BuilderWidget();
+```
+
+绘制瘦子 ![瘦子](./images/md/thin.png)
+绘制胖子 ![胖子](./images/md/fat.png)
+
+## 38.

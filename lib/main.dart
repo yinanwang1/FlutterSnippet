@@ -23,17 +23,11 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
       appBar: AppBar(
         title: const Text("我的新世界"),
       ),
-      body: Center(
+      body: const Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Text("试试看"),
-            TextButton(
-                onPressed: () {
-                  // TODO
-                },
-                child: const Text("取消监听")),
-            const BuilderWidget(),
+            BuilderWidget(),
           ],
         ),
       ),

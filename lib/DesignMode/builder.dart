@@ -24,39 +24,85 @@ abstract class PersonBuilder {
   void buildLegRight();
 }
 
+// 瘦子
 class PersonThinBuilder extends PersonBuilder {
   PersonThinBuilder(super.paint, super.path);
 
   @override
   void buildArmLeft() {
-    path.moveTo(60, 50);
-    path.lineTo(40, 100);
+    path.moveTo(-10, 60);
+    path.relativeLineTo(-100, 100);
+    path.relativeLineTo(0, 10);
+    path.relativeLineTo(100, -100);
   }
 
   @override
   void buildArmRight() {
-    path.moveTo(70, 50);
-    path.lineTo(90, 100);
+    path.moveTo(10, 60);
+    path.relativeLineTo(100, 100);
+    path.relativeLineTo(0, 10);
+    path.relativeLineTo(-100, -100);
   }
 
   @override
   void buildBody() {
-    path.addOval(const Rect.fromLTRB(60, 50, 10, 50));
+    path.addOval(const Rect.fromLTWH(-15, 50, 30, 150));
   }
 
   @override
   void buildHead() {
-    path.addOval(const Rect.fromLTRB(50, 20, 30, 30));
+    path.addOval(const Rect.fromLTWH(-25, 10, 50, 50));
   }
 
   @override
   void buildLegLeft() {
-    path.addOval(const Rect.fromLTRB(60, 100, 45, 150));
+    path.addOval(const Rect.fromLTWH(-15, 190, 10, 150));
   }
 
   @override
   void buildLegRight() {
-    path.addOval(const Rect.fromLTRB(70, 100, 85, 150));
+    path.addOval(const Rect.fromLTWH(5, 190, 10, 150));
+  }
+}
+
+// 瘦子
+class PersonFatBuilder extends PersonBuilder {
+  PersonFatBuilder(super.paint, super.path);
+
+  @override
+  void buildArmLeft() {
+    path.moveTo(-30, 50);
+    path.relativeLineTo(-100, 100);
+    path.relativeLineTo(0, 10);
+    path.relativeLineTo(100, -100);
+  }
+
+  @override
+  void buildArmRight() {
+    path.moveTo(30, 50);
+    path.relativeLineTo(100, 100);
+    path.relativeLineTo(0, 10);
+    path.relativeLineTo(-100, -100);
+  }
+
+  @override
+  void buildBody() {
+    path.addOval(const Rect.fromLTWH(-50, 50, 100, 150));
+  }
+
+  @override
+  void buildHead() {
+    path.addOval(const Rect.fromLTWH(-25, 10, 50, 50));
+  }
+
+  @override
+  void buildLegLeft() {
+    path.addOval(const Rect.fromLTWH(-35, 190, 25, 150));
+  }
+
+  @override
+  void buildLegRight() {
+    path.addOval(const Rect.fromLTWH(12, 190, 25, 150));
   }
 }
 
@@ -75,6 +121,8 @@ class PersonDirector {
   }
 }
 
+// 绘制人
+
 class BuilderWidget extends StatelessWidget {
   const BuilderWidget({super.key});
 
@@ -85,15 +133,14 @@ class BuilderWidget extends StatelessWidget {
       ..style = PaintingStyle.fill
       ..color = Colors.redAccent;
     final Path path = Path();
-    PersonThinBuilder personThinBuilder = PersonThinBuilder(paint, path);
-    PersonDirector personDirector = PersonDirector(personThinBuilder);
+    var builder = PersonFatBuilder(paint, path);
+    PersonDirector personDirector = PersonDirector(builder);
     personDirector.createPerson();
 
     return Container(
-      width: MediaQuery.of(context).size.width,
       height: 300,
-      alignment: Alignment.center,
-      color: Colors.green,
+      width: MediaQuery.of(context).size.width,
+      alignment: Alignment.topCenter,
       child: CustomPaint(
         painter: BuilderCanvas(paint, path),
       ),
