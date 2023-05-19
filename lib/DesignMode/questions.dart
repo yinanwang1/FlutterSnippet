@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
+// 模板方法模式
+
 abstract class TestPaper {
   void testQuestion1() {
     debugPrint("问题1");

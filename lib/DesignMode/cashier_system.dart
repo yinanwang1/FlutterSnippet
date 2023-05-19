@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_snippet/Common/my_colors.dart';
 
+// 策略模式
+
 class CashierSystem extends StatefulWidget {
   const CashierSystem({Key? key}) : super(key: key);
 

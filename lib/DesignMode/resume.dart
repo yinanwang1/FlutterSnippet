@@ -1,3 +1,6 @@
+
+// 原型模式
+
 class Resume {
   String? id;
   String? name;

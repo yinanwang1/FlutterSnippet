@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
+// 代理模式
+
 abstract class IGiveGift {
   void giveDolls();
 
