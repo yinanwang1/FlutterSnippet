@@ -671,4 +671,25 @@ const BuilderWidget();
 绘制瘦子 ![瘦子](./images/md/thin.png)
 绘制胖子 ![胖子](./images/md/fat.png)
 
-## 38.
+## 38. 老板回来了（观察者模式）
+创建一个observer抽象对象，实例化同事1和同事2。创建一个Subject抽象对象，实例化boss。
+boss可以绑定同事1和同事2.那么老板回来了，触发通知。
+
+```
+TextButton(onPressed: (){
+    var boss = Boss();
+    var colleague1 = StockObserver("围观眼", boss);
+    var colleague2 = NBAObserver("以观察", boss);
+    
+    boss.attach(colleague1);
+    boss.attach(colleague2);
+    
+    boss.subjectState = "老板回来了";
+    boss.notify();
+
+}, child: const Text("测试下"));
+```
+观察者 ![观察者](./images/md/observer.jpg)
+
+
+## 39. 

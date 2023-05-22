@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_snippet/Common/MaterialAppUtil.dart';
+import 'package:flutter_snippet/DesignMode/observer.dart';
 
 import 'DesignMode/builder.dart';
 
@@ -23,11 +24,22 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
       appBar: AppBar(
         title: const Text("我的新世界"),
       ),
-      body: const Center(
+      body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            BuilderWidget(),
+            TextButton(onPressed: (){
+              var boss = Boss();
+              var colleague1 = StockObserver("围观眼", boss);
+              var colleague2 = NBAObserver("以观察", boss);
+
+              boss.attach(colleague1);
+              boss.attach(colleague2);
+
+              boss.subjectState = "老板回来了";
+              boss.notify();
+
+            }, child: const Text("测试下"))
           ],
         ),
       ),
