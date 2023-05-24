@@ -692,4 +692,18 @@ TextButton(onPressed: (){
 观察者 ![观察者](./images/md/observer.jpg)
 
 
-## 39. 
+## 39. 不同数据表多张表（抽象工厂模式）
+创建一个工厂方法，提供所有的表和操作方法。每一张表兼容不同的平台。
+
+```
+IUser user = DataAccess.createUser();
+user.insert(User("test", 2));
+user.getUser(2);
+
+IProject project = DataAccess.createProject();
+project.insertProject(Project("Woo", "1"));
+project.getProject("123");
+```
+观察者 ![观察者](./images/md/facotry.jpg)
+
+## 40. 
