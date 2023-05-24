@@ -30,12 +30,11 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
           mainAxisSize: MainAxisSize.min,
           children: [
             TextButton(onPressed: (){
-              IFactory factory = AccessFactory();
-              IUser user = factory.createUser();
+              IUser user = DataAccess.createUser();
               user.insert(User("test", 2));
               user.getUser(2);
 
-              IProject project = factory.createProject();
+              IProject project = DataAccess.createProject();
               project.insertProject(Project("Woo", "1"));
               project.getProject("123");
 

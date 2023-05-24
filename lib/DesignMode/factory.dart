@@ -1,3 +1,5 @@
+import 'dart:core';
+
 import 'package:flutter/cupertino.dart';
 
 // 抽象工厂模式
@@ -68,7 +70,6 @@ class SqlServerProject implements IProject {
   void insertProject(Project project) {
     debugPrint("在sql server中根据ID得到Project表一条记录");
   }
-
 }
 
 class AccessProject implements IProject {
@@ -85,34 +86,32 @@ class AccessProject implements IProject {
   }
 }
 
-abstract class IFactory {
-  IUser createUser();
-  IProject createProject();
-}
+class DataAccess {
+  static const String dbNameSqlServer = "sqlServer";
+  static const String dbNameAccess = "access";
 
-class SqlServerFactory implements IFactory {
-  @override
-  IUser createUser() {
+  static String db = dbNameSqlServer;
+
+  static IUser createUser() {
+    switch(db) {
+      case dbNameSqlServer:
+        return SqlServerUser();
+      case dbNameAccess:
+        return AccessUser();
+    }
+
     return SqlServerUser();
   }
 
-  @override
-  IProject createProject() {
+  static IProject createProject() {
+    switch(db) {
+      case dbNameSqlServer:
+        return SqlServerProject();
+      case dbNameAccess:
+        return AccessProject();
+    }
+
     return SqlServerProject();
   }
-
-
-
 }
 
-class AccessFactory implements IFactory {
-  @override
-  IUser createUser() {
-    return AccessUser();
-  }
-
-  @override
-  IProject createProject() {
-   return AccessProject();
-  }
-}
