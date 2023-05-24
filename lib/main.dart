@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_snippet/Common/MaterialAppUtil.dart';
+import 'package:flutter_snippet/DesignMode/factory.dart';
 import 'package:flutter_snippet/DesignMode/observer.dart';
 
 import 'DesignMode/builder.dart';
@@ -29,15 +30,14 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
           mainAxisSize: MainAxisSize.min,
           children: [
             TextButton(onPressed: (){
-              var boss = Boss();
-              var colleague1 = StockObserver("围观眼", boss);
-              var colleague2 = NBAObserver("以观察", boss);
+              IFactory factory = AccessFactory();
+              IUser user = factory.createUser();
+              user.insert(User("test", 2));
+              user.getUser(2);
 
-              boss.attach(colleague1);
-              boss.attach(colleague2);
-
-              boss.subjectState = "老板回来了";
-              boss.notify();
+              IProject project = factory.createProject();
+              project.insertProject(Project("Woo", "1"));
+              project.getProject("123");
 
             }, child: const Text("测试下"))
           ],
