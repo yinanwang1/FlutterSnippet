@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_snippet/Common/MaterialAppUtil.dart';
 import 'package:flutter_snippet/DesignMode/factory.dart';
 import 'package:flutter_snippet/DesignMode/observer.dart';
+import 'package:flutter_snippet/DesignMode/state.dart';
+import 'package:flutter_snippet/aMap/main.dart';
 
 import 'DesignMode/builder.dart';
 
@@ -29,16 +31,14 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            TextButton(onPressed: (){
-              IUser user = DataAccess.createUser();
-              user.insert(User("test", 2));
-              user.getUser(2);
+            TextButton(onPressed: () {
+              Navigator
+                  .of(context)
+                  .push(MaterialPageRoute(builder: (_) {
+                return AMapDemo();
+              }));
 
-              IProject project = DataAccess.createProject();
-              project.insertProject(Project("Woo", "1"));
-              project.getProject("123");
-
-            }, child: const Text("测试下"))
+              }, child: const Text("测试下"))
           ],
         ),
       ),

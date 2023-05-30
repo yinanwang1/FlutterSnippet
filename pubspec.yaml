@@ -65,6 +65,10 @@ dependencies:
   # 绘制多边形
   polygon: ^0.1.0
 
+  # 高德地图使用
+  permission_handler: ^10.2.0
+  amap_flutter_map: ^3.0.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
