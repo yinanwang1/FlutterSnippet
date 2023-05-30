@@ -5,14 +5,14 @@ import 'package:flutter_snippet/aMap/base_page.dart';
 import 'package:flutter_snippet/aMap/const_config.dart';
 
 class PoiClickDemoPage extends BasePage {
-  PoiClickDemoPage(String title, String subTitle) : super(title, subTitle);
+  const PoiClickDemoPage(String title, String subTitle, {super.key}) : super(title, subTitle);
 
   @override
-  Widget build(BuildContext context) => _Body();
+  Widget build(BuildContext context) => const _Body();
 }
 
 class _Body extends StatefulWidget {
-  _Body({Key? key}) : super(key: key);
+  const _Body({Key? key}) : super(key: key);
 
   @override
   _BodyState createState() => _BodyState();
@@ -28,11 +28,11 @@ class _BodyState extends State<_Body> {
       onPoiTouched: _onPoiTouched,
     );
     return ConstrainedBox(
-      constraints: BoxConstraints.expand(),
+      constraints: const BoxConstraints.expand(),
       child: Stack(
         alignment: Alignment.center,
         children: [
-          Container(
+          SizedBox(
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
             child: amap,
@@ -53,10 +53,10 @@ class _BodyState extends State<_Body> {
   Widget showPoiInfo(AMapPoi poi) {
     return Container(
       alignment: Alignment.center,
-      color: Color(0x8200CCFF),
+      color: const Color(0x8200CCFF),
       child: Text(
         '您点击了 ${poi.name}',
-        style: TextStyle(fontWeight: FontWeight.w600),
+        style: const TextStyle(fontWeight: FontWeight.w600),
       ),
     );
   }

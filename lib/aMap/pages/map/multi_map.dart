@@ -5,7 +5,7 @@ import 'package:flutter_snippet/aMap/base_page.dart';
 import 'package:flutter_snippet/aMap/const_config.dart';
 
 class MultiMapDemoPage extends BasePage {
-  MultiMapDemoPage(String title, String subTitle) : super(title, subTitle);
+  const MultiMapDemoPage(String title, String subTitle, {super.key}) : super(title, subTitle);
   @override
   Widget build(BuildContext context) {
     return const _MultiMapDemoBody();
@@ -21,10 +21,10 @@ class _MultiMapDemoBody extends StatefulWidget {
 class _MultiMapDemoState extends State<_MultiMapDemoBody> {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
-      child: Column(
+      child: const Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[

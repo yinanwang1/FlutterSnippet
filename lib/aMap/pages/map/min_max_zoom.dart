@@ -4,14 +4,14 @@ import 'package:flutter_snippet/aMap/base_page.dart';
 import 'package:flutter_snippet/aMap/const_config.dart';
 
 class MinMaxZoomDemoPage extends BasePage {
-  MinMaxZoomDemoPage(String title, String subTitle) : super(title, subTitle);
+  const MinMaxZoomDemoPage(String title, String subTitle, {super.key}) : super(title, subTitle);
 
   @override
-  Widget build(BuildContext context) => _Body();
+  Widget build(BuildContext context) => const _Body();
 }
 
 class _Body extends StatefulWidget {
-  _Body({Key? key}) : super(key: key);
+  const _Body({Key? key}) : super(key: key);
 
   @override
   _BodyState createState() => _BodyState();
@@ -33,10 +33,10 @@ class _BodyState extends State<_Body> {
       minMaxZoomPreference: MinMaxZoomPreference(_minZoom, _maxZoom),
     );
     return ConstrainedBox(
-      constraints: BoxConstraints.expand(),
+      constraints: const BoxConstraints.expand(),
       child: Stack(
         children: [
-          Container(
+          SizedBox(
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
             child: amap,
@@ -51,24 +51,24 @@ class _BodyState extends State<_Body> {
                 Container(
                   width: MediaQuery.of(context).size.width,
                   color: Colors.grey,
-                  padding: EdgeInsets.all(5),
+                  padding: const EdgeInsets.all(5),
                   alignment: Alignment.centerLeft,
                   child: Text(
                     '当前限制的最小最大缩放级别是：[$_minZoom, $_maxZoom]',
-                    style: TextStyle(color: Colors.blue),
+                    style: const TextStyle(color: Colors.blue),
                   ),
                 ),
                 _currentZoom != null
                     ? Container(
                         width: MediaQuery.of(context).size.width,
                         color: Colors.grey,
-                        padding: EdgeInsets.all(5),
+                        padding: const EdgeInsets.all(5),
                         alignment: Alignment.centerLeft,
                         child: Text(
                           _currentZoom ?? "0",
-                          style: TextStyle(color: Colors.white),
+                          style: const TextStyle(color: Colors.white),
                         ))
-                    : SizedBox(),
+                    : const SizedBox(),
               ],
             ),
           ),
@@ -79,28 +79,28 @@ class _BodyState extends State<_Body> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 InkResponse(
+                  onTap: _zoomIn,
                   child: Container(
-                    child: Icon(
+                    width: 40,
+                    height: 40,
+                    color: Colors.blue,
+                    child: const Icon(
                       Icons.add,
                       color: Colors.white,
                     ),
-                    width: 40,
-                    height: 40,
-                    color: Colors.blue,
                   ),
-                  onTap: _zoomIn,
                 ),
                 InkResponse(
+                  onTap: _zoomOut,
                   child: Container(
-                    child: Icon(
+                    color: Colors.blue,
+                    width: 40,
+                    height: 40,
+                    child: const Icon(
                       Icons.remove,
                       color: Colors.white,
                     ),
-                    color: Colors.blue,
-                    width: 40,
-                    height: 40,
                   ),
-                  onTap: _zoomOut,
                 ),
               ],
             ),

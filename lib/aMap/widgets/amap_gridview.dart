@@ -10,10 +10,10 @@ class AMapGradView extends StatefulWidget {
   ///宽高比
   final double childAspectRatio;
 
-  AMapGradView({Key? key, this.crossAxisCount = 2, this.childAspectRatio = 4, required this.childrenWidgets}) : super(key: key);
+  const AMapGradView({Key? key, this.crossAxisCount = 2, this.childAspectRatio = 4, required this.childrenWidgets}) : super(key: key);
 
   @override
-  _GradViewState createState() => _GradViewState();
+  State createState() => _GradViewState();
 }
 
 class _GradViewState extends State<AMapGradView> {
@@ -21,7 +21,7 @@ class _GradViewState extends State<AMapGradView> {
   Widget build(BuildContext context) {
     return GridView.count(
         primary: false,
-        physics: new NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         //水平子Widget之间间距
         crossAxisSpacing: 1.0,
         //垂直子Widget之间间距
@@ -30,7 +30,7 @@ class _GradViewState extends State<AMapGradView> {
         crossAxisCount: widget.crossAxisCount,
         //宽高比
         childAspectRatio: widget.childAspectRatio,
-        children: widget.childrenWidgets,
-        shrinkWrap: true);
+        shrinkWrap: true,
+        children: widget.childrenWidgets);
   }
 }

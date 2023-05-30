@@ -6,7 +6,7 @@ import 'package:flutter_snippet/aMap/base_page.dart';
 import 'package:flutter_snippet/aMap/const_config.dart';
 
 class ShowMapPage extends BasePage {
-  ShowMapPage(String title, String subTitle) : super(title, subTitle);
+  const ShowMapPage(String title, String subTitle, {super.key}) : super(title, subTitle);
   @override
   Widget build(BuildContext context) {
     return _ShowMapPageBody();
@@ -19,7 +19,7 @@ class _ShowMapPageBody extends StatefulWidget {
 }
 
 class _ShowMapPageState extends State<_ShowMapPageBody> {
-  List<Widget> _approvalNumberWidget = [];
+  final List<Widget> _approvalNumberWidget = [];
   @override
   Widget build(BuildContext context) {
     final AMapWidget map = AMapWidget(
@@ -29,11 +29,11 @@ class _ShowMapPageState extends State<_ShowMapPageBody> {
     );
 
     return ConstrainedBox(
-      constraints: BoxConstraints.expand(),
+      constraints: const BoxConstraints.expand(),
       child: Stack(
         alignment: Alignment.center,
         children: [
-          Container(
+          SizedBox(
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
             child: map,
@@ -76,7 +76,7 @@ class _ShowMapPageState extends State<_ShowMapPageBody> {
         _approvalNumberWidget.add(Text(satelliteImageApprovalNumber));
       }
     });
-    print('地图审图号（普通地图）: $mapContentApprovalNumber');
-    print('地图审图号（卫星地图): $satelliteImageApprovalNumber');
+    debugPrint('地图审图号（普通地图）: $mapContentApprovalNumber');
+    debugPrint('地图审图号（卫星地图): $satelliteImageApprovalNumber');
   }
 }

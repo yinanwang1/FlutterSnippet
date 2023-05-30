@@ -6,7 +6,7 @@ import 'package:flutter_snippet/aMap/base_page.dart';
 import 'package:flutter_snippet/aMap/const_config.dart';
 
 class SnapshotPage extends BasePage {
-  SnapshotPage(String title, String subTitle) : super(title, subTitle);
+  const SnapshotPage(String title, String subTitle, {super.key}) : super(title, subTitle);
   @override
   Widget build(BuildContext context) {
     return _SnapShotBody();
@@ -41,7 +41,7 @@ class _SnapShotState extends State<_SnapShotBody> {
               height: 40,
               width: 100,
               child: TextButton(
-                child: Text('截屏'),
+                child: const Text('截屏'),
                 onPressed: () async {
                   final imageBytes = await _mapController?.takeSnapshot();
                   setState(() {

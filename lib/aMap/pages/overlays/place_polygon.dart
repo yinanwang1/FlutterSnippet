@@ -6,10 +6,10 @@ import 'package:flutter_snippet/aMap/const_config.dart';
 import 'package:flutter_snippet/aMap/widgets/amap_switch_button.dart';
 
 class PolygonDemoPage extends BasePage {
-  PolygonDemoPage(String title, String subTitle) : super(title, subTitle);
+  const PolygonDemoPage(String title, String subTitle) : super(title, subTitle);
   @override
   Widget build(BuildContext context) {
-    return _Body();
+    return const _Body();
   }
 }
 
@@ -30,7 +30,7 @@ class _State extends State<_Body> {
     Colors.pink,
   ];
 
-  Map<String, Polygon> _polygons = <String, Polygon>{};
+  final Map<String, Polygon> _polygons = <String, Polygon>{};
   String? selectedPolygonId;
 
   void _onMapCreated(AMapController controller) {}
@@ -73,7 +73,7 @@ class _State extends State<_Body> {
         _polygons.remove(selectedPolygonId);
       });
     } else {
-      print('无选中的Polygon，无法删除');
+      debugPrint('无选中的Polygon，无法删除');
     }
   }
 
@@ -93,7 +93,7 @@ class _State extends State<_Body> {
             selectedPolygon.copyWith(strokeWidthParam: currentWidth);
       });
     } else {
-      print('无选中的Polygon，无法修改宽度');
+      debugPrint('无选中的Polygon，无法修改宽度');
     }
   }
 
@@ -128,7 +128,7 @@ class _State extends State<_Body> {
       List<LatLng> currentPoints = polygon.points;
       List<LatLng> newPoints = <LatLng>[];
       newPoints.addAll(currentPoints);
-      newPoints.add(LatLng(39.828809, 116.360364));
+      newPoints.add(const LatLng(39.828809, 116.360364));
 
       var polygonId = selectedPolygonId;
       if (null != polygonId) {
@@ -156,18 +156,18 @@ class _State extends State<_Body> {
     final AMapWidget map = AMapWidget(
       privacyStatement: ConstConfig.amapPrivacyStatement,
       initialCameraPosition:
-          CameraPosition(target: LatLng(39.828809, 116.360364), zoom: 13),
+          const CameraPosition(target: LatLng(39.828809, 116.360364), zoom: 13),
       onMapCreated: _onMapCreated,
       polygons: Set<Polygon>.of(_polygons.values),
     );
-    return Container(
+    return SizedBox(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Container(
+          SizedBox(
             height: MediaQuery.of(context).size.height * 0.6,
             width: MediaQuery.of(context).size.width,
             child: map,
@@ -182,42 +182,42 @@ class _State extends State<_Body> {
                       Column(
                         children: <Widget>[
                           TextButton(
-                            child: const Text('添加'),
                             onPressed: _add,
+                            child: const Text('添加'),
                           ),
                           TextButton(
-                            child: const Text('删除'),
                             onPressed:
                                 (selectedPolygonId == null) ? null : _remove,
+                            child: const Text('删除'),
                           ),
                           TextButton(
-                            child: const Text('修改边框宽度'),
                             onPressed: (selectedPolygonId == null)
                                 ? null
                                 : _changeStrokeWidth,
+                            child: const Text('修改边框宽度'),
                           ),
                         ],
                       ),
                       Column(
                         children: <Widget>[
                           TextButton(
-                            child: const Text('修改边框和填充色'),
                             onPressed: (selectedPolygonId == null)
                                 ? null
                                 : _changeColors,
+                            child: const Text('修改边框和填充色'),
                           ),
                           AMapSwitchButton(
-                            label: Text('显示'),
+                            label: const Text('显示'),
                             onSwitchChanged: (selectedPolygonId == null)
                                 ? null
                                 : _toggleVisible,
                             defaultValue: true,
                           ),
                           TextButton(
-                            child: const Text('修改坐标'),
                             onPressed: (selectedPolygonId == null)
                                 ? null
                                 : _changePoints,
+                            child: const Text('修改坐标'),
                           ),
                         ],
                       ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-typedef void OnChanged(bool value);
+typedef OnChanged = void Function(bool value);
 
 class AMapSwitchButton extends StatefulWidget {
   const AMapSwitchButton({
@@ -32,27 +32,25 @@ class _SwitchButtonState extends State<AMapSwitchButton> {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Container(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              widget.label ?? Text(""),
-              Switch(
-                value: _localValue,
-                onChanged: (null != widget.onSwitchChanged)
-                    ? (value) {
-                        setState(() {
-                          _localValue = value;
-                        });
-                        if (null != widget.onSwitchChanged) {
-                          widget.onSwitchChanged!(value);
-                        }
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            widget.label ?? const Text(""),
+            Switch(
+              value: _localValue,
+              onChanged: (null != widget.onSwitchChanged)
+                  ? (value) {
+                      setState(() {
+                        _localValue = value;
+                      });
+                      if (null != widget.onSwitchChanged) {
+                        widget.onSwitchChanged!(value);
                       }
-                    : null,
-              ),
-            ],
-          ),
+                    }
+                  : null,
+            ),
+          ],
         ),
       ],
     );

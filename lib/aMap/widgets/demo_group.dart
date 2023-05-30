@@ -5,7 +5,7 @@ class DemoGroupWidget extends StatefulWidget {
   final String? groupLabel;
   final List<BasePage>? itemPages;
 
-  DemoGroupWidget({Key? key, @required this.groupLabel, this.itemPages})
+  const DemoGroupWidget({Key? key, @required this.groupLabel, this.itemPages})
       : super(key: key);
   @override
   State<StatefulWidget> createState() => _GroupState();
@@ -24,7 +24,7 @@ class _GroupState extends State<DemoGroupWidget> {
   @override
   void initState() {
     super.initState();
-    if (widget.itemPages != null && widget.itemPages!.length > 0) {
+    if (widget.itemPages != null && widget.itemPages!.isNotEmpty) {
       _hasItemPages = true;
     } else {
       _hasItemPages = false;
@@ -40,15 +40,15 @@ class _GroupState extends State<DemoGroupWidget> {
         ListTile(
             title: Text(
           widget.groupLabel ?? "",
-          style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
+          style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
         )),
-        Divider(height: 1),
+        const Divider(height: 1),
         Container(
-          padding: EdgeInsets.only(left: 10),
+          padding: const EdgeInsets.only(left: 10),
           child: _hasItemPages
               ? ListView.separated(
                   shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   itemCount: widget.itemPages?.length ?? 0,
                   itemBuilder: (_, int index) => ListTile(
                     title: Text(widget.itemPages![index].title),
@@ -56,14 +56,14 @@ class _GroupState extends State<DemoGroupWidget> {
                     onTap: () => _pushPage(context, widget.itemPages![index]),
                   ),
                   separatorBuilder: (BuildContext context, int index) =>
-                      Divider(
+                      const Divider(
                     height: 1,
                     indent: 16,
                   ),
                 )
               : null,
         ),
-        Divider(height: 1),
+        const Divider(height: 1),
       ],
     );
   }

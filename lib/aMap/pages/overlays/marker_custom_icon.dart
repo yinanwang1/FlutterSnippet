@@ -5,7 +5,7 @@ import 'package:flutter_snippet/aMap/base_page.dart';
 import 'package:flutter_snippet/aMap/const_config.dart';
 
 class MarkerCustomIconPage extends BasePage {
-  MarkerCustomIconPage(String title, String subTitle) : super(title, subTitle);
+  const MarkerCustomIconPage(String title, String subTitle) : super(title, subTitle);
 
   @override
   Widget build(BuildContext context) => _Body();
@@ -17,12 +17,12 @@ class _Body extends StatefulWidget {
 }
 
 class _BodyState extends State<_Body> {
-  static final LatLng markerPosition = const LatLng(39.909187, 116.397451);
+  static const LatLng markerPosition = LatLng(39.909187, 116.397451);
   final Map<String, Marker> _initMarkerMap = <String, Marker>{};
   late String _currentMarkerId;
   bool _hasInitMarker = false;
-  static final String _startIconPath = 'assets/start.png';
-  static final String _endIconPath = 'assets/end.png';
+  static const String _startIconPath = 'assets/start.png';
+  static const String _endIconPath = 'assets/end.png';
   String _iconPath = _startIconPath;
 
   void _initMarker(BuildContext context) async {
@@ -64,7 +64,7 @@ class _BodyState extends State<_Body> {
       apiKey: ConstConfig.amapApiKeys,
       markers: Set<Marker>.of(_initMarkerMap.values),
     );
-    return Container(
+    return SizedBox(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         child: Column(

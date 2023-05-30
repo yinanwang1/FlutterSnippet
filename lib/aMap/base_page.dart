@@ -5,5 +5,5 @@ abstract class BasePage extends StatelessWidget {
   final String title;
   final String subTitle;
 
-  const BasePage(this.title, this.subTitle);
+  const BasePage(this.title, this.subTitle, {super.key});
 }

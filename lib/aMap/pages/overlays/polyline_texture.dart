@@ -5,11 +5,11 @@ import 'package:flutter_snippet/aMap/base_page.dart';
 import 'package:flutter_snippet/aMap/const_config.dart';
 
 class PolylineTextureDemoPage extends BasePage {
-  PolylineTextureDemoPage(String title, String subTitle)
+  const PolylineTextureDemoPage(String title, String subTitle)
       : super(title, subTitle);
   @override
   Widget build(BuildContext context) {
-    return _Body();
+    return const _Body();
   }
 }
 
@@ -21,14 +21,14 @@ class _Body extends StatefulWidget {
 }
 
 class _State extends State<_Body> {
-  Map<String, Polyline> _polylines = <String, Polyline>{};
+  final Map<String, Polyline> _polyLines = <String, Polyline>{};
   String? selectedPolylineId;
 
   void _onMapCreated(AMapController controller) {}
 
   List<LatLng> _createPoints() {
     final List<LatLng> points = <LatLng>[];
-    final int polylineCount = _polylines.length;
+    final int polylineCount = _polyLines.length;
     final double offset = polylineCount * -(0.01);
     points.add(LatLng(39.938698 + offset, 116.275177));
     points.add(LatLng(39.966069 + offset, 116.289253));
@@ -47,7 +47,7 @@ class _State extends State<_Body> {
         points: _createPoints());
 
     setState(() {
-      _polylines[polyline.id] = polyline;
+      _polyLines[polyline.id] = polyline;
     });
   }
 
@@ -66,10 +66,10 @@ class _State extends State<_Body> {
     final AMapWidget map = AMapWidget(
       privacyStatement: ConstConfig.amapPrivacyStatement,
       onMapCreated: _onMapCreated,
-      polylines: Set<Polyline>.of(_polylines.values),
+      polylines: Set<Polyline>.of(_polyLines.values),
     );
 
-    return Container(
+    return SizedBox(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
       child: Column(
@@ -84,7 +84,7 @@ class _State extends State<_Body> {
               flex: 1,
               child: TextButton(
                 onPressed: _add,
-                child: Text('添加纹理线'),
+                child: const Text('添加纹理线'),
               )),
         ],
       ),

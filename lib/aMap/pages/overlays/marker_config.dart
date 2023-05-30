@@ -1,23 +1,19 @@
 import 'dart:async';
-import 'dart:typed_data';
-import 'dart:ui';
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-
-import 'package:amap_flutter_map/amap_flutter_map.dart';
-import 'package:amap_flutter_base/amap_flutter_base.dart';
 import 'dart:math';
 
+import 'package:amap_flutter_base/amap_flutter_base.dart';
+import 'package:amap_flutter_map/amap_flutter_map.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_snippet/aMap/base_page.dart';
 import 'package:flutter_snippet/aMap/const_config.dart';
 import 'package:flutter_snippet/aMap/widgets/amap_switch_button.dart';
 
 class MarkerConfigDemoPage extends BasePage {
-  MarkerConfigDemoPage(String title, String subTitle) : super(title, subTitle);
+  const MarkerConfigDemoPage(String title, String subTitle) : super(title, subTitle);
 
   @override
   Widget build(BuildContext context) {
-    return _Body();
+    return const _Body();
   }
 }
 
@@ -29,43 +25,43 @@ class _Body extends StatefulWidget {
 }
 
 class _State extends State<_Body> {
-  static final LatLng mapCenter = const LatLng(39.909187, 116.397451);
+  static const LatLng mapCenter = LatLng(39.909187, 116.397451);
 
-  Map<String, Marker> _markers = <String, Marker>{};
+  final Map<String, Marker> _markers = <String, Marker>{};
   BitmapDescriptor? _markerIcon;
   String? selectedMarkerId;
 
   void _onMapCreated(AMapController controller) {}
 
   ///通过BitmapDescriptor.fromAssetImage的方式获取图片
-  Future<void> _createMarkerImageFromAsset(BuildContext context) async {
-    if (_markerIcon == null) {
-      final ImageConfiguration imageConfiguration = createLocalImageConfiguration(context);
-      BitmapDescriptor.fromAssetImage(imageConfiguration, 'assets/start.png').then(_updateBitmap);
-    }
-  }
+  // Future<void> _createMarkerImageFromAsset(BuildContext context) async {
+  //   if (_markerIcon == null) {
+  //     final ImageConfiguration imageConfiguration = createLocalImageConfiguration(context);
+  //     BitmapDescriptor.fromAssetImage(imageConfiguration, 'assets/start.png').then(_updateBitmap);
+  //   }
+  // }
 
   ///通过BitmapDescriptor.fromBytes的方式获取图片
-  Future<void> _createMarkerImageFromBytes(BuildContext context) async {
-    final Completer<BitmapDescriptor> bitmapIcon = Completer<BitmapDescriptor>();
-    final ImageConfiguration config = createLocalImageConfiguration(context);
+  // Future<void> _createMarkerImageFromBytes(BuildContext context) async {
+  //   final Completer<BitmapDescriptor> bitmapIcon = Completer<BitmapDescriptor>();
+  //   final ImageConfiguration config = createLocalImageConfiguration(context);
+  //
+  //   const AssetImage('assets/end.png').resolve(config).addListener(ImageStreamListener((ImageInfo image, bool sync) async {
+  //     final ByteData? bytes = await image.image.toByteData(format: ImageByteFormat.png);
+  //     if (null != bytes) {
+  //       final BitmapDescriptor bitmap = BitmapDescriptor.fromBytes(bytes.buffer.asUint8List());
+  //       bitmapIcon.complete(bitmap);
+  //     }
+  //   }));
+  //
+  //   bitmapIcon.future.then((value) => _updateBitmap(value));
+  // }
 
-    const AssetImage('assets/end.png').resolve(config).addListener(ImageStreamListener((ImageInfo image, bool sync) async {
-      final ByteData? bytes = await image.image.toByteData(format: ImageByteFormat.png);
-      if (null != bytes) {
-        final BitmapDescriptor bitmap = BitmapDescriptor.fromBytes(bytes.buffer.asUint8List());
-        bitmapIcon.complete(bitmap);
-      }
-    }));
-
-    bitmapIcon.future.then((value) => _updateBitmap(value));
-  }
-
-  void _updateBitmap(BitmapDescriptor bitmap) {
-    setState(() {
-      _markerIcon = bitmap;
-    });
-  }
+  // void _updateBitmap(BitmapDescriptor bitmap) {
+  //   setState(() {
+  //     _markerIcon = bitmap;
+  //   });
+  // }
 
   void _add() {
     final int markerCount = _markers.length;
@@ -87,7 +83,7 @@ class _State extends State<_Body> {
   void _onMarkerTapped(String markerId) {
     final Marker? tappedMarker = _markers[markerId];
     final String? title = tappedMarker?.infoWindow.title;
-    print('$title 被点击了,markerId: $markerId');
+    debugPrint('$title 被点击了,markerId: $markerId');
     setState(() {
       selectedMarkerId = markerId;
     });
@@ -96,7 +92,7 @@ class _State extends State<_Body> {
   void _onMarkerDragEnd(String markerId, LatLng position) {
     final Marker? tappedMarker = _markers[markerId];
     final String? title = tappedMarker?.infoWindow.title;
-    print('$title markerId: $markerId 被拖拽到了: $position');
+    debugPrint('$title markerId: $markerId 被拖拽到了: $position');
   }
 
   void _remove() {
@@ -107,12 +103,12 @@ class _State extends State<_Body> {
         _markers.remove(selectedMarkerId);
       });
     } else {
-      print('无选中的Marker，无法删除');
+      debugPrint('无选中的Marker，无法删除');
     }
   }
 
   void _removeAll() {
-    if (_markers.length > 0) {
+    if (_markers.isNotEmpty) {
       setState(() {
         _markers.clear();
         selectedMarkerId = null;
@@ -122,7 +118,7 @@ class _State extends State<_Body> {
 
   void _changeInfo() async {
     final Marker? marker = _markers[selectedMarkerId];
-    final String? newTitle = (marker?.infoWindow.title ?? "") + '*';
+    final String newTitle = '${marker?.infoWindow.title ?? ""}*';
     var markerId = selectedMarkerId;
     if (null != marker && null != markerId) {
       setState(() {
@@ -163,7 +159,7 @@ class _State extends State<_Body> {
 
   void _changePosition() {
     final Marker? marker = _markers[selectedMarkerId];
-    final LatLng current = marker?.position ?? LatLng(0, 0);
+    final LatLng current = marker?.position ?? const LatLng(0, 0);
     final Offset offset = Offset(
       mapCenter.latitude - current.latitude,
       mapCenter.longitude - current.longitude,
@@ -245,9 +241,7 @@ class _State extends State<_Body> {
   Widget build(BuildContext context) {
     ///以下几种获取自定图片的方式使用其中一种即可。
     //最简单的方式
-    if (null == _markerIcon) {
-      _markerIcon = BitmapDescriptor.fromIconPath('assets/location_marker.png');
-    }
+    _markerIcon ??= BitmapDescriptor.fromIconPath('assets/location_marker.png');
 
     //通过BitmapDescriptor.fromAssetImage的方式获取图片
     // _createMarkerImageFromAsset(context);
@@ -260,14 +254,14 @@ class _State extends State<_Body> {
       onMapCreated: _onMapCreated,
       markers: Set<Marker>.of(_markers.values),
     );
-    return Container(
+    return SizedBox(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Container(
+          SizedBox(
             height: MediaQuery.of(context).size.height * 0.6,
             width: MediaQuery.of(context).size.width,
             child: map,
@@ -282,50 +276,50 @@ class _State extends State<_Body> {
                       Column(
                         children: <Widget>[
                           TextButton(
-                            child: const Text('添加'),
                             onPressed: _add,
+                            child: const Text('添加'),
                           ),
                           TextButton(
-                            child: const Text('移除'),
                             onPressed: (selectedMarkerId == null) ? null : _remove,
+                            child: const Text('移除'),
                           ),
                           TextButton(
-                            child: const Text('更新InfoWidow'),
                             onPressed: (selectedMarkerId == null) ? null : _changeInfo,
+                            child: const Text('更新InfoWidow'),
                           ),
                           TextButton(
-                            child: const Text('修改锚点'),
                             onPressed: (selectedMarkerId == null) ? null : _changeAnchor,
+                            child: const Text('修改锚点'),
                           ),
                           TextButton(
-                            child: const Text('修改透明度'),
                             onPressed: (selectedMarkerId == null) ? null : _changeAlpha,
+                            child: const Text('修改透明度'),
                           ),
                         ],
                       ),
                       Column(
                         children: <Widget>[
                           TextButton(
+                            onPressed: _markers.isNotEmpty ? _removeAll : null,
                             child: const Text('全部移除'),
-                            onPressed: _markers.length > 0 ? _removeAll : null,
                           ),
                           AMapSwitchButton(
-                            label: Text('允许拖动'),
+                            label: const Text('允许拖动'),
                             onSwitchChanged: (selectedMarkerId == null) ? null : _toggleDraggable,
                             defaultValue: false,
                           ),
                           AMapSwitchButton(
-                            label: Text('显示'),
+                            label: const Text('显示'),
                             onSwitchChanged: (selectedMarkerId == null) ? null : _toggleVisible,
                             defaultValue: true,
                           ),
                           TextButton(
-                            child: const Text('修改坐标'),
                             onPressed: (selectedMarkerId == null) ? null : _changePosition,
+                            child: const Text('修改坐标'),
                           ),
                           TextButton(
-                            child: const Text('修改旋转角度'),
                             onPressed: (selectedMarkerId == null) ? null : _changeRotation,
+                            child: const Text('修改旋转角度'),
                           ),
                         ],
                       ),

@@ -6,7 +6,7 @@ class AMapRadioGroup<T> extends StatefulWidget {
   final T? groupValue;
   final Map<String, T>? radioValueMap;
   final ValueChanged<T>? onChanged;
-  AMapRadioGroup(
+  const AMapRadioGroup(
       {Key? key,
       this.groupLabel,
       this.groupValue,
@@ -15,7 +15,7 @@ class AMapRadioGroup<T> extends StatefulWidget {
       : super(key: key);
 
   @override
-  _AMapRadioGroupState createState() => _AMapRadioGroupState();
+  State createState() => _AMapRadioGroupState();
 }
 
 class _AMapRadioGroupState extends State<AMapRadioGroup> {
@@ -24,14 +24,14 @@ class _AMapRadioGroupState extends State<AMapRadioGroup> {
   @override
   void initState() {
     super.initState();
-    _groupValue = widget.groupValue ?? null;
+    _groupValue = widget.groupValue;
   }
 
   @override
   Widget build(BuildContext context) {
     List<Widget> radioList = [];
-    _groupValue = widget.groupValue ?? null;
-    Widget _myRadio(String label, dynamic radioValue) {
+    _groupValue = widget.groupValue;
+    Widget myRadio(String label, dynamic radioValue) {
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -54,18 +54,18 @@ class _AMapRadioGroupState extends State<AMapRadioGroup> {
 
     if (widget.radioValueMap != null) {
       widget.radioValueMap!.forEach((key, value) {
-        radioList.add(_myRadio(key, value));
+        radioList.add(myRadio(key, value));
       });
     }
     return Container(
-      padding: EdgeInsets.all(5),
+      padding: const EdgeInsets.all(5),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(widget.groupLabel ?? "", style: TextStyle(fontWeight: FontWeight.w600)),
+          Text(widget.groupLabel ?? "", style: const TextStyle(fontWeight: FontWeight.w600)),
           Container(
-            padding: EdgeInsets.only(left: 10),
+            padding: const EdgeInsets.only(left: 10),
             child: AMapGradView(
               childrenWidgets: radioList,
             ),

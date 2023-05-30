@@ -75,12 +75,12 @@ class Toast {
                     alignment: Alignment.center,
                     width: MediaQuery.of(context).size.width,
                     child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 40.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 40.0),
                       child: AnimatedOpacity(
                         opacity: _showing ? 1.0 : 0.0, //目标透明度
                         duration: _showing
-                            ? Duration(milliseconds: 100)
-                            : Duration(milliseconds: 400),
+                            ? const Duration(milliseconds: 100)
+                            : const Duration(milliseconds: 400),
                         child: _buildToastWidget(),
                       ),
                     )),
@@ -97,7 +97,7 @@ class Toast {
     if (DateTime.now().difference(_startedTime!).inMilliseconds >= _showTime!) {
       _showing = false;
       _overlayEntry!.markNeedsBuild();
-      await Future.delayed(Duration(milliseconds: 400));
+      await Future.delayed(const Duration(milliseconds: 400));
       _overlayEntry!.remove();
       _overlayEntry = null;
     }
@@ -125,7 +125,7 @@ class Toast {
 
 //  设置toast位置
   static buildToastPosition(context) {
-    var backResult;
+    double backResult;
     if (_toastPosition == ToastPosition.top) {
       backResult = MediaQuery.of(context).size.height * 1 / 4;
     } else if (_toastPosition == ToastPosition.center) {

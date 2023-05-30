@@ -70,4 +70,9 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     api 'androidx.multidex:multidex:2.0.1'
+
+    //3D地图so及jar
+    api 'com.amap.api:3dmap:9.7.0'
+    //搜索功能
+    api 'com.amap.api:search:9.5.0'
 }

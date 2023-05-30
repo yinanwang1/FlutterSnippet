@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:amap_flutter_map/amap_flutter_map.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -8,14 +6,14 @@ import 'package:flutter_snippet/aMap/const_config.dart';
 import 'package:flutter_snippet/aMap/widgets/amap_switch_button.dart';
 
 class CustomMapStylePage extends BasePage {
-  CustomMapStylePage(String title, String subTitle) : super(title, subTitle);
+  const CustomMapStylePage(String title, String subTitle, {super.key}) : super(title, subTitle);
 
   @override
-  Widget build(BuildContext context) => _CustomMapStyleBody();
+  Widget build(BuildContext context) => const _CustomMapStyleBody();
 }
 
 class _CustomMapStyleBody extends StatefulWidget {
-  _CustomMapStyleBody({Key? key}) : super(key: key);
+  const _CustomMapStyleBody({Key? key}) : super(key: key);
 
   @override
   _CustomMapStyleState createState() => _CustomMapStyleState();
@@ -28,9 +26,7 @@ class _CustomMapStyleState extends State<_CustomMapStyleBody> {
 
   //加载自定义地图样式
   void _loadCustomData() async {
-    if (null == _customStyleOptions) {
-      _customStyleOptions = CustomStyleOptions(false);
-    }
+    _customStyleOptions = CustomStyleOptions(false);
     ByteData styleByteData = await rootBundle.load('assets/style.data');
     _customStyleOptions.styleData = styleByteData.buffer.asUint8List();
     ByteData styleExtraByteData = await rootBundle.load('assets/style_extra.data');
@@ -56,11 +52,11 @@ class _CustomMapStyleState extends State<_CustomMapStyleBody> {
       customStyleOptions: _customStyleOptions,
     );
     return ConstrainedBox(
-      constraints: BoxConstraints.expand(),
+      constraints: const BoxConstraints.expand(),
       child: Stack(
         alignment: Alignment.center,
         children: [
-          Container(
+          SizedBox(
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
             child: map,
@@ -68,9 +64,9 @@ class _CustomMapStyleState extends State<_CustomMapStyleBody> {
           Positioned(
             top: 30,
             child: Container(
-              color: Color(0xFF00BFFF),
+              color: const Color(0xFF00BFFF),
               child: AMapSwitchButton(
-                label: Text(
+                label: const Text(
                   '自定义地图',
                   style: TextStyle(color: Colors.white),
                 ),
@@ -92,8 +88,6 @@ class _CustomMapStyleState extends State<_CustomMapStyleBody> {
   }
 
   void onMapCreated(AMapController controller) {
-    if (null != controller) {
-      _mapCreated = true;
-    }
+    _mapCreated = true;
   }
 }

@@ -6,13 +6,13 @@ import 'package:flutter_snippet/aMap/widgets/amap_gridview.dart';
 import 'package:flutter_snippet/aMap/widgets/amap_switch_button.dart';
 
 class GesturesDemoPage extends BasePage {
-  GesturesDemoPage(String title, String subTitle) : super(title, subTitle);
+  const GesturesDemoPage(String title, String subTitle, {super.key}) : super(title, subTitle);
   @override
-  Widget build(BuildContext context) => _Body();
+  Widget build(BuildContext context) => const _Body();
 }
 
 class _Body extends StatefulWidget {
-  _Body({Key? key}) : super(key: key);
+  const _Body({Key? key}) : super(key: key);
 
   @override
   _BodyState createState() => _BodyState();
@@ -44,7 +44,7 @@ class _BodyState extends State<_Body> {
     //手势开关
     final List<Widget> gesturesOptions = [
       AMapSwitchButton(
-        label: Text('旋转'),
+        label: const Text('旋转'),
         defaultValue: _rotateGesturesEnabled,
         onSwitchChanged: (value) => {
           setState(() {
@@ -53,7 +53,7 @@ class _BodyState extends State<_Body> {
         },
       ),
       AMapSwitchButton(
-        label: Text('滑动'),
+        label: const Text('滑动'),
         defaultValue: _scrollGesturesEnabled,
         onSwitchChanged: (value) => {
           setState(() {
@@ -62,7 +62,7 @@ class _BodyState extends State<_Body> {
         },
       ),
       AMapSwitchButton(
-        label: Text('倾斜'),
+        label: const Text('倾斜'),
         defaultValue: _tiltGesturesEnabled,
         onSwitchChanged: (value) => {
           setState(() {
@@ -71,7 +71,7 @@ class _BodyState extends State<_Body> {
         },
       ),
       AMapSwitchButton(
-        label: Text('缩放'),
+        label: const Text('缩放'),
         defaultValue: _zoomGesturesEnabled,
         onSwitchChanged: (value) => {
           setState(() {
@@ -80,16 +80,16 @@ class _BodyState extends State<_Body> {
         },
       ),
     ];
-    Widget _gesturesOptiosWeidget() {
+    Widget gesturesOptionsWidget() {
       return Container(
-        padding: EdgeInsets.all(5),
+        padding: const EdgeInsets.all(5),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('手势控制', style: TextStyle(fontWeight: FontWeight.w600)),
+            const Text('手势控制', style: TextStyle(fontWeight: FontWeight.w600)),
             Container(
-              padding: EdgeInsets.only(left: 10),
+              padding: const EdgeInsets.only(left: 10),
               child: AMapGradView(childrenWidgets: gesturesOptions),
             ),
           ],
@@ -97,14 +97,14 @@ class _BodyState extends State<_Body> {
       );
     }
 
-    return Container(
+    return SizedBox(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Container(
+          SizedBox(
             height: MediaQuery.of(context).size.height * 0.6,
             width: MediaQuery.of(context).size.width,
             child: map,
@@ -112,7 +112,7 @@ class _BodyState extends State<_Body> {
           Expanded(
             child: SingleChildScrollView(
               child: Container(
-                child: _gesturesOptiosWeidget(),
+                child: gesturesOptionsWidget(),
               ),
             ),
           ),

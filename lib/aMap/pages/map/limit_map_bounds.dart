@@ -5,10 +5,10 @@ import 'package:flutter_snippet/aMap/const_config.dart';
 import 'package:amap_flutter_base/amap_flutter_base.dart';
 
 class LimitMapBoundsPage extends BasePage {
-  const LimitMapBoundsPage(String title, String subTitle) : super(title, subTitle);
+  const LimitMapBoundsPage(String title, String subTitle, {super.key}) : super(title, subTitle);
 
   @override
-  Widget build(BuildContext context) => _Body();
+  Widget build(BuildContext context) => const _Body();
 }
 
 class _Body extends StatefulWidget {

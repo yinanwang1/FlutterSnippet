@@ -5,14 +5,14 @@ import 'package:flutter_snippet/aMap/const_config.dart';
 import 'package:flutter_snippet/aMap/widgets/amap_radio_group.dart';
 
 class ChangeMapTypePage extends BasePage {
-  ChangeMapTypePage(String title, String subTitle) : super(title, subTitle);
+  const ChangeMapTypePage(String title, String subTitle, {super.key}) : super(title, subTitle);
 
   @override
-  Widget build(BuildContext context) => _PageBody();
+  Widget build(BuildContext context) => const _PageBody();
 }
 
 class _PageBody extends StatefulWidget {
-  _PageBody({Key? key}) : super(key: key);
+  const _PageBody({Key? key}) : super(key: key);
 
   @override
   _PageBodyState createState() => _PageBodyState();
@@ -43,32 +43,30 @@ class _PageBodyState extends State<_PageBody> {
       //地图类型属性
       mapType: _mapType,
     );
-    return Container(
+    return SizedBox(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Container(
+          SizedBox(
             height: MediaQuery.of(context).size.height * 0.6,
             width: MediaQuery.of(context).size.width,
             child: map,
           ),
           Expanded(
             child: SingleChildScrollView(
-              child: Container(
-                child: AMapRadioGroup(
-                  groupLabel: '地图样式',
-                  groupValue: _mapType,
-                  radioValueMap: _radioValueMap,
-                  onChanged: (value) => {
-                    //改变当前地图样式为选中的样式
-                    setState(() {
-                      _mapType = value;
-                    })
-                  },
-                ),
+              child: AMapRadioGroup(
+                groupLabel: '地图样式',
+                groupValue: _mapType,
+                radioValueMap: _radioValueMap,
+                onChanged: (value) => {
+                  //改变当前地图样式为选中的样式
+                  setState(() {
+                    _mapType = value;
+                  })
+                },
               ),
             ),
           ),

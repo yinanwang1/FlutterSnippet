@@ -6,14 +6,14 @@ import 'package:flutter_snippet/aMap/widgets/amap_gridview.dart';
 import 'package:flutter_snippet/aMap/widgets/amap_switch_button.dart';
 
 class MapUIDemoPage extends BasePage {
-  MapUIDemoPage(String title, String subTitle) : super(title, subTitle);
+  const MapUIDemoPage(String title, String subTitle, {super.key}) : super(title, subTitle);
 
   @override
-  Widget build(BuildContext context) => _Body();
+  Widget build(BuildContext context) => const _Body();
 }
 
 class _Body extends StatefulWidget {
-  _Body({Key? key}) : super(key: key);
+  const _Body({Key? key}) : super(key: key);
 
   @override
   _BodyState createState() => _BodyState();
@@ -47,9 +47,9 @@ class _BodyState extends State<_Body> {
     );
 
     //ui控制
-    final List<Widget> _uiOptions = [
+    final List<Widget> uiOptions = [
       AMapSwitchButton(
-        label: Text('显示路况'),
+        label: const Text('显示路况'),
         defaultValue: _trafficEnabled,
         onSwitchChanged: (value) => {
           setState(() {
@@ -58,7 +58,7 @@ class _BodyState extends State<_Body> {
         },
       ),
       AMapSwitchButton(
-        label: Text('显示3D建筑物'),
+        label: const Text('显示3D建筑物'),
         defaultValue: _buildingsEnabled,
         onSwitchChanged: (value) => {
           setState(() {
@@ -67,7 +67,7 @@ class _BodyState extends State<_Body> {
         },
       ),
       AMapSwitchButton(
-        label: Text('显示指南针'),
+        label: const Text('显示指南针'),
         defaultValue: _compassEnabled,
         onSwitchChanged: (value) => {
           setState(() {
@@ -76,7 +76,7 @@ class _BodyState extends State<_Body> {
         },
       ),
       AMapSwitchButton(
-        label: Text('显示地图文字'),
+        label: const Text('显示地图文字'),
         defaultValue: _labelsEnabled,
         onSwitchChanged: (value) => {
           setState(() {
@@ -85,7 +85,7 @@ class _BodyState extends State<_Body> {
         },
       ),
       AMapSwitchButton(
-        label: Text('显示比例尺'),
+        label: const Text('显示比例尺'),
         defaultValue: _scaleEnabled,
         onSwitchChanged: (value) => {
           setState(() {
@@ -95,31 +95,31 @@ class _BodyState extends State<_Body> {
       ),
     ];
 
-    Widget _uiOptionsWidget() {
+    Widget uiOptionsWidget() {
       return Container(
-        padding: EdgeInsets.all(5),
+        padding: const EdgeInsets.all(5),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('UI操作', style: TextStyle(fontWeight: FontWeight.w600)),
+            const Text('UI操作', style: TextStyle(fontWeight: FontWeight.w600)),
             Container(
-              padding: EdgeInsets.only(left: 10),
-              child: AMapGradView(childrenWidgets: _uiOptions),
+              padding: const EdgeInsets.only(left: 10),
+              child: AMapGradView(childrenWidgets: uiOptions),
             ),
           ],
         ),
       );
     }
 
-    return Container(
+    return SizedBox(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Container(
+          SizedBox(
             height: MediaQuery.of(context).size.height * 0.7,
             width: MediaQuery.of(context).size.width,
             child: map,
@@ -127,7 +127,7 @@ class _BodyState extends State<_Body> {
           Expanded(
             child: SingleChildScrollView(
               child: Container(
-                child: _uiOptionsWidget(),
+                child: uiOptionsWidget(),
               ),
             ),
           ),

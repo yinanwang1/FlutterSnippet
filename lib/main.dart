@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_snippet/Common/MaterialAppUtil.dart';
-import 'package:flutter_snippet/DesignMode/factory.dart';
-import 'package:flutter_snippet/DesignMode/observer.dart';
-import 'package:flutter_snippet/DesignMode/state.dart';
-import 'package:flutter_snippet/aMap/main.dart';
-
-import 'DesignMode/builder.dart';
+import 'package:flutter_snippet/aMap/AMapDemo.dart';
 
 void main() {
   runApp(ProviderScope(child: createMaterialApp((settings) => MaterialPageRoute(builder: (_) => const MyHomePage()), {})));
@@ -35,7 +30,7 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
               Navigator
                   .of(context)
                   .push(MaterialPageRoute(builder: (_) {
-                return AMapDemo();
+                return const AMapDemo();
               }));
 
               }, child: const Text("测试下"))

@@ -7,7 +7,7 @@ import 'package:flutter_snippet/aMap/const_config.dart';
 import 'package:flutter_snippet/aMap/widgets/amap_switch_button.dart';
 
 class AllMapConfigDemoPage extends BasePage {
-  AllMapConfigDemoPage(String title, String subTitle) : super(title, subTitle);
+  const AllMapConfigDemoPage(String title, String subTitle) : super(title, subTitle);
   @override
   Widget build(BuildContext context) {
     return _MapUiBody();
@@ -21,7 +21,7 @@ class _MapUiBody extends StatefulWidget {
 
 class _MapUiBodyState extends State<_MapUiBody> {
   //默认显示在北京天安门
-  static final CameraPosition _kInitialPosition = const CameraPosition(
+  static const CameraPosition _kInitialPosition = CameraPosition(
     target: LatLng(39.909187, 116.397451),
     zoom: 10.0,
   );
@@ -61,10 +61,10 @@ class _MapUiBodyState extends State<_MapUiBody> {
 
   AMapController? _controller;
 
-  CustomStyleOptions _customStyleOptions = CustomStyleOptions(false);
+  final CustomStyleOptions _customStyleOptions = CustomStyleOptions(false);
 
   ///自定义定位小蓝点
-  MyLocationStyleOptions _myLocationStyleOptions =
+  final MyLocationStyleOptions _myLocationStyleOptions =
       MyLocationStyleOptions(false);
   @override
   void initState() {
@@ -109,7 +109,7 @@ class _MapUiBodyState extends State<_MapUiBody> {
       onPoiTouched: _onMapPoiTouched,
     );
 
-    Widget _mapTypeRadio(String label, MapType radioValue) {
+    Widget mapTypeRadio(String label, MapType radioValue) {
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -129,18 +129,18 @@ class _MapUiBodyState extends State<_MapUiBody> {
       );
     }
 
-    final List<Widget> _mapTypeList = [
-      _mapTypeRadio('普通地图', MapType.normal),
-      _mapTypeRadio('卫星地图', MapType.satellite),
-      _mapTypeRadio('导航地图', MapType.navi),
-      _mapTypeRadio('公交地图', MapType.bus),
-      _mapTypeRadio('黑夜模式', MapType.night),
+    final List<Widget> mapTypeList = [
+      mapTypeRadio('普通地图', MapType.normal),
+      mapTypeRadio('卫星地图', MapType.satellite),
+      mapTypeRadio('导航地图', MapType.navi),
+      mapTypeRadio('公交地图', MapType.bus),
+      mapTypeRadio('黑夜模式', MapType.night),
     ];
 
     //ui控制
-    final List<Widget> _uiOptions = [
+    final List<Widget> uiOptions = [
       AMapSwitchButton(
-        label: Text('显示路况'),
+        label: const Text('显示路况'),
         defaultValue: _trafficEnabled,
         onSwitchChanged: (value) => {
           setState(() {
@@ -149,7 +149,7 @@ class _MapUiBodyState extends State<_MapUiBody> {
         },
       ),
       AMapSwitchButton(
-        label: Text('显示3D建筑物'),
+        label: const Text('显示3D建筑物'),
         defaultValue: _buildingsEnabled,
         onSwitchChanged: (value) => {
           setState(() {
@@ -158,7 +158,7 @@ class _MapUiBodyState extends State<_MapUiBody> {
         },
       ),
       AMapSwitchButton(
-        label: Text('显示指南针'),
+        label: const Text('显示指南针'),
         defaultValue: _compassEnabled,
         onSwitchChanged: (value) => {
           setState(() {
@@ -167,7 +167,7 @@ class _MapUiBodyState extends State<_MapUiBody> {
         },
       ),
       AMapSwitchButton(
-        label: Text('显示地图文字'),
+        label: const Text('显示地图文字'),
         defaultValue: _labelsEnabled,
         onSwitchChanged: (value) => {
           setState(() {
@@ -176,7 +176,7 @@ class _MapUiBodyState extends State<_MapUiBody> {
         },
       ),
       AMapSwitchButton(
-        label: Text('显示比例尺'),
+        label: const Text('显示比例尺'),
         defaultValue: _scaleEnabled,
         onSwitchChanged: (value) => {
           setState(() {
@@ -185,7 +185,7 @@ class _MapUiBodyState extends State<_MapUiBody> {
         },
       ),
       AMapSwitchButton(
-        label: Text('点击Poi'),
+        label: const Text('点击Poi'),
         defaultValue: _touchPoiEnabled,
         onSwitchChanged: (value) => {
           setState(() {
@@ -194,7 +194,7 @@ class _MapUiBodyState extends State<_MapUiBody> {
         },
       ),
       AMapSwitchButton(
-        label: Text('自定义地图'),
+        label: const Text('自定义地图'),
         defaultValue: _customStyleOptions.enabled,
         onSwitchChanged: (value) => {
           setState(() {
@@ -207,7 +207,7 @@ class _MapUiBodyState extends State<_MapUiBody> {
     //手势开关
     final List<Widget> gesturesOptions = [
       AMapSwitchButton(
-        label: Text('旋转'),
+        label: const Text('旋转'),
         defaultValue: _rotateGesturesEnabled,
         onSwitchChanged: (value) => {
           setState(() {
@@ -216,7 +216,7 @@ class _MapUiBodyState extends State<_MapUiBody> {
         },
       ),
       AMapSwitchButton(
-        label: Text('滑动'),
+        label: const Text('滑动'),
         defaultValue: _scrollGesturesEnabled,
         onSwitchChanged: (value) => {
           setState(() {
@@ -225,7 +225,7 @@ class _MapUiBodyState extends State<_MapUiBody> {
         },
       ),
       AMapSwitchButton(
-        label: Text('倾斜'),
+        label: const Text('倾斜'),
         defaultValue: _tiltGesturesEnabled,
         onSwitchChanged: (value) => {
           setState(() {
@@ -234,7 +234,7 @@ class _MapUiBodyState extends State<_MapUiBody> {
         },
       ),
       AMapSwitchButton(
-        label: Text('缩放'),
+        label: const Text('缩放'),
         defaultValue: _zoomGesturesEnabled,
         onSwitchChanged: (value) => {
           setState(() {
@@ -244,26 +244,26 @@ class _MapUiBodyState extends State<_MapUiBody> {
       ),
     ];
 
-    Widget _mapTypeOptions() {
+    Widget mapTypeOptions() {
       return Container(
-        padding: EdgeInsets.all(5),
+        padding: const EdgeInsets.all(5),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('地图样式', style: TextStyle(fontWeight: FontWeight.w600)),
+            const Text('地图样式', style: TextStyle(fontWeight: FontWeight.w600)),
             Container(
-              padding: EdgeInsets.only(left: 10),
-              child: createGridView(_mapTypeList),
+              padding: const EdgeInsets.only(left: 10),
+              child: createGridView(mapTypeList),
             ),
           ],
         ),
       );
     }
 
-    Widget _myLocationStyleContainer() {
+    Widget myLocationStyleContainer() {
       return Container(
-        padding: EdgeInsets.all(5),
+        padding: const EdgeInsets.all(5),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.max,
@@ -271,7 +271,7 @@ class _MapUiBodyState extends State<_MapUiBody> {
             // Text('定位小蓝点', style: TextStyle(fontWeight: FontWeight.w600)),
             AMapSwitchButton(
               label:
-                  Text('定位小蓝点', style: TextStyle(fontWeight: FontWeight.w600)),
+                  const Text('定位小蓝点', style: TextStyle(fontWeight: FontWeight.w600)),
               defaultValue: _myLocationStyleOptions.enabled,
               onSwitchChanged: (value) => {
                 setState(() {
@@ -284,33 +284,33 @@ class _MapUiBodyState extends State<_MapUiBody> {
       );
     }
 
-    Widget _uiOptionsWidget() {
+    Widget uiOptionsWidget() {
       return Container(
-        padding: EdgeInsets.all(5),
+        padding: const EdgeInsets.all(5),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('UI操作', style: TextStyle(fontWeight: FontWeight.w600)),
+            const Text('UI操作', style: TextStyle(fontWeight: FontWeight.w600)),
             Container(
-              padding: EdgeInsets.only(left: 10),
-              child: createGridView(_uiOptions),
+              padding: const EdgeInsets.only(left: 10),
+              child: createGridView(uiOptions),
             ),
           ],
         ),
       );
     }
 
-    Widget _gesturesOptionsWidget() {
+    Widget gesturesOptionsWidget() {
       return Container(
-        padding: EdgeInsets.all(5),
+        padding: const EdgeInsets.all(5),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text('手势控制', style: TextStyle(fontWeight: FontWeight.w600)),
+            const Text('手势控制', style: TextStyle(fontWeight: FontWeight.w600)),
             Container(
-              padding: EdgeInsets.only(left: 10),
+              padding: const EdgeInsets.only(left: 10),
               child: createGridView(gesturesOptions),
             ),
           ],
@@ -318,29 +318,29 @@ class _MapUiBodyState extends State<_MapUiBody> {
       );
     }
 
-    Widget _optionsItem() {
+    Widget optionsItem() {
       return Column(
         children: [
-          _mapTypeOptions(),
-          _myLocationStyleContainer(),
-          _uiOptionsWidget(),
-          _gesturesOptionsWidget(),
+          mapTypeOptions(),
+          myLocationStyleContainer(),
+          uiOptionsWidget(),
+          gesturesOptionsWidget(),
           TextButton(
-            child: const Text('moveCamera到首开'),
             onPressed: _moveCameraToShoukai,
+            child: const Text('moveCamera到首开'),
           ),
         ],
       );
     }
 
-    return Container(
+    return SizedBox(
       height: MediaQuery.of(context).size.height,
       width: MediaQuery.of(context).size.width,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Container(
+          SizedBox(
             height: MediaQuery.of(context).size.height * 0.6,
             width: MediaQuery.of(context).size.width,
             child: map,
@@ -348,7 +348,7 @@ class _MapUiBodyState extends State<_MapUiBody> {
           Expanded(
             child: SingleChildScrollView(
               child: Container(
-                child: _optionsItem(),
+                child: optionsItem(),
               ),
             ),
           ),
@@ -369,14 +369,14 @@ class _MapUiBodyState extends State<_MapUiBody> {
         await _controller?.getMapContentApprovalNumber();
     var satelliteImageApprovalNumber =
         await _controller?.getSatelliteImageApprovalNumber();
-    print('地图审图号（普通地图）: $mapContentApprovalNumber');
-    print('地图审图号（卫星地图): $satelliteImageApprovalNumber');
+    debugPrint('地图审图号（普通地图）: $mapContentApprovalNumber');
+    debugPrint('地图审图号（卫星地图): $satelliteImageApprovalNumber');
   }
 
   Widget createGridView(List<Widget> widgets) {
     return GridView.count(
         primary: false,
-        physics: new NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         //水平子Widget之间间距
         crossAxisSpacing: 1.0,
         //垂直子Widget之间间距
@@ -385,13 +385,13 @@ class _MapUiBodyState extends State<_MapUiBody> {
         crossAxisCount: 2,
         //宽高比
         childAspectRatio: 4,
-        children: widgets,
-        shrinkWrap: true);
+        shrinkWrap: true,
+        children: widgets);
   }
 
   //移动地图中心点到首开广场
   void _moveCameraToShoukai() {
-    _controller?.moveCamera(CameraUpdate.newCameraPosition(CameraPosition(
+    _controller?.moveCamera(CameraUpdate.newCameraPosition(const CameraPosition(
         target: LatLng(39.993306, 116.473004),
         zoom: 18,
         tilt: 30,
@@ -399,26 +399,26 @@ class _MapUiBodyState extends State<_MapUiBody> {
   }
 
   void _onLocationChanged(AMapLocation location) {
-    print('_onLocationChanged ${location.toJson()}');
+    debugPrint('_onLocationChanged ${location.toJson()}');
   }
 
   void _onCameraMove(CameraPosition cameraPosition) {
-    print('onCameraMove===> ${cameraPosition.toMap()}');
+    debugPrint('onCameraMove===> ${cameraPosition.toMap()}');
   }
 
   void _onCameraMoveEnd(CameraPosition cameraPosition) {
-    print('_onCameraMoveEnd===> ${cameraPosition.toMap()}');
+    debugPrint('_onCameraMoveEnd===> ${cameraPosition.toMap()}');
   }
 
   void _onMapTap(LatLng latLng) {
-    print('_onMapTap===> ${latLng.toJson()}');
+    debugPrint('_onMapTap===> ${latLng.toJson()}');
   }
 
   void _onMapLongPress(LatLng latLng) {
-    print('_onMapLongPress===> ${latLng.toJson()}');
+    debugPrint('_onMapLongPress===> ${latLng.toJson()}');
   }
 
   void _onMapPoiTouched(AMapPoi poi) {
-    print('_onMapPoiTouched===> ${poi.toJson()}');
+    debugPrint('_onMapPoiTouched===> ${poi.toJson()}');
   }
 }

@@ -7,7 +7,7 @@ import 'package:flutter_snippet/aMap/base_page.dart';
 import 'package:flutter_snippet/aMap/const_config.dart';
 
 class MarkerAddWithMapPage extends BasePage {
-  MarkerAddWithMapPage(String title, String subTitle) : super(title, subTitle);
+  const MarkerAddWithMapPage(String title, String subTitle) : super(title, subTitle);
 
   @override
   Widget build(BuildContext context) => _Body();
@@ -19,7 +19,7 @@ class _Body extends StatefulWidget {
 }
 
 class _BodyState extends State<_Body> {
-  static final LatLng mapCenter = const LatLng(39.909187, 116.397451);
+  static const LatLng mapCenter = LatLng(39.909187, 116.397451);
   final Map<String, Marker> _initMarkerMap = <String, Marker>{};
 
   @override

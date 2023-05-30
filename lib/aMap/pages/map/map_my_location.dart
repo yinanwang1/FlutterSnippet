@@ -5,13 +5,13 @@ import 'package:flutter_snippet/aMap/const_config.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class MyLocationPage extends BasePage {
-  MyLocationPage(String title, String subTitle) : super(title, subTitle);
+  const MyLocationPage(String title, String subTitle, {super.key}) : super(title, subTitle);
   @override
-  Widget build(BuildContext context) => _Body();
+  Widget build(BuildContext context) => const _Body();
 }
 
 class _Body extends StatefulWidget {
-  _Body({Key? key}) : super(key: key);
+  const _Body({Key? key}) : super(key: key);
   @override
   _BodyState createState() => _BodyState();
 }
@@ -20,18 +20,18 @@ class _BodyState extends State<_Body> {
   @override
   void initState() {
     super.initState();
-    _requestLocaitonPermission();
+    _requestLocationPermission();
   }
 
   @override
   void reassemble() {
     super.reassemble();
-    _requestLocaitonPermission();
+    _requestLocationPermission();
   }
 
-  void _requestLocaitonPermission() async {
+  void _requestLocationPermission() async {
     PermissionStatus status = await Permission.location.request();
-    print('permissionStatus=====> $status');
+    debugPrint('permissionStatus=====> $status');
   }
 
   @override

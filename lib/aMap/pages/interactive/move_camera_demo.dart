@@ -6,14 +6,14 @@ import 'package:flutter_snippet/aMap/const_config.dart';
 import 'package:flutter_snippet/aMap/widgets/amap_gridview.dart';
 
 class MoveCameraDemoPage extends BasePage {
-  MoveCameraDemoPage(String title, String subTitle) : super(title, subTitle);
+  const MoveCameraDemoPage(String title, String subTitle, {super.key}) : super(title, subTitle);
 
   @override
-  Widget build(BuildContext context) => _Body();
+  Widget build(BuildContext context) => const _Body();
 }
 
 class _Body extends StatefulWidget {
-  _Body({Key? key}) : super(key: key);
+  const _Body({Key? key}) : super(key: key);
 
   @override
   _BodyState createState() => _BodyState();
@@ -30,24 +30,22 @@ class _BodyState extends State<_Body> {
       onCameraMove: _onCameraMove,
       onCameraMoveEnd: _onCameraMoveEnd,
     );
-    List<Widget> _optionsWidget = [
+    List<Widget> optionsWidget = [
       _createMyFloatButton('改变显示区域', _changeLatLngBounds),
       _createMyFloatButton('改变中心点', _changeCameraPosition),
       _createMyFloatButton('改变缩放级别到18', _changeCameraZoom),
       _createMyFloatButton('按照像素移动地图', _scrollBy),
     ];
 
-    Widget _cameraOptions() {
+    Widget cameraOptions() {
       return Container(
-        padding: EdgeInsets.all(5),
+        padding: const EdgeInsets.all(5),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Container(
-              child: AMapGradView(
-                childrenWidgets: _optionsWidget,
-              ),
+            AMapGradView(
+              childrenWidgets: optionsWidget,
             ),
           ],
         ),
@@ -55,7 +53,7 @@ class _BodyState extends State<_Body> {
     }
 
     return ConstrainedBox(
-        constraints: BoxConstraints.expand(),
+        constraints: const BoxConstraints.expand(),
         child: Column(
           children: [
             ConstrainedBox(
@@ -64,7 +62,7 @@ class _BodyState extends State<_Body> {
                   minHeight: MediaQuery.of(context).size.height * 0.7),
               child: Stack(
                 children: [
-                  Container(
+                  SizedBox(
                     height: MediaQuery.of(context).size.height * 0.7,
                     width: MediaQuery.of(context).size.width,
                     child: amap,
@@ -76,28 +74,28 @@ class _BodyState extends State<_Body> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         InkResponse(
+                          onTap: _zoomIn,
                           child: Container(
-                            child: Icon(
+                            width: 40,
+                            height: 40,
+                            color: Colors.blue,
+                            child: const Icon(
                               Icons.add,
                               color: Colors.white,
                             ),
-                            width: 40,
-                            height: 40,
-                            color: Colors.blue,
                           ),
-                          onTap: _zoomIn,
                         ),
                         InkResponse(
+                          onTap: _zoomOut,
                           child: Container(
-                            child: Icon(
+                            color: Colors.blue,
+                            width: 40,
+                            height: 40,
+                            child: const Icon(
                               Icons.remove,
                               color: Colors.white,
                             ),
-                            color: Colors.blue,
-                            width: 40,
-                            height: 40,
                           ),
-                          onTap: _zoomOut,
                         ),
                       ],
                     ),
@@ -113,16 +111,16 @@ class _BodyState extends State<_Body> {
                         ? Container(
                             width: MediaQuery.of(context).size.width,
                             color: Colors.grey,
-                            padding: EdgeInsets.all(5),
+                            padding: const EdgeInsets.all(5),
                             alignment: Alignment.centerLeft,
                             child: Text(
                               _currentZoom ?? "",
-                              style: TextStyle(color: Colors.white),
+                              style: const TextStyle(color: Colors.white),
                             ),
                           )
-                        : SizedBox(),
+                        : const SizedBox(),
                     Container(
-                      child: _cameraOptions(),
+                      child: cameraOptions(),
                     ),
                   ],
                 ),
@@ -151,7 +149,7 @@ class _BodyState extends State<_Body> {
   void _changeCameraPosition() {
     _mapController?.moveCamera(
       CameraUpdate.newCameraPosition(
-        CameraPosition(
+        const CameraPosition(
             //中心点
             target: LatLng(31.230378, 121.473658),
             //缩放级别
@@ -194,8 +192,8 @@ class _BodyState extends State<_Body> {
     _mapController?.moveCamera(
       CameraUpdate.newLatLngBounds(
           LatLngBounds(
-              southwest: LatLng(33.789925, 104.838326),
-              northeast: LatLng(38.740688, 114.647472)),
+              southwest: const LatLng(33.789925, 104.838326),
+              northeast: const LatLng(38.740688, 114.647472)),
           15.0),
       animated: true,
     );
