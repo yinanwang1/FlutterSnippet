@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_snippet/Common/MaterialAppUtil.dart';
-import 'package:flutter_snippet/DesignMode/adapter.dart';
-import 'package:flutter_snippet/DesignMode/state.dart';
+import 'package:flutter_snippet/DesignMode/memento.dart';
 
 void main() {
   runApp(ProviderScope(child: createMaterialApp((settings) => MaterialPageRoute(builder: (_) => const MyHomePage()), {})));
@@ -28,19 +27,16 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
           mainAxisSize: MainAxisSize.min,
           children: [
             TextButton(onPressed: () {
-              // Target target = Adapter();
-              // target.request();
+              Originator o = Originator("On");
+              o.show();
 
+              Caretaker c = Caretaker(o.createMemento());
 
-              Player b = Forwards("巴蒂尔");
-              b.attack();
+              o.state = "Off";
+              o.show();
 
-              Player m = Guards("麦克格雷迪");
-              m.attack();
-
-              Player ym = Translator("姚明");
-              ym.attack();
-              ym.defense();
+              o.setMemento(c.memento);
+              o.show();
 
               }, child: const Text("测试下"))
           ],
