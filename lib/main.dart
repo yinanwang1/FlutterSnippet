@@ -28,8 +28,19 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
           mainAxisSize: MainAxisSize.min,
           children: [
             TextButton(onPressed: () {
-              Target target = Adapter();
-              target.request();
+              // Target target = Adapter();
+              // target.request();
+
+
+              Player b = Forwards("巴蒂尔");
+              b.attack();
+
+              Player m = Guards("麦克格雷迪");
+              m.attack();
+
+              Player ym = Translator("姚明");
+              ym.attack();
+              ym.defense();
 
               }, child: const Text("测试下"))
           ],
