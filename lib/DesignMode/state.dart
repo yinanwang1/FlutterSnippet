@@ -5,12 +5,12 @@ import 'package:flutter/cupertino.dart';
 class Work {
   int hour;
   bool taskFinished;
-  State? state;
+  State state;
 
-  Work({this.hour = 0, this.taskFinished = false, this.state});
+  Work({this.hour = 0, this.taskFinished = false, State? state}) : state = state ?? ForenoonState();
 
   void writeProgram() {
-    state?.writeProgram(this);
+    state.writeProgram(this);
   }
 }
 

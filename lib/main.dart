@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_snippet/Common/MaterialAppUtil.dart';
+import 'package:flutter_snippet/DesignMode/state.dart';
 import 'package:flutter_snippet/aMap/AMapDemo.dart';
 
 void main() {
@@ -27,11 +28,23 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
           mainAxisSize: MainAxisSize.min,
           children: [
             TextButton(onPressed: () {
-              Navigator
-                  .of(context)
-                  .push(MaterialPageRoute(builder: (_) {
-                return const AMapDemo();
-              }));
+              Work work = Work();
+
+              work.hour = 1;
+              work.writeProgram();
+
+              work.hour = 10;
+              work.writeProgram();
+
+              work.hour = 19;
+              work.writeProgram();
+
+              work.hour = 21;
+              work.writeProgram();
+
+              work.hour = 3;
+              work.writeProgram();
+
 
               }, child: const Text("测试下"))
           ],

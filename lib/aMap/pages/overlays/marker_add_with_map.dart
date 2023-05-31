@@ -7,7 +7,7 @@ import 'package:flutter_snippet/aMap/base_page.dart';
 import 'package:flutter_snippet/aMap/const_config.dart';
 
 class MarkerAddWithMapPage extends BasePage {
-  const MarkerAddWithMapPage(String title, String subTitle) : super(title, subTitle);
+  const MarkerAddWithMapPage(String title, String subTitle, {super.key}) : super(title, subTitle);
 
   @override
   Widget build(BuildContext context) => _Body();
