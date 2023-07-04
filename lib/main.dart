@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_snippet/Common/MaterialAppUtil.dart';
-import 'package:flutter_snippet/DesignMode/memento.dart';
+import 'package:flutter_snippet/Widgets/gradient_border.dart';
 
 void main() {
   runApp(ProviderScope(child: createMaterialApp((settings) => MaterialPageRoute(builder: (_) => const MyHomePage()), {})));
@@ -22,24 +22,9 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
       appBar: AppBar(
         title: const Text("我的新世界"),
       ),
-      body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            TextButton(onPressed: () {
-              Originator o = Originator("On");
-              o.show();
-
-              Caretaker c = Caretaker(o.createMemento());
-
-              o.state = "Off";
-              o.show();
-
-              o.setMemento(c.memento);
-              o.show();
-
-              }, child: const Text("测试下"))
-          ],
+      body: const Center(
+        child: GradientBorder(
+          child: Text("渐变色边框", style: TextStyle(color: Colors.black, fontSize: 16),),
         ),
       ),
     );

@@ -706,4 +706,36 @@ project.getProject("123");
 ```
 观察者 ![观察者](./images/md/facotry.jpg)
 
-## 40. 
+## 40. 渐变色边框
+展示渐变色边框。
+```
+class GradientBorder extends StatelessWidget {
+  final Widget? child;
+
+  const GradientBorder({Key? key, this.child}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 200,
+      height: 48,
+      child: LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+          return CustomPaint(
+            painter: GradientBoundPainter(
+                colors: [MyColors.mainColor, const Color(0xffff8D1A)],
+                width: constraints.maxWidth,
+                height: constraints.maxHeight),
+            child: Center(
+              child: child,
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+```
+渐变色边框 ![渐变色边框](./images/md/gradientBorder.jpg)
+
+## 41. 
