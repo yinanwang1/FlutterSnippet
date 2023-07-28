@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_snippet/Common/MaterialAppUtil.dart';
 import 'package:flutter_snippet/DesignModel/flyweight.dart';
+import 'package:flutter_snippet/DesignModel/visitor.dart';
 
 void main() {
   runApp(ProviderScope(child: createMaterialApp((settings) => MaterialPageRoute(builder: (_) => const MyHomePage()), {})));
@@ -23,7 +24,7 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
         title: const Text("我的新世界"),
       ),
       body: const Center(
-        child: FlyweightWidget(),
+        child: VisitorWidget(),
       ),
     );
   }
