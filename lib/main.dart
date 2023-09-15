@@ -15,65 +15,71 @@ class MyHomePage extends ConsumerStatefulWidget {
 }
 
 class _MyHomePageState extends ConsumerState<MyHomePage> {
+  ValueNotifier valueNotifier = ValueNotifier<int>(0);
+
+  @override
+  void initState() {
+    valueNotifier.addListener(() {
+      debugPrint("wyn valueNotifier.value is ${valueNotifier.value}");
+    });
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("我的新世界"),
+        scrolledUnderElevation: 0,
       ),
       body: Center(
-        child: DefaultTextStyle(
-          style: const TextStyle(color: Colors.cyan, fontSize: 10),
-          child: Column(
-            children: [
-              ElevatedButton(
-                  onPressed: () {},
-                  child: const Text(
-                    "data",
-                    style: TextStyle(),
-                  )),
-              _showAlertView(),
-              const Test(),
-            ],
-          ),
+        child: ValueListenableBuilder(
+          valueListenable: valueNotifier,
+          builder: (BuildContext context, value, Widget? child) {
+            return Text("value is $value");
+          },
+        ),
+      ),
+      floatingActionButton: IconButton(
+          onPressed: () {
+            // valueNotifier.value++;
+            Navigator.of(context).push(MaterialPageRoute(builder: (_) => TestWidget(valueNotifier)));
+          },
+          icon: const Icon(Icons.add)),
+    );
+  }
+}
+
+
+class TestWidget extends StatefulWidget {
+
+  final ValueNotifier valueNotifier;
+
+  const TestWidget(this.valueNotifier, {super.key});
+
+  @override
+  State<StatefulWidget> createState() => _TestWidgetState();
+
+}
+
+class _TestWidgetState extends State<TestWidget> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("data"),
+      ),
+      body: Center(
+        child: Column(
+          children: [
+            TextButton(onPressed: (){
+              widget.valueNotifier.value++;
+            }, child: const Text("好吧")),
+          ],
         ),
       ),
     );
   }
 
-  Widget _showAlertView() {
-    return Container();
-  }
-}
-
-// 使用CustomMultiChildLayout自定义页面
-class Test extends StatelessWidget {
-  const Test({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: 300,
-      height: 300,
-      child: CustomMultiChildLayout(delegate: MyDelegate(), children: [
-        LayoutId(id: 1, child: const FlutterLogo(size: 100)),
-        LayoutId(id: 2, child: const FlutterLogo(size: 100)),
-      ]),
-    );
-  }
-}
-
-class MyDelegate extends MultiChildLayoutDelegate {
-  @override
-  void performLayout(Size size) {
-    var size1 = layoutChild(1, const BoxConstraints(minHeight: 10, minWidth: 10, maxHeight: 100, maxWidth: 100));
-    positionChild(1, const Offset(0, 0));
-    var size2 = layoutChild(2, const BoxConstraints(minHeight: 10, minWidth: 10, maxHeight: 50, maxWidth: 50));
-    positionChild(2, Offset(size1.width, size1.height));
-  }
-
-  @override
-  bool shouldRelayout(covariant MultiChildLayoutDelegate oldDelegate) {
-    return true;
-  }
 }

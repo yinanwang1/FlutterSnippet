@@ -37,18 +37,18 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.5
-  path_provider: ^2.1.0
+  cupertino_icons: ^1.0.6
+  path_provider: ^2.1.1
   http: ^1.1.0
-  webview_flutter: ^4.2.2
+  webview_flutter: ^4.2.4
   provider: ^6.0.5
-  badges: ^3.1.1
+  badges: ^3.1.2
   # 屏幕比例尺寸配置
-  flutter_screenutil: ^5.8.4
+  flutter_screenutil: ^5.9.0
   # 多张图片选择
   images_picker: ^1.2.11
   # 状态管理
-  flutter_riverpod: ^2.3.7
+  flutter_riverpod: ^2.4.0
   # 加载框
   flutter_easyloading: ^3.0.5
   # 图标
@@ -67,7 +67,7 @@ dependencies:
   polygon: ^0.1.0
 
   # 高德地图使用
-  permission_handler: ^10.4.3
+  permission_handler: ^10.4.5
   amap_flutter_map: ^3.0.0
   amap_flutter_base: ^3.0.0
   amap_flutter_location: ^3.0.0
@@ -85,7 +85,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^2.0.2
+  flutter_lints: ^2.0.3
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
