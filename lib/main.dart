@@ -4,6 +4,7 @@ import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_snippet/Common/MaterialAppUtil.dart';
+import 'package:flutter_snippet/Common/my_colors.dart';
 
 void main() async {
   runApp(ProviderScope(child: createMaterialApp((settings) => MaterialPageRoute(builder: (_) => const MyHomePage()), {})));
@@ -210,6 +211,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
   }
 
   Widget _defineCamera() {
+    const BorderSide borderSide = BorderSide(width: 3, color: MyColors.mainColor);
     return Stack(
       alignment: AlignmentDirectional.center,
       children: [
@@ -224,6 +226,29 @@ class TakePictureScreenState extends State<TakePictureScreen> {
           ),
         ),
         CameraPreview(_controller),
+        Row(
+          children: [
+            Expanded(flex: 1, child: Container(
+              height: 80,
+              decoration: const BoxDecoration(
+                border: Border(top: borderSide, bottom: borderSide)
+              ),
+            )),
+            Container(
+              width: 100,
+              height: 100,
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.red, width: 3)
+              ),
+            ),
+            Expanded(flex: 1, child: Container(
+              height: 80,
+              decoration: const BoxDecoration(
+                  border: Border(top: borderSide, bottom: borderSide)
+              ),
+            )),
+          ],
+        ),
         Positioned(
           left: 0,
           right: 0,
