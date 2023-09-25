@@ -99,7 +99,11 @@ class TakePictureScreenState extends State<TakePictureScreen> {
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             // If the Future is complete, display the preview.
-            return _defineCamera();
+            return SizedBox(
+              height: double.infinity,
+              width: double.infinity,
+              child: _defineCamera(),
+            );
           } else {
             // Otherwise, display a loading indicator.
             return const Center(child: CircularProgressIndicator());
@@ -144,28 +148,37 @@ class TakePictureScreenState extends State<TakePictureScreen> {
   }
 
   Widget _defineCamera() {
-    return Column(
+    return Stack(
+      alignment: AlignmentDirectional.center,
       children: [
         const Positioned(
           left: 0,
           right: 0,
+          top: 0,
           child: Text(
             "data",
-            style: TextStyle(fontSize: 30, color: Colors.red),
+            style: TextStyle(fontSize: 30, color: Colors.blue),
             textAlign: TextAlign.center,
           ),
         ),
-        SizedBox(
-          width: double.infinity,
-          height: 300,
-          child: CameraPreview(
-            _controller,
-            child: const Text(
-              "data",
-              style: TextStyle(fontSize: 30, color: Colors.red),
-              textAlign: TextAlign.center,
-            ),
-          ),
+        CameraPreview(_controller),
+        Positioned(
+          left: 0,
+          right: 0,
+          bottom: 0,
+          child: IconButton(
+              onPressed: () {
+                debugPrint("_controller.value.flashMode is ${_controller.value.flashMode}");
+                if (FlashMode.off == _controller.value.flashMode) {
+                  _controller.setFlashMode(FlashMode.torch);
+                } else {
+                  _controller.setFlashMode(FlashMode.off);
+                }
+              },
+              icon: const Icon(
+                Icons.flashlight_on_sharp,
+                size: 60,
+              )),
         )
       ],
     );
