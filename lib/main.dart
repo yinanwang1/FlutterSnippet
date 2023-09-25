@@ -1,31 +1,41 @@
+import 'dart:io';
+
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_snippet/Common/MaterialAppUtil.dart';
 
-void main() {
-  runApp(ProviderScope(child: createMaterialApp((settings) => MaterialPageRoute(builder: (_) => const MyHomePage()), {})));
+void main() async {
+  // Ensure that plugin services are initialized so that `availableCameras()`
+  // can be called before `runApp()`
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Obtain a list of the available cameras on the device.
+  final cameras = await availableCameras();
+
+  // Get a specific camera from the list of available cameras.
+  final firstCamera = cameras.first;
+
+  runApp(ProviderScope(
+      child: createMaterialApp(
+          (settings) => MaterialPageRoute(
+              builder: (_) => MyHomePage(
+                    camera: firstCamera,
+                  )),
+          {})));
   // runApp(const ProviderScope(child: MyHomePage()));
 }
 
 class MyHomePage extends ConsumerStatefulWidget {
-  const MyHomePage({Key? key}) : super(key: key);
+  final CameraDescription camera;
+
+  const MyHomePage({Key? key, required this.camera}) : super(key: key);
 
   @override
   ConsumerState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends ConsumerState<MyHomePage> {
-  ValueNotifier valueNotifier = ValueNotifier<int>(0);
-
-  @override
-  void initState() {
-    valueNotifier.addListener(() {
-      debugPrint("wyn valueNotifier.value is ${valueNotifier.value}");
-    });
-
-    super.initState();
-  }
-
+class _MyHomePageState extends ConsumerState<MyHomePage> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,53 +43,148 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
         title: const Text("我的新世界"),
         scrolledUnderElevation: 0,
       ),
-      body: Center(
-        child: ValueListenableBuilder(
-          valueListenable: valueNotifier,
-          builder: (BuildContext context, value, Widget? child) {
-            return Text("value is $value");
-          },
-        ),
-      ),
-      floatingActionButton: IconButton(
-          onPressed: () {
-            // valueNotifier.value++;
-            Navigator.of(context).push(MaterialPageRoute(builder: (_) => TestWidget(valueNotifier)));
-          },
-          icon: const Icon(Icons.add)),
+      body: TakePictureScreen(camera: widget.camera),
     );
   }
 }
 
+// A screen that allows users to take a picture using a given camera.
+class TakePictureScreen extends StatefulWidget {
+  const TakePictureScreen({
+    super.key,
+    required this.camera,
+  });
 
-class TestWidget extends StatefulWidget {
-
-  final ValueNotifier valueNotifier;
-
-  const TestWidget(this.valueNotifier, {super.key});
+  final CameraDescription camera;
 
   @override
-  State<StatefulWidget> createState() => _TestWidgetState();
-
+  TakePictureScreenState createState() => TakePictureScreenState();
 }
 
-class _TestWidgetState extends State<TestWidget> {
+class TakePictureScreenState extends State<TakePictureScreen> {
+  late CameraController _controller;
+  late Future<void> _initializeControllerFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    // To display the current output from the Camera,
+    // create a CameraController.
+    _controller = CameraController(
+      // Get a specific camera from the list of available cameras.
+      widget.camera,
+      // Define the resolution to use.
+      ResolutionPreset.medium,
+    );
+
+    // Next, initialize the controller. This returns a Future.
+    _initializeControllerFuture = _controller.initialize();
+  }
+
+  @override
+  void dispose() {
+    // Dispose of the controller when the widget is disposed.
+    _controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("data"),
+      // You must wait until the controller is initialized before displaying the
+      // camera preview. Use a FutureBuilder to display a loading spinner until the
+      // controller has finished initializing.
+      body: FutureBuilder<void>(
+        future: _initializeControllerFuture,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            // If the Future is complete, display the preview.
+            return _defineCamera();
+          } else {
+            // Otherwise, display a loading indicator.
+            return const Center(child: CircularProgressIndicator());
+          }
+        },
       ),
-      body: Center(
-        child: Column(
-          children: [
-            TextButton(onPressed: (){
-              widget.valueNotifier.value++;
-            }, child: const Text("好吧")),
-          ],
-        ),
+      floatingActionButton: FloatingActionButton(
+        // Provide an onPressed callback.
+        onPressed: () async {
+          // Take the Picture in a try / catch block. If anything goes wrong,
+          // catch the error.
+          try {
+            // Ensure that the camera is initialized.
+            await _initializeControllerFuture;
+
+            // Attempt to take a picture and get the file `image`
+            // where it was saved.
+            final image = await _controller.takePicture();
+
+            if (!mounted) return;
+
+            debugPrint("image.path is ${image.path}");
+
+            // If the picture was taken, display it on a new screen.
+            await Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => DisplayPictureScreen(
+                  // Pass the automatically generated path to
+                  // the DisplayPictureScreen widget.
+                  imagePath: image.path,
+                ),
+              ),
+            );
+          } catch (e) {
+            // If an error occurs, log the error to the console.
+            debugPrint("e is $e");
+          }
+        },
+        child: const Icon(Icons.camera_alt),
       ),
     );
   }
 
+  Widget _defineCamera() {
+    return Column(
+      children: [
+        const Positioned(
+          left: 0,
+          right: 0,
+          child: Text(
+            "data",
+            style: TextStyle(fontSize: 30, color: Colors.red),
+            textAlign: TextAlign.center,
+          ),
+        ),
+        SizedBox(
+          width: double.infinity,
+          height: 300,
+          child: CameraPreview(
+            _controller,
+            child: const Text(
+              "data",
+              style: TextStyle(fontSize: 30, color: Colors.red),
+              textAlign: TextAlign.center,
+            ),
+          ),
+        )
+      ],
+    );
+  }
+}
+
+// A widget that displays the picture taken by the user.
+class DisplayPictureScreen extends StatelessWidget {
+  final String imagePath;
+
+  const DisplayPictureScreen({super.key, required this.imagePath});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Display the Picture')),
+      // The image is stored as a file on the device. Use the `Image.file`
+      // constructor with the given path to display the image.
+      body: Image.file(File(imagePath)),
+    );
+  }
 }

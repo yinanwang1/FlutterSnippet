@@ -45,7 +45,9 @@ dependencies:
   badges: ^3.1.2
   # 屏幕比例尺寸配置
   flutter_screenutil: ^5.9.0
-  # 多张图片选择
+  # 选择多张图片，需要iOS14
+  image_picker: ^1.0.4
+  # 多张图片选择 (android不支持13，会提示没有读文件权限。需要)
   images_picker: ^1.2.11
   # 状态管理
   flutter_riverpod: ^2.4.0
@@ -67,7 +69,7 @@ dependencies:
   polygon: ^0.1.0
 
   # 高德地图使用
-  permission_handler: ^10.4.5
+  permission_handler: ^11.0.0
   amap_flutter_map: ^3.0.0
   amap_flutter_base: ^3.0.0
   amap_flutter_location: ^3.0.0
@@ -75,6 +77,14 @@ dependencies:
   flutter_slidable: ^3.0.0
   # 图标
   font_awesome_flutter: ^10.5.0
+  # 获取设备信息
+  device_info_plus: ^9.0.3
+
+  # 自定义照相机
+  camera: ^0.10.5+4
+
+
+
 
 dev_dependencies:
   flutter_test:
