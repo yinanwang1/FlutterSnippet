@@ -6,30 +6,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_snippet/Common/MaterialAppUtil.dart';
 
 void main() async {
-  // Ensure that plugin services are initialized so that `availableCameras()`
-  // can be called before `runApp()`
-  WidgetsFlutterBinding.ensureInitialized();
-
-  // Obtain a list of the available cameras on the device.
-  final cameras = await availableCameras();
-
-  // Get a specific camera from the list of available cameras.
-  final firstCamera = cameras.first;
-
-  runApp(ProviderScope(
-      child: createMaterialApp(
-          (settings) => MaterialPageRoute(
-              builder: (_) => MyHomePage(
-                    camera: firstCamera,
-                  )),
-          {})));
+  runApp(ProviderScope(child: createMaterialApp((settings) => MaterialPageRoute(builder: (_) => const MyHomePage()), {})));
   // runApp(const ProviderScope(child: MyHomePage()));
 }
 
 class MyHomePage extends ConsumerStatefulWidget {
-  final CameraDescription camera;
-
-  const MyHomePage({Key? key, required this.camera}) : super(key: key);
+  const MyHomePage({Key? key}) : super(key: key);
 
   @override
   ConsumerState createState() => _MyHomePageState();
@@ -43,7 +25,86 @@ class _MyHomePageState extends ConsumerState<MyHomePage> with SingleTickerProvid
         title: const Text("我的新世界"),
         scrolledUnderElevation: 0,
       ),
-      body: TakePictureScreen(camera: widget.camera),
+      body: const Center(
+        child: Text("测试下"),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+            return const OpenNewPage();
+          }));
+        },
+        child: const Icon(Icons.camera),
+      ),
+    );
+  }
+}
+
+class OpenNewPage extends StatefulWidget {
+  const OpenNewPage({super.key});
+
+  @override
+  State createState() => _OpenNewPageState();
+}
+
+class _OpenNewPageState extends State<OpenNewPage> {
+  CameraDescription? firstCamera;
+
+  late ValueNotifier _valueNotifier;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _valueNotifier = ValueNotifier(false);
+
+    _initializeCamera();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  void _initializeCamera() async {
+    // Ensure that plugin services are initialized so that `availableCameras()`
+    // can be called before `runApp()`
+    WidgetsFlutterBinding.ensureInitialized();
+
+    // Obtain a list of the available cameras on the device.
+    final cameras = await availableCameras();
+
+    // Get a specific camera from the list of available cameras.
+    firstCamera = cameras.first;
+
+    _valueNotifier.value = true;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("打开新页面"),
+        scrolledUnderElevation: 0,
+      ),
+      body: Center(
+        child: ValueListenableBuilder(
+          valueListenable: _valueNotifier,
+          builder: (BuildContext context, value, Widget? child) {
+            var camera = firstCamera;
+            if (null == camera || !value) {
+              return const CircularProgressIndicator();
+            }
+
+            return ElevatedButton(
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => TakePictureScreen(camera: camera)));
+              },
+              child: const Text("打开新页面"),
+            );
+          },
+        ),
+      ),
     );
   }
 }
@@ -91,6 +152,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: const Text("拍个照片吧"),),
       // You must wait until the controller is initialized before displaying the
       // camera preview. Use a FutureBuilder to display a loading spinner until the
       // controller has finished initializing.
