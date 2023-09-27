@@ -738,4 +738,11 @@ class GradientBorder extends StatelessWidget {
 ```
 渐变色边框 ![渐变色边框](./images/md/gradientBorder.jpg)
 
-## 41. 
+## 41. 下雪
+绘制雪人和雪花，用显示动画展示。
+```
+Snowing()
+```
+下雪 ![渐变色边框](./images/md/snowing.gif)
+
+## 42.
