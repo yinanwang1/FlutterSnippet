@@ -40,7 +40,7 @@ dependencies:
   cupertino_icons: ^1.0.6
   path_provider: ^2.1.1
   http: ^1.1.0
-  webview_flutter: ^4.2.4
+  webview_flutter: ^4.4.1
   provider: ^6.0.5
   badges: ^3.1.2
   # 屏幕比例尺寸配置
@@ -50,11 +50,11 @@ dependencies:
   # 多张图片选择 (android不支持13，会提示没有读文件权限。需要)
   images_picker: ^1.2.11
   # 状态管理
-  flutter_riverpod: ^2.4.0
+  flutter_riverpod: ^2.4.3
   # 加载框
   flutter_easyloading: ^3.0.5
   # 图标
-  fl_chart: ^0.63.0
+  fl_chart: ^0.64.0
   # 路径
   path: ^1.8.3
 
@@ -69,7 +69,7 @@ dependencies:
   polygon: ^0.1.0
 
   # 高德地图使用
-  permission_handler: ^11.0.0
+  permission_handler: ^11.0.1
   amap_flutter_map: ^3.0.0
   amap_flutter_base: ^3.0.0
   amap_flutter_location: ^3.0.0
@@ -81,9 +81,9 @@ dependencies:
   device_info_plus: ^9.0.3
 
   # 自定义照相机
-  camera: ^0.10.5+4
-
-
+  camera: ^0.10.5+5
+  # 动画
+  rive: ^0.11.17
 
 
 dev_dependencies:
