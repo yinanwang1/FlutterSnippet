@@ -745,4 +745,11 @@ Snowing()
 ```
 下雪 ![渐变色边框](./images/md/snowing.gif)
 
-## 42.
+## 42.拍照指定裁剪大小
+（1）自定义拍照界面。（2）拍好照片后直接裁剪指定范围。
+```agsl
+CropCamera()
+```
+下雪 ![渐变色边框](./images/md/cropCamera.gif)
+
+## 43.

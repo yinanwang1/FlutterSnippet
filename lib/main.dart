@@ -9,6 +9,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_snippet/Common/ImageUtils.dart';
 import 'package:flutter_snippet/Common/MaterialAppUtil.dart';
+import 'package:flutter_snippet/Widgets/CropCamera.dart';
 import 'package:path_provider/path_provider.dart';
 
 final imageUrlProvider = StateProvider<String?>((ref) => null);
@@ -49,7 +50,9 @@ class _MyHomePageState extends ConsumerState<MyHomePage> with SingleTickerProvid
         children: [
           ElevatedButton(
               onPressed: () {
-                debugPrint("wyn aaaaaa");
+                Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+                  return const CropCamera();
+                }));
               },
               child: const Text("点带你我试试")),
           FutureBuilder(
