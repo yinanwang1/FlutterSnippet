@@ -78,7 +78,7 @@ dependencies:
   # 图标
   font_awesome_flutter: ^10.5.0
   # 获取设备信息
-  device_info_plus: ^9.0.3
+  device_info_plus: ^10.0.0
 
   # 自定义照相机
   camera: ^0.10.5+5
