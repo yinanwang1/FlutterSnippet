@@ -59,7 +59,7 @@ MaterialApp createMaterialApp(RouteFactory? onGenerateRoute, Map<String, WidgetB
         }),
       )),
     ),
-    themeMode: ThemeMode.light,
+    themeMode: ThemeMode.system,
     debugShowCheckedModeBanner: false,
     initialRoute: "/",
     builder: EasyLoading.init(),
