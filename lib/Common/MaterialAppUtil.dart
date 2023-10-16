@@ -7,6 +7,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_snippet/Common/my_colors.dart';
+import 'package:flutter_snippet/generated/l10n.dart';
 
 RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();
 
@@ -25,13 +26,8 @@ Widget createMaterialApp(RouteFactory? onGenerateRoute, Map<String, WidgetBuilde
     routes: routes,
     // 必须有这个主题，不然用户端不能审核通过
     title: "美丽新世界",
-    localeListResolutionCallback: (List<Locale>? locals, Iterable<Locale>? supportedLocales) {
-      return const Locale('zh');
-    },
-    localeResolutionCallback: (Locale? locale, Iterable<Locale>? supportedLocales) {
-      return const Locale("zh");
-    },
     localizationsDelegates: const [
+      S.delegate,
       GlobalMaterialLocalizations.delegate,
       GlobalWidgetsLocalizations.delegate,
       GlobalCupertinoLocalizations.delegate

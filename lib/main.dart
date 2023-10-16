@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_snippet/Common/MaterialAppUtil.dart';
+import 'package:flutter_snippet/generated/l10n.dart';
 
 void main() {
   // runApp(const ProviderScope(child: MyApp()));
   runApp(createMaterialApp(
       (settings) => MaterialPageRoute(
-          builder: (_) => const MyHomePage(
-                title: "美丽新世界",
+          builder: (context) => MyHomePage(
+                title: S.of(context).title,
               )),
       {}));
 }
@@ -65,7 +66,8 @@ class MyHomePage extends ConsumerWidget {
             ),
           ),
           const Text("4.点击\"拍照还车\"."),
-          TextButton(onPressed: (){}, child: const Text("TextButton")),
+          TextButton(onPressed: () {}, child: const Text("TextButton")),
+          TextField(),
         ],
       ),
     );
