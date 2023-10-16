@@ -1,117 +1,73 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_snippet/Common/MaterialAppUtil.dart';
 
-void main() async {
-  runApp(const ProviderScope(child: MyTestApp()));
-  // runApp(const ProviderScope(child: MyHomePage()));
-  // runApp(ProviderScope(child: createMaterialApp((settings) => MaterialPageRoute(builder: (_) => const MyHomePage()), {})));
+void main() {
+  // runApp(const ProviderScope(child: MyApp()));
+  runApp(createMaterialApp(
+      (settings) => MaterialPageRoute(
+          builder: (_) => const MyHomePage(
+                title: "美丽新世界",
+              )),
+      {}));
 }
 
-class MyTestApp extends ConsumerWidget {
-  const MyTestApp({super.key});
+class MyHomePage extends ConsumerWidget {
+  final String title;
+
+  const MyHomePage({super.key, required this.title});
 
   @override
   Widget build(BuildContext context, ref) {
-    String themeColor = ref.watch(themeColorProvider);
-    Color color = themeColorMap[themeColor] ?? Colors.red;
-
-    debugPrint("themeColor is $themeColor, color is $color");
-
-    return MaterialApp(
-      title: "我是谁",
-      theme: ThemeData(
-        primaryColor: color,
-        primaryColorDark: color,
-        // floatingActionButtonTheme: FloatingActionButtonThemeData(backgroundColor: color),
-      ),
-      home: Scaffold(
+    return Scaffold(
         appBar: AppBar(
-          title: const Text("美丽新世界"),
+          title: Text(title),
         ),
-        body: SingleChildScrollView(
+        body: Center(
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
-              ...themeColorMap.keys.map((e) => ListTile(
-                    title: Text(e),
-                    onTap: () {
-                      ref.read(themeColorProvider.notifier).update((state) => e);
-
-                      debugPrint("e is $e");
-                    },
-                  ))
+              // _headerWidget()
+              Theme(data: Theme.of(context).copyWith(primaryColor: Colors.red), child: _headerWidget(context))
             ],
           ),
-        ),
-        floatingActionButton: IconButton(onPressed: () {}, icon: const Icon(Icons.add)),
+        ));
+  }
+
+  Widget _headerWidget(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.only(top: 8, bottom: 3, left: 20, right: 20),
+      alignment: Alignment.center,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Padding(padding: EdgeInsets.only(top: 5, bottom: 1), child: Text("1.将车辆停在辅助线上方;")),
+          RichText(
+              text: TextSpan(
+                  text: "2.将车辆踏板上的",
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: 30),
+                  children: const [
+                TextSpan(text: "颜色码", style: TextStyle(fontWeight: FontWeight.bold)),
+                TextSpan(text: "，放置在屏幕"),
+                TextSpan(text: "绿色方框内", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.green)),
+                TextSpan(text: ";"),
+              ])),
+          Padding(
+            padding: const EdgeInsets.only(top: 1, bottom: 1),
+            child: RichText(
+              text: TextSpan(text: "3.将地面", style: Theme.of(context).textTheme.bodyMedium, children: const [
+                TextSpan(text: "辅助线", style: TextStyle(fontWeight: FontWeight.bold)),
+                TextSpan(text: "，放置在屏幕"),
+                TextSpan(text: "红线内", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.red)),
+                TextSpan(text: ";"),
+              ]),
+            ),
+          ),
+          const Text("4.点击\"拍照还车\"."),
+          TextButton(onPressed: (){}, child: const Text("TextButton")),
+        ],
       ),
     );
   }
 }
-
-class MyHomePage extends ConsumerStatefulWidget {
-  const MyHomePage({Key? key}) : super(key: key);
-
-  @override
-  ConsumerState createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends ConsumerState<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    String themeColor = ref.watch(themeColorProvider);
-    Color color = themeColorMap[themeColor] ?? Colors.red;
-
-    debugPrint("themeColor is $themeColor, color is $color");
-
-    return MaterialApp(
-      title: "我是谁",
-      // theme: ThemeData(primaryColor: color,
-      //     primaryColorDark: color,
-      //     // floatingActionButtonTheme: FloatingActionButtonThemeData(backgroundColor: color),
-      // ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text("美丽新世界"),
-        ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              ...themeColorMap.keys.map((e) => ListTile(
-                    title: Text(e),
-                    onTap: () {
-                      ref.read(themeColorProvider.notifier).update((state) => e);
-
-                      debugPrint("e is $e");
-                    },
-                  ))
-            ],
-          ),
-        ),
-        floatingActionButton: IconButton(onPressed: () {}, icon: const Icon(Icons.add)),
-      ),
-    );
-  }
-}
-
-/// 适配暗黑模式
-
-final themeColorProvider = StateProvider<String>((ref) => '');
-
-Map<String, Color> themeColorMap = {
-  'gray': Colors.grey,
-  'blue': Colors.blue,
-  'blueAccent': Colors.blueAccent,
-  'cyan': Colors.cyan,
-  'deepPurple': Colors.purple,
-  'deepPurpleAccent': Colors.deepPurpleAccent,
-  'deepOrange': Colors.orange,
-  'green': Colors.green,
-  'indigo': Colors.indigo,
-  'indigoAccent': Colors.indigoAccent,
-  'orange': Colors.orange,
-  'purple': Colors.purple,
-  'pink': Colors.pink,
-  'red': Colors.red,
-  'teal': Colors.teal,
-  'black': Colors.black,
-};
