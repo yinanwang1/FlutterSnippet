@@ -49,9 +49,12 @@ class _BooksState extends ConsumerState<Books> {
         return Stack(
           children: [
             Positioned.fill(
-                child: Image.asset(
-              "images/gradient.png",
-              fit: BoxFit.fill,
+                child: Opacity(
+              opacity: 0.2,
+              child: Image.asset(
+                "images/gradient.png",
+                fit: BoxFit.fill,
+              ),
             )),
             Positioned.fill(child: _mainWidget(data))
           ],
