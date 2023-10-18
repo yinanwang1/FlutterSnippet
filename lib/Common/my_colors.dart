@@ -88,3 +88,18 @@ class MyColors {
     return Color.fromARGB(random.nextInt(256), random.nextInt(256), random.nextInt(256), 1);
   }
 }
+
+const chartColors = [
+  Color(0xFFF3657C),
+  Color(0xFF48A1FF),
+  Color(0xFFDE81D2),
+  Color(0xFF89D1EA),
+  Color(0xFFEAA675),
+  Color(0xFF4DCCCB),
+  Color(0xFF985FE5),
+  Color(0xFF85DFBE),
+  Color(0xFF9F8BF1),
+  Color(0xFF58CC74),
+  Color(0xFFFBD34B),
+  Color(0xFFADDF83),
+];
