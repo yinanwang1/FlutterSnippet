@@ -72,7 +72,7 @@ class _BooksState extends ConsumerState<Books> {
             }
             var book = books[index];
             return Card(
-                elevation: 1,
+                elevation: 3,
                 margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
                 color: MyColors.randomColor(),
                 child: _itemWidget(book));

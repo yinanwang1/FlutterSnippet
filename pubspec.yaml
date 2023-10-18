@@ -50,7 +50,7 @@ dependencies:
   # 多张图片选择 (android不支持13，会提示没有读文件权限。需要)
   images_picker: ^1.2.11
   # 状态管理
-  flutter_riverpod: ^2.4.3
+  flutter_riverpod: ^2.4.4
   # 加载框
   flutter_easyloading: ^3.0.5
   # 图标
@@ -76,14 +76,16 @@ dependencies:
   # 轮播
   flutter_slidable: ^3.0.0
   # 图标
-  font_awesome_flutter: ^10.5.0
+  font_awesome_flutter: ^10.6.0
   # 获取设备信息
-  device_info_plus: ^10.0.0
+  device_info_plus: ^9.1.0
 
   # 自定义照相机
   camera: ^0.10.5+5
   # 动画
   rive: ^0.11.17
+  # 播放音乐
+  assets_audio_player: ^3.1.1
 
 
 dev_dependencies:

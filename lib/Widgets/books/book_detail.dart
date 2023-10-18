@@ -1,3 +1,4 @@
+import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_snippet/Common/my_colors.dart';
@@ -16,6 +17,16 @@ class BookDetail extends ConsumerStatefulWidget {
 
 class _BookDetailState extends ConsumerState<BookDetail> {
   double audioPlayingHeight = 80.0;
+
+  // 播放的状态
+  late ValueNotifier _valueNotifier;
+
+  @override
+  void initState() {
+    _valueNotifier = ValueNotifier(false);
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -97,9 +108,44 @@ class _BookDetailState extends ConsumerState<BookDetail> {
   }
 
   Widget _audioPlayingWidget(BookList bookList) {
-    return Container(
-      height: audioPlayingHeight,
-      color: MyColors.randomColor().withOpacity(0.3),
+    var mp3 = bookList.mp3;
+    if (null == mp3 || mp3.isEmpty) {
+      return Container(
+        height: audioPlayingHeight,
+        color: MyColors.randomColor().withOpacity(0.3),
+        alignment: Alignment.center,
+        child: const Text("没有音频文件"),
+      );
+    }
+
+    debugPrint("mp3 is $mp3");
+
+    return SafeArea(
+      child: SizedBox(
+        height: audioPlayingHeight,
+        child: ValueListenableBuilder(
+          valueListenable: _valueNotifier,
+          builder: (BuildContext context, value, Widget? child) {
+            return AudioWidget.assets(
+              path: mp3,
+              play: value,
+              child: ElevatedButton(
+                  child: Text(
+                    value ? "pause" : "play ",
+                  ),
+                  onPressed: () {
+                    _valueNotifier.value = !value;
+                  }),
+              onReadyToPlay: (duration) {
+                //onReadyToPlay
+              },
+              onPositionChanged: (current, duration) {
+                //onPositionChanged
+              },
+            );
+          },
+        ),
+      ),
     );
   }
 }
