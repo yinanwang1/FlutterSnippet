@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_snippet/Widgets/books/books.dart';
 import 'package:flutter_snippet/model/book_entity.dart';
-import 'package:path/path.dart';
 
 // 朗读者详情
 class DeclaimerDetail extends ConsumerWidget {
@@ -23,7 +22,7 @@ class DeclaimerDetail extends ConsumerWidget {
               child: Column(
                 children: [
                   _portraitWidget(bookList),
-                  _bookDetailWidget(bookList, context),
+                  Expanded(child: _bookDetailWidget(bookList, context)),
                 ],
               ),
             ),
