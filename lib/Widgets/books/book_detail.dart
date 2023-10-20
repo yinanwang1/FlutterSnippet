@@ -1,4 +1,5 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
+import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_snippet/Common/my_colors.dart';
@@ -9,21 +10,25 @@ import 'package:flutter_snippet/model/book_entity.dart';
 /// 课文详情页面，展示课文的内容和播放mps
 
 class BookDetail extends ConsumerStatefulWidget {
-  const BookDetail({Key? key}) : super(key: key);
+  const BookDetail({super.key});
 
   @override
   ConsumerState createState() => _BookDetailState();
 }
 
 class _BookDetailState extends ConsumerState<BookDetail> {
-  double audioPlayingHeight = 80.0;
+  double audioPlayingHeight = 100.0;
 
   // 播放的状态
   late ValueNotifier _valueNotifier;
+  late ValueNotifier<Duration> _currentNotifier;
+  late ValueNotifier<Duration> _durationNotifier;
 
   @override
   void initState() {
-    _valueNotifier = ValueNotifier(false);
+    _valueNotifier = ValueNotifier(true);
+    _currentNotifier = ValueNotifier(const Duration(milliseconds: 1));
+    _durationNotifier = ValueNotifier(const Duration(milliseconds: 1));
 
     super.initState();
   }
@@ -121,31 +126,79 @@ class _BookDetailState extends ConsumerState<BookDetail> {
     debugPrint("mp3 is $mp3");
 
     return SafeArea(
-      child: SizedBox(
+      child: Container(
         height: audioPlayingHeight,
-        child: ValueListenableBuilder(
-          valueListenable: _valueNotifier,
-          builder: (BuildContext context, value, Widget? child) {
-            return AudioWidget.assets(
-              path: mp3,
-              play: value,
-              child: ElevatedButton(
-                  child: Text(
-                    value ? "pause" : "play ",
-                  ),
-                  onPressed: () {
-                    _valueNotifier.value = !value;
-                  }),
-              onReadyToPlay: (duration) {
-                //onReadyToPlay
-              },
-              onPositionChanged: (current, duration) {
-                //onPositionChanged
-              },
-            );
-          },
+        width: MediaQuery.sizeOf(context).width,
+        margin: const EdgeInsets.only(bottom: 15),
+        child: Column(
+          children: [
+            Expanded(
+              child: _playingWidget(mp3),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+              child: _progressWidget(),
+            ),
+          ],
         ),
       ),
     );
+  }
+
+  Widget _playingWidget(String mp3) {
+    return ValueListenableBuilder(
+      valueListenable: _valueNotifier,
+      builder: (BuildContext context, value, Widget? child) {
+        return AudioWidget.assets(
+          path: mp3,
+          play: value,
+          loopMode: LoopMode.single,
+          child: ElevatedButton(
+              child: Text(
+                value ? "暂停" : "播放",
+              ),
+              onPressed: () {
+                _valueNotifier.value = !value;
+              }),
+          onReadyToPlay: (duration) {
+            //onReadyToPlay
+            debugPrint("onReadyToPlay is $duration");
+          },
+          onPositionChanged: (current, duration) {
+            //onPositionChanged
+            debugPrint("onPositionChanged current is $current, duration is $duration");
+            _currentNotifier.value = current;
+            _durationNotifier.value = duration;
+          },
+        );
+      },
+    );
+  }
+
+  Widget _progressWidget() {
+    return ValueListenableBuilder(
+        valueListenable: _durationNotifier,
+        builder: (_, duration, __) {
+          return ValueListenableBuilder(
+              valueListenable: _currentNotifier,
+              builder: (_, current, __) {
+                return Row(
+                  children: [
+                    Text(
+                      formatDate(DateTime.fromMillisecondsSinceEpoch(current.inMilliseconds), [nn, ":", ss]),
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                    const Padding(padding: EdgeInsets.only(left: 8)),
+                    Expanded(
+                        child: LinearProgressIndicator(
+                      value: current.inMilliseconds / duration.inMilliseconds,
+                    )),
+                    const Padding(padding: EdgeInsets.only(left: 8)),
+                    Text(formatDate(DateTime.fromMillisecondsSinceEpoch(duration.inMilliseconds), [nn, ":", ss]),
+                        style: Theme.of(context).textTheme.titleLarge),
+                  ],
+                );
+              });
+        });
   }
 }
