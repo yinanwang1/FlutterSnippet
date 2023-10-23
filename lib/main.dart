@@ -2,15 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_snippet/Common/MaterialAppUtil.dart';
 import 'package:flutter_snippet/Widgets/books/books.dart';
-import 'package:flutter_snippet/generated/l10n.dart';
 
 void main() {
   // runApp(const ProviderScope(child: MyApp()));
   runApp(createMaterialApp(
-      (settings) => MaterialPageRoute(
-          builder: (context) => MyHomePage(
-                title: S.of(context).title,
-              )),
+      (settings) => MaterialPageRoute(builder: (context) {
+            return const Books();
+            // return MyHomePage(
+            //   title: S.of(context).title,
+            // );
+          }),
       {}));
 }
 

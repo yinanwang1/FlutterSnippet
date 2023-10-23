@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
@@ -143,7 +145,14 @@ class _BookDetailState extends ConsumerState<BookDetail> {
         child: Column(
           children: [
             Expanded(
-              child: _playingWidget(mp3),
+              child: Center(
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    _playingWidget(mp3),
+                  ],
+                ),
+              ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
@@ -158,30 +167,39 @@ class _BookDetailState extends ConsumerState<BookDetail> {
   Widget _playingWidget(String mp3) {
     return ValueListenableBuilder(
       valueListenable: _valueNotifier,
-      builder: (BuildContext context, value, Widget? child) {
-        return AudioWidget.assets(
-          path: mp3,
-          play: value,
-          loopMode: LoopMode.single,
-          child: ElevatedButton(
-              child: Text(
-                value ? "暂停" : "播放",
-              ),
-              onPressed: () {
-                _valueNotifier.value = !value;
-              }),
-          onReadyToPlay: (duration) {
-            //onReadyToPlay
-            debugPrint("onReadyToPlay is $duration");
-          },
-          onPositionChanged: (current, duration) {
-            //onPositionChanged
-            debugPrint("onPositionChanged current is $current, duration is $duration");
-            _currentNotifier.value = current;
-            _durationNotifier.value = duration;
-          },
-        );
+      builder: (BuildContext context, playing, Widget? child) {
+        return _playingButton(mp3, playing);
       },
+    );
+  }
+
+  Widget _playingButton(String mp3, bool playing) {
+    return AudioWidget.assets(
+      path: mp3,
+      play: playing,
+      onReadyToPlay: (duration) {
+        //onReadyToPlay
+        debugPrint("onReadyToPlay is $duration");
+      },
+      onPositionChanged: (current, duration) {
+        //onPositionChanged
+        // debugPrint("onPositionChanged current is $current, duration is $duration");
+        _currentNotifier.value = current;
+        _durationNotifier.value = duration;
+      },
+      onFinished: _playNext,
+      child: ElevatedButton(
+        onPressed: () {
+          _valueNotifier.value = !playing;
+        },
+        style: ButtonStyle(
+            backgroundColor: playing
+                ? MaterialStateProperty.all(Theme.of(context).primaryColor.withOpacity(0.3))
+                : MaterialStateProperty.all(Theme.of(context).primaryColor)),
+        child: Text(
+          playing ? "暂停" : "播放",
+        ),
+      ),
     );
   }
 
@@ -201,7 +219,7 @@ class _BookDetailState extends ConsumerState<BookDetail> {
                     const Padding(padding: EdgeInsets.only(left: 8)),
                     Expanded(
                         child: LinearProgressIndicator(
-                      value: current.inMilliseconds / duration.inMilliseconds,
+                      value: current.inMilliseconds / max(1, duration.inMilliseconds),
                     )),
                     const Padding(padding: EdgeInsets.only(left: 8)),
                     Text(formatDate(DateTime.fromMillisecondsSinceEpoch(duration.inMilliseconds), [nn, ":", ss]),
@@ -210,5 +228,21 @@ class _BookDetailState extends ConsumerState<BookDetail> {
                 );
               });
         });
+  }
+
+  void _playNext() {
+    var books = ref.read(booksProvider);
+    var current = ref.read(selectedBookProvider);
+    int index = 0;
+    if (null != current) {
+      index = books.indexOf(current);
+    }
+
+    index += 1;
+    if (index >= books.length) {
+      index = 0;
+    }
+
+    ref.read(selectedBookProvider.notifier).update((state) => books[index]);
   }
 }
