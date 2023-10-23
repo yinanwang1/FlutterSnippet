@@ -72,12 +72,14 @@ const AppBarTheme appBarTheme = AppBarTheme(
     shadowColor: Colors.white,
     elevation: 1,
     backgroundColor: Colors.white,
+    foregroundColor: MyColors.title,
     titleTextStyle: TextStyle(color: MyColors.title, fontSize: 16, fontWeight: FontWeight.w500));
 
 const AppBarTheme appBarTheme2 = AppBarTheme(
     shadowColor: Colors.white,
     elevation: 1,
     backgroundColor: Colors.black,
+    foregroundColor: Colors.white,
     titleTextStyle: TextStyle(color: MyColors.white, fontSize: 16, fontWeight: FontWeight.w500));
 
 const CupertinoThemeData cupertinoThemeData = CupertinoThemeData(
