@@ -5,7 +5,7 @@ import 'package:flutter_snippet/model/book_entity.dart';
 
 // 朗读者详情
 class DeclaimerDetail extends ConsumerWidget {
-  const DeclaimerDetail({Key? key}) : super(key: key);
+  const DeclaimerDetail({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

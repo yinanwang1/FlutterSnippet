@@ -17,7 +17,7 @@ final booksProvider = StateProvider<List<BookList>>((ref) => []);
 final selectedBookProvider = StateProvider<BookList?>((_) => null);
 
 class Books extends ConsumerStatefulWidget {
-  const Books({Key? key}) : super(key: key);
+  const Books({super.key});
 
   @override
   ConsumerState createState() => _BooksState();

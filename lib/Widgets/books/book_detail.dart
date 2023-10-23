@@ -51,16 +51,26 @@ class _BookDetailState extends ConsumerState<BookDetail> {
           ? const Center(
               child: Text("此文章不存在"),
             )
-          : Stack(
-              children: [
-                _mainWidget(bookList),
-                _declaimerWidget(bookList),
-              ],
+          : SizedBox(
+              width: double.infinity,
+              height: double.infinity,
+              child: Stack(
+                children: [
+                  _mainWidget(bookList),
+                  _declaimerWidget(bookList),
+                ],
+              ),
             ),
     );
   }
 
   Widget _declaimerWidget(BookList bookList) {
+    if ((bookList.declaimerPortrait?.isEmpty ?? true) ||
+        (bookList.declaimerDesc?.isEmpty ?? true) ||
+        (bookList.declaimer?.isEmpty ?? true)) {
+      return const SizedBox();
+    }
+
     String defaultImage =
         "https://ts1.cn.mm.bing.net/th/id/R-C.8ce37665e600c4d772934472f117f14e?rik=1qWQ%2bvGGajn8QQ&riu=http%3a%2f%2fwww.52gougouwang.com%2fuploads%2fdog%2f130104%2f1-130104125553R0.jpg&ehk=jYYbCuIfLOlagmm14hBuKvHVIe0EFBNhcmKk3ISfDqY%3d&risl=&pid=ImgRaw&r=0";
     double width = 60;
