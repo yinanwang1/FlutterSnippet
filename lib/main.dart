@@ -10,10 +10,10 @@ void main() {
   // runApp(const ProviderScope(child: MyApp()));
   runApp(createMaterialApp(
       (settings) => MaterialPageRoute(builder: (context) {
-            return const Books();
-            // return MyHomePage(
-            //   title: S.of(context).title,
-            // );
+            // return const Books();
+            return MyHomePage(
+              title: S.of(context).title,
+            );
           }),
       {}));
 }
@@ -43,9 +43,20 @@ class _MyHomePageState extends ConsumerState<MyHomePage> with SingleTickerProvid
                     Navigator.of(context).push(MaterialPageRoute(builder: (_) => const Books()));
                   },
                   child: const Text("查看小学生课文")),
-              DefaultTextStyle(
-                style: Theme.of(context).textTheme.titleLarge ?? const TextStyle(color: MyColors.title),
-                child: const Text("data"),
+              Container(
+                color: Colors.grey,
+                margin: const EdgeInsets.symmetric(horizontal: 30),
+                child: DefaultTextStyle(
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(height: 3) ?? const TextStyle(color: MyColors.title),
+                  overflow: TextOverflow.visible,
+                  textWidthBasis: TextWidthBasis.parent,
+                  textHeightBehavior: const TextHeightBehavior(
+                    applyHeightToFirstAscent: true,
+                    applyHeightToLastDescent: true,
+                    leadingDistribution: TextLeadingDistribution.proportional
+                  ),
+                  child: const Text("hello, world! Hello, world, world! Today is a beautiful day! Where are you from?"),
+                ),
               ),
               MyInheritedWidget("我就是我",
                   child: TextButton(
