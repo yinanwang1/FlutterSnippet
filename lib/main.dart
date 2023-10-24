@@ -10,10 +10,10 @@ void main() {
   // runApp(const ProviderScope(child: MyApp()));
   runApp(createMaterialApp(
       (settings) => MaterialPageRoute(builder: (context) {
-            // return const Books();
-            return MyHomePage(
-              title: S.of(context).title,
-            );
+            return const Books();
+            // return MyHomePage(
+            //   title: S.of(context).title,
+            // );
           }),
       {}));
 }

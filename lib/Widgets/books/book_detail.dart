@@ -177,6 +177,7 @@ class _BookDetailState extends ConsumerState<BookDetail> {
     return AudioWidget.assets(
       path: mp3,
       play: playing,
+      loopMode: LoopMode.single,
       onReadyToPlay: (duration) {
         //onReadyToPlay
         debugPrint("onReadyToPlay is $duration");
