@@ -4,11 +4,11 @@ typedef OnChanged = void Function(bool value);
 
 class AMapSwitchButton extends StatefulWidget {
   const AMapSwitchButton({
-    Key? key,
+    super.key,
     this.label,
     this.onSwitchChanged,
     this.defaultValue = true,
-  }) : super(key: key);
+  });
 
   final Text? label;
   final Function? onSwitchChanged;

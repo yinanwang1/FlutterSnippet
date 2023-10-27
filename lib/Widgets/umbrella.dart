@@ -30,8 +30,7 @@ class Umbrella extends StatelessWidget {
         Colors.purple,
       ],
       this.number = 30,
-      Key? key})
-      : super(key: key);
+      super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -7,7 +7,7 @@ import 'package:flutter_snippet/Common/no_data.dart';
 /// navigationTitle返回null。页面仅仅为一个列表。此时可以重载build添加其他widgets。
 
 abstract class PagingListWidget extends StatefulWidget {
-  const PagingListWidget({Key? key}) : super(key: key);
+  const PagingListWidget({super.key});
 
   @override
   PagingListWidgetState createState();

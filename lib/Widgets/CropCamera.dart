@@ -17,7 +17,7 @@ import 'package:permission_handler/permission_handler.dart';
 const normalTextStyle = TextStyle(color: Color(0xff333333), fontSize: 14);
 
 class CropCamera extends StatefulWidget {
-  const CropCamera({Key? key}) : super(key: key);
+  const CropCamera({super.key});
 
   @override
   State createState() => _CropCameraState();

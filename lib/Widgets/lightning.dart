@@ -4,7 +4,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class Lightning extends StatefulWidget {
-  const Lightning({Key? key}) : super(key: key);
+  const Lightning({super.key});
 
   @override
   State createState() => _LightningState();

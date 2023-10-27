@@ -5,7 +5,7 @@ import 'package:flutter_snippet/aMap/base_page.dart';
 import 'package:flutter_snippet/aMap/const_config.dart';
 
 class PolylineGeodesicDemoPage extends BasePage {
-  const PolylineGeodesicDemoPage(String title, String subTitle) : super(title, subTitle);
+  const PolylineGeodesicDemoPage(super.title, super.subTitle, {super.key});
 
   @override
   Widget build(BuildContext context) {

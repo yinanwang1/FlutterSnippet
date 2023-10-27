@@ -19,7 +19,7 @@ import 'package:flutter/material.dart';
 class AbilityWidget extends StatefulWidget {
   final Ability ability;
 
-  const AbilityWidget({Key? key, required this.ability}) : super(key: key);
+  const AbilityWidget({super.key, required this.ability});
 
   @override
   State createState() => _AbilityWidgetState();

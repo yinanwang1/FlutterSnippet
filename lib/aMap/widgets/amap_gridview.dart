@@ -10,7 +10,7 @@ class AMapGradView extends StatefulWidget {
   ///宽高比
   final double childAspectRatio;
 
-  const AMapGradView({Key? key, this.crossAxisCount = 2, this.childAspectRatio = 4, required this.childrenWidgets}) : super(key: key);
+  const AMapGradView({super.key, this.crossAxisCount = 2, this.childAspectRatio = 4, required this.childrenWidgets});
 
   @override
   State createState() => _GradViewState();

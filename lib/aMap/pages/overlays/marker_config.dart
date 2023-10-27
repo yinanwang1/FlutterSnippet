@@ -9,7 +9,7 @@ import 'package:flutter_snippet/aMap/const_config.dart';
 import 'package:flutter_snippet/aMap/widgets/amap_switch_button.dart';
 
 class MarkerConfigDemoPage extends BasePage {
-  const MarkerConfigDemoPage(String title, String subTitle) : super(title, subTitle);
+  const MarkerConfigDemoPage(super.title, super.subTitle, {super.key});
 
   @override
   Widget build(BuildContext context) {

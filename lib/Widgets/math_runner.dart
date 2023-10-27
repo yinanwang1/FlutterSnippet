@@ -29,8 +29,7 @@ class MathRunner extends StatefulWidget {
   final int index;
 
   const MathRunner(
-      {Key? key, required this.child, required this.f, required this.g, this.parts = 1, this.index = 0, this.reverse = true})
-      : super(key: key);
+      {super.key, required this.child, required this.f, required this.g, this.parts = 1, this.index = 0, this.reverse = true});
 
   @override
   State createState() {

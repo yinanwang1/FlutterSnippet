@@ -7,8 +7,7 @@ import 'package:flutter/material.dart';
 
 class NormalCell extends StatelessWidget {
   const NormalCell(
-      {Key? key, this.height = 50, this.leading, this.title, this.middle, this.trailing, this.showBottomLine = true, this.onTap})
-      : super(key: key);
+      {super.key, this.height = 50, this.leading, this.title, this.middle, this.trailing, this.showBottomLine = true, this.onTap});
 
   final double height;
   final Widget? leading;

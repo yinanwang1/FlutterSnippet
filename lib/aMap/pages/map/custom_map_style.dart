@@ -6,14 +6,14 @@ import 'package:flutter_snippet/aMap/const_config.dart';
 import 'package:flutter_snippet/aMap/widgets/amap_switch_button.dart';
 
 class CustomMapStylePage extends BasePage {
-  const CustomMapStylePage(String title, String subTitle, {super.key}) : super(title, subTitle);
+  const CustomMapStylePage(super.title, super.subTitle, {super.key});
 
   @override
   Widget build(BuildContext context) => const _CustomMapStyleBody();
 }
 
 class _CustomMapStyleBody extends StatefulWidget {
-  const _CustomMapStyleBody({Key? key}) : super(key: key);
+  const _CustomMapStyleBody();
 
   @override
   _CustomMapStyleState createState() => _CustomMapStyleState();

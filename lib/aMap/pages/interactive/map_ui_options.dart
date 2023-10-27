@@ -6,14 +6,14 @@ import 'package:flutter_snippet/aMap/widgets/amap_gridview.dart';
 import 'package:flutter_snippet/aMap/widgets/amap_switch_button.dart';
 
 class MapUIDemoPage extends BasePage {
-  const MapUIDemoPage(String title, String subTitle, {super.key}) : super(title, subTitle);
+  const MapUIDemoPage(super.title, super.subTitle, {super.key});
 
   @override
   Widget build(BuildContext context) => const _Body();
 }
 
 class _Body extends StatefulWidget {
-  const _Body({Key? key}) : super(key: key);
+  const _Body();
 
   @override
   _BodyState createState() => _BodyState();

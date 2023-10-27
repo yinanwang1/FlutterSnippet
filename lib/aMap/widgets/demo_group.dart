@@ -5,8 +5,7 @@ class DemoGroupWidget extends StatefulWidget {
   final String? groupLabel;
   final List<BasePage>? itemPages;
 
-  const DemoGroupWidget({Key? key, @required this.groupLabel, this.itemPages})
-      : super(key: key);
+  const DemoGroupWidget({super.key, @required this.groupLabel, this.itemPages});
   @override
   State<StatefulWidget> createState() => _GroupState();
 }

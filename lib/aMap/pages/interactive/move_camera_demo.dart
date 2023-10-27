@@ -6,14 +6,14 @@ import 'package:flutter_snippet/aMap/const_config.dart';
 import 'package:flutter_snippet/aMap/widgets/amap_gridview.dart';
 
 class MoveCameraDemoPage extends BasePage {
-  const MoveCameraDemoPage(String title, String subTitle, {super.key}) : super(title, subTitle);
+  const MoveCameraDemoPage(super.title, super.subTitle, {super.key});
 
   @override
   Widget build(BuildContext context) => const _Body();
 }
 
 class _Body extends StatefulWidget {
-  const _Body({Key? key}) : super(key: key);
+  const _Body();
 
   @override
   _BodyState createState() => _BodyState();

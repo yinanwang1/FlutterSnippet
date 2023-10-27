@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 /// 用显示动画播放
 
 class Snowing extends StatefulWidget {
-  const Snowing({Key? key}) : super(key: key);
+  const Snowing({super.key});
 
   @override
   State createState() => _SnowingState();

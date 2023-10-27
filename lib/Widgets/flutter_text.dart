@@ -25,7 +25,7 @@ class FlutterText extends StatelessWidget {
   const FlutterText(
     this.content, {
     this.config,
-    Key? key,
+    super.key,
     this.style,
     this.strutStyle,
     this.textAlign,
@@ -37,7 +37,7 @@ class FlutterText extends StatelessWidget {
     this.maxLines,
     this.semanticsLabel,
     this.textWidthBasis,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +77,7 @@ class FlutterLayout extends StatefulWidget {
   final Widget child;
   final AnimationConfig config;
 
-  const FlutterLayout(this.child, this.config, {Key? key}) : super(key: key);
+  const FlutterLayout(this.child, this.config, {super.key});
 
   @override
   State createState() {
@@ -171,7 +171,7 @@ class FlutterAnimation extends StatelessWidget {
   final Animation<double> _animation;
   final AnimationConfig _config;
 
-  const FlutterAnimation(this._child, this._animation, this._config, {Key? key}) : super(key: key);
+  const FlutterAnimation(this._child, this._animation, this._config, {super.key});
 
   @override
   Widget build(BuildContext context) {

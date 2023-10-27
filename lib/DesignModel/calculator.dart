@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_snippet/Common/my_colors.dart';
 
 class Calculator extends StatefulWidget {
-  const Calculator({Key? key}) : super(key: key);
+  const Calculator({super.key});
 
   @override
   State createState() => _CalculatorState();

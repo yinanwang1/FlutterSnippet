@@ -5,7 +5,7 @@ import 'package:flutter_snippet/aMap/base_page.dart';
 import 'package:flutter_snippet/aMap/const_config.dart';
 
 class MultiMapDemoPage extends BasePage {
-  const MultiMapDemoPage(String title, String subTitle, {super.key}) : super(title, subTitle);
+  const MultiMapDemoPage(super.title, super.subTitle, {super.key});
   @override
   Widget build(BuildContext context) {
     return const _MultiMapDemoBody();

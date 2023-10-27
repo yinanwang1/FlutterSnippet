@@ -7,8 +7,7 @@ class LoadingAnimations extends StatefulWidget {
   final String? loadingText;
   final double size;
 
-  const LoadingAnimations({required this.bgColor, required this.foregroundColor, this.loadingText, this.size = 100, Key? key})
-      : super(key: key);
+  const LoadingAnimations({required this.bgColor, required this.foregroundColor, this.loadingText, this.size = 100, super.key});
 
   @override
   State createState() => LoadingAnimationsState();

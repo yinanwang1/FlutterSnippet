@@ -10,7 +10,7 @@ class FlutterWebView extends StatefulWidget {
   final String url;
   final String title;
 
-  const FlutterWebView(this.url, {this.title = "", Key? key}) : super(key: key);
+  const FlutterWebView(this.url, {this.title = "", super.key});
 
   @override
   State createState() => _FlutterWebViewState();

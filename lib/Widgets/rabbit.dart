@@ -16,7 +16,7 @@ const fillLeftFace = "fillLeftFace";
 const fillRightFace = "fillRightFace";
 
 class Rabbit extends StatefulWidget {
-  const Rabbit({Key? key}) : super(key: key);
+  const Rabbit({super.key});
 
   @override
   State createState() => _RabbitState();

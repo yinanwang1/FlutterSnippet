@@ -9,8 +9,7 @@ class Rainbow extends StatelessWidget {
   final Widget? child;
 
   const Rainbow(
-      {this.startPoint = const Offset(0, 50), this.rowHeight = 12, this.size = const Size(300, 300), this.child, Key? key})
-      : super(key: key);
+      {this.startPoint = const Offset(0, 50), this.rowHeight = 12, this.size = const Size(300, 300), this.child, super.key});
 
   @override
   Widget build(BuildContext context) {

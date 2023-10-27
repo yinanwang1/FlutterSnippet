@@ -4,7 +4,7 @@ import 'package:flutter_snippet/Common/my_colors.dart';
 class NoData extends StatelessWidget {
   final String? message;
 
-  const NoData({Key? key, this.message}) : super(key: key);
+  const NoData({super.key, this.message});
 
   @override
   Widget build(BuildContext context) {

@@ -21,8 +21,7 @@ class ToggleRotate extends StatefulWidget {
       this.durationMs = 300,
       this.clockwise = true,
       this.curve = Curves.fastOutSlowIn,
-      Key? key})
-      : super(key: key);
+      super.key});
 
   @override
   State createState() => _ToggleRotateState();

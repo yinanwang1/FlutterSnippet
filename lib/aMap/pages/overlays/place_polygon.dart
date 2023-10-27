@@ -6,7 +6,7 @@ import 'package:flutter_snippet/aMap/const_config.dart';
 import 'package:flutter_snippet/aMap/widgets/amap_switch_button.dart';
 
 class PolygonDemoPage extends BasePage {
-  const PolygonDemoPage(String title, String subTitle) : super(title, subTitle);
+  const PolygonDemoPage(super.title, super.subTitle, {super.key});
   @override
   Widget build(BuildContext context) {
     return const _Body();

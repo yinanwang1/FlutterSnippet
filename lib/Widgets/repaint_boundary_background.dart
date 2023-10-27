@@ -7,7 +7,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 /// 再绘制一个小圆，跟随手指滚动
 
 class RepaintBoundaryBackground extends ConsumerStatefulWidget {
-  const RepaintBoundaryBackground({Key? key}) : super(key: key);
+  const RepaintBoundaryBackground({super.key});
 
   @override
   ConsumerState createState() => _MyHomePageState();

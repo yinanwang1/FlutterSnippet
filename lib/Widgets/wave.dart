@@ -30,8 +30,7 @@ class Wave extends StatefulWidget {
       this.waveSize = const Size(120, 120),
       this.centerRadius = 0,
       this.isWaveUp = true,
-      Key? key})
-      : super(key: key);
+      super.key});
 
   @override
   State createState() => _WaveState();

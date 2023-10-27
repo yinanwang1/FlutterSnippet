@@ -23,7 +23,7 @@ class RedPacket extends StatefulWidget {
   final Function? onFinish;
   final Function? onOpen;
 
-  const RedPacket({Key? key, this.onFinish, this.onOpen}) : super(key: key);
+  const RedPacket({super.key, this.onFinish, this.onOpen});
 
   @override
   State createState() {

@@ -7,12 +7,11 @@ class AMapRadioGroup<T> extends StatefulWidget {
   final Map<String, T>? radioValueMap;
   final ValueChanged<T>? onChanged;
   const AMapRadioGroup(
-      {Key? key,
+      {super.key,
       this.groupLabel,
       this.groupValue,
       this.radioValueMap,
-      this.onChanged})
-      : super(key: key);
+      this.onChanged});
 
   @override
   State createState() => _AMapRadioGroupState();

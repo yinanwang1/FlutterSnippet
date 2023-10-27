@@ -19,8 +19,8 @@ class MyAlertView extends StatelessWidget {
     this.onClickLeft,
     this.onClickRight,
     this.contentWidget,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

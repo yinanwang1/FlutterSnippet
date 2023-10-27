@@ -7,7 +7,7 @@ import 'package:polygon/polygon.dart';
 class TearingText extends StatefulWidget {
   final String text;
 
-  const TearingText(this.text, {Key? key}) : super(key: key);
+  const TearingText(this.text, {super.key});
 
   @override
   State createState() => _TearingTextState();

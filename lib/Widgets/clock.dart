@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
 
 class Clock extends StatelessWidget {
-  const Clock({Key? key}) : super(key: key);
+  const Clock({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class _ClockPlate extends StatelessWidget {
 }
 
 class _Clock extends StatefulWidget {
-  const _Clock({Key? key}) : super(key: key);
+  const _Clock();
 
   @override
   _ClockState createState() {

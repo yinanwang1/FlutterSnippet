@@ -6,7 +6,7 @@ import 'package:flutter_snippet/Common/my_colors.dart';
 class GradientBorder extends StatelessWidget {
   final Widget? child;
 
-  const GradientBorder({Key? key, this.child}) : super(key: key);
+  const GradientBorder({super.key, this.child});
 
   @override
   Widget build(BuildContext context) {

@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 class CircleProgressWidget extends StatefulWidget {
   final Progress progress;
 
-  const CircleProgressWidget(this.progress, {Key? key}) : super(key: key);
+  const CircleProgressWidget(this.progress, {super.key});
 
   @override
   State createState() => _CircleProgressWidgetState();

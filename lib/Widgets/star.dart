@@ -11,9 +11,8 @@ class CustomRating extends StatefulWidget {
   final double score;
   final Function(double) onRating;
 
-  const CustomRating({this.max = 5, this.star = const Star(), this.score = 0, required this.onRating, Key? key})
-      : assert(score <= max),
-        super(key: key);
+  const CustomRating({this.max = 5, this.star = const Star(), this.score = 0, required this.onRating, super.key})
+      : assert(score <= max);
 
   @override
   State createState() {
@@ -87,7 +86,7 @@ class StarScore extends StatelessWidget {
   final double score;
   final Widget? tail;
 
-  const StarScore({this.star = const Star(), required this.score, this.tail, Key? key}) : super(key: key);
+  const StarScore({this.star = const Star(), required this.score, this.tail, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -120,7 +119,7 @@ class StarScore extends StatelessWidget {
 class _StarWidget extends StatelessWidget {
   final Star star;
 
-  const _StarWidget({Key? key, this.star = const Star()}) : super(key: key);
+  const _StarWidget({this.star = const Star()});
 
   @override
   Widget build(BuildContext context) {

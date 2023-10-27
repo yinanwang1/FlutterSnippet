@@ -5,14 +5,14 @@ import 'package:flutter_snippet/aMap/const_config.dart';
 import 'package:flutter_snippet/aMap/widgets/amap_radio_group.dart';
 
 class ChangeMapTypePage extends BasePage {
-  const ChangeMapTypePage(String title, String subTitle, {super.key}) : super(title, subTitle);
+  const ChangeMapTypePage(super.title, super.subTitle, {super.key});
 
   @override
   Widget build(BuildContext context) => const _PageBody();
 }
 
 class _PageBody extends StatefulWidget {
-  const _PageBody({Key? key}) : super(key: key);
+  const _PageBody();
 
   @override
   _PageBodyState createState() => _PageBodyState();

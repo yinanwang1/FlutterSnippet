@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 ///
 ///
 class EfficientPage extends StatefulWidget {
-  const EfficientPage({Key? key}) : super(key: key);
+  const EfficientPage({super.key});
 
   @override
   State createState() => _EfficientPageState();

@@ -7,7 +7,7 @@ import 'package:flutter_snippet/aMap/const_config.dart';
 import 'package:flutter_snippet/aMap/widgets/amap_switch_button.dart';
 
 class AllMapConfigDemoPage extends BasePage {
-  const AllMapConfigDemoPage(String title, String subTitle) : super(title, subTitle);
+  const AllMapConfigDemoPage(super.title, super.subTitle, {super.key});
   @override
   Widget build(BuildContext context) {
     return _MapUiBody();

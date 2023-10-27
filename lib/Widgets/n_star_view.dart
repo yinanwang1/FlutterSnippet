@@ -11,7 +11,7 @@ class NStarView extends StatelessWidget {
   final double r;
   final Color color;
 
-  const NStarView(this.num, this.R, this.r, {this.color = Colors.blue, Key? key}) : super(key: key);
+  const NStarView(this.num, this.R, this.r, {this.color = Colors.blue, super.key});
 
   @override
   Widget build(BuildContext context) {

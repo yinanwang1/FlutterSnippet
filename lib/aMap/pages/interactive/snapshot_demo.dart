@@ -6,7 +6,7 @@ import 'package:flutter_snippet/aMap/base_page.dart';
 import 'package:flutter_snippet/aMap/const_config.dart';
 
 class SnapshotPage extends BasePage {
-  const SnapshotPage(String title, String subTitle, {super.key}) : super(title, subTitle);
+  const SnapshotPage(super.title, super.subTitle, {super.key});
   @override
   Widget build(BuildContext context) {
     return _SnapShotBody();

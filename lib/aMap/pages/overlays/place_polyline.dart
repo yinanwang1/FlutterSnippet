@@ -7,7 +7,7 @@ import 'package:flutter_snippet/aMap/const_config.dart';
 import 'package:flutter_snippet/aMap/widgets/amap_switch_button.dart';
 
 class PolylineDemoPage extends BasePage {
-  const PolylineDemoPage(String title, String subTitle) : super(title, subTitle);
+  const PolylineDemoPage(super.title, super.subTitle, {super.key});
   @override
   Widget build(BuildContext context) {
     return const _Body();

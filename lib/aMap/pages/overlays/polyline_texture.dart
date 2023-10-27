@@ -5,8 +5,7 @@ import 'package:flutter_snippet/aMap/base_page.dart';
 import 'package:flutter_snippet/aMap/const_config.dart';
 
 class PolylineTextureDemoPage extends BasePage {
-  const PolylineTextureDemoPage(String title, String subTitle)
-      : super(title, subTitle);
+  const PolylineTextureDemoPage(super.title, super.subTitle, {super.key});
   @override
   Widget build(BuildContext context) {
     return const _Body();

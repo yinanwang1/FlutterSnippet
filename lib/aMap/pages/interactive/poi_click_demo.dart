@@ -5,14 +5,14 @@ import 'package:flutter_snippet/aMap/base_page.dart';
 import 'package:flutter_snippet/aMap/const_config.dart';
 
 class PoiClickDemoPage extends BasePage {
-  const PoiClickDemoPage(String title, String subTitle, {super.key}) : super(title, subTitle);
+  const PoiClickDemoPage(super.title, super.subTitle, {super.key});
 
   @override
   Widget build(BuildContext context) => const _Body();
 }
 
 class _Body extends StatefulWidget {
-  const _Body({Key? key}) : super(key: key);
+  const _Body();
 
   @override
   _BodyState createState() => _BodyState();

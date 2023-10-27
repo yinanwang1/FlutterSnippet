@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class BlueButton extends StatelessWidget {
@@ -6,8 +5,7 @@ class BlueButton extends StatelessWidget {
   final Widget? child;
   final GestureTapCallback? onPressed;
 
-  const BlueButton({this.title, required this.onPressed, this.child, Key? key})
-      : super(key: key);
+  const BlueButton({this.title, required this.onPressed, this.child, super.key});
 
   static const enableBackgroundColor = BoxDecoration(
     gradient: LinearGradient(
@@ -32,8 +30,10 @@ class BlueButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      onTap: onPressed,
       child: Container(
         height: 50,
+        decoration: null == onPressed ? disableBackgroundColor : enableBackgroundColor,
         child: Center(
           child: child ?? Text(
             title ?? "",
@@ -43,9 +43,7 @@ class BlueButton extends StatelessWidget {
                 fontWeight: FontWeight.bold),
           ),
         ),
-        decoration: null == onPressed ? disableBackgroundColor : enableBackgroundColor,
       ),
-      onTap: onPressed,
     );
   }
 }

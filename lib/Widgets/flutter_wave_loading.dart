@@ -30,8 +30,7 @@ class FlutterWaveLoading extends StatefulWidget {
       this.borderRadius = 20,
       this.isOval = false,
       this.curve = Curves.linear,
-      Key? key})
-      : super(key: key);
+      super.key});
 
   @override
   State createState() => _FlutterWaveLoadingState();

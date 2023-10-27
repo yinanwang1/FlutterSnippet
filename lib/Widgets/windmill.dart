@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 // 风车
 
 class Windmill extends StatefulWidget {
-  const Windmill({Key? key}) : super(key: key);
+  const Windmill({super.key});
 
   @override
   State createState() => _WindmillState();

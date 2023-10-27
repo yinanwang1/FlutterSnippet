@@ -60,8 +60,7 @@ class PointsCurve extends StatelessWidget {
       this.straightLineColor = Colors.red,
       this.curveStrokeWidth = 1,
       this.curveColor = Colors.blue,
-      Key? key})
-      : super(key: key);
+      super.key});
 
   @override
   Widget build(BuildContext context) {

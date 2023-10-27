@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 class BallLoading extends StatefulWidget {
-  const BallLoading({Key? key}) : super(key: key);
+  const BallLoading({super.key});
 
   @override
   State createState() => _BallLoadingState();
@@ -73,7 +73,7 @@ class BallPinter extends CustomPainter {
 }
 
 class DoubleBallLoading extends StatefulWidget {
-  const DoubleBallLoading({Key? key}) : super(key: key);
+  const DoubleBallLoading({super.key});
 
   @override
   State createState() => _DoubleBallLoadingState();
@@ -156,7 +156,7 @@ class DoubleBallPainter extends CustomPainter {
 }
 
 class ClockPendulum extends StatefulWidget {
-  const ClockPendulum({Key? key}) : super(key: key);
+  const ClockPendulum({super.key});
 
   @override
   State createState() => _ClockPendulumState();

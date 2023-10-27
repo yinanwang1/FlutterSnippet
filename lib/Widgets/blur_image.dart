@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class BlurImageDemo extends StatefulWidget {
-  const BlurImageDemo({Key? key}) : super(key: key);
+  const BlurImageDemo({super.key});
 
   @override
   State createState() {
