@@ -750,6 +750,14 @@ Snowing()
 ```agsl
 CropCamera()
 ```
-下雪 ![渐变色边框](./images/md/cropCamera.gif)
+裁剪 ![渐变色边框](./images/md/cropCamera.gif)
 
-## 43.
+## 43. 水印
+在页面中添加一个水印。
+```
+WaterMarkInstance().addWatermark(context, "稍微长一点把");
+```
+水印 ![水印](./images/md/ic_water_mark.jpg)
+
+## 44. 
+
