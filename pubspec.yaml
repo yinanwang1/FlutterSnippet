@@ -39,9 +39,9 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
   path_provider: ^2.1.1
-  http: ^1.1.0
-  webview_flutter: ^4.4.1
-  provider: ^6.0.5
+  http: ^1.1.2
+  webview_flutter: ^4.4.2
+  provider: ^6.1.1
   badges: ^3.1.2
   # 屏幕比例尺寸配置
   flutter_screenutil: ^5.9.0
@@ -50,17 +50,17 @@ dependencies:
   # 多张图片选择 (android不支持13，会提示没有读文件权限。需要)
   images_picker: ^1.2.11
   # 状态管理
-  flutter_riverpod: ^2.4.4
+  flutter_riverpod: ^2.4.9
   # 加载框
   flutter_easyloading: ^3.0.5
   # 图标
-  fl_chart: ^0.64.0
+  fl_chart: ^0.65.0
   # 路径
   path: ^1.8.3
 
   # 生成代码
   source_gen: ^1.4.0
-  build_runner: ^2.4.6
+  build_runner: ^2.4.7
 
   # 轮播
   carousel_slider: ^4.2.1
@@ -69,21 +69,21 @@ dependencies:
   polygon: ^0.1.0
 
   # 高德地图使用
-  permission_handler: ^11.0.1
+  permission_handler: ^11.1.0
   amap_flutter_map: ^3.0.0
   amap_flutter_base: ^3.0.0
   amap_flutter_location: ^3.0.0
   # 轮播
-  flutter_slidable: ^3.0.0
+  flutter_slidable: ^3.0.1
   # 图标
   font_awesome_flutter: ^10.6.0
   # 获取设备信息
-  device_info_plus: ^9.1.0
+  device_info_plus: ^9.1.1
 
   # 自定义照相机
   camera: ^0.10.5+5
   # 动画
-  rive: ^0.11.17
+  rive: ^0.12.3
   # 播放音乐
   assets_audio_player: ^3.1.1
   # 时间格式化
@@ -99,7 +99,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^3.0.0
+  flutter_lints: ^3.0.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
