@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_snippet/Common/MaterialAppUtil.dart';
-import 'package:flutter_snippet/Widgets/water_mark.dart';
 
 import 'generated/l10n.dart';
 
@@ -27,16 +26,9 @@ class MyHomePage extends ConsumerStatefulWidget {
 
 class _MyHomePageState extends ConsumerState<MyHomePage> with SingleTickerProviderStateMixin {
   @override
-  void initState() {
-    Future.delayed(const Duration(milliseconds: 50), () {
-      WaterMarkInstance().addWatermark(context, "稍微长一点把");
-    });
-
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final String content = ' Hello World! ' * 1;
+
     return Scaffold(
         appBar: AppBar(
           title: Text(widget.title),
@@ -50,28 +42,32 @@ class _MyHomePageState extends ConsumerState<MyHomePage> with SingleTickerProvid
                 // flipY: true,
                 child: const Text('Horizontal Flip'),
               ),
-              Center(
-                heightFactor: 2.0,
-                child: Container(
-                  width: 200,
-                  height: 200,
-                  color: Colors.blue.shade50,
-                  child: const FractionalTranslation(
-                    // translation: Offset(0.5, .5),
-                    translation: Offset(.3, .1),
-                    child: Text(
-                      "FittedBox",
-                      style: TextStyle(color: Colors.black),
-                    ),
-                  ),
-                ),
-              ),
-              Container(
-                width: 200,
+              SizedBox(
+                width: 250,
                 height: 250,
-                color: Colors.blue.shade50,
-                child: const LimitedBox(
-                  child: Card(child: Text('Hello World! ')),
+                child: Stack(
+                  children: <Widget>[
+                    Container(
+                      width: 250,
+                      height: 250,
+                      color: Colors.white,
+                    ),
+                    Container(
+                      padding: const EdgeInsets.all(5.0),
+                      alignment: Alignment.topCenter,
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: <Color>[Colors.black.withAlpha(0), Colors.black12, Colors.black45],
+                        ),
+                      ),
+                      child: const Text(
+                        'Foreground Text',
+                        style: TextStyle(color: Colors.red, fontSize: 20.0),
+                      ),
+                    ),
+                  ],
                 ),
               )
             ],
