@@ -50,6 +50,7 @@ class Assets {
   static const String imagesCar = 'images/car.png';
   static const String imagesDarkSky = 'images/darkSky.jpeg';
   static const String imagesGradient = 'images/gradient.png';
+  static const String imagesIcAppealDone = 'images/ic_appeal_done.png';
   static const String imagesIcScanningFlashlightChecked = 'images/ic_scanning_flashlight_checked.png';
   static const String imagesIcScanningFlashlightUnchecked = 'images/ic_scanning_flashlight_unchecked.png';
   static const String imagesNamei = 'images/namei.png';
