@@ -42,33 +42,16 @@ class _MyHomePageState extends ConsumerState<MyHomePage> with SingleTickerProvid
                 // flipY: true,
                 child: const Text('Horizontal Flip'),
               ),
-              SizedBox(
-                width: 250,
-                height: 250,
-                child: Stack(
-                  children: <Widget>[
-                    Container(
-                      width: 250,
-                      height: 250,
-                      color: Colors.white,
-                    ),
-                    Container(
-                      padding: const EdgeInsets.all(5.0),
-                      alignment: Alignment.topCenter,
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: <Color>[Colors.black.withAlpha(0), Colors.black12, Colors.black45],
-                        ),
-                      ),
-                      child: const Text(
-                        'Foreground Text',
-                        style: TextStyle(color: Colors.red, fontSize: 20.0),
-                      ),
-                    ),
-                  ],
-                ),
+              const Row(
+                textDirection: TextDirection.rtl,
+                children: <Widget>[
+                  FlutterLogo(),
+                  Expanded(
+                    child: Text(
+                        "Flutter's hot reload helps you quickly and easily experiment, build UIs, add features, and fix bug faster. Experience sub-second reload times, without losing state, on emulators, simulators, and hardware for iOS and Android."),
+                  ),
+                  Icon(Icons.sentiment_very_satisfied),
+                ],
               )
             ],
           ),
