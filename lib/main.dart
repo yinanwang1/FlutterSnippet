@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_snippet/Common/MaterialAppUtil.dart';
+import 'package:flutter_snippet/generated/assets.dart';
 
 import 'generated/l10n.dart';
 
@@ -42,15 +43,15 @@ class _MyHomePageState extends ConsumerState<MyHomePage> with SingleTickerProvid
                 // flipY: true,
                 child: const Text('Horizontal Flip'),
               ),
-              const Row(
+               Row(
                 textDirection: TextDirection.rtl,
                 children: <Widget>[
-                  FlutterLogo(),
-                  Expanded(
+                  const FlutterLogo(),
+                  const Expanded(
                     child: Text(
                         "Flutter's hot reload helps you quickly and easily experiment, build UIs, add features, and fix bug faster. Experience sub-second reload times, without losing state, on emulators, simulators, and hardware for iOS and Android."),
                   ),
-                  Icon(Icons.sentiment_very_satisfied),
+                  Image.asset(Assets.imagesIcAppealDone),
                 ],
               )
             ],
