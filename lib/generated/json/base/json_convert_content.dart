@@ -114,7 +114,7 @@ class JsonConvert {
         if (value == null) {
           return null;
         }
-        return convertFuncMap[type]!(Map<String, dynamic>.from(value)) as T;
+        return convertFuncMap[type]!(value as Map<String, dynamic>) as T;
       } else {
         throw UnimplementedError('$type unimplemented,you can try running the app again');
       }
@@ -130,7 +130,7 @@ class JsonConvert {
       return data.map<BookList>((Map<String, dynamic> e) => BookList.fromJson(e)).toList() as M;
     }
 
-    debugPrint("${M.toString()} not found");
+    debugPrint("$M not found");
 
     return null;
   }
@@ -140,7 +140,7 @@ class JsonConvert {
       return json;
     }
     if (json is List) {
-      return _getListChildType<M>(json.map((e) => e as Map<String, dynamic>).toList());
+      return _getListChildType<M>(json.map((dynamic e) => e as Map<String, dynamic>).toList());
     } else {
       return jsonConvert.convert<M>(json);
     }

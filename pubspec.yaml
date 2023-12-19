@@ -46,7 +46,7 @@ dependencies:
   # 屏幕比例尺寸配置
   flutter_screenutil: ^5.9.0
   # 选择多张图片，需要iOS14
-  image_picker: ^1.0.4
+  image_picker: ^1.0.5
   # 多张图片选择 (android不支持13，会提示没有读文件权限。需要)
   images_picker: ^1.2.11
   # 状态管理
@@ -59,7 +59,7 @@ dependencies:
   path: ^1.8.3
 
   # 生成代码
-  source_gen: ^1.4.0
+  source_gen: ^1.5.0
   build_runner: ^2.4.7
 
   # 轮播
@@ -81,7 +81,7 @@ dependencies:
   device_info_plus: ^9.1.1
 
   # 自定义照相机
-  camera: ^0.10.5+5
+  camera: ^0.10.5+7
   # 动画
   rive: ^0.12.3
   # 播放音乐
