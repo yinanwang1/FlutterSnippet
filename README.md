@@ -759,5 +759,12 @@ WaterMarkInstance().addWatermark(context, "稍微长一点把");
 ```
 水印 ![水印](./images/md/ic_water_mark.jpg)
 
-## 44. 
+## 44. 自定义图标
+在高德地图上展示一个自定义的Marker
+```
+const DemoAMapMarkers()
+```
+自定义图标 ![自定义图标](./images/md/customMarker.jpg)
+
+## 45. 
 
