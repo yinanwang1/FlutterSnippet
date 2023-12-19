@@ -198,7 +198,7 @@ class BaseAMapState extends ConsumerState<BaseAMap> {
   void initState() {
     currentLatLng = widget.centerLatLng;
 
-    _addLocationListen();
+    Future.delayed(const Duration(milliseconds: 2000), _addLocationListen);
 
     super.initState();
   }

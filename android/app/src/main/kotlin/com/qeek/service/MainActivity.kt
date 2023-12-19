@@ -1,4 +1,4 @@
-package com.example.flutter_learn
+package com.qeek.service
 
 import io.flutter.embedding.android.FlutterActivity
 

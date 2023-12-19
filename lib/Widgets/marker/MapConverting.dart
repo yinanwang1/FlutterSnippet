@@ -1,4 +1,5 @@
 import 'package:amap_flutter_base/amap_flutter_base.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_snippet/Widgets/marker/MapItem.dart';
 import 'package:flutter_snippet/generated/my_images.dart';
 
@@ -54,16 +55,16 @@ class MapConverting {
 class BatteryWeakListDataItems {
   BatteryWeakListDataItems({this.bikeNo, this.power, this.coordinate});
 
-  String? bikeNo;
+  final String? bikeNo;
 
   //电量百分比
-  int? power;
-  CoordinateEntity? coordinate;
+  final int? power;
+  final CoordinateEntity? coordinate;
 }
 
 class CoordinateEntity {
-  double? longitude;
-  double? latitude;
+  final double? longitude;
+  final double? latitude;
 
-  CoordinateEntity({double? longitude, double? latitude});
+  CoordinateEntity({this.longitude, this.latitude});
 }

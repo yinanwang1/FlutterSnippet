@@ -51,7 +51,6 @@ class _DemoAMapMarkersState extends State<DemoAMapMarkers> {
 
     var mapItems = MapConverting.asMapItemForExchange(items);
     var markerItems = await compute(MapConverting.asMarkerItem, mapItems);
-    debugPrint("markerItems is $markerItems");
     _baseAMapState.currentState?.refreshMarkers(markerItems);
 
     var bounds = computeBounds(latLngList);
