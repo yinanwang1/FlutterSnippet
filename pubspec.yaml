@@ -89,6 +89,12 @@ dependencies:
   # 时间格式化
   date_format: ^2.0.7
 
+  url_launcher: ^6.2.2
+  # 本地键值对缓存
+  shared_preferences: ^2.2.2
+  # 集合方法。方便数组处理
+  collection: ^1.18.0
+
 
 dev_dependencies:
   flutter_test:

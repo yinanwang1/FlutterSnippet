@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_snippet/Common/my_colors.dart';
+import 'package:flutter_snippet/generated/my_images.dart';
 
 class NoData extends StatelessWidget {
   final String? message;
@@ -14,7 +15,7 @@ class NoData extends StatelessWidget {
           margin: const EdgeInsets.only(top: 30),
           alignment: Alignment.center,
           child: const Image(
-            image: AssetImage("images/no_task.png"),
+            image: AssetImage(MyImages.imagesNoTask),
             width: 100,
             height: 100,
           ),

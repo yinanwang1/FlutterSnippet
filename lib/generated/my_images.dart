@@ -51,9 +51,17 @@ class MyImages {
   static const String imagesDarkSky = 'images/darkSky.jpeg';
   static const String imagesGradient = 'images/gradient.png';
   static const String imagesIcAppealDone = 'images/ic_appeal_done.png';
+  static const String imagesIcBlueArrow = 'images/ic_blue_arrow.png';
+  static const String imagesIcBlueArrowIos = 'images/ic_blue_arrow_ios.png';
+  static const String imagesIcHomepageSearchLocationBg = 'images/ic_homepage_search_location_bg.png';
+  static const String imagesIcLocation = 'images/ic_location.png';
+  static const String imagesIcNormalBikeHollow = 'images/ic_normal_bike_hollow.png';
+  static const String imagesIcNormalBikeHollowBigger = 'images/ic_normal_bike_hollow_bigger.png';
   static const String imagesIcScanningFlashlightChecked = 'images/ic_scanning_flashlight_checked.png';
   static const String imagesIcScanningFlashlightUnchecked = 'images/ic_scanning_flashlight_unchecked.png';
+  static const String imagesMyLocationIconBlue = 'images/my_location_icon_blue.png';
   static const String imagesNamei = 'images/namei.png';
+  static const String imagesNoTask = 'images/no_task.png';
   static const String imagesNumber = 'images/number.png';
   static const String mdBlurImage = 'images/md/blurImage.png';
   static const String mdBubbleChat = 'images/md/bubbleChat.jpeg';

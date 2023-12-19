@@ -6,6 +6,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_snippet/Common/my_colors.dart';
 import 'package:flutter_snippet/Widgets/books/book_detail.dart';
+import 'package:flutter_snippet/generated/my_images.dart';
 import 'package:flutter_snippet/model/book_entity.dart';
 
 /// 小学生课文朗读
@@ -52,7 +53,7 @@ class _BooksState extends ConsumerState<Books> {
                 child: Opacity(
               opacity: 0.2,
               child: Image.asset(
-                "images/gradient.png",
+                MyImages.imagesGradient,
                 fit: BoxFit.fill,
               ),
             )),

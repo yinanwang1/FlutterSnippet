@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_snippet/generated/my_images.dart';
 
 class ProgressImage extends StatelessWidget {
   final double progress;
@@ -13,7 +14,7 @@ class ProgressImage extends StatelessWidget {
       alignment: Alignment.center,
       children: [
         Image.asset(
-          "images/namei.png",
+          MyImages.imagesNamei,
           width: 150,
           height: 150,
           fit: BoxFit.cover,

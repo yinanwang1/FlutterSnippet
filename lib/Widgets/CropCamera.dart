@@ -9,6 +9,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_snippet/Common/ImageUtils.dart';
 import 'package:flutter_snippet/Common/my_alert_view.dart';
 import 'package:flutter_snippet/Common/my_buttons.dart';
+import 'package:flutter_snippet/generated/my_images.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -263,7 +264,7 @@ class _CropCameraState extends State<CropCamera> {
                     builder: (_, value, __) {
                       return Center(
                         child: Image.asset(
-                            value ? "images/ic_scanning_flashlight_checked.png" : "images/ic_scanning_flashlight_unchecked.png",
+                            value ? MyImages.imagesIcScanningFlashlightChecked : MyImages.imagesIcScanningFlashlightUnchecked,
                             width: 44,
                             height: 44),
                       );

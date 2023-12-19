@@ -4,6 +4,7 @@ import 'dart:ui' as ui;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_snippet/generated/my_images.dart';
 
 class RunCar extends StatefulWidget {
   const RunCar({super.key});
@@ -58,7 +59,7 @@ class _RunCarState extends State<RunCar> with SingleTickerProviderStateMixin {
   }
 
   void _loadImage() async {
-    _image = await _loadImageFromAssets("images/car.png");
+    _image = await _loadImageFromAssets(MyImages.imagesCar);
     setState(() {});
   }
 

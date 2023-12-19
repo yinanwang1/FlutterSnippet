@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_snippet/generated/my_images.dart';
 
 class Lightning extends StatefulWidget {
   const Lightning({super.key});
@@ -58,7 +59,7 @@ class _LightningState extends State<Lightning> with SingleTickerProviderStateMix
           width: windowSize.width,
           height: windowSize.height,
           child: Image.asset(
-            "images/darkSky.jpeg",
+            MyImages.imagesDarkSky,
             fit: BoxFit.fitHeight,
           ),
         ),

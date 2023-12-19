@@ -3,6 +3,7 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_snippet/generated/my_images.dart';
 
 class BlurImageDemo extends StatefulWidget {
   const BlurImageDemo({super.key});
@@ -29,7 +30,7 @@ class _BlurImageDemoState extends State<BlurImageDemo> with SingleTickerProvider
   }
 
   Future<void> init() async {
-    final ByteData data = await rootBundle.load('images/namei.png');
+    final ByteData data = await rootBundle.load(MyImages.imagesNamei);
     fillImage = await loadImage(Uint8List.view(data.buffer));
   }
 
