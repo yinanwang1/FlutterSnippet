@@ -50,26 +50,11 @@ class _MyHomePageState extends ConsumerState<MyHomePage> with SingleTickerProvid
             ),
             ElevatedButton(
                 onPressed: () {
-                  _test();
                 },
                 child: const Text("改变")),
             Image.asset(MyImages.imagesIcNormalBikeHollowBigger),
           ],
         )));
-  }
-
-  void _test() {
-    var listA = [1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4];
-    var listB = [1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4, 1, 2, 3, 4];
-
-    var result = [];
-    for (var i = 0, j = 0; i < listA.length; i++, j++) {
-      var answer = listB[j] + (listA[i] - 1) % 4 * 4;
-
-      result.add(answer);
-    }
-
-    debugPrint("result is $result");
   }
 }
 

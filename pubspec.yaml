@@ -41,7 +41,7 @@ dependencies:
   path_provider: ^2.1.2
   http: ^1.2.1
   webview_flutter: ^4.7.0
-  provider: ^6.1.1
+  provider: ^6.1.2
   badges: ^3.1.2
   # 屏幕比例尺寸配置
   flutter_screenutil: ^5.9.0
@@ -89,7 +89,7 @@ dependencies:
   # 时间格式化
   date_format: ^2.0.7
 
-  url_launcher: ^6.2.4
+  url_launcher: ^6.2.5
   # 本地键值对缓存
   shared_preferences: ^2.2.2
   # 集合方法。方便数组处理
