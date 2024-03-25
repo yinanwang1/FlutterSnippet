@@ -48,10 +48,7 @@ class _MyHomePageState extends ConsumerState<MyHomePage> with SingleTickerProvid
                 child: Container(color: Colors.cyan, child: const Text("我是谁")),
               ),
             ),
-            ElevatedButton(
-                onPressed: () {
-                },
-                child: const Text("改变")),
+            ElevatedButton(onPressed: () {}, child: const Text("改变")),
             Image.asset(MyImages.imagesIcNormalBikeHollowBigger),
           ],
         )));

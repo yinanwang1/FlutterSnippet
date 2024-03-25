@@ -38,6 +38,9 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
+  # 路径 工具
+  path: ^1.9.0
+  # 文件路径
   path_provider: ^2.1.2
   http: ^1.2.1
   webview_flutter: ^4.7.0
@@ -50,13 +53,11 @@ dependencies:
   # 多张图片选择 (android不支持13，会提示没有读文件权限。需要)
   images_picker: ^1.2.11
   # 状态管理
-  flutter_riverpod: ^2.4.10
+  flutter_riverpod: ^2.5.1
   # 加载框
   flutter_easyloading: ^3.0.5
   # 图标
   fl_chart: ^0.66.2
-  # 路径
-  path: ^1.9.0
 
   # 生成代码
   source_gen: ^1.5.0
@@ -74,7 +75,7 @@ dependencies:
   amap_flutter_base: ^3.0.0
   amap_flutter_location: ^3.0.0
   # 轮播
-  flutter_slidable: ^3.0.1
+  flutter_slidable: ^3.1.0
   # 图标
   font_awesome_flutter: ^10.7.0
   # 获取设备信息
@@ -83,7 +84,7 @@ dependencies:
   # 自定义照相机
   camera: ^0.10.5+9
   # 动画
-  rive: ^0.12.4
+  rive: ^0.13.1
   # 播放音乐
   assets_audio_player: ^3.1.1
   # 时间格式化
@@ -94,6 +95,14 @@ dependencies:
   shared_preferences: ^2.2.2
   # 集合方法。方便数组处理
   collection: ^1.18.0
+
+  # 蓝牙连接功能
+  flutter_blue_plus: ^1.31.17
+  # md5 加密
+  crypto: ^3.0.3
+
+  #国际化
+  intl: ^0.18.1
 
 
 dev_dependencies:
