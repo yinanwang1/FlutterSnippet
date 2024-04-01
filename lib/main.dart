@@ -26,9 +26,8 @@ class MyHomePage extends ConsumerStatefulWidget {
 }
 
 class _MyHomePageState extends ConsumerState<MyHomePage> with SingleTickerProviderStateMixin {
-  EdgeInsets _edgeInsets = EdgeInsets.zero;
 
-  Random _random = Random();
+  List<String> _items = List.generate(100, (index) => "$index");
 
   @override
   Widget build(BuildContext context) {
@@ -36,22 +35,24 @@ class _MyHomePageState extends ConsumerState<MyHomePage> with SingleTickerProvid
         appBar: AppBar(
           title: Text(widget.title),
         ),
-        body: Center(
-            child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-              color: Colors.green,
-              child: AnimatedPadding(
-                duration: const Duration(seconds: 1),
-                padding: _edgeInsets,
-                child: Container(color: Colors.cyan, child: const Text("我是谁")),
+        body: ReorderableList(
+          onReorder: (int oldIndex, int newIndex) {
+            setState(() {
+              if (oldIndex < newIndex) {
+                newIndex -= 1;
+              }
+              final item = _items.removeAt(oldIndex);
+              _items.insert(newIndex , item);
+              });
+          }, itemBuilder: (BuildContext context, int index) {
+            return Card(
+              key: Key(index.toString()),
+              child: ListTile(
+                title: Text('Item $index'),
               ),
-            ),
-            ElevatedButton(onPressed: () {}, child: const Text("改变")),
-            Image.asset(MyImages.imagesIcNormalBikeHollowBigger),
-          ],
-        )));
+            );
+          }, itemCount: 100,
+        ));
   }
 }
 
