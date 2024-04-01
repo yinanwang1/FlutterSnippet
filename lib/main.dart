@@ -26,7 +26,6 @@ class MyHomePage extends ConsumerStatefulWidget {
 }
 
 class _MyHomePageState extends ConsumerState<MyHomePage> with SingleTickerProviderStateMixin {
-
   List<String> _items = List.generate(100, (index) => "$index");
 
   @override
@@ -35,23 +34,24 @@ class _MyHomePageState extends ConsumerState<MyHomePage> with SingleTickerProvid
         appBar: AppBar(
           title: Text(widget.title),
         ),
-        body: ReorderableList(
+        body: ReorderableListView(
           onReorder: (int oldIndex, int newIndex) {
             setState(() {
               if (oldIndex < newIndex) {
                 newIndex -= 1;
               }
               final item = _items.removeAt(oldIndex);
-              _items.insert(newIndex , item);
-              });
-          }, itemBuilder: (BuildContext context, int index) {
-            return Card(
-              key: Key(index.toString()),
-              child: ListTile(
-                title: Text('Item $index'),
-              ),
-            );
-          }, itemCount: 100,
+              _items.insert(newIndex, item);
+            });
+          },
+          children: _items
+              .map((index) => Card(
+                    key: Key(index.toString()),
+                    child: ListTile(
+                      title: Text('Item $index'),
+                    ),
+                  ))
+              .toList(),
         ));
   }
 }
