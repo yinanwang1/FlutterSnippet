@@ -108,7 +108,7 @@ class BitmapDescriptorFactory {
     RenderView renderView = RenderView(
       child: RenderPositionedBox(alignment: alignment, child: repaintBoundary),
       configuration: ViewConfiguration(
-        size: size,
+        logicalConstraints: BoxConstraints(maxWidth: size.width, maxHeight: size.height),
         devicePixelRatio: devicePixelRatio,
       ),
       view: View.of(context),
