@@ -1,6 +1,5 @@
 import 'dart:math';
 
-import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -174,34 +173,37 @@ class _BookDetailState extends ConsumerState<BookDetail> {
   }
 
   Widget _playingButton(String mp3, bool playing) {
-    return AudioWidget.assets(
-      path: mp3,
-      play: playing,
-      loopMode: LoopMode.single,
-      onReadyToPlay: (duration) {
-        //onReadyToPlay
-        debugPrint("onReadyToPlay is $duration");
-      },
-      onPositionChanged: (current, duration) {
-        //onPositionChanged
-        // debugPrint("onPositionChanged current is $current, duration is $duration");
-        _currentNotifier.value = current;
-        _durationNotifier.value = duration;
-      },
-      onFinished: _playNext,
-      child: ElevatedButton(
-        onPressed: () {
-          _valueNotifier.value = !playing;
-        },
-        style: ButtonStyle(
-            backgroundColor: playing
-                ? MaterialStateProperty.all(Theme.of(context).primaryColor.withOpacity(0.3))
-                : MaterialStateProperty.all(Theme.of(context).primaryColor)),
-        child: Text(
-          playing ? "暂停" : "播放",
-        ),
-      ),
-    );
+    return Container();
+
+    // 移除了 assets_audio_player
+    // return AudioWidget.assets(
+    //   path: mp3,
+    //   play: playing,
+    //   loopMode: LoopMode.single,
+    //   onReadyToPlay: (duration) {
+    //     //onReadyToPlay
+    //     debugPrint("onReadyToPlay is $duration");
+    //   },
+    //   onPositionChanged: (current, duration) {
+    //     //onPositionChanged
+    //     // debugPrint("onPositionChanged current is $current, duration is $duration");
+    //     _currentNotifier.value = current;
+    //     _durationNotifier.value = duration;
+    //   },
+    //   onFinished: _playNext,
+    //   child: ElevatedButton(
+    //     onPressed: () {
+    //       _valueNotifier.value = !playing;
+    //     },
+    //     style: ButtonStyle(
+    //         backgroundColor: playing
+    //             ? MaterialStateProperty.all(Theme.of(context).primaryColor.withOpacity(0.3))
+    //             : MaterialStateProperty.all(Theme.of(context).primaryColor)),
+    //     child: Text(
+    //       playing ? "暂停" : "播放",
+    //     ),
+    //   ),
+    // );
   }
 
   Widget _progressWidget() {

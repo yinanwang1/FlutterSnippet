@@ -1,116 +1,48 @@
 plugins {
     id "com.android.application"
     id "kotlin-android"
+    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id "dev.flutter.flutter-gradle-plugin"
 }
 
-def localProperties = new Properties()
-def localPropertiesFile = rootProject.file('local.properties')
-if (localPropertiesFile.exists()) {
-    localPropertiesFile.withReader('UTF-8') { reader ->
-        localProperties.load(reader)
-    }
-}
-
-def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
-if (flutterVersionCode == null) {
-    flutterVersionCode = '1'
-}
-
-def flutterVersionName = localProperties.getProperty('flutter.versionName')
-if (flutterVersionName == null) {
-    flutterVersionName = '1.0'
-}
-
 android {
-    namespace "com.example.flutter_learn"
-    compileSdk flutter.compileSdkVersion
-    ndkVersion flutter.ndkVersion
-    compileSdkVersion 34
-    buildToolsVersion "34.0.0"
+    namespace = "com.example.flutter_snippet"
+    compileSdk = flutter.compileSdkVersion
+    ndkVersion = flutter.ndkVersion
+
+    kotlin {
+        jvmToolchain(21)
+    }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
 
     kotlinOptions {
-        jvmTarget = '1.8'
-    }
-
-    sourceSets {
-        main.java.srcDirs += 'src/main/kotlin'
+        jvmTarget = '21'
     }
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.example.flutter_learn"
+        applicationId = "com.example.flutter_snippet"
         // You can update the following values to match your application needs.
-        // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
-        minSdkVersion 21
-        targetSdkVersion 34
-        targetSdkVersion flutter.targetSdkVersion
-        versionCode flutterVersionCode.toInteger()
-        versionName flutterVersionName
-    }
-
-    signingConfigs {
-        release {
-            storeFile file("../../keys/release")
-            storePassword "123456"
-            keyAlias "key0"
-            keyPassword "123456"
-        }
+        // For more information, see: https://flutter.dev/to/review-gradle-config.
+        minSdk = flutter.minSdkVersion
+        targetSdk = flutter.targetSdkVersion
+        versionCode = flutter.versionCode
+        versionName = flutter.versionName
     }
 
     buildTypes {
-        debug {
-            manifestPlaceholders = [DEBUG: "true"]
-
-            // 是否进行混淆
-            minifyEnabled true
-            shrinkResources true
-            // 混淆文件的位置
-            proguardFiles 'proguard-rules.pro'
-
-            signingConfig signingConfigs.release
-        }
-
-        profile {
-            manifestPlaceholders = [DEBUG: "true"]
-            /* 是否应该生成可调试的apk */
-            debuggable true
-            // 是否进行混淆
-            minifyEnabled true
-            shrinkResources true
-            zipAlignEnabled true //是否启用zipAlign压缩
-            // 混淆文件的位置
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
-        }
-
         release {
-            manifestPlaceholders = [DEBUG: "false"]
-            /* 是否应该生成可调试的apk */
-            debuggable false
-            // 是否进行混淆
-            minifyEnabled true
-            shrinkResources true
-            zipAlignEnabled true //是否启用zipAlign压缩
-            // 混淆文件的位置
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
+            // TODO: Add your own signing config for the release build.
+            // Signing with the debug keys for now, so `flutter run --release` works.
+            signingConfig = signingConfigs.debug
         }
     }
 }
 
 flutter {
-    source '../..'
-}
-
-dependencies {
-    //3D地图so及jar
-    api 'com.amap.api:3dmap:10.0.600'
-    //搜索功能
-    api 'com.amap.api:search:9.7.0'
+    source = "../.."
 }
