@@ -50,13 +50,17 @@ class _CalculatorState extends State<Calculator> {
                 color: Colors.white,
                 border: Border.all(color: MyColors.title, width: 1),
                 borderRadius: const BorderRadius.all(Radius.circular(3))),
-            child: Text(number, style: const TextStyle(fontSize: 20, color: MyColors.title)),
+            child: Text(number,
+                style: const TextStyle(fontSize: 20, color: MyColors.title)),
           ),
           const Padding(padding: EdgeInsets.only(top: 8)),
           Expanded(
               child: GridView.builder(
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 4, childAspectRatio: 1.5, mainAxisSpacing: 3, crossAxisSpacing: 3),
+                crossAxisCount: 4,
+                childAspectRatio: 1.5,
+                mainAxisSpacing: 3,
+                crossAxisSpacing: 3),
             itemBuilder: (_, index) {
               return Container(
                 alignment: Alignment.center,
