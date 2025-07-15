@@ -704,7 +704,7 @@ IProject project = DataAccess.createProject();
 project.insertProject(Project("Woo", "1"));
 project.getProject("123");
 ```
-观察者 ![观察者](./images/md/facotry.jpg)
+观察者 ![抽象工厂模式](./images/md/facotry.jpg)
 
 ## 40. 渐变色边框
 展示渐变色边框。

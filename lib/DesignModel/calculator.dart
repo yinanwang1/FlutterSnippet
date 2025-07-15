@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_snippet/Common/my_colors.dart';
 
+// 单工厂模式
 class Calculator extends StatefulWidget {
   const Calculator({super.key});
 

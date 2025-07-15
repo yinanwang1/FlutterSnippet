@@ -84,7 +84,7 @@ dependencies:
   # 自定义照相机
   camera: ^0.11.1
   # 动画
-  rive: ^0.13.20
+#  rive: ^0.13.20
   # 时间格式化
   date_format: ^2.0.9
 
