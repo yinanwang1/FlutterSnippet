@@ -51,7 +51,7 @@ dependencies:
   # 选择多张图片，需要iOS14
   image_picker: ^1.1.2
   # 多张图片选择 (android不支持13，会提示没有读文件权限。需要)
-  images_picker: ^1.2.11
+#  images_picker: ^1.2.11
   # 状态管理
   flutter_riverpod: ^2.6.1
   # 加载框
@@ -61,7 +61,7 @@ dependencies:
 
   # 生成代码
   source_gen: ^2.0.0
-  build_runner: ^2.5.0
+  build_runner: ^2.5.4
 
   # 轮播
   carousel_slider_plus: ^7.1.1
@@ -70,7 +70,7 @@ dependencies:
   polygon: ^0.1.0
 
   # 高德地图使用
-  permission_handler: ^12.0.0+1
+  permission_handler: ^12.0.1
   amap_flutter_map: ^3.0.0
   amap_flutter_base: ^3.0.0
   amap_flutter_location: ^3.0.0
@@ -82,13 +82,13 @@ dependencies:
   device_info_plus: ^11.5.0
 
   # 自定义照相机
-  camera: ^0.11.1
+  camera: ^0.11.2
   # 动画
 #  rive: ^0.13.20
   # 时间格式化
   date_format: ^2.0.9
 
-  url_launcher: ^6.3.1
+  url_launcher: ^6.3.2
   # 本地键值对缓存
   shared_preferences: ^2.5.3
   # 集合方法。方便数组处理
