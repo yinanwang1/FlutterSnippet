@@ -12,10 +12,32 @@ import 'package:flutter_snippet/model/book_entity.dart';
 /// 小学生课文朗读
 
 // 课文列表
-final booksProvider = StateProvider<List<BookList>>((ref) => []);
+final booksProvider = NotifierProvider<BooksNotifier, List<BookList>>(BooksNotifier.new);
+
+class BooksNotifier extends Notifier<List<BookList>> {
+  @override
+  List<BookList> build() {
+    return [];
+  }
+
+  void setValue(List<BookList> value) {
+    state = value;
+  }
+}
 
 // 选中的课文
-final selectedBookProvider = StateProvider<BookList?>((_) => null);
+final selectedBookProvider = NotifierProvider<SelectedBook, BookList?>(SelectedBook.new);
+
+class SelectedBook extends Notifier<BookList?> {
+  @override
+  BookList? build() {
+    return null;
+  }
+
+  void setValue(BookList? value) {
+    state = value;
+  }
+}
 
 class Books extends ConsumerStatefulWidget {
   const Books({super.key});
@@ -39,7 +61,7 @@ class _BooksState extends ConsumerState<Books> {
           "小学生课文朗读",
           style: Theme.of(context).textTheme.titleLarge?.copyWith(color: Colors.white),
         ),
-        backgroundColor: MyColors.randomColor().withOpacity(0.5),
+        backgroundColor: MyColors.randomColor().withValues(alpha: 0.5),
       ),
       body: Consumer(builder: (_, ref, __) {
         var data = ref.watch(booksProvider);
@@ -95,7 +117,7 @@ class _BooksState extends ConsumerState<Books> {
         child: Text(bookList.title ?? "", style: Theme.of(context).textTheme.titleLarge?.copyWith(color: Colors.white)),
       ),
       onTap: () {
-        ref.read(selectedBookProvider.notifier).update((state) => bookList);
+        ref.read(selectedBookProvider.notifier).setValue(bookList);
         Navigator.of(context).push(MaterialPageRoute(builder: (_) {
           return const BookDetail();
         }));
@@ -107,7 +129,7 @@ class _BooksState extends ConsumerState<Books> {
     try {
       String books = await rootBundle.loadString("assets/books/grade2First.json");
       BookEntity entity = BookEntity.fromJson(jsonDecode(books));
-      ref.read(booksProvider.notifier).update((state) => entity.list ?? []);
+      ref.read(booksProvider.notifier).setValue(entity.list ?? []);
     } catch (e) {
       EasyLoading.showToast(e.toString());
 

@@ -128,7 +128,7 @@ class _BookDetailState extends ConsumerState<BookDetail> {
     if (null == mp3 || mp3.isEmpty) {
       return Container(
         height: audioPlayingHeight,
-        color: MyColors.randomColor().withOpacity(0.3),
+        color: MyColors.randomColor().withValues(alpha: 0.3),
         alignment: Alignment.center,
         child: const Text("没有音频文件"),
       );
@@ -246,6 +246,6 @@ class _BookDetailState extends ConsumerState<BookDetail> {
       index = 0;
     }
 
-    ref.read(selectedBookProvider.notifier).update((state) => books[index]);
+    ref.read(selectedBookProvider.notifier).setValue(books[index]);
   }
 }
