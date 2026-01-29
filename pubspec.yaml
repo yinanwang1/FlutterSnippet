@@ -42,18 +42,18 @@ dependencies:
   path: ^1.9.1
   # 文件路径
   path_provider: ^2.1.5
-  http: ^1.5.0
+  http: ^1.6.0
   webview_flutter: ^4.13.0
   provider: ^6.1.5+1
   badges: ^3.1.2
   # 屏幕比例尺寸配置
   flutter_screenutil: ^5.9.3
   # 选择多张图片，需要iOS14
-  image_picker: ^1.2.0
+  image_picker: ^1.2.1
   # 多张图片选择 (android不支持13，会提示没有读文件权限。需要)
 #  images_picker: ^1.2.11
   # 状态管理
-  flutter_riverpod: ^3.0.0
+  flutter_riverpod: ^3.1.0
   # 加载框
   flutter_easyloading: ^3.0.5
   # 图标
@@ -75,14 +75,14 @@ dependencies:
   amap_flutter_base: ^3.0.0
   amap_flutter_location: ^3.0.0
   # 轮播
-  flutter_slidable: ^4.0.1
+  flutter_slidable: ^4.0.3
   # 图标
-  font_awesome_flutter: ^10.10.0
+  font_awesome_flutter: ^10.12.0
   # 获取设备信息
-  device_info_plus: ^12.1.0
+  device_info_plus: ^12.3.0
 
   # 自定义照相机
-  camera: ^0.11.2
+  camera: ^0.11.3
   # 动画
 #  rive: ^0.13.20
   # 时间格式化
@@ -90,14 +90,14 @@ dependencies:
 
   url_launcher: ^6.3.2
   # 本地键值对缓存
-  shared_preferences: ^2.5.3
+  shared_preferences: ^2.5.4
   # 集合方法。方便数组处理
   collection: ^1.19.1
 
   # 蓝牙连接功能
-  flutter_blue_plus: ^1.36.8
+  flutter_blue_plus: ^2.1.0
   # md5 加密
-  crypto: ^3.0.6
+  crypto: ^3.0.7
 
   #国际化
   intl: ^0.20.2
