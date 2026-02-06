@@ -43,7 +43,7 @@ dependencies:
   # 文件路径
   path_provider: ^2.1.5
   http: ^1.6.0
-  webview_flutter: ^4.13.0
+  webview_flutter: ^4.13.1
   provider: ^6.1.5+1
   badges: ^3.1.2
   # 屏幕比例尺寸配置
@@ -53,7 +53,7 @@ dependencies:
   # 多张图片选择 (android不支持13，会提示没有读文件权限。需要)
 #  images_picker: ^1.2.11
   # 状态管理
-  flutter_riverpod: ^3.1.0
+  flutter_riverpod: ^3.2.1
   # 加载框
   flutter_easyloading: ^3.0.5
   # 图标
@@ -101,6 +101,9 @@ dependencies:
 
   #国际化
   intl: ^0.20.2
+
+  # android的全面屏适配
+  edge_to_edge: ^0.0.2
 
 
 dev_dependencies:

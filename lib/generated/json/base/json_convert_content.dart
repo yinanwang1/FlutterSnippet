@@ -11,6 +11,15 @@ JsonConvert jsonConvert = JsonConvert();
 typedef JsonConvertFunction<T> = T Function(Map<String, dynamic> json);
 typedef EnumConvertFunction<T> = T Function(String value);
 typedef ConvertExceptionHandler = void Function(Object error, StackTrace stackTrace);
+extension MapSafeExt<K, V> on Map<K, V> {
+  T? getOrNull<T>(K? key) {
+    if (!containsKey(key) || key == null) {
+      return null;
+    } else {
+      return this[key] as T?;
+    }
+  }
+}
 
 class JsonConvert {
   static ConvertExceptionHandler? onError;
@@ -114,7 +123,12 @@ class JsonConvert {
         if (value == null) {
           return null;
         }
-        return convertFuncMap[type]!(value as Map<String, dynamic>) as T;
+        var covertFunc = convertFuncMap[type]!;
+        if (covertFunc is Map<String, dynamic>) {
+          return covertFunc(value as Map<String, dynamic>) as T;
+        } else {
+          return covertFunc(Map<String, dynamic>.from(value)) as T;
+        }
       } else {
         throw UnimplementedError('$type unimplemented,you can try running the app again');
       }
