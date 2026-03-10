@@ -2,7 +2,7 @@ import 'package:edge_to_edge/edge_to_edge.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_snippet/generated/l10n.dart';
+import 'package:flutter_snippet/l10n/app_localizations.dart';
 
 final snippetLocaleProvider = NotifierProvider<SnippetLocaleNotifier, Locale>(SnippetLocaleNotifier.new);
 
@@ -28,13 +28,8 @@ class MyApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
       locale: ref.watch(snippetLocaleProvider),
-        supportedLocales: S.delegate.supportedLocales,
-        localizationsDelegates: [
-          S.delegate,
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
+        supportedLocales: AppLocalizations.supportedLocales,
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
         home: MyHomePage(
           title: "学习web",
         ));
@@ -70,7 +65,7 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
       body: Center(
           child: Column(
         children: [
-          Text(S.of(context).title),
+          Text(AppLocalizations.of(context)?.title ?? ""),
           TextButton(
             onPressed: () {
               var locale = ref.read(snippetLocaleProvider);
@@ -80,7 +75,7 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
                 ref.read(snippetLocaleProvider.notifier).setValue(Locale('zh', 'CN'));
               }
             },
-            child: Text(S.of(context).title),
+            child: Text(AppLocalizations.of(context)?.comeOn ?? ""),
           ),
         ],
       )),

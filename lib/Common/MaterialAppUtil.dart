@@ -7,7 +7,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_snippet/Common/my_colors.dart';
-import 'package:flutter_snippet/generated/l10n.dart';
+import 'package:flutter_snippet/l10n/app_localizations.dart';
 
 RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();
 
@@ -27,10 +27,10 @@ Widget createMaterialApp(RouteFactory? onGenerateRoute, Map<String, WidgetBuilde
     // 必须有这个主题，不然用户端不能审核通过
     title: "美丽新世界",
     localizationsDelegates: const [
-      S.delegate,
       GlobalMaterialLocalizations.delegate,
       GlobalWidgetsLocalizations.delegate,
-      GlobalCupertinoLocalizations.delegate
+      GlobalCupertinoLocalizations.delegate,
+      AppLocalizations.delegate
     ],
     supportedLocales: const [
       Locale('zh', 'CH'),
