@@ -37,7 +37,7 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.8
+  cupertino_icons: ^1.0.9
   # 路径 工具
   path: ^1.9.1
   # 文件路径
@@ -45,26 +45,26 @@ dependencies:
   http: ^1.6.0
   webview_flutter: ^4.13.1
   provider: ^6.1.5+1
-  badges: ^3.1.2
+  badges: ^3.2.0
   # 屏幕比例尺寸配置
   flutter_screenutil: ^5.9.3
   # 选择多张图片，需要iOS14
-  image_picker: ^1.2.1
+  image_picker: ^1.2.2
   # 多张图片选择 (android不支持13，会提示没有读文件权限。需要)
 #  images_picker: ^1.2.11
   # 状态管理
-  flutter_riverpod: ^3.2.1
+  flutter_riverpod: ^3.3.1
   # 加载框
   flutter_easyloading: ^3.0.5
   # 图标
-  fl_chart: ^1.1.1
+  fl_chart: ^1.2.0
 
   # 生成代码
 #  source_gen: ^4.0.1
 #  build_runner: ^2.8.0
 
   # 轮播
-  carousel_slider_plus: ^7.1.1
+  carousel_slider_plus: ^7.1.2
 
   # 绘制多边形
   polygon: ^0.1.0
@@ -77,25 +77,25 @@ dependencies:
   # 轮播
   flutter_slidable: ^4.0.3
   # 图标
-  font_awesome_flutter: ^10.12.0
+  font_awesome_flutter: ^11.0.0
   # 获取设备信息
-  device_info_plus: ^12.3.0
+  device_info_plus: ^13.1.0
 
   # 自定义照相机
-  camera: ^0.11.3
+  camera: ^0.12.0+1
   # 动画
-#  rive: ^0.13.20
+  rive: ^0.13.20
   # 时间格式化
   date_format: ^2.0.9
 
   url_launcher: ^6.3.2
   # 本地键值对缓存
-  shared_preferences: ^2.5.4
+  shared_preferences: ^2.5.5
   # 集合方法。方便数组处理
   collection: ^1.19.1
 
   # 蓝牙连接功能
-  flutter_blue_plus: ^2.1.0
+  flutter_blue_plus: ^2.3.2
   # md5 加密
   crypto: ^3.0.7
 
@@ -105,6 +105,8 @@ dependencies:
   # android的全面屏适配
   edge_to_edge: ^0.0.2
 
+  # bloc 消息提醒
+  flutter_bloc: ^9.1.1
 
 dev_dependencies:
   flutter_test:

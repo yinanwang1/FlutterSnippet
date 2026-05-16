@@ -1,8 +1,7 @@
-import 'dart:math';
-
 import 'package:edge_to_edge/edge_to_edge.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_snippet/Widgets/bloc/bloc_test.dart';
 import 'package:flutter_snippet/l10n/app_localizations.dart';
 
 final snippetLocaleProvider = NotifierProvider<SnippetLocaleNotifier, Locale>(SnippetLocaleNotifier.new);
@@ -57,9 +56,6 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
     super.dispose();
   }
 
-  int _count = 5;
-  Random _random = Random();
-
   @override
   Widget build(BuildContext context) {
     print("CounterProvider build");
@@ -83,85 +79,16 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
             },
             child: Text(AppLocalizations.of(context)?.comeOn ?? ""),
           ),
-          CounterProvider(
-            _count,
-            child: Column(
-              children: [
-                AWidget(),
-                BWidget(),
-                Padding(padding: EdgeInsets.only(top: 15), child: TextButton(onPressed: (){
-                  setState(() {
-                    _count = _random.nextInt(10);
-                  });
-                }, child: Text("CounterProvider 刷新")),)
-              ],
-            ),
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+                return BlocTest();
+              }));
+            },
+            child: Text("跳转到bloc"),
           ),
         ],
       )),
     );
-  }
-}
-
-class AWidget extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    return AWidgetState();
-  }
-}
-
-class AWidgetState extends State<AWidget> {
-  @override
-  Widget build(BuildContext context) {
-    print("AWidget build");
-
-    return Column(
-      children: [Text("data"), valueWidget()],
-    );
-  }
-
-  Widget valueWidget() {
-    var count = CounterProvider.of(context).count;
-
-    return Text("value is $count");
-  }
-}
-
-class CounterProvider extends InheritedWidget {
-  final int count;
-
-  const CounterProvider(this.count, {super.key, required super.child});
-
-  static CounterProvider of(BuildContext context) {
-    return context.dependOnInheritedWidgetOfExactType<CounterProvider>()!;
-  }
-
-  @override
-  bool updateShouldNotify(CounterProvider oldWidget) {
-    return count != oldWidget.count;
-  }
-}
-
-class BWidget extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    return BWidgetState();
-  }
-}
-
-class BWidgetState extends State<BWidget> {
-  @override
-  Widget build(BuildContext context) {
-    print("BWidget build");
-
-    return Column(
-      children: [Text("BWidget"), valueWidget()],
-    );
-  }
-
-  Widget valueWidget() {
-    var count = CounterProvider.of(context).count;
-
-    return Text("BWidget value is $count");
   }
 }
