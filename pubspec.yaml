@@ -41,19 +41,19 @@ dependencies:
   # 路径 工具
   path: ^1.9.1
   # 文件路径
-  path_provider: ^2.1.5
+  path_provider: ^2.1.6
   http: ^1.6.0
-  webview_flutter: ^4.13.1
+  webview_flutter: ^4.14.0
   provider: ^6.1.5+1
   badges: ^3.2.0
   # 屏幕比例尺寸配置
   flutter_screenutil: ^5.9.3
   # 选择多张图片，需要iOS14
-  image_picker: ^1.2.2
+  image_picker: ^1.2.3
   # 多张图片选择 (android不支持13，会提示没有读文件权限。需要)
 #  images_picker: ^1.2.11
   # 状态管理
-  flutter_riverpod: ^3.3.1
+  flutter_riverpod: ^3.3.2
   # 加载框
   flutter_easyloading: ^3.0.5
   # 图标
@@ -70,7 +70,7 @@ dependencies:
   polygon: ^0.1.0
 
   # 高德地图使用
-  permission_handler: ^12.0.1
+  permission_handler: ^12.0.3
   amap_flutter_map: ^3.0.0
   amap_flutter_base: ^3.0.0
   amap_flutter_location: ^3.0.0
@@ -79,12 +79,12 @@ dependencies:
   # 图标
   font_awesome_flutter: ^11.0.0
   # 获取设备信息
-  device_info_plus: ^13.1.0
+  device_info_plus: ^13.2.0
 
   # 自定义照相机
   camera: ^0.12.0+1
   # 动画
-  rive: ^0.13.20
+  rive: ^0.14.9
   # 时间格式化
   date_format: ^2.0.9
 
@@ -95,11 +95,11 @@ dependencies:
   collection: ^1.19.1
 
   # 蓝牙连接功能
-  flutter_blue_plus: ^2.3.2
+  flutter_blue_plus: ^2.3.10
   # md5 加密
   crypto: ^3.0.7
 
-  #国际化
+  # 国际化
   intl: ^0.20.2
 
   # android的全面屏适配
@@ -159,5 +159,3 @@ flutter:
 
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
-flutter_intl:
-  enabled: true
