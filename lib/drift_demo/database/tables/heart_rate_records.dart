@@ -12,6 +12,9 @@ class HeartRateRecords extends Table {
 
   DateTimeColumn get createdAt => dateTime().withDefault(currentDateAndTime)();
 
+  /// V2 新增：旧记录和新记录默认均为未同步。
+  BoolColumn get isSynced => boolean().withDefault(const Constant(false))();
+
   @override
   List<String> get customConstraints => ['CHECK (bpm BETWEEN 1 AND 300)'];
 }

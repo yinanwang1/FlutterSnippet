@@ -6,7 +6,7 @@ import 'tables/heart_rate_records.dart';
 
 part 'app_database.g.dart';
 
-/// V1：保存心率记录，首次打开时自动创建表。
+/// V2：保存心率记录及同步状态，打开旧数据库时保留记录并升级。
 @DriftDatabase(tables: [HeartRateRecords])
 class AppDatabase extends _$AppDatabase {
   AppDatabase([QueryExecutor? executor])
@@ -21,11 +21,17 @@ class AppDatabase extends _$AppDatabase {
         );
 
   @override
-  int get schemaVersion => 1;
+  int get schemaVersion => 2;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
         onCreate: (migrator) => migrator.createAll(),
+        onUpgrade: (migrator, from, to) async {
+          if (from < 2) {
+            await migrator.addColumn(
+                heartRateRecords, heartRateRecords.isSynced);
+          }
+        },
       );
 
   Stream<List<HeartRateRecord>> watchHeartRateRecords() {
@@ -59,6 +65,12 @@ class AppDatabase extends _$AppDatabase {
   Future<int> deleteHeartRateRecord(int id) {
     return (delete(heartRateRecords)..where((table) => table.id.equals(id)))
         .go();
+  }
+
+  /// 学习示例仅更新本地状态，实际同步应在服务器确认后调用。
+  Future<int> markHeartRateSynced(int id) {
+    return (update(heartRateRecords)..where((table) => table.id.equals(id)))
+        .write(const HeartRateRecordsCompanion(isSynced: Value(true)));
   }
 
   /// 查询实际打开的文件路径，同时等待首次建库完成。

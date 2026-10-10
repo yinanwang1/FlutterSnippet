@@ -92,7 +92,7 @@ class _DriftDemoPageState extends ConsumerState<DriftDemoPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Drift 心率记录 · V1')),
+      appBar: AppBar(title: const Text('Drift 心率记录 · V2')),
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -159,31 +159,40 @@ class _DriftDemoPageState extends ConsumerState<DriftDemoPage> {
                                     subtitle: Text(
                                       '设备：${record.deviceId}\n'
                                       '测量：${record.measuredAt.toLocal()}\n'
-                                      '创建：${record.createdAt.toLocal()}',
+                                      '创建：${record.createdAt.toLocal()}\n'
+                                      '同步状态：${record.isSynced ? '已同步' : '未同步'}',
                                     ),
-                                    isThreeLine: true,
-                                    trailing: Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        IconButton(
-                                          tooltip: '修改心率',
-                                          onPressed: _saving
-                                              ? null
-                                              : () => _edit(record),
-                                          icon: const Icon(Icons.edit_outlined),
+                                    trailing: PopupMenuButton<String>(
+                                      enabled: !_saving,
+                                      tooltip: '记录操作',
+                                      onSelected: (action) {
+                                        if (action == 'edit') {
+                                          _edit(record);
+                                        } else {
+                                          _runOperation(() async {
+                                            if (action == 'sync') {
+                                              await _database
+                                                  .markHeartRateSynced(
+                                                      record.id);
+                                            } else if (action == 'delete') {
+                                              await _database
+                                                  .deleteHeartRateRecord(
+                                                      record.id);
+                                            }
+                                          });
+                                        }
+                                      },
+                                      itemBuilder: (context) => [
+                                        PopupMenuItem(
+                                          value: 'sync',
+                                          enabled: !record.isSynced,
+                                          child: const Text('标记已同步（本地演示）'),
                                         ),
-                                        IconButton(
-                                          tooltip: '删除记录',
-                                          onPressed: _saving
-                                              ? null
-                                              : () => _runOperation(() async {
-                                                    await _database
-                                                        .deleteHeartRateRecord(
-                                                            record.id);
-                                                  }),
-                                          icon:
-                                              const Icon(Icons.delete_outline),
-                                        ),
+                                        const PopupMenuItem(
+                                            value: 'edit', child: Text('修改心率')),
+                                        const PopupMenuItem(
+                                            value: 'delete',
+                                            child: Text('删除记录')),
                                       ],
                                     ),
                                   );
