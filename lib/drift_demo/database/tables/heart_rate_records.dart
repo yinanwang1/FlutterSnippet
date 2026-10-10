@@ -12,8 +12,8 @@ class HeartRateRecords extends Table {
 
   DateTimeColumn get createdAt => dateTime().withDefault(currentDateAndTime)();
 
-  /// V2 新增：旧记录和新记录默认均为未同步。
-  BoolColumn get isSynced => boolean().withDefault(const Constant(false))();
+  /// V3 新增：摄氏温度，旧记录和未指定温度的新记录默认 36.8°C。
+  RealColumn get temperature => real().withDefault(const Constant(36.8))();
 
   @override
   List<String> get customConstraints => ['CHECK (bpm BETWEEN 1 AND 300)'];

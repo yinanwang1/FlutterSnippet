@@ -92,7 +92,7 @@ class _DriftDemoPageState extends ConsumerState<DriftDemoPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Drift 心率记录 · V2')),
+      appBar: AppBar(title: const Text('Drift 心率记录 · V4')),
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -160,7 +160,7 @@ class _DriftDemoPageState extends ConsumerState<DriftDemoPage> {
                                       '设备：${record.deviceId}\n'
                                       '测量：${record.measuredAt.toLocal()}\n'
                                       '创建：${record.createdAt.toLocal()}\n'
-                                      '同步状态：${record.isSynced ? '已同步' : '未同步'}',
+                                      '温度：${record.temperature.toStringAsFixed(1)}°C',
                                     ),
                                     trailing: PopupMenuButton<String>(
                                       enabled: !_saving,
@@ -170,11 +170,7 @@ class _DriftDemoPageState extends ConsumerState<DriftDemoPage> {
                                           _edit(record);
                                         } else {
                                           _runOperation(() async {
-                                            if (action == 'sync') {
-                                              await _database
-                                                  .markHeartRateSynced(
-                                                      record.id);
-                                            } else if (action == 'delete') {
+                                            if (action == 'delete') {
                                               await _database
                                                   .deleteHeartRateRecord(
                                                       record.id);
@@ -183,11 +179,6 @@ class _DriftDemoPageState extends ConsumerState<DriftDemoPage> {
                                         }
                                       },
                                       itemBuilder: (context) => [
-                                        PopupMenuItem(
-                                          value: 'sync',
-                                          enabled: !record.isSynced,
-                                          child: const Text('标记已同步（本地演示）'),
-                                        ),
                                         const PopupMenuItem(
                                             value: 'edit', child: Text('修改心率')),
                                         const PopupMenuItem(

@@ -6,7 +6,7 @@ import 'tables/heart_rate_records.dart';
 
 part 'app_database.g.dart';
 
-/// V2：保存心率记录及同步状态，打开旧数据库时保留记录并升级。
+/// V4：保存心率与温度，移除旧版本的同步状态。
 @DriftDatabase(tables: [HeartRateRecords])
 class AppDatabase extends _$AppDatabase {
   AppDatabase([QueryExecutor? executor])
@@ -21,16 +21,38 @@ class AppDatabase extends _$AppDatabase {
         );
 
   @override
-  int get schemaVersion => 2;
+  int get schemaVersion => 4;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
         onCreate: (migrator) => migrator.createAll(),
         onUpgrade: (migrator, from, to) async {
-          if (from < 2) {
-            await migrator.addColumn(
-                heartRateRecords, heartRateRecords.isSynced);
-          }
+          await transaction(() async {
+            // V1/V2 缺少温度字段，先补齐，再迁移到最终 V4 表结构。
+            if (from < 3) {
+              await migrator.addColumn(
+                  heartRateRecords, heartRateRecords.temperature);
+            }
+            if (from < 4) {
+              // 重建表时保留历史自增序列，避免复用已删除记录的 ID。
+              final sequence = await customSelect(
+                "SELECT seq FROM sqlite_sequence WHERE name = 'heart_rate_records'",
+              ).getSingleOrNull();
+              await migrator.alterTable(TableMigration(heartRateRecords));
+              if (sequence != null) {
+                final previousSequence = sequence.read<int>('seq');
+                await customStatement(
+                  "INSERT INTO sqlite_sequence (name, seq) SELECT 'heart_rate_records', ? "
+                  "WHERE NOT EXISTS (SELECT 1 FROM sqlite_sequence WHERE name = 'heart_rate_records')",
+                  [previousSequence],
+                );
+                await customStatement(
+                  "UPDATE sqlite_sequence SET seq = MAX(seq, ?) WHERE name = 'heart_rate_records'",
+                  [previousSequence],
+                );
+              }
+            }
+          });
         },
       );
 
@@ -65,12 +87,6 @@ class AppDatabase extends _$AppDatabase {
   Future<int> deleteHeartRateRecord(int id) {
     return (delete(heartRateRecords)..where((table) => table.id.equals(id)))
         .go();
-  }
-
-  /// 学习示例仅更新本地状态，实际同步应在服务器确认后调用。
-  Future<int> markHeartRateSynced(int id) {
-    return (update(heartRateRecords)..where((table) => table.id.equals(id)))
-        .write(const HeartRateRecordsCompanion(isSynced: Value(true)));
   }
 
   /// 查询实际打开的文件路径，同时等待首次建库完成。

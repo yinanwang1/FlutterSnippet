@@ -46,19 +46,17 @@ class $HeartRateRecordsTable extends HeartRateRecords
       type: DriftSqlType.dateTime,
       requiredDuringInsert: false,
       defaultValue: currentDateAndTime);
-  static const VerificationMeta _isSyncedMeta =
-      const VerificationMeta('isSynced');
+  static const VerificationMeta _temperatureMeta =
+      const VerificationMeta('temperature');
   @override
-  late final GeneratedColumn<bool> isSynced = GeneratedColumn<bool>(
-      'is_synced', aliasedName, false,
-      type: DriftSqlType.bool,
+  late final GeneratedColumn<double> temperature = GeneratedColumn<double>(
+      'temperature', aliasedName, false,
+      type: DriftSqlType.double,
       requiredDuringInsert: false,
-      defaultConstraints:
-          GeneratedColumn.constraintIsAlways('CHECK ("is_synced" IN (0, 1))'),
-      defaultValue: const Constant(false));
+      defaultValue: const Constant(36.8));
   @override
   List<GeneratedColumn> get $columns =>
-      [id, deviceId, bpm, measuredAt, createdAt, isSynced];
+      [id, deviceId, bpm, measuredAt, createdAt, temperature];
   @override
   String get aliasedName => _alias ?? actualTableName;
   @override
@@ -96,9 +94,11 @@ class $HeartRateRecordsTable extends HeartRateRecords
       context.handle(_createdAtMeta,
           createdAt.isAcceptableOrUnknown(data['created_at']!, _createdAtMeta));
     }
-    if (data.containsKey('is_synced')) {
-      context.handle(_isSyncedMeta,
-          isSynced.isAcceptableOrUnknown(data['is_synced']!, _isSyncedMeta));
+    if (data.containsKey('temperature')) {
+      context.handle(
+          _temperatureMeta,
+          temperature.isAcceptableOrUnknown(
+              data['temperature']!, _temperatureMeta));
     }
     return context;
   }
@@ -119,8 +119,8 @@ class $HeartRateRecordsTable extends HeartRateRecords
           .read(DriftSqlType.dateTime, data['${effectivePrefix}measured_at'])!,
       createdAt: attachedDatabase.typeMapping
           .read(DriftSqlType.dateTime, data['${effectivePrefix}created_at'])!,
-      isSynced: attachedDatabase.typeMapping
-          .read(DriftSqlType.bool, data['${effectivePrefix}is_synced'])!,
+      temperature: attachedDatabase.typeMapping
+          .read(DriftSqlType.double, data['${effectivePrefix}temperature'])!,
     );
   }
 
@@ -137,15 +137,15 @@ class HeartRateRecord extends DataClass implements Insertable<HeartRateRecord> {
   final DateTime measuredAt;
   final DateTime createdAt;
 
-  /// V2 新增：旧记录和新记录默认均为未同步。
-  final bool isSynced;
+  /// V3 新增：摄氏温度，旧记录和未指定温度的新记录默认 36.8°C。
+  final double temperature;
   const HeartRateRecord(
       {required this.id,
       required this.deviceId,
       required this.bpm,
       required this.measuredAt,
       required this.createdAt,
-      required this.isSynced});
+      required this.temperature});
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
@@ -154,7 +154,7 @@ class HeartRateRecord extends DataClass implements Insertable<HeartRateRecord> {
     map['bpm'] = Variable<int>(bpm);
     map['measured_at'] = Variable<DateTime>(measuredAt);
     map['created_at'] = Variable<DateTime>(createdAt);
-    map['is_synced'] = Variable<bool>(isSynced);
+    map['temperature'] = Variable<double>(temperature);
     return map;
   }
 
@@ -165,7 +165,7 @@ class HeartRateRecord extends DataClass implements Insertable<HeartRateRecord> {
       bpm: Value(bpm),
       measuredAt: Value(measuredAt),
       createdAt: Value(createdAt),
-      isSynced: Value(isSynced),
+      temperature: Value(temperature),
     );
   }
 
@@ -178,7 +178,7 @@ class HeartRateRecord extends DataClass implements Insertable<HeartRateRecord> {
       bpm: serializer.fromJson<int>(json['bpm']),
       measuredAt: serializer.fromJson<DateTime>(json['measuredAt']),
       createdAt: serializer.fromJson<DateTime>(json['createdAt']),
-      isSynced: serializer.fromJson<bool>(json['isSynced']),
+      temperature: serializer.fromJson<double>(json['temperature']),
     );
   }
   @override
@@ -190,7 +190,7 @@ class HeartRateRecord extends DataClass implements Insertable<HeartRateRecord> {
       'bpm': serializer.toJson<int>(bpm),
       'measuredAt': serializer.toJson<DateTime>(measuredAt),
       'createdAt': serializer.toJson<DateTime>(createdAt),
-      'isSynced': serializer.toJson<bool>(isSynced),
+      'temperature': serializer.toJson<double>(temperature),
     };
   }
 
@@ -200,14 +200,14 @@ class HeartRateRecord extends DataClass implements Insertable<HeartRateRecord> {
           int? bpm,
           DateTime? measuredAt,
           DateTime? createdAt,
-          bool? isSynced}) =>
+          double? temperature}) =>
       HeartRateRecord(
         id: id ?? this.id,
         deviceId: deviceId ?? this.deviceId,
         bpm: bpm ?? this.bpm,
         measuredAt: measuredAt ?? this.measuredAt,
         createdAt: createdAt ?? this.createdAt,
-        isSynced: isSynced ?? this.isSynced,
+        temperature: temperature ?? this.temperature,
       );
   HeartRateRecord copyWithCompanion(HeartRateRecordsCompanion data) {
     return HeartRateRecord(
@@ -217,7 +217,8 @@ class HeartRateRecord extends DataClass implements Insertable<HeartRateRecord> {
       measuredAt:
           data.measuredAt.present ? data.measuredAt.value : this.measuredAt,
       createdAt: data.createdAt.present ? data.createdAt.value : this.createdAt,
-      isSynced: data.isSynced.present ? data.isSynced.value : this.isSynced,
+      temperature:
+          data.temperature.present ? data.temperature.value : this.temperature,
     );
   }
 
@@ -229,14 +230,14 @@ class HeartRateRecord extends DataClass implements Insertable<HeartRateRecord> {
           ..write('bpm: $bpm, ')
           ..write('measuredAt: $measuredAt, ')
           ..write('createdAt: $createdAt, ')
-          ..write('isSynced: $isSynced')
+          ..write('temperature: $temperature')
           ..write(')'))
         .toString();
   }
 
   @override
   int get hashCode =>
-      Object.hash(id, deviceId, bpm, measuredAt, createdAt, isSynced);
+      Object.hash(id, deviceId, bpm, measuredAt, createdAt, temperature);
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -246,7 +247,7 @@ class HeartRateRecord extends DataClass implements Insertable<HeartRateRecord> {
           other.bpm == this.bpm &&
           other.measuredAt == this.measuredAt &&
           other.createdAt == this.createdAt &&
-          other.isSynced == this.isSynced);
+          other.temperature == this.temperature);
 }
 
 class HeartRateRecordsCompanion extends UpdateCompanion<HeartRateRecord> {
@@ -255,14 +256,14 @@ class HeartRateRecordsCompanion extends UpdateCompanion<HeartRateRecord> {
   final Value<int> bpm;
   final Value<DateTime> measuredAt;
   final Value<DateTime> createdAt;
-  final Value<bool> isSynced;
+  final Value<double> temperature;
   const HeartRateRecordsCompanion({
     this.id = const Value.absent(),
     this.deviceId = const Value.absent(),
     this.bpm = const Value.absent(),
     this.measuredAt = const Value.absent(),
     this.createdAt = const Value.absent(),
-    this.isSynced = const Value.absent(),
+    this.temperature = const Value.absent(),
   });
   HeartRateRecordsCompanion.insert({
     this.id = const Value.absent(),
@@ -270,7 +271,7 @@ class HeartRateRecordsCompanion extends UpdateCompanion<HeartRateRecord> {
     required int bpm,
     required DateTime measuredAt,
     this.createdAt = const Value.absent(),
-    this.isSynced = const Value.absent(),
+    this.temperature = const Value.absent(),
   })  : deviceId = Value(deviceId),
         bpm = Value(bpm),
         measuredAt = Value(measuredAt);
@@ -280,7 +281,7 @@ class HeartRateRecordsCompanion extends UpdateCompanion<HeartRateRecord> {
     Expression<int>? bpm,
     Expression<DateTime>? measuredAt,
     Expression<DateTime>? createdAt,
-    Expression<bool>? isSynced,
+    Expression<double>? temperature,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -288,7 +289,7 @@ class HeartRateRecordsCompanion extends UpdateCompanion<HeartRateRecord> {
       if (bpm != null) 'bpm': bpm,
       if (measuredAt != null) 'measured_at': measuredAt,
       if (createdAt != null) 'created_at': createdAt,
-      if (isSynced != null) 'is_synced': isSynced,
+      if (temperature != null) 'temperature': temperature,
     });
   }
 
@@ -298,14 +299,14 @@ class HeartRateRecordsCompanion extends UpdateCompanion<HeartRateRecord> {
       Value<int>? bpm,
       Value<DateTime>? measuredAt,
       Value<DateTime>? createdAt,
-      Value<bool>? isSynced}) {
+      Value<double>? temperature}) {
     return HeartRateRecordsCompanion(
       id: id ?? this.id,
       deviceId: deviceId ?? this.deviceId,
       bpm: bpm ?? this.bpm,
       measuredAt: measuredAt ?? this.measuredAt,
       createdAt: createdAt ?? this.createdAt,
-      isSynced: isSynced ?? this.isSynced,
+      temperature: temperature ?? this.temperature,
     );
   }
 
@@ -327,8 +328,8 @@ class HeartRateRecordsCompanion extends UpdateCompanion<HeartRateRecord> {
     if (createdAt.present) {
       map['created_at'] = Variable<DateTime>(createdAt.value);
     }
-    if (isSynced.present) {
-      map['is_synced'] = Variable<bool>(isSynced.value);
+    if (temperature.present) {
+      map['temperature'] = Variable<double>(temperature.value);
     }
     return map;
   }
@@ -341,7 +342,7 @@ class HeartRateRecordsCompanion extends UpdateCompanion<HeartRateRecord> {
           ..write('bpm: $bpm, ')
           ..write('measuredAt: $measuredAt, ')
           ..write('createdAt: $createdAt, ')
-          ..write('isSynced: $isSynced')
+          ..write('temperature: $temperature')
           ..write(')'))
         .toString();
   }
