@@ -1,8 +1,8 @@
-
-builders:
-  testBuilder:
-    import: "./lib/learnAnnotation.dart"
-    builder_factories: ["testBuilder"]
-    build_extensions: {".dart": [".g.part"]}
-    auto_apply: root_package
-    build_to: source
+targets:
+  $default:
+    builders:
+      drift_dev:
+        enabled: true
+        options:
+          # 学习阶段使用基础查询 API，不生成额外的 Manager API。
+          generate_manager: false
