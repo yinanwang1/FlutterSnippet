@@ -1,4 +1,5 @@
 import 'package:edge_to_edge/edge_to_edge.dart';
+import 'package:flutter/foundation.dart' show kDebugMode;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_snippet/Widgets/bloc/bloc_test.dart';
@@ -24,6 +25,8 @@ void main() {
 }
 
 class MyApp extends ConsumerWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
@@ -58,7 +61,9 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    print("CounterProvider build");
+    if (kDebugMode) {
+      print("CounterProvider build");
+    }
 
     return Scaffold(
       ///需要注意，这个的AppBar 会影响 overlap 数值，如果没有，会多这部分像素点返回

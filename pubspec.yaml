@@ -159,3 +159,20 @@ flutter:
 
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+flutter_assets_generator:
+  enable: true
+  output_dir: generated/
+  output_filename: assets
+  class_name: Assets
+  auto_detection: true
+  # Automatically add missing dependencies (rive, flutter_svg, lottie) default: true
+  auto_add_dependencies: true
+  # Options: robust (default), legacy (old style)
+  style: robust
+  # Leaf type: class (typed wrappers, default for robust) or string (raw path, default for legacy)
+  leaf_type: class
+  # Options: camel (default), snake
+  name_style: camel
+  package_parameter_enabled: false
+  named_with_parent: true
+  path_ignore: [ ]
