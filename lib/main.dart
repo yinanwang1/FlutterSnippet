@@ -2,6 +2,7 @@ import 'package:edge_to_edge/edge_to_edge.dart';
 import 'package:flutter/foundation.dart' show kDebugMode;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_snippet/Widgets/Database/learn_data_base.dart';
 import 'package:flutter_snippet/Widgets/bloc/bloc_test.dart';
 import 'package:flutter_snippet/l10n/app_localizations.dart';
 
@@ -91,6 +92,14 @@ class _MyHomePageState extends ConsumerState<MyHomePage> {
               }));
             },
             child: Text("跳转到bloc"),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+                return LearnDataBase();
+              }));
+            },
+            child: Text("跳转到学习数据库"),
           ),
         ],
       )),
